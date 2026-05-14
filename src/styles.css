@@ -81,6 +81,9 @@ code, pre {
 .font-clue {
   font-variation-settings: "wdth" 100, "wght" 500;
 }
+.font-clue-strong {
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
 .font-ui {
   font-variation-settings: "wdth" 100, "wght" 600;
 }
