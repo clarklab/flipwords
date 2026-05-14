@@ -588,8 +588,8 @@ export default function FlipWords() {
       </div>
 
       {/* Game board */}
-      <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mt-2 md:mt-4 flex-shrink-0 z-10">
-        <div className="relative bg-tile-face/60 backdrop-blur-sm border border-tile-edge rounded-3xl shadow-tile p-4 md:p-8">
+      <div className="flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-2 md:mt-4 flex items-center justify-center z-10">
+        <div className="relative bg-tile-face/60 backdrop-blur-sm border border-tile-edge rounded-3xl shadow-tile p-4 md:p-8 w-full">
           <button
             onClick={() => {
               commitState(
@@ -640,7 +640,7 @@ export default function FlipWords() {
                       slotRefs.current[idx] = el;
                     }}
                     className={cn(
-                      "w-20 h-40 md:w-24 md:h-48 rounded-2xl flex items-center justify-center relative transition-colors cursor-pointer",
+                      "w-[clamp(5rem,14vh,8rem)] h-[clamp(10rem,28vh,16rem)] rounded-2xl flex items-center justify-center relative transition-colors cursor-pointer",
                       tile
                         ? "border-0"
                         : isActive
@@ -698,7 +698,7 @@ export default function FlipWords() {
       </div>
 
       {/* Bank */}
-      <div className="mt-auto w-full flex-shrink-0 relative z-10 pt-6 md:pt-10 pb-6 md:pb-10">
+      <div className="w-full flex-shrink-0 relative z-10 pt-4 md:pt-6 pb-6 md:pb-8">
         <div className="text-center mb-4">
           <p className="font-ui text-[10px] md:text-xs text-ink-soft uppercase tracking-[0.2em]">
             Tile rail

@@ -37,10 +37,11 @@ export default function Tile({
     });
   }, [tile.isFlipped]);
 
-  const dimensions =
-    size === "small"
-      ? "w-16 h-32 md:w-20 md:h-40"
-      : "w-20 h-40 md:w-24 md:h-48";
+  const dimensions = inSlot
+    ? "w-full h-full"
+    : size === "small"
+    ? "w-16 h-32 md:w-20 md:h-40"
+    : "w-20 h-40 md:w-24 md:h-48";
 
   return (
     <motion.div
