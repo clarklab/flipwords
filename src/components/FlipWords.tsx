@@ -513,7 +513,7 @@ export default function FlipWords() {
       <div
         data-edge={edge}
         className={cn(
-          "relative font-clue text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge rounded-full px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs shadow-tile transition-colors",
+          "relative font-clue-strong text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge rounded-full px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs shadow-tile transition-colors",
           edge === "left" || edge === "right" ? "[writing-mode:vertical-rl]" : "",
           edge === "left" ? "rotate-180" : "",
           correct && "text-accent border-accent/40 bg-accent-soft"
