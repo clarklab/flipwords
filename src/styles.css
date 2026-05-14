@@ -1,0 +1,12 @@
+@import "tailwindcss" source("../");
+
+body {
+  @apply m-0 bg-black text-white;
+  font-family: "Google Sans Flex", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Google Sans Flex", sans-serif;
+}
