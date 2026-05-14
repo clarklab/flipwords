@@ -1,0 +1,920 @@
+[
+  {
+    "id": 1,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["AIR", "MAN", "PORT", "HOLE"],
+    "compounds": {
+      "top": "AIRMAN",
+      "bottom": "PORTHOLE",
+      "left": "AIRPORT",
+      "right": "MANHOLE"
+    },
+    "clues": {
+      "top": "A flier in uniform",
+      "bottom": "Round window on a ship",
+      "left": "Where you catch a flight",
+      "right": "Round cover in the street"
+    }
+  },
+  {
+    "id": 2,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["HOT", "HEAD", "BED", "ROOM"],
+    "compounds": {
+      "top": "HOTHEAD",
+      "bottom": "BEDROOM",
+      "left": "HOTBED",
+      "right": "HEADROOM"
+    },
+    "clues": {
+      "top": "Someone with a very short fuse",
+      "bottom": "Where the snoring happens",
+      "left": "A place where trouble breeds",
+      "right": "Clearance above your noggin"
+    }
+  },
+  {
+    "id": 3,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["FIRE", "BALL", "WORK", "ROOM"],
+    "compounds": {
+      "top": "FIREBALL",
+      "bottom": "WORKROOM",
+      "left": "FIREWORK",
+      "right": "BALLROOM"
+    },
+    "clues": {
+      "top": "A blazing comet of energy",
+      "bottom": "Cubicle for getting stuff done",
+      "left": "A July 4th sparkler in the sky",
+      "right": "Where dancers waltz in gowns"
+    }
+  },
+  {
+    "id": 4,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["BED", "SIDE", "TIME", "LINE"],
+    "compounds": {
+      "top": "BEDSIDE",
+      "bottom": "TIMELINE",
+      "left": "BEDTIME",
+      "right": "SIDELINE"
+    },
+    "clues": {
+      "top": "Where your alarm clock sits",
+      "bottom": "History laid out left-to-right",
+      "left": "When the kids ought to be asleep",
+      "right": "Edge of the football field"
+    }
+  },
+  {
+    "id": 5,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["CUP", "CAKE", "BOARD", "WALK"],
+    "compounds": {
+      "top": "CUPCAKE",
+      "bottom": "BOARDWALK",
+      "left": "CUPBOARD",
+      "right": "CAKEWALK"
+    },
+    "clues": {
+      "top": "Bakery's little frosted gem",
+      "bottom": "Wooden stroll by the sea",
+      "left": "Where the mugs and bowls hide",
+      "right": "An absurdly easy task"
+    }
+  },
+  {
+    "id": 6,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["BACK", "DOOR", "FIRE", "MAN"],
+    "compounds": {
+      "top": "BACKDOOR",
+      "bottom": "FIREMAN",
+      "left": "BACKFIRE",
+      "right": "DOORMAN"
+    },
+    "clues": {
+      "top": "A sneaky alternate entrance",
+      "bottom": "A helmet-clad hero with a hose",
+      "left": "When a plan blows up on you",
+      "right": "Gatekeeper of the lobby"
+    }
+  },
+  {
+    "id": 7,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["RAIN", "DROP", "FALL", "OUT"],
+    "compounds": {
+      "top": "RAINDROP",
+      "bottom": "FALLOUT",
+      "left": "RAINFALL",
+      "right": "DROPOUT"
+    },
+    "clues": {
+      "top": "A single bead from the sky",
+      "bottom": "Bad aftertaste of a blowup",
+      "left": "What meteorologists measure in inches",
+      "right": "Someone who left school early"
+    }
+  },
+  {
+    "id": 8,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["SNOW", "BALL", "BOARD", "ROOM"],
+    "compounds": {
+      "top": "SNOWBALL",
+      "bottom": "BOARDROOM",
+      "left": "SNOWBOARD",
+      "right": "BALLROOM"
+    },
+    "clues": {
+      "top": "Winter's icy projectile",
+      "bottom": "Where executives plot strategy",
+      "left": "Ride down the slope sideways",
+      "right": "Grand hall for waltzing"
+    }
+  },
+  {
+    "id": 9,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["BLACK", "OUT", "BIRD", "HOUSE"],
+    "compounds": {
+      "top": "BLACKOUT",
+      "bottom": "BIRDHOUSE",
+      "left": "BLACKBIRD",
+      "right": "OUTHOUSE"
+    },
+    "clues": {
+      "top": "Sudden city-wide darkness",
+      "bottom": "Tiny wooden cottage for tweeters",
+      "left": "Subject of a famous Beatles tune",
+      "right": "Original throne room out back"
+    }
+  },
+  {
+    "id": 10,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["WAR", "HEAD", "PATH", "WAY"],
+    "compounds": {
+      "top": "WARHEAD",
+      "bottom": "PATHWAY",
+      "left": "WARPATH",
+      "right": "HEADWAY"
+    },
+    "clues": {
+      "top": "Explosive tip of a missile",
+      "bottom": "Stone-paved garden route",
+      "left": "On a determined rampage",
+      "right": "Forward progress"
+    }
+  },
+  {
+    "id": 11,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["NIGHT", "FALL", "TIME", "OUT"],
+    "compounds": {
+      "top": "NIGHTFALL",
+      "bottom": "TIMEOUT",
+      "left": "NIGHTTIME",
+      "right": "FALLOUT"
+    },
+    "clues": {
+      "top": "When the sky goes dark",
+      "bottom": "Coach calls for a quick pause",
+      "left": "After dusk and before dawn",
+      "right": "The mess left after disaster"
+    }
+  },
+  {
+    "id": 12,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["HALF", "WAY", "BACK", "SIDE"],
+    "compounds": {
+      "top": "HALFWAY",
+      "bottom": "BACKSIDE",
+      "left": "HALFBACK",
+      "right": "WAYSIDE"
+    },
+    "clues": {
+      "top": "Right at the midpoint",
+      "bottom": "Your, ahem, derriere",
+      "left": "Football position behind the line",
+      "right": "Where forgotten things fall"
+    }
+  },
+  {
+    "id": 13,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["FOOT", "WORK", "NOTE", "BOOK"],
+    "compounds": {
+      "top": "FOOTWORK",
+      "bottom": "NOTEBOOK",
+      "left": "FOOTNOTE",
+      "right": "WORKBOOK"
+    },
+    "clues": {
+      "top": "Nimble dance-step skill",
+      "bottom": "Spiral-bound for jotting",
+      "left": "Tiny number that sends you to the bottom",
+      "right": "Practice pages for students"
+    }
+  },
+  {
+    "id": 14,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["HONEY", "MOON", "POT", "SHOT"],
+    "compounds": {
+      "top": "HONEYMOON",
+      "bottom": "POTSHOT",
+      "left": "HONEYPOT",
+      "right": "MOONSHOT"
+    },
+    "clues": {
+      "top": "Post-wedding tropical getaway",
+      "bottom": "A cheap, easy insult",
+      "left": "Sweet jar that lures bears",
+      "right": "An audacious long-shot goal"
+    }
+  },
+  {
+    "id": 15,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": ["BED", "TIME", "SIDE", "LINE"],
+    "compounds": {
+      "top": "BEDTIME",
+      "bottom": "SIDELINE",
+      "left": "BEDSIDE",
+      "right": "TIMELINE"
+    },
+    "clues": {
+      "top": "When the kids ought to be asleep",
+      "bottom": "Bench seat for the benched",
+      "left": "Where your alarm clock sits",
+      "right": "History visualized in order"
+    }
+  },
+  {
+    "id": 16,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["BASE", "BOARD", "BALL", "ROOM"],
+    "compounds": {
+      "top": "BASEBOARD",
+      "bottom": "BALLROOM",
+      "left": "BASEBALL",
+      "right": "BOARDROOM"
+    },
+    "clues": {
+      "top": "Trim along the bottom of the wall",
+      "bottom": "Where chandeliers and dancers meet",
+      "left": "America's pastime with a glove",
+      "right": "Where big decisions get made"
+    }
+  },
+  {
+    "id": 17,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["DOWN", "TOWN", "PLAY", "HOUSE"],
+    "compounds": {
+      "top": "DOWNTOWN",
+      "bottom": "PLAYHOUSE",
+      "left": "DOWNPLAY",
+      "right": "TOWNHOUSE"
+    },
+    "clues": {
+      "top": "The city's bustling core",
+      "bottom": "Kid-sized fort in the yard",
+      "left": "To minimize importance",
+      "right": "A row-house in the city"
+    }
+  },
+  {
+    "id": 18,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["LAKE", "SIDE", "SHORE", "LINE"],
+    "compounds": {
+      "top": "LAKESIDE",
+      "bottom": "SHORELINE",
+      "left": "LAKESHORE",
+      "right": "SIDELINE"
+    },
+    "clues": {
+      "top": "Cabin perch by still water",
+      "bottom": "Where ocean meets sand",
+      "left": "The beach beside a lake",
+      "right": "Bench seat for the benched"
+    }
+  },
+  {
+    "id": 19,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["WASTE", "LAND", "WATER", "FALL"],
+    "compounds": {
+      "top": "WASTELAND",
+      "bottom": "WATERFALL",
+      "left": "WASTEWATER",
+      "right": "LANDFALL"
+    },
+    "clues": {
+      "top": "A desolate post-apocalypse zone",
+      "bottom": "A cascading curtain of mist",
+      "left": "Used-up runoff from the drain",
+      "right": "When the hurricane reaches the coast"
+    }
+  },
+  {
+    "id": 20,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["WILD", "FIRE", "LIFE", "BOAT"],
+    "compounds": {
+      "top": "WILDFIRE",
+      "bottom": "LIFEBOAT",
+      "left": "WILDLIFE",
+      "right": "FIREBOAT"
+    },
+    "clues": {
+      "top": "Forest blaze spreading fast",
+      "bottom": "Inflatable for the sinking ship",
+      "left": "Critters in their natural habitat",
+      "right": "Floating vessel with hoses ablaze"
+    }
+  },
+  {
+    "id": 21,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["RAIN", "CHECK", "FALL", "OUT"],
+    "compounds": {
+      "top": "RAINCHECK",
+      "bottom": "FALLOUT",
+      "left": "RAINFALL",
+      "right": "CHECKOUT"
+    },
+    "clues": {
+      "top": "Postponed for another day",
+      "bottom": "The grim aftermath of a bomb",
+      "left": "How storms are measured in inches",
+      "right": "Last stop at the grocery store"
+    }
+  },
+  {
+    "id": 22,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["FORE", "HEAD", "FOOT", "LIGHT"],
+    "compounds": {
+      "top": "FOREHEAD",
+      "bottom": "FOOTLIGHT",
+      "left": "FOREFOOT",
+      "right": "HEADLIGHT"
+    },
+    "clues": {
+      "top": "Where you slap when you remember",
+      "bottom": "Glowing strip at the stage's edge",
+      "left": "A four-legged animal's front toes",
+      "right": "Bright eye on the car's front"
+    }
+  },
+  {
+    "id": 23,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["LOW", "DOWN", "LIFE", "TIME"],
+    "compounds": {
+      "top": "LOWDOWN",
+      "bottom": "LIFETIME",
+      "left": "LOWLIFE",
+      "right": "DOWNTIME"
+    },
+    "clues": {
+      "top": "Give me the inside scoop",
+      "bottom": "Your whole span on Earth",
+      "left": "A no-good scoundrel",
+      "right": "Quiet break between tasks"
+    }
+  },
+  {
+    "id": 24,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["GOD", "FATHER", "MOTHER", "LAND"],
+    "compounds": {
+      "top": "GODFATHER",
+      "bottom": "MOTHERLAND",
+      "left": "GODMOTHER",
+      "right": "FATHERLAND"
+    },
+    "clues": {
+      "top": "Marlon Brando's mafia don",
+      "bottom": "The country where you were born",
+      "left": "Fairy-tale wish granter",
+      "right": "Your patriotic homeland"
+    }
+  },
+  {
+    "id": 25,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["BEACH", "HEAD", "SIDE", "LINE"],
+    "compounds": {
+      "top": "BEACHHEAD",
+      "bottom": "SIDELINE",
+      "left": "BEACHSIDE",
+      "right": "HEADLINE"
+    },
+    "clues": {
+      "top": "Military foothold on the shore",
+      "bottom": "Bench seat at the football game",
+      "left": "Right next to the sand and surf",
+      "right": "Front-page tease"
+    }
+  },
+  {
+    "id": 26,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["ROUND", "TABLE", "HOUSE", "TOP"],
+    "compounds": {
+      "top": "ROUNDTABLE",
+      "bottom": "HOUSETOP",
+      "left": "ROUNDHOUSE",
+      "right": "TABLETOP"
+    },
+    "clues": {
+      "top": "King Arthur's egalitarian meeting",
+      "bottom": "Where Santa lands his sleigh",
+      "left": "A sweeping cinematic kick",
+      "right": "Surface for setting your coffee"
+    }
+  },
+  {
+    "id": 27,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["AIR", "TIME", "DROP", "OUT"],
+    "compounds": {
+      "top": "AIRTIME",
+      "bottom": "DROPOUT",
+      "left": "AIRDROP",
+      "right": "TIMEOUT"
+    },
+    "clues": {
+      "top": "How long you're on the radio",
+      "bottom": "Someone who quit school",
+      "left": "Care package from the sky",
+      "right": "A coach-called pause in the action"
+    }
+  },
+  {
+    "id": 28,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["HORSE", "POWER", "PLAY", "HOUSE"],
+    "compounds": {
+      "top": "HORSEPOWER",
+      "bottom": "PLAYHOUSE",
+      "left": "HORSEPLAY",
+      "right": "POWERHOUSE"
+    },
+    "clues": {
+      "top": "Car-spec unit that James Watt invented",
+      "bottom": "A children's mini cottage",
+      "left": "Rough-and-tumble messing around",
+      "right": "An unstoppable force of nature"
+    }
+  },
+  {
+    "id": 29,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["WALK", "OVER", "OUT", "COME"],
+    "compounds": {
+      "top": "WALKOVER",
+      "bottom": "OUTCOME",
+      "left": "WALKOUT",
+      "right": "OVERCOME"
+    },
+    "clues": {
+      "top": "An easy victory",
+      "bottom": "How things end up",
+      "left": "A dramatic union strike",
+      "right": "To triumph over obstacles"
+    }
+  },
+  {
+    "id": 30,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["CROSS", "WALK", "CUT", "OUT"],
+    "compounds": {
+      "top": "CROSSWALK",
+      "bottom": "CUTOUT",
+      "left": "CROSSCUT",
+      "right": "WALKOUT"
+    },
+    "clues": {
+      "top": "Striped strip where pedestrians get right of way",
+      "bottom": "A paper silhouette in a kid's craft",
+      "left": "A saw that slices across the grain",
+      "right": "A workforce strike"
+    }
+  },
+  {
+    "id": 31,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["AIR", "DROP", "LOCK", "DOWN"],
+    "compounds": {
+      "top": "AIRDROP",
+      "bottom": "LOCKDOWN",
+      "left": "AIRLOCK",
+      "right": "DROPDOWN"
+    },
+    "clues": {
+      "top": "Care package from a plane",
+      "bottom": "Stay-at-home order from above",
+      "left": "Spacecraft's airtight chamber",
+      "right": "Menu that unfolds when clicked"
+    }
+  },
+  {
+    "id": 32,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["BACK", "WATER", "DOOR", "WAY"],
+    "compounds": {
+      "top": "BACKWATER",
+      "bottom": "DOORWAY",
+      "left": "BACKDOOR",
+      "right": "WATERWAY"
+    },
+    "clues": {
+      "top": "A remote, sleepy place",
+      "bottom": "The frame you walk through",
+      "left": "Sneaky alternate entrance",
+      "right": "Canal or river highway"
+    }
+  },
+  {
+    "id": 33,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["SCHOOL", "BOY", "GIRL", "HOOD"],
+    "compounds": {
+      "top": "SCHOOLBOY",
+      "bottom": "GIRLHOOD",
+      "left": "SCHOOLGIRL",
+      "right": "BOYHOOD"
+    },
+    "clues": {
+      "top": "A young chap with a backpack",
+      "bottom": "A young female's growing years",
+      "left": "A young miss with a backpack",
+      "right": "A young chap's growing years"
+    }
+  },
+  {
+    "id": 34,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["UNDER", "WATER", "HAND", "CRAFT"],
+    "compounds": {
+      "top": "UNDERWATER",
+      "bottom": "HANDCRAFT",
+      "left": "UNDERHAND",
+      "right": "WATERCRAFT"
+    },
+    "clues": {
+      "top": "Where the scuba divers go",
+      "bottom": "An artisan-made item",
+      "left": "A deceitful, sneaky move",
+      "right": "Floating vessel of any size"
+    }
+  },
+  {
+    "id": 35,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["SEA", "SIDE", "COAST", "LINE"],
+    "compounds": {
+      "top": "SEASIDE",
+      "bottom": "COASTLINE",
+      "left": "SEACOAST",
+      "right": "SIDELINE"
+    },
+    "clues": {
+      "top": "A British beach town vibe",
+      "bottom": "Outline of the shore on a map",
+      "left": "Where land meets the ocean",
+      "right": "Bench area for benched players"
+    }
+  },
+  {
+    "id": 36,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": ["HOT", "SPOT", "HEAD", "LIGHT"],
+    "compounds": {
+      "top": "HOTSPOT",
+      "bottom": "HEADLIGHT",
+      "left": "HOTHEAD",
+      "right": "SPOTLIGHT"
+    },
+    "clues": {
+      "top": "A trendy place or a wifi link",
+      "bottom": "Bright eye on the car's front",
+      "left": "Someone with a very short fuse",
+      "right": "Center-stage beam of attention"
+    }
+  },
+  {
+    "id": 37,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": ["GRAND", "MOTHER", "CHILD", "HOOD"],
+    "compounds": {
+      "top": "GRANDMOTHER",
+      "bottom": "CHILDHOOD",
+      "left": "GRANDCHILD",
+      "right": "MOTHERHOOD"
+    },
+    "clues": {
+      "top": "Cookie-baking matriarch",
+      "bottom": "Your formative kid years",
+      "left": "Spoiled by the matriarch",
+      "right": "The state of having kids"
+    }
+  },
+  {
+    "id": 38,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": ["UNDER", "TOW", "FOOT", "PATH"],
+    "compounds": {
+      "top": "UNDERTOW",
+      "bottom": "FOOTPATH",
+      "left": "UNDERFOOT",
+      "right": "TOWPATH"
+    },
+    "clues": {
+      "top": "Dangerous undersea pull",
+      "bottom": "A narrow walking trail",
+      "left": "Right beneath your soles",
+      "right": "Trail where mules pulled barges"
+    }
+  },
+  {
+    "id": 39,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": ["OFF", "SPRING", "SIDE", "BOARD"],
+    "compounds": {
+      "top": "OFFSPRING",
+      "bottom": "SIDEBOARD",
+      "left": "OFFSIDE",
+      "right": "SPRINGBOARD"
+    },
+    "clues": {
+      "top": "Your sons and daughters",
+      "bottom": "A buffet table against the wall",
+      "left": "A soccer ref's frequent call",
+      "right": "Diving platform with a bounce"
+    }
+  },
+  {
+    "id": 40,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": ["FLAT", "IRON", "FOOT", "WORK"],
+    "compounds": {
+      "top": "FLATIRON",
+      "bottom": "FOOTWORK",
+      "left": "FLATFOOT",
+      "right": "IRONWORK"
+    },
+    "clues": {
+      "top": "Press your shirts smooth",
+      "bottom": "Nimble dance steps",
+      "left": "A clumsy cop, classically",
+      "right": "Wrought metal scrollery"
+    }
+  },
+  {
+    "id": 41,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["BACK", "HAND", "TRACK", "BALL"],
+    "compounds": {
+      "top": "BACKHAND",
+      "bottom": "TRACKBALL",
+      "left": "BACKTRACK",
+      "right": "HANDBALL"
+    },
+    "clues": {
+      "top": "A tennis swing across your body",
+      "bottom": "Vintage mouse alternative",
+      "left": "Retrace your steps",
+      "right": "Olympic sport played with two teams and a goal"
+    }
+  },
+  {
+    "id": 42,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["TOW", "HEAD", "PATH", "WAY"],
+    "compounds": {
+      "top": "TOWHEAD",
+      "bottom": "PATHWAY",
+      "left": "TOWPATH",
+      "right": "HEADWAY"
+    },
+    "clues": {
+      "top": "A very pale-blond kid",
+      "bottom": "Garden walkway",
+      "left": "Old mule track beside a canal",
+      "right": "Forward progress"
+    }
+  },
+  {
+    "id": 43,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["STAGE", "HAND", "PLAY", "BOOK"],
+    "compounds": {
+      "top": "STAGEHAND",
+      "bottom": "PLAYBOOK",
+      "left": "STAGEPLAY",
+      "right": "HANDBOOK"
+    },
+    "clues": {
+      "top": "Backstage worker shifting scenery",
+      "bottom": "A team's strategy guide",
+      "left": "Performed at a theater",
+      "right": "Pocket-sized how-to guide"
+    }
+  },
+  {
+    "id": 44,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["BACK", "WATER", "SPACE", "CRAFT"],
+    "compounds": {
+      "top": "BACKWATER",
+      "bottom": "SPACECRAFT",
+      "left": "BACKSPACE",
+      "right": "WATERCRAFT"
+    },
+    "clues": {
+      "top": "A remote, sleepy bayou",
+      "bottom": "Rocket-powered ride to orbit",
+      "left": "Keyboard key that erases left",
+      "right": "Any boat or floating vessel"
+    }
+  },
+  {
+    "id": 45,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["BEACH", "HEAD", "SIDE", "BOARD"],
+    "compounds": {
+      "top": "BEACHHEAD",
+      "bottom": "SIDEBOARD",
+      "left": "BEACHSIDE",
+      "right": "HEADBOARD"
+    },
+    "clues": {
+      "top": "Where the invasion lands ashore",
+      "bottom": "Dining-room buffet cabinet",
+      "left": "Right next to the surf and sand",
+      "right": "What you lean against in bed"
+    }
+  },
+  {
+    "id": 46,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": ["SUN", "SCREEN", "DOWN", "PLAY"],
+    "compounds": {
+      "top": "SUNSCREEN",
+      "bottom": "DOWNPLAY",
+      "left": "SUNDOWN",
+      "right": "SCREENPLAY"
+    },
+    "clues": {
+      "top": "Slather it on at the beach",
+      "bottom": "Brush something aside",
+      "left": "Dusk, in poetic terms",
+      "right": "A Hollywood script in standard format"
+    }
+  },
+  {
+    "id": 47,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": ["OVER", "RIDE", "TIME", "SHARE"],
+    "compounds": {
+      "top": "OVERRIDE",
+      "bottom": "TIMESHARE",
+      "left": "OVERTIME",
+      "right": "RIDESHARE"
+    },
+    "clues": {
+      "top": "Manually take over the controls",
+      "bottom": "Vacation condo split among owners",
+      "left": "Extra hours at time-and-a-half",
+      "right": "Uber or Lyft, generically"
+    }
+  },
+  {
+    "id": 48,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["QUICK", "SAND", "STEP", "STONE"],
+    "compounds": {
+      "top": "QUICKSAND",
+      "bottom": "STEPSTONE",
+      "left": "QUICKSTEP",
+      "right": "SANDSTONE"
+    },
+    "clues": {
+      "top": "Suction trap on a jungle floor",
+      "bottom": "Slab to step on across a creek",
+      "left": "A peppy ballroom dance",
+      "right": "Sedimentary rock for buildings"
+    }
+  },
+  {
+    "id": 49,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["SEA", "WATER", "SHORE", "LINE"],
+    "compounds": {
+      "top": "SEAWATER",
+      "bottom": "SHORELINE",
+      "left": "SEASHORE",
+      "right": "WATERLINE"
+    },
+    "clues": {
+      "top": "Salty H2O from the ocean",
+      "bottom": "Where the land meets the waves",
+      "left": "Beachy edge of the ocean",
+      "right": "Mark on the hull where the float-level sits"
+    }
+  },
+  {
+    "id": 50,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": ["WEEK", "DAY", "NIGHT", "TIME"],
+    "compounds": {
+      "top": "WEEKDAY",
+      "bottom": "NIGHTTIME",
+      "left": "WEEKNIGHT",
+      "right": "DAYTIME"
+    },
+    "clues": {
+      "top": "Monday through Friday",
+      "bottom": "When the owls come out",
+      "left": "A workday evening",
+      "right": "When the sun rules the sky"
+    }
+  },
+  {
+    "id": 51,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": ["FORE", "HEAD", "FOOT", "REST"],
+    "compounds": {
+      "top": "FOREHEAD",
+      "bottom": "FOOTREST",
+      "left": "FOREFOOT",
+      "right": "HEADREST"
+    },
+    "clues": {
+      "top": "Where you slap when you remember",
+      "bottom": "Ottoman for tired toes",
+      "left": "A four-legged animal's front paws",
+      "right": "Cushion against your skull in the car"
+    }
+  }
+]

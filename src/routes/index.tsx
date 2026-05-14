@@ -7,10 +7,13 @@ export const Route = createFileRoute('/')({
 
 function Home() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="mx-auto flex max-w-6xl justify-end px-4 pt-4">
-        <Link to="/admin" className="text-sm font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-slate-900">
-          Admin Review
+    <div className="min-h-[100dvh] bg-paper relative">
+      <div className="absolute top-4 right-4 z-50 md:top-6 md:right-6 pointer-events-none">
+        <Link
+          to="/admin"
+          className="font-ui pointer-events-auto text-[11px] md:text-xs text-ink-soft hover:text-ink underline decoration-paper-line decoration-1 underline-offset-4 transition-colors"
+        >
+          Admin
         </Link>
       </div>
       <FlipWords />

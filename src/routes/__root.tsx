@@ -11,7 +11,11 @@ export const Route = createRootRoute({
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+      },
+      {
+        name: 'theme-color',
+        content: '#f5f1e8',
       },
       {
         title: 'FlipWords',
@@ -26,7 +30,7 @@ export const Route = createRootRoute({
       },
       {
         property: 'og:description',
-        content: 'The ultimate word puzzle game. Flip, rotate, and match!',
+        content: 'A word puzzle that flips, rotates, and clicks into place.',
       },
       {
         name: 'twitter:card',
@@ -45,7 +49,7 @@ export const Route = createRootRoute({
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400..900&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap',
       },
       {
         rel: 'stylesheet',

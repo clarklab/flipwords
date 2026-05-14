@@ -1,12 +1,143 @@
 @import "tailwindcss" source("../");
 
-body {
-  @apply m-0 bg-black text-white;
-  font-family: "Google Sans Flex", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@theme {
+  --color-surface: oklch(96% 0.018 85);
+  --color-surface-deep: oklch(92% 0.022 85);
+  --color-ink: oklch(22% 0.025 250);
+  --color-ink-muted: oklch(45% 0.02 250);
+  --color-ink-soft: oklch(65% 0.015 250);
+  --color-tile-face: oklch(99% 0.012 85);
+  --color-tile-edge: oklch(86% 0.015 85);
+  --color-tile-back: oklch(82% 0.02 85);
+  --color-accent: oklch(60% 0.14 180);
+  --color-accent-soft: oklch(92% 0.05 180);
+  --color-warn: oklch(58% 0.13 30);
+  --color-paper-line: oklch(78% 0.02 80);
 }
 
-code {
-  font-family: "Google Sans Flex", sans-serif;
+:root {
+  --shadow-tile: 0 1px 0 rgba(70, 50, 20, 0.04), 0 6px 14px -6px rgba(60, 40, 10, 0.18), 0 14px 30px -12px rgba(60, 40, 10, 0.14);
+  --shadow-tile-hover: 0 2px 0 rgba(70, 50, 20, 0.05), 0 10px 22px -8px rgba(60, 40, 10, 0.22), 0 24px 48px -18px rgba(60, 40, 10, 0.18);
+  --shadow-tile-lift: 0 4px 0 rgba(70, 50, 20, 0.06), 0 18px 36px -10px rgba(60, 40, 10, 0.3), 0 36px 70px -22px rgba(60, 40, 10, 0.22);
+  --inset-slot: inset 0 2px 8px -2px rgba(60, 40, 10, 0.18), inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+  --paper-tex:
+    repeating-linear-gradient(
+      135deg,
+      rgba(120, 90, 40, 0.018) 0px,
+      rgba(120, 90, 40, 0.018) 1px,
+      transparent 1px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(120, 90, 40, 0.012) 0px,
+      rgba(120, 90, 40, 0.012) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+}
+
+html, body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+body {
+  @apply m-0;
+  font-family: "Mona Sans", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-variation-settings: "wdth" 100, "wght" 400;
+  font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+  background:
+    radial-gradient(ellipse at 50% -10%, oklch(95% 0.03 80) 0%, transparent 60%),
+    var(--paper-tex),
+    var(--color-surface);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+code, pre {
+  font-family: "Mona Sans", ui-monospace, monospace;
+  font-variation-settings: "wdth" 100, "wght" 500;
+}
+
+/* Mona Sans width axis utilities */
+.font-wide {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  letter-spacing: -0.005em;
+}
+.font-wide-700 {
+  font-variation-settings: "wdth" 125, "wght" 700;
+  letter-spacing: 0;
+}
+.font-expand {
+  font-variation-settings: "wdth" 115, "wght" 700;
+}
+.font-normal-tile {
+  font-variation-settings: "wdth" 100, "wght" 750;
+  letter-spacing: 0.01em;
+}
+.font-clue {
+  font-variation-settings: "wdth" 100, "wght" 500;
+}
+.font-ui {
+  font-variation-settings: "wdth" 100, "wght" 600;
+}
+
+/* Paper texture overlay */
+.bg-paper {
+  background:
+    var(--paper-tex),
+    var(--color-surface);
+}
+
+.bg-tile-face {
+  background:
+    linear-gradient(180deg, oklch(99.5% 0.012 85) 0%, oklch(98% 0.014 85) 100%),
+    var(--color-tile-face);
+}
+
+.shadow-tile {
+  box-shadow: var(--shadow-tile);
+}
+.shadow-tile-hover {
+  box-shadow: var(--shadow-tile-hover);
+}
+.shadow-tile-lift {
+  box-shadow: var(--shadow-tile-lift);
+}
+.shadow-slot-inset {
+  box-shadow: var(--inset-slot);
+}
+
+/* Hide scrollbars on tile rail */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* GSAP friendliness — promote to its own compositor layer */
+.gpu {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Selection feels paper-y */
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
 }
