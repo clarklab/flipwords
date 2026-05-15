@@ -11,23 +11,23 @@
       },
       {
         "id": "t2",
-        "top": "CAT",
-        "bottom": "WALK"
-      },
-      {
-        "id": "t3",
         "top": "AIR",
         "bottom": "PORT"
       },
       {
+        "id": "t3",
+        "top": "TYPE",
+        "bottom": "WRITER"
+      },
+      {
         "id": "t4",
-        "top": "SKY",
-        "bottom": "LARK"
+        "top": "WATER",
+        "bottom": "MELON"
       },
       {
         "id": "t5",
-        "top": "BIRTH",
-        "bottom": "DAY"
+        "top": "SNOW",
+        "bottom": "FLAKE"
       }
     ],
     "hints": {
@@ -50,28 +50,28 @@
     "tiles": [
       {
         "id": "t1",
+        "top": "ICE",
+        "bottom": "CREAM"
+      },
+      {
+        "id": "t2",
         "top": "HOT",
         "bottom": "BED"
       },
       {
-        "id": "t2",
-        "top": "CORN",
-        "bottom": "FIELD"
-      },
-      {
         "id": "t3",
-        "top": "SUN",
-        "bottom": "FLOWER"
-      },
-      {
-        "id": "t4",
         "top": "HEAD",
         "bottom": "ROOM"
       },
       {
+        "id": "t4",
+        "top": "HEART",
+        "bottom": "BREAK"
+      },
+      {
         "id": "t5",
-        "top": "PIN",
-        "bottom": "WHEEL"
+        "top": "LIFE",
+        "bottom": "GUARD"
       }
     ],
     "hints": {
@@ -94,28 +94,28 @@
     "tiles": [
       {
         "id": "t1",
+        "top": "RAIN",
+        "bottom": "COAT"
+      },
+      {
+        "id": "t2",
+        "top": "BARE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t3",
+        "top": "GOLD",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t4",
         "top": "FIRE",
         "bottom": "WORK"
       },
       {
-        "id": "t2",
+        "id": "t5",
         "top": "BALL",
         "bottom": "ROOM"
-      },
-      {
-        "id": "t3",
-        "top": "DRAGON",
-        "bottom": "FLY"
-      },
-      {
-        "id": "t4",
-        "top": "CORN",
-        "bottom": "FIELD"
-      },
-      {
-        "id": "t5",
-        "top": "ICE",
-        "bottom": "CREAM"
       }
     ],
     "hints": {
@@ -138,28 +138,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SKY",
-        "bottom": "LARK"
-      },
-      {
-        "id": "t2",
         "top": "BED",
         "bottom": "TIME"
       },
       {
-        "id": "t3",
-        "top": "LOCK",
-        "bottom": "SMITH"
+        "id": "t2",
+        "top": "PEA",
+        "bottom": "NUT"
       },
       {
-        "id": "t4",
+        "id": "t3",
         "top": "SIDE",
         "bottom": "LINE"
       },
       {
+        "id": "t4",
+        "top": "EVER",
+        "bottom": "GREEN"
+      },
+      {
         "id": "t5",
-        "top": "PAPER",
-        "bottom": "CLIP"
+        "top": "LOCK",
+        "bottom": "SMITH"
       }
     ],
     "hints": {
@@ -182,28 +182,28 @@
     "tiles": [
       {
         "id": "t1",
+        "top": "FISH",
+        "bottom": "BOWL"
+      },
+      {
+        "id": "t2",
+        "top": "CAKE",
+        "bottom": "WALK"
+      },
+      {
+        "id": "t3",
+        "top": "BIRTH",
+        "bottom": "DAY"
+      },
+      {
+        "id": "t4",
         "top": "CUP",
         "bottom": "BOARD"
       },
       {
-        "id": "t2",
-        "top": "TOOTH",
-        "bottom": "BRUSH"
-      },
-      {
-        "id": "t3",
-        "top": "SNAKE",
-        "bottom": "BITE"
-      },
-      {
-        "id": "t4",
-        "top": "MOON",
-        "bottom": "LIGHT"
-      },
-      {
         "id": "t5",
-        "top": "CAKE",
-        "bottom": "WALK"
+        "top": "PEPPER",
+        "bottom": "MINT"
       }
     ],
     "hints": {
@@ -226,28 +226,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "GRAPE",
-        "bottom": "VINE"
-      },
-      {
-        "id": "t2",
-        "top": "BIRD",
-        "bottom": "SEED"
-      },
-      {
-        "id": "t3",
-        "top": "BACK",
-        "bottom": "FIRE"
-      },
-      {
-        "id": "t4",
         "top": "DOOR",
         "bottom": "MAN"
       },
       {
+        "id": "t2",
+        "top": "BACK",
+        "bottom": "FIRE"
+      },
+      {
+        "id": "t3",
+        "top": "FOOT",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t4",
+        "top": "MUSH",
+        "bottom": "ROOM"
+      },
+      {
         "id": "t5",
-        "top": "DOG",
-        "bottom": "SLED"
+        "top": "GOLD",
+        "bottom": "FISH"
       }
     ],
     "hints": {
@@ -270,23 +270,23 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "LOCK",
-        "bottom": "SMITH"
+        "top": "BLUE",
+        "bottom": "PRINT"
       },
       {
         "id": "t2",
-        "top": "BIRTH",
-        "bottom": "DAY"
+        "top": "DROP",
+        "bottom": "OUT"
       },
       {
         "id": "t3",
-        "top": "PEPPER",
-        "bottom": "MINT"
+        "top": "DRIFT",
+        "bottom": "WOOD"
       },
       {
         "id": "t4",
-        "top": "DROP",
-        "bottom": "OUT"
+        "top": "BIRD",
+        "bottom": "SEED"
       },
       {
         "id": "t5",
@@ -314,28 +314,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "EARTH",
-        "bottom": "WORM"
+        "top": "CORN",
+        "bottom": "FIELD"
       },
       {
         "id": "t2",
-        "top": "SUIT",
-        "bottom": "CASE"
-      },
-      {
-        "id": "t3",
-        "top": "BIRTH",
-        "bottom": "DAY"
-      },
-      {
-        "id": "t4",
         "top": "SNOW",
         "bottom": "BOARD"
       },
       {
-        "id": "t5",
+        "id": "t3",
+        "top": "PEPPER",
+        "bottom": "MINT"
+      },
+      {
+        "id": "t4",
         "top": "BALL",
         "bottom": "ROOM"
+      },
+      {
+        "id": "t5",
+        "top": "JELLY",
+        "bottom": "BEAN"
       }
     ],
     "hints": {
@@ -358,8 +358,8 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SCARE",
-        "bottom": "CROW"
+        "top": "EARTH",
+        "bottom": "WORM"
       },
       {
         "id": "t2",
@@ -368,18 +368,18 @@
       },
       {
         "id": "t3",
-        "top": "BLACK",
-        "bottom": "BIRD"
+        "top": "EYE",
+        "bottom": "BROW"
       },
       {
         "id": "t4",
-        "top": "LOCK",
-        "bottom": "SMITH"
+        "top": "BUTTER",
+        "bottom": "FLY"
       },
       {
         "id": "t5",
-        "top": "PEPPER",
-        "bottom": "MINT"
+        "top": "BLACK",
+        "bottom": "BIRD"
       }
     ],
     "hints": {
@@ -402,28 +402,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "PAPER",
-        "bottom": "CLIP"
-      },
-      {
-        "id": "t2",
         "top": "HEAD",
         "bottom": "WAY"
       },
       {
-        "id": "t3",
-        "top": "EAR",
-        "bottom": "RING"
-      },
-      {
-        "id": "t4",
+        "id": "t2",
         "top": "WAR",
         "bottom": "PATH"
       },
       {
+        "id": "t3",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t4",
+        "top": "PINE",
+        "bottom": "APPLE"
+      },
+      {
         "id": "t5",
-        "top": "SHOE",
-        "bottom": "LACE"
+        "top": "CORN",
+        "bottom": "FIELD"
       }
     ],
     "hints": {
@@ -446,8 +446,8 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SHOE",
-        "bottom": "LACE"
+        "top": "LAND",
+        "bottom": "SCAPE"
       },
       {
         "id": "t2",
@@ -456,18 +456,18 @@
       },
       {
         "id": "t3",
-        "top": "PAPER",
-        "bottom": "CLIP"
+        "top": "EARTH",
+        "bottom": "WORM"
       },
       {
         "id": "t4",
-        "top": "WIND",
-        "bottom": "MILL"
+        "top": "NIGHT",
+        "bottom": "TIME"
       },
       {
         "id": "t5",
-        "top": "NIGHT",
-        "bottom": "TIME"
+        "top": "BIRTH",
+        "bottom": "DAY"
       }
     ],
     "hints": {
@@ -490,28 +490,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "HALF",
-        "bottom": "BACK"
-      },
-      {
-        "id": "t2",
         "top": "WAY",
         "bottom": "SIDE"
       },
       {
+        "id": "t2",
+        "top": "EVER",
+        "bottom": "GREEN"
+      },
+      {
         "id": "t3",
-        "top": "SUN",
-        "bottom": "FLOWER"
+        "top": "JELLY",
+        "bottom": "BEAN"
       },
       {
         "id": "t4",
-        "top": "SKY",
-        "bottom": "LARK"
+        "top": "HALF",
+        "bottom": "BACK"
       },
       {
         "id": "t5",
-        "top": "SHOE",
-        "bottom": "LACE"
+        "top": "SUIT",
+        "bottom": "CASE"
       }
     ],
     "hints": {
@@ -534,28 +534,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "DRAGON",
-        "bottom": "FLY"
-      },
-      {
-        "id": "t2",
         "top": "WORK",
         "bottom": "BOOK"
       },
       {
+        "id": "t2",
+        "top": "FOOT",
+        "bottom": "NOTE"
+      },
+      {
         "id": "t3",
-        "top": "EYE",
-        "bottom": "BROW"
+        "top": "GRAPE",
+        "bottom": "VINE"
       },
       {
         "id": "t4",
-        "top": "DOG",
-        "bottom": "SLED"
+        "top": "TOOTH",
+        "bottom": "PICK"
       },
       {
         "id": "t5",
-        "top": "FOOT",
-        "bottom": "NOTE"
+        "top": "BEAN",
+        "bottom": "STALK"
       }
     ],
     "hints": {
@@ -578,23 +578,23 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "EARTH",
-        "bottom": "WORM"
-      },
-      {
-        "id": "t2",
         "top": "MOON",
         "bottom": "SHOT"
       },
       {
+        "id": "t2",
+        "top": "EYE",
+        "bottom": "BROW"
+      },
+      {
         "id": "t3",
-        "top": "BUTTER",
-        "bottom": "FLY"
+        "top": "WIND",
+        "bottom": "SHIELD"
       },
       {
         "id": "t4",
-        "top": "FISH",
-        "bottom": "BOWL"
+        "top": "WATER",
+        "bottom": "MELON"
       },
       {
         "id": "t5",
@@ -622,8 +622,8 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "DESK",
-        "bottom": "TOP"
+        "top": "BED",
+        "bottom": "SIDE"
       },
       {
         "id": "t2",
@@ -632,18 +632,18 @@
       },
       {
         "id": "t3",
-        "top": "BIRD",
-        "bottom": "SEED"
+        "top": "DESK",
+        "bottom": "TOP"
       },
       {
         "id": "t4",
-        "top": "SNAKE",
-        "bottom": "BITE"
+        "top": "KEY",
+        "bottom": "NOTE"
       },
       {
         "id": "t5",
-        "top": "BED",
-        "bottom": "SIDE"
+        "top": "EARTH",
+        "bottom": "WORM"
       }
     ],
     "hints": {
@@ -666,28 +666,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "EARTH",
-        "bottom": "WORM"
-      },
-      {
-        "id": "t2",
-        "top": "BIRTH",
-        "bottom": "DAY"
-      },
-      {
-        "id": "t3",
         "top": "BASE",
         "bottom": "BALL"
       },
       {
+        "id": "t2",
+        "top": "SKY",
+        "bottom": "LARK"
+      },
+      {
+        "id": "t3",
+        "top": "DRAGON",
+        "bottom": "FLY"
+      },
+      {
         "id": "t4",
-        "top": "EYE",
-        "bottom": "BROW"
+        "top": "BOARD",
+        "bottom": "ROOM"
       },
       {
         "id": "t5",
-        "top": "BOARD",
-        "bottom": "ROOM"
+        "top": "STAR",
+        "bottom": "FISH"
       }
     ],
     "hints": {
@@ -710,18 +710,18 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "MOON",
-        "bottom": "LIGHT"
+        "top": "BLUE",
+        "bottom": "PRINT"
       },
       {
         "id": "t2",
-        "top": "DOWN",
-        "bottom": "PLAY"
+        "top": "JELLY",
+        "bottom": "BEAN"
       },
       {
         "id": "t3",
-        "top": "RAIN",
-        "bottom": "COAT"
+        "top": "SAND",
+        "bottom": "CASTLE"
       },
       {
         "id": "t4",
@@ -730,8 +730,8 @@
       },
       {
         "id": "t5",
-        "top": "WIND",
-        "bottom": "MILL"
+        "top": "DOWN",
+        "bottom": "PLAY"
       }
     ],
     "hints": {
@@ -754,28 +754,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "AIR",
-        "bottom": "PLANE"
+        "top": "SIDE",
+        "bottom": "LINE"
       },
       {
         "id": "t2",
-        "top": "GOLD",
-        "bottom": "FISH"
-      },
-      {
-        "id": "t3",
-        "top": "CORN",
-        "bottom": "FIELD"
-      },
-      {
-        "id": "t4",
         "top": "LAKE",
         "bottom": "SHORE"
       },
       {
+        "id": "t3",
+        "top": "STRAW",
+        "bottom": "BERRY"
+      },
+      {
+        "id": "t4",
+        "top": "CAT",
+        "bottom": "WALK"
+      },
+      {
         "id": "t5",
-        "top": "SIDE",
-        "bottom": "LINE"
+        "top": "RAIN",
+        "bottom": "COAT"
       }
     ],
     "hints": {
@@ -798,28 +798,28 @@
     "tiles": [
       {
         "id": "t1",
+        "top": "TOOTH",
+        "bottom": "BRUSH"
+      },
+      {
+        "id": "t2",
+        "top": "STRAW",
+        "bottom": "BERRY"
+      },
+      {
+        "id": "t3",
         "top": "WASTE",
         "bottom": "WATER"
       },
       {
-        "id": "t2",
+        "id": "t4",
         "top": "LAND",
         "bottom": "FALL"
       },
       {
-        "id": "t3",
-        "top": "EARTH",
-        "bottom": "WORM"
-      },
-      {
-        "id": "t4",
-        "top": "BIRTH",
-        "bottom": "DAY"
-      },
-      {
         "id": "t5",
-        "top": "JELLY",
-        "bottom": "BEAN"
+        "top": "LIFE",
+        "bottom": "GUARD"
       }
     ],
     "hints": {
@@ -842,28 +842,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "BIRTH",
-        "bottom": "DAY"
-      },
-      {
-        "id": "t2",
-        "top": "GOLD",
-        "bottom": "FISH"
-      },
-      {
-        "id": "t3",
         "top": "FIRE",
         "bottom": "BOAT"
       },
       {
-        "id": "t4",
+        "id": "t2",
         "top": "WILD",
         "bottom": "LIFE"
       },
       {
+        "id": "t3",
+        "top": "ARROW",
+        "bottom": "HEAD"
+      },
+      {
+        "id": "t4",
+        "top": "BEAN",
+        "bottom": "STALK"
+      },
+      {
         "id": "t5",
-        "top": "SCARE",
-        "bottom": "CROW"
+        "top": "GRAPE",
+        "bottom": "VINE"
       }
     ],
     "hints": {
@@ -886,28 +886,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "RAIN",
-        "bottom": "FALL"
+        "top": "BIRD",
+        "bottom": "SEED"
       },
       {
         "id": "t2",
-        "top": "STAR",
-        "bottom": "FISH"
-      },
-      {
-        "id": "t3",
         "top": "CHECK",
         "bottom": "OUT"
       },
       {
+        "id": "t3",
+        "top": "HAIR",
+        "bottom": "CUT"
+      },
+      {
         "id": "t4",
-        "top": "EYE",
-        "bottom": "BROW"
+        "top": "RAIN",
+        "bottom": "FALL"
       },
       {
         "id": "t5",
-        "top": "SNAKE",
-        "bottom": "BITE"
+        "top": "EYE",
+        "bottom": "BROW"
       }
     ],
     "hints": {
@@ -930,28 +930,28 @@
     "tiles": [
       {
         "id": "t1",
+        "top": "DRIFT",
+        "bottom": "WOOD"
+      },
+      {
+        "id": "t2",
         "top": "HEAD",
         "bottom": "LIGHT"
       },
       {
-        "id": "t2",
-        "top": "PIN",
-        "bottom": "WHEEL"
-      },
-      {
         "id": "t3",
-        "top": "PEPPER",
-        "bottom": "MINT"
+        "top": "BUTTER",
+        "bottom": "FLY"
       },
       {
         "id": "t4",
-        "top": "SUIT",
-        "bottom": "CASE"
+        "top": "FORE",
+        "bottom": "FOOT"
       },
       {
         "id": "t5",
-        "top": "FORE",
-        "bottom": "FOOT"
+        "top": "SNOW",
+        "bottom": "FLAKE"
       }
     ],
     "hints": {
@@ -974,18 +974,18 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "LOW",
-        "bottom": "LIFE"
+        "top": "EYE",
+        "bottom": "BROW"
       },
       {
         "id": "t2",
-        "top": "CORN",
-        "bottom": "FIELD"
+        "top": "DOWN",
+        "bottom": "TIME"
       },
       {
         "id": "t3",
-        "top": "DOWN",
-        "bottom": "TIME"
+        "top": "FOOT",
+        "bottom": "BALL"
       },
       {
         "id": "t4",
@@ -994,8 +994,8 @@
       },
       {
         "id": "t5",
-        "top": "JELLY",
-        "bottom": "BEAN"
+        "top": "LOW",
+        "bottom": "LIFE"
       }
     ],
     "hints": {
@@ -1018,28 +1018,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "KEY",
-        "bottom": "NOTE"
-      },
-      {
-        "id": "t2",
         "top": "GOD",
         "bottom": "MOTHER"
       },
       {
-        "id": "t3",
-        "top": "TOOTH",
-        "bottom": "BRUSH"
-      },
-      {
-        "id": "t4",
+        "id": "t2",
         "top": "FATHER",
         "bottom": "LAND"
       },
       {
+        "id": "t3",
+        "top": "EVER",
+        "bottom": "GREEN"
+      },
+      {
+        "id": "t4",
+        "top": "SNOW",
+        "bottom": "FLAKE"
+      },
+      {
         "id": "t5",
-        "top": "WIND",
-        "bottom": "MILL"
+        "top": "GOLD",
+        "bottom": "FISH"
       }
     ],
     "hints": {
@@ -1062,18 +1062,18 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "STRAW",
-        "bottom": "BERRY"
+        "top": "BARE",
+        "bottom": "FOOT"
       },
       {
         "id": "t2",
-        "top": "HEAD",
-        "bottom": "LINE"
+        "top": "PIN",
+        "bottom": "WHEEL"
       },
       {
         "id": "t3",
-        "top": "DRAGON",
-        "bottom": "FLY"
+        "top": "BLUE",
+        "bottom": "PRINT"
       },
       {
         "id": "t4",
@@ -1082,8 +1082,8 @@
       },
       {
         "id": "t5",
-        "top": "EARTH",
-        "bottom": "WORM"
+        "top": "HEAD",
+        "bottom": "LINE"
       }
     ],
     "hints": {
@@ -1106,28 +1106,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "TYPE",
-        "bottom": "WRITER"
+        "top": "SNAKE",
+        "bottom": "BITE"
       },
       {
         "id": "t2",
-        "top": "ROUND",
-        "bottom": "HOUSE"
-      },
-      {
-        "id": "t3",
         "top": "TABLE",
         "bottom": "TOP"
       },
       {
+        "id": "t3",
+        "top": "ROUND",
+        "bottom": "HOUSE"
+      },
+      {
         "id": "t4",
-        "top": "FISH",
-        "bottom": "BOWL"
+        "top": "LAND",
+        "bottom": "SCAPE"
       },
       {
         "id": "t5",
-        "top": "BIRTH",
-        "bottom": "DAY"
+        "top": "FOOT",
+        "bottom": "BALL"
       }
     ],
     "hints": {
@@ -1155,23 +1155,23 @@
       },
       {
         "id": "t2",
-        "top": "CORN",
-        "bottom": "FIELD"
-      },
-      {
-        "id": "t3",
         "top": "TIME",
         "bottom": "OUT"
       },
       {
+        "id": "t3",
+        "top": "SUN",
+        "bottom": "FLOWER"
+      },
+      {
         "id": "t4",
-        "top": "EAR",
-        "bottom": "RING"
+        "top": "TOOTH",
+        "bottom": "BRUSH"
       },
       {
         "id": "t5",
-        "top": "EARTH",
-        "bottom": "WORM"
+        "top": "ICE",
+        "bottom": "CREAM"
       }
     ],
     "hints": {
@@ -1194,28 +1194,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SUN",
-        "bottom": "FLOWER"
+        "top": "SCARE",
+        "bottom": "CROW"
       },
       {
         "id": "t2",
-        "top": "HAND",
-        "bottom": "SHAKE"
-      },
-      {
-        "id": "t3",
         "top": "HORSE",
         "bottom": "PLAY"
       },
       {
+        "id": "t3",
+        "top": "SAND",
+        "bottom": "CASTLE"
+      },
+      {
         "id": "t4",
-        "top": "SNAKE",
-        "bottom": "BITE"
+        "top": "POWER",
+        "bottom": "HOUSE"
       },
       {
         "id": "t5",
-        "top": "POWER",
-        "bottom": "HOUSE"
+        "top": "LAND",
+        "bottom": "SCAPE"
       }
     ],
     "hints": {
@@ -1238,28 +1238,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "OVER",
-        "bottom": "COME"
+        "top": "LIME",
+        "bottom": "STONE"
       },
       {
         "id": "t2",
-        "top": "SUIT",
-        "bottom": "CASE"
-      },
-      {
-        "id": "t3",
-        "top": "GRAPE",
-        "bottom": "VINE"
-      },
-      {
-        "id": "t4",
         "top": "WALK",
         "bottom": "OUT"
       },
       {
+        "id": "t3",
+        "top": "PEPPER",
+        "bottom": "MINT"
+      },
+      {
+        "id": "t4",
+        "top": "OVER",
+        "bottom": "COME"
+      },
+      {
         "id": "t5",
-        "top": "DESK",
-        "bottom": "TOP"
+        "top": "KEY",
+        "bottom": "NOTE"
       }
     ],
     "hints": {
@@ -1282,28 +1282,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "BUTTER",
-        "bottom": "FLY"
-      },
-      {
-        "id": "t2",
-        "top": "PAPER",
-        "bottom": "CLIP"
-      },
-      {
-        "id": "t3",
-        "top": "CROSS",
-        "bottom": "CUT"
-      },
-      {
-        "id": "t4",
         "top": "WALK",
         "bottom": "OUT"
       },
       {
+        "id": "t2",
+        "top": "CROSS",
+        "bottom": "CUT"
+      },
+      {
+        "id": "t3",
+        "top": "LOCK",
+        "bottom": "SMITH"
+      },
+      {
+        "id": "t4",
+        "top": "DRIFT",
+        "bottom": "WOOD"
+      },
+      {
         "id": "t5",
-        "top": "KEY",
-        "bottom": "NOTE"
+        "top": "SNAKE",
+        "bottom": "BITE"
       }
     ],
     "hints": {
@@ -1326,23 +1326,23 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SCARE",
-        "bottom": "CROW"
+        "top": "EARTH",
+        "bottom": "WORM"
       },
       {
         "id": "t2",
-        "top": "EAR",
-        "bottom": "RING"
-      },
-      {
-        "id": "t3",
         "top": "DROP",
         "bottom": "DOWN"
       },
       {
+        "id": "t3",
+        "top": "TOOTH",
+        "bottom": "BRUSH"
+      },
+      {
         "id": "t4",
-        "top": "BUTTER",
-        "bottom": "FLY"
+        "top": "EYE",
+        "bottom": "BROW"
       },
       {
         "id": "t5",
@@ -1370,28 +1370,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "BACK",
-        "bottom": "DOOR"
-      },
-      {
-        "id": "t2",
-        "top": "BIRD",
-        "bottom": "SEED"
-      },
-      {
-        "id": "t3",
-        "top": "SHOE",
-        "bottom": "LACE"
-      },
-      {
-        "id": "t4",
         "top": "ICE",
         "bottom": "CREAM"
       },
       {
-        "id": "t5",
+        "id": "t2",
         "top": "WATER",
         "bottom": "WAY"
+      },
+      {
+        "id": "t3",
+        "top": "TYPE",
+        "bottom": "WRITER"
+      },
+      {
+        "id": "t4",
+        "top": "LAND",
+        "bottom": "SCAPE"
+      },
+      {
+        "id": "t5",
+        "top": "BACK",
+        "bottom": "DOOR"
       }
     ],
     "hints": {
@@ -1414,28 +1414,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "GRAPE",
-        "bottom": "VINE"
-      },
-      {
-        "id": "t2",
         "top": "SCHOOL",
         "bottom": "GIRL"
       },
       {
+        "id": "t2",
+        "top": "KEY",
+        "bottom": "NOTE"
+      },
+      {
         "id": "t3",
-        "top": "EYE",
-        "bottom": "BROW"
+        "top": "RAIN",
+        "bottom": "BOW"
       },
       {
         "id": "t4",
-        "top": "BOY",
-        "bottom": "HOOD"
+        "top": "FISH",
+        "bottom": "BOWL"
       },
       {
         "id": "t5",
-        "top": "SUN",
-        "bottom": "FLOWER"
+        "top": "BOY",
+        "bottom": "HOOD"
       }
     ],
     "hints": {
@@ -1458,23 +1458,23 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SNAKE",
-        "bottom": "BITE"
+        "top": "SUN",
+        "bottom": "FLOWER"
       },
       {
         "id": "t2",
-        "top": "EYE",
-        "bottom": "BROW"
-      },
-      {
-        "id": "t3",
         "top": "UNDER",
         "bottom": "HAND"
       },
       {
+        "id": "t3",
+        "top": "TYPE",
+        "bottom": "WRITER"
+      },
+      {
         "id": "t4",
-        "top": "DESK",
-        "bottom": "TOP"
+        "top": "JELLY",
+        "bottom": "BEAN"
       },
       {
         "id": "t5",
@@ -1502,13 +1502,13 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "STAR",
-        "bottom": "FISH"
+        "top": "FISH",
+        "bottom": "BOWL"
       },
       {
         "id": "t2",
-        "top": "BIRD",
-        "bottom": "SEED"
+        "top": "SIDE",
+        "bottom": "LINE"
       },
       {
         "id": "t3",
@@ -1517,13 +1517,13 @@
       },
       {
         "id": "t4",
-        "top": "TOOTH",
-        "bottom": "BRUSH"
+        "top": "BUTTER",
+        "bottom": "CUP"
       },
       {
         "id": "t5",
-        "top": "SIDE",
-        "bottom": "LINE"
+        "top": "SNAKE",
+        "bottom": "BITE"
       }
     ],
     "hints": {
@@ -1546,13 +1546,13 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SHOE",
-        "bottom": "LACE"
+        "top": "SUIT",
+        "bottom": "CASE"
       },
       {
         "id": "t2",
-        "top": "EAR",
-        "bottom": "RING"
+        "top": "EARTH",
+        "bottom": "WORM"
       },
       {
         "id": "t3",
@@ -1561,8 +1561,8 @@
       },
       {
         "id": "t4",
-        "top": "SNAKE",
-        "bottom": "BITE"
+        "top": "MUSH",
+        "bottom": "ROOM"
       },
       {
         "id": "t5",
@@ -1590,28 +1590,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SCARE",
-        "bottom": "CROW"
-      },
-      {
-        "id": "t2",
-        "top": "ICE",
-        "bottom": "CREAM"
-      },
-      {
-        "id": "t3",
-        "top": "MOTHER",
-        "bottom": "HOOD"
-      },
-      {
-        "id": "t4",
         "top": "GRAND",
         "bottom": "CHILD"
       },
       {
+        "id": "t2",
+        "top": "PAPER",
+        "bottom": "CLIP"
+      },
+      {
+        "id": "t3",
+        "top": "WIND",
+        "bottom": "SHIELD"
+      },
+      {
+        "id": "t4",
+        "top": "FISH",
+        "bottom": "BOWL"
+      },
+      {
         "id": "t5",
-        "top": "PIN",
-        "bottom": "WHEEL"
+        "top": "MOTHER",
+        "bottom": "HOOD"
       }
     ],
     "hints": {
@@ -1634,13 +1634,13 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "FISH",
-        "bottom": "BOWL"
+        "top": "UNDER",
+        "bottom": "FOOT"
       },
       {
         "id": "t2",
-        "top": "JELLY",
-        "bottom": "BEAN"
+        "top": "TOW",
+        "bottom": "PATH"
       },
       {
         "id": "t3",
@@ -1649,13 +1649,13 @@
       },
       {
         "id": "t4",
-        "top": "UNDER",
-        "bottom": "FOOT"
+        "top": "LOCK",
+        "bottom": "SMITH"
       },
       {
         "id": "t5",
-        "top": "TOW",
-        "bottom": "PATH"
+        "top": "HAND",
+        "bottom": "SHAKE"
       }
     ],
     "hints": {
@@ -1678,28 +1678,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "SPRING",
-        "bottom": "BOARD"
+        "top": "PIN",
+        "bottom": "WHEEL"
       },
       {
         "id": "t2",
+        "top": "SKY",
+        "bottom": "LARK"
+      },
+      {
+        "id": "t3",
         "top": "OFF",
         "bottom": "SIDE"
       },
       {
-        "id": "t3",
-        "top": "JELLY",
-        "bottom": "BEAN"
-      },
-      {
         "id": "t4",
-        "top": "FISH",
-        "bottom": "BOWL"
+        "top": "SPRING",
+        "bottom": "BOARD"
       },
       {
         "id": "t5",
-        "top": "BIRD",
-        "bottom": "SEED"
+        "top": "ICE",
+        "bottom": "CREAM"
       }
     ],
     "hints": {
@@ -1727,23 +1727,23 @@
       },
       {
         "id": "t2",
-        "top": "EARTH",
-        "bottom": "WORM"
+        "top": "HAND",
+        "bottom": "SHAKE"
       },
       {
         "id": "t3",
-        "top": "RAIN",
-        "bottom": "COAT"
+        "top": "BIRD",
+        "bottom": "SEED"
       },
       {
         "id": "t4",
-        "top": "JELLY",
-        "bottom": "BEAN"
+        "top": "IRON",
+        "bottom": "WORK"
       },
       {
         "id": "t5",
-        "top": "IRON",
-        "bottom": "WORK"
+        "top": "SAND",
+        "bottom": "CASTLE"
       }
     ],
     "hints": {
@@ -1771,23 +1771,23 @@
       },
       {
         "id": "t2",
+        "top": "BEAN",
+        "bottom": "STALK"
+      },
+      {
+        "id": "t3",
+        "top": "SCARE",
+        "bottom": "CROW"
+      },
+      {
+        "id": "t4",
         "top": "TRACK",
         "bottom": "BALL"
       },
       {
-        "id": "t3",
-        "top": "FISH",
-        "bottom": "BOWL"
-      },
-      {
-        "id": "t4",
-        "top": "JELLY",
-        "bottom": "BEAN"
-      },
-      {
         "id": "t5",
-        "top": "EYE",
-        "bottom": "BROW"
+        "top": "TYPE",
+        "bottom": "WRITER"
       }
     ],
     "hints": {
@@ -1810,28 +1810,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "HAND",
-        "bottom": "SHAKE"
-      },
-      {
-        "id": "t2",
-        "top": "ICE",
-        "bottom": "CREAM"
-      },
-      {
-        "id": "t3",
-        "top": "DESK",
-        "bottom": "TOP"
-      },
-      {
-        "id": "t4",
         "top": "PATH",
         "bottom": "WAY"
       },
       {
-        "id": "t5",
+        "id": "t2",
+        "top": "TYPE",
+        "bottom": "WRITER"
+      },
+      {
+        "id": "t3",
+        "top": "BARE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t4",
         "top": "TOW",
         "bottom": "HEAD"
+      },
+      {
+        "id": "t5",
+        "top": "LIME",
+        "bottom": "STONE"
       }
     ],
     "hints": {
@@ -1859,23 +1859,23 @@
       },
       {
         "id": "t2",
+        "top": "LIME",
+        "bottom": "STONE"
+      },
+      {
+        "id": "t3",
+        "top": "BUTTER",
+        "bottom": "FLY"
+      },
+      {
+        "id": "t4",
         "top": "STAGE",
         "bottom": "HAND"
       },
       {
-        "id": "t3",
-        "top": "SUN",
-        "bottom": "FLOWER"
-      },
-      {
-        "id": "t4",
-        "top": "PAPER",
-        "bottom": "CLIP"
-      },
-      {
         "id": "t5",
-        "top": "TOOTH",
-        "bottom": "BRUSH"
+        "top": "GRAPE",
+        "bottom": "VINE"
       }
     ],
     "hints": {
@@ -1898,8 +1898,8 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "DESK",
-        "bottom": "TOP"
+        "top": "RAIN",
+        "bottom": "BOW"
       },
       {
         "id": "t2",
@@ -1908,8 +1908,8 @@
       },
       {
         "id": "t3",
-        "top": "TOOTH",
-        "bottom": "BRUSH"
+        "top": "HEART",
+        "bottom": "BREAK"
       },
       {
         "id": "t4",
@@ -1918,8 +1918,8 @@
       },
       {
         "id": "t5",
-        "top": "PIN",
-        "bottom": "WHEEL"
+        "top": "STRAW",
+        "bottom": "BERRY"
       }
     ],
     "hints": {
@@ -1942,28 +1942,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "BEACH",
-        "bottom": "HEAD"
-      },
-      {
-        "id": "t2",
-        "top": "SHOE",
-        "bottom": "LACE"
-      },
-      {
-        "id": "t3",
         "top": "SUN",
         "bottom": "FLOWER"
       },
       {
+        "id": "t2",
+        "top": "EYE",
+        "bottom": "BROW"
+      },
+      {
+        "id": "t3",
+        "top": "PEA",
+        "bottom": "NUT"
+      },
+      {
         "id": "t4",
-        "top": "SIDE",
-        "bottom": "BOARD"
+        "top": "BEACH",
+        "bottom": "HEAD"
       },
       {
         "id": "t5",
-        "top": "TOOTH",
-        "bottom": "BRUSH"
+        "top": "SIDE",
+        "bottom": "BOARD"
       }
     ],
     "hints": {
@@ -1986,28 +1986,28 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "KEY",
-        "bottom": "NOTE"
-      },
-      {
-        "id": "t2",
         "top": "SUN",
         "bottom": "DOWN"
       },
       {
-        "id": "t3",
-        "top": "PEPPER",
-        "bottom": "MINT"
-      },
-      {
-        "id": "t4",
+        "id": "t2",
         "top": "SCREEN",
         "bottom": "PLAY"
       },
       {
+        "id": "t3",
+        "top": "PEA",
+        "bottom": "NUT"
+      },
+      {
+        "id": "t4",
+        "top": "JELLY",
+        "bottom": "BEAN"
+      },
+      {
         "id": "t5",
-        "top": "ICE",
-        "bottom": "CREAM"
+        "top": "LAND",
+        "bottom": "SCAPE"
       }
     ],
     "hints": {
@@ -2030,28 +2030,28 @@
     "tiles": [
       {
         "id": "t1",
+        "top": "PIN",
+        "bottom": "WHEEL"
+      },
+      {
+        "id": "t2",
+        "top": "SUN",
+        "bottom": "FLOWER"
+      },
+      {
+        "id": "t3",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t4",
         "top": "RIDE",
         "bottom": "SHARE"
       },
       {
-        "id": "t2",
+        "id": "t5",
         "top": "OVER",
         "bottom": "TIME"
-      },
-      {
-        "id": "t3",
-        "top": "LOCK",
-        "bottom": "SMITH"
-      },
-      {
-        "id": "t4",
-        "top": "KEY",
-        "bottom": "NOTE"
-      },
-      {
-        "id": "t5",
-        "top": "GRAPE",
-        "bottom": "VINE"
       }
     ],
     "hints": {
@@ -2074,8 +2074,8 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "EARTH",
-        "bottom": "WORM"
+        "top": "WIND",
+        "bottom": "MILL"
       },
       {
         "id": "t2",
@@ -2084,18 +2084,18 @@
       },
       {
         "id": "t3",
-        "top": "QUICK",
-        "bottom": "SAND"
+        "top": "JELLY",
+        "bottom": "BEAN"
       },
       {
         "id": "t4",
-        "top": "PEPPER",
-        "bottom": "MINT"
+        "top": "KEY",
+        "bottom": "NOTE"
       },
       {
         "id": "t5",
-        "top": "SCARE",
-        "bottom": "CROW"
+        "top": "QUICK",
+        "bottom": "SAND"
       }
     ],
     "hints": {
@@ -2118,28 +2118,28 @@
     "tiles": [
       {
         "id": "t1",
+        "top": "CORN",
+        "bottom": "FIELD"
+      },
+      {
+        "id": "t2",
         "top": "SHORE",
         "bottom": "LINE"
       },
       {
-        "id": "t2",
+        "id": "t3",
+        "top": "WIND",
+        "bottom": "MILL"
+      },
+      {
+        "id": "t4",
         "top": "SEA",
         "bottom": "WATER"
       },
       {
-        "id": "t3",
-        "top": "LOCK",
-        "bottom": "SMITH"
-      },
-      {
-        "id": "t4",
-        "top": "SNAKE",
-        "bottom": "BITE"
-      },
-      {
         "id": "t5",
-        "top": "SKY",
-        "bottom": "LARK"
+        "top": "HONEY",
+        "bottom": "COMB"
       }
     ],
     "hints": {
@@ -2162,8 +2162,8 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "GRAPE",
-        "bottom": "VINE"
+        "top": "WEEK",
+        "bottom": "NIGHT"
       },
       {
         "id": "t2",
@@ -2172,18 +2172,18 @@
       },
       {
         "id": "t3",
-        "top": "WEEK",
-        "bottom": "NIGHT"
+        "top": "LIFE",
+        "bottom": "GUARD"
       },
       {
         "id": "t4",
-        "top": "EAR",
-        "bottom": "RING"
+        "top": "SUIT",
+        "bottom": "CASE"
       },
       {
         "id": "t5",
-        "top": "PAPER",
-        "bottom": "CLIP"
+        "top": "FOOT",
+        "bottom": "BALL"
       }
     ],
     "hints": {
@@ -2206,18 +2206,18 @@
     "tiles": [
       {
         "id": "t1",
-        "top": "RAIN",
-        "bottom": "COAT"
+        "top": "FORE",
+        "bottom": "HEAD"
       },
       {
         "id": "t2",
-        "top": "PIN",
-        "bottom": "WHEEL"
+        "top": "HAIR",
+        "bottom": "CUT"
       },
       {
         "id": "t3",
-        "top": "FORE",
-        "bottom": "HEAD"
+        "top": "CAT",
+        "bottom": "WALK"
       },
       {
         "id": "t4",
@@ -2226,8 +2226,8 @@
       },
       {
         "id": "t5",
-        "top": "SNAKE",
-        "bottom": "BITE"
+        "top": "AIR",
+        "bottom": "PLANE"
       }
     ],
     "hints": {
@@ -2241,6 +2241,2206 @@
       "slot0Bottom": "FORE",
       "slot1Top": "REST",
       "slot1Bottom": "FOOT"
+    }
+  },
+  {
+    "id": 52,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "PAY",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t2",
+        "top": "CHECK",
+        "bottom": "UP"
+      },
+      {
+        "id": "t3",
+        "top": "BIRD",
+        "bottom": "SEED"
+      },
+      {
+        "id": "t4",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t5",
+        "top": "BEAN",
+        "bottom": "STALK"
+      }
+    ],
+    "hints": {
+      "topRow": "Friday's reward in the mail",
+      "bottomRow": "Spare copy on the hard drive",
+      "leftCol": "Sweet revenge for a slight",
+      "rightCol": "Yearly visit to the doctor"
+    },
+    "solution": {
+      "slot0Top": "PAY",
+      "slot0Bottom": "BACK",
+      "slot1Top": "CHECK",
+      "slot1Bottom": "UP"
+    }
+  },
+  {
+    "id": 53,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DRAGON",
+        "bottom": "FLY"
+      },
+      {
+        "id": "t2",
+        "top": "IN",
+        "bottom": "TAKE"
+      },
+      {
+        "id": "t3",
+        "top": "COME",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t4",
+        "top": "FOOT",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t5",
+        "top": "EARTH",
+        "bottom": "WORM"
+      }
+    ],
+    "hints": {
+      "topRow": "What the IRS wants a piece of",
+      "bottomRow": "Wrestler's match-ending move",
+      "leftCol": "Mouthful of air or food",
+      "rightCol": "When the price drops back to earth"
+    },
+    "solution": {
+      "slot0Top": "IN",
+      "slot0Bottom": "TAKE",
+      "slot1Top": "COME",
+      "slot1Bottom": "DOWN"
+    }
+  },
+  {
+    "id": 54,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "MARK",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t2",
+        "top": "MOON",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t3",
+        "top": "BEAN",
+        "bottom": "STALK"
+      },
+      {
+        "id": "t4",
+        "top": "UP",
+        "bottom": "GRADE"
+      },
+      {
+        "id": "t5",
+        "top": "WATER",
+        "bottom": "MELON"
+      }
+    ],
+    "hints": {
+      "topRow": "Retail price hike",
+      "bottomRow": "Trip from C+ to C-",
+      "leftCol": "Clearance-rack savings",
+      "rightCol": "Reward for a tougher job"
+    },
+    "solution": {
+      "slot0Top": "MARK",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "UP",
+      "slot1Bottom": "GRADE"
+    }
+  },
+  {
+    "id": 55,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OVER",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t2",
+        "top": "PINE",
+        "bottom": "APPLE"
+      },
+      {
+        "id": "t3",
+        "top": "WIND",
+        "bottom": "MILL"
+      },
+      {
+        "id": "t4",
+        "top": "PAY",
+        "bottom": "DAY"
+      },
+      {
+        "id": "t5",
+        "top": "BUTTER",
+        "bottom": "CUP"
+      }
+    ],
+    "hints": {
+      "topRow": "Hand the cashier too much",
+      "bottomRow": "Monday-to-Friday grind",
+      "leftCol": "Pile on the assignments",
+      "rightCol": "Friday's reward for a job well done"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "WORK",
+      "slot1Top": "PAY",
+      "slot1Bottom": "DAY"
+    }
+  },
+  {
+    "id": 56,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "PEPPER",
+        "bottom": "MINT"
+      },
+      {
+        "id": "t2",
+        "top": "NIGHT",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t3",
+        "top": "WATER",
+        "bottom": "MELON"
+      },
+      {
+        "id": "t4",
+        "top": "MID",
+        "bottom": "DAY"
+      },
+      {
+        "id": "t5",
+        "top": "STAR",
+        "bottom": "FISH"
+      }
+    ],
+    "hints": {
+      "topRow": "When Cinderella's coach turns back",
+      "bottomRow": "Sun streaming through the window",
+      "leftCol": "Twelve sharp at lunchtime",
+      "rightCol": "Little plug-in bulb in the hallway"
+    },
+    "solution": {
+      "slot0Top": "MID",
+      "slot0Bottom": "DAY",
+      "slot1Top": "NIGHT",
+      "slot1Bottom": "LIGHT"
+    }
+  },
+  {
+    "id": 57,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BIRD",
+        "bottom": "SEED"
+      },
+      {
+        "id": "t2",
+        "top": "GIRL",
+        "bottom": "FRIEND"
+      },
+      {
+        "id": "t3",
+        "top": "SCARE",
+        "bottom": "CROW"
+      },
+      {
+        "id": "t4",
+        "top": "COW",
+        "bottom": "BOY"
+      },
+      {
+        "id": "t5",
+        "top": "DOG",
+        "bottom": "SLED"
+      }
+    ],
+    "hints": {
+      "topRow": "Yee-haw, says the rancher gal",
+      "bottomRow": "Your steady fella",
+      "leftCol": "Lasso-twirling rodeo guy",
+      "rightCol": "Your steady gal"
+    },
+    "solution": {
+      "slot0Top": "COW",
+      "slot0Bottom": "BOY",
+      "slot1Top": "GIRL",
+      "slot1Bottom": "FRIEND"
+    }
+  },
+  {
+    "id": 58,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "HONEY",
+        "bottom": "COMB"
+      },
+      {
+        "id": "t2",
+        "top": "BAG",
+        "bottom": "PIPE"
+      },
+      {
+        "id": "t3",
+        "top": "HAIR",
+        "bottom": "CUT"
+      },
+      {
+        "id": "t4",
+        "top": "FORE",
+        "bottom": "ARM"
+      },
+      {
+        "id": "t5",
+        "top": "PLAY",
+        "bottom": "FUL"
+      }
+    ],
+    "hints": {
+      "topRow": "Warm-up to the main event",
+      "bottomRow": "All you can hold in two hands",
+      "leftCol": "Elbow to wrist",
+      "rightCol": "Like a clown romping for laughs"
+    },
+    "solution": {
+      "slot0Top": "FORE",
+      "slot0Bottom": "ARM",
+      "slot1Top": "PLAY",
+      "slot1Bottom": "FUL"
+    }
+  },
+  {
+    "id": 59,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OUT",
+        "bottom": "SET"
+      },
+      {
+        "id": "t2",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t3",
+        "top": "SKY",
+        "bottom": "LARK"
+      },
+      {
+        "id": "t4",
+        "top": "EAR",
+        "bottom": "RING"
+      },
+      {
+        "id": "t5",
+        "top": "PAY",
+        "bottom": "OFF"
+      }
+    ],
+    "hints": {
+      "topRow": "Lottery winner's big haul",
+      "bottomRow": "Balance one cost against another",
+      "leftCol": "What the bookie hands you when you win",
+      "rightCol": "Start of a quest or adventure"
+    },
+    "solution": {
+      "slot0Top": "PAY",
+      "slot0Bottom": "OFF",
+      "slot1Top": "OUT",
+      "slot1Bottom": "SET"
+    }
+  },
+  {
+    "id": 60,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "GOLD",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t2",
+        "top": "DESK",
+        "bottom": "TOP"
+      },
+      {
+        "id": "t3",
+        "top": "STRAW",
+        "bottom": "BERRY"
+      },
+      {
+        "id": "t4",
+        "top": "OFF",
+        "bottom": "LOAD"
+      },
+      {
+        "id": "t5",
+        "top": "RUN",
+        "bottom": "DOWN"
+      }
+    ],
+    "hints": {
+      "topRow": "Election tiebreaker round",
+      "bottomRow": "Pull a file from the internet",
+      "leftCol": "Stale and beat-looking",
+      "rightCol": "Unhitch the trailer at the warehouse"
+    },
+    "solution": {
+      "slot0Top": "RUN",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "OFF",
+      "slot1Bottom": "LOAD"
+    }
+  },
+  {
+    "id": 61,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SHOE",
+        "bottom": "LACE"
+      },
+      {
+        "id": "t2",
+        "top": "STRAW",
+        "bottom": "BERRY"
+      },
+      {
+        "id": "t3",
+        "top": "MUSH",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t4",
+        "top": "WORK",
+        "bottom": "TABLE"
+      },
+      {
+        "id": "t5",
+        "top": "OUT",
+        "bottom": "LAND"
+      }
+    ],
+    "hints": {
+      "topRow": "Gym sweat session",
+      "bottomRow": "Flat plain stretching to the horizon",
+      "leftCol": "Carpenter's bench in the garage",
+      "rightCol": "A wide, sleepy frontier"
+    },
+    "solution": {
+      "slot0Top": "WORK",
+      "slot0Bottom": "TABLE",
+      "slot1Top": "OUT",
+      "slot1Bottom": "LAND"
+    }
+  },
+  {
+    "id": 62,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FOOT",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t2",
+        "top": "BUTTER",
+        "bottom": "CUP"
+      },
+      {
+        "id": "t3",
+        "top": "HOLD",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t4",
+        "top": "DESK",
+        "bottom": "TOP"
+      },
+      {
+        "id": "t5",
+        "top": "OUT",
+        "bottom": "DO"
+      }
+    ],
+    "hints": {
+      "topRow": "Stubborn negotiation refuser",
+      "bottomRow": "Take it way too far",
+      "leftCol": "Lingering from the old regime",
+      "rightCol": "Beat them by a country mile"
+    },
+    "solution": {
+      "slot0Top": "HOLD",
+      "slot0Bottom": "OVER",
+      "slot1Top": "OUT",
+      "slot1Bottom": "DO"
+    }
+  },
+  {
+    "id": 63,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "GRAPE",
+        "bottom": "VINE"
+      },
+      {
+        "id": "t2",
+        "top": "OUT",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t3",
+        "top": "BARE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t4",
+        "top": "SUIT",
+        "bottom": "CASE"
+      },
+      {
+        "id": "t5",
+        "top": "LOCK",
+        "bottom": "UP"
+      }
+    ],
+    "hints": {
+      "topRow": "What gets you stuck on the porch",
+      "bottomRow": "Silver lining in disguise",
+      "leftCol": "Stick the kids in for the night",
+      "rightCol": "Where the picnic happens"
+    },
+    "solution": {
+      "slot0Top": "LOCK",
+      "slot0Bottom": "UP",
+      "slot1Top": "OUT",
+      "slot1Bottom": "SIDE"
+    }
+  },
+  {
+    "id": 64,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FOOT",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t2",
+        "top": "WIND",
+        "bottom": "SHIELD"
+      },
+      {
+        "id": "t3",
+        "top": "UP",
+        "bottom": "SHOT"
+      },
+      {
+        "id": "t4",
+        "top": "BLOW",
+        "bottom": "GUN"
+      },
+      {
+        "id": "t5",
+        "top": "PIN",
+        "bottom": "WHEEL"
+      }
+    ],
+    "hints": {
+      "topRow": "A sudden temper explosion",
+      "bottomRow": "Loud crack from a pistol",
+      "leftCol": "Pea-shooter from a tribal jungle",
+      "rightCol": "An unexpected longshot of fortune"
+    },
+    "solution": {
+      "slot0Top": "BLOW",
+      "slot0Bottom": "GUN",
+      "slot1Top": "UP",
+      "slot1Bottom": "SHOT"
+    }
+  },
+  {
+    "id": 65,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LOCK",
+        "bottom": "SMITH"
+      },
+      {
+        "id": "t2",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t3",
+        "top": "OUT",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t4",
+        "top": "SAND",
+        "bottom": "CASTLE"
+      },
+      {
+        "id": "t5",
+        "top": "TURN",
+        "bottom": "OFF"
+      }
+    ],
+    "hints": {
+      "topRow": "Crowd that showed up at the rally",
+      "bottomRow": "Sketch in bullet-point form",
+      "leftCol": "Click the switch the other way",
+      "rightCol": "Currently disconnected from the net"
+    },
+    "solution": {
+      "slot0Top": "TURN",
+      "slot0Bottom": "OFF",
+      "slot1Top": "OUT",
+      "slot1Bottom": "LINE"
+    }
+  },
+  {
+    "id": 66,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "EAR",
+        "bottom": "RING"
+      },
+      {
+        "id": "t2",
+        "top": "HAND",
+        "bottom": "SHAKE"
+      },
+      {
+        "id": "t3",
+        "top": "HAIR",
+        "bottom": "CUT"
+      },
+      {
+        "id": "t4",
+        "top": "MIS",
+        "bottom": "LAY"
+      },
+      {
+        "id": "t5",
+        "top": "TAKE",
+        "bottom": "AWAY"
+      }
+    ],
+    "hints": {
+      "topRow": "Honest blunder",
+      "bottomRow": "Store-credit plan: pay it off, then take it home",
+      "leftCol": "Lose track of the keys briefly",
+      "rightCol": "Burrito to-go, please"
+    },
+    "solution": {
+      "slot0Top": "MIS",
+      "slot0Bottom": "LAY",
+      "slot1Top": "TAKE",
+      "slot1Bottom": "AWAY"
+    }
+  },
+  {
+    "id": 67,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "UP",
+        "bottom": "LIFT"
+      },
+      {
+        "id": "t2",
+        "top": "WATER",
+        "bottom": "MELON"
+      },
+      {
+        "id": "t3",
+        "top": "WIND",
+        "bottom": "SHIELD"
+      },
+      {
+        "id": "t4",
+        "top": "BUTTER",
+        "bottom": "FLY"
+      },
+      {
+        "id": "t5",
+        "top": "WORK",
+        "bottom": "SHOP"
+      }
+    ],
+    "hints": {
+      "topRow": "Get the team buzzing with energy",
+      "bottomRow": "Sneak a candy bar out of the store",
+      "leftCol": "Tool-filled room with a sawdust floor",
+      "rightCol": "Sneakers with extra sole height"
+    },
+    "solution": {
+      "slot0Top": "WORK",
+      "slot0Bottom": "SHOP",
+      "slot1Top": "UP",
+      "slot1Bottom": "LIFT"
+    }
+  },
+  {
+    "id": 68,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "PIN",
+        "bottom": "WHEEL"
+      },
+      {
+        "id": "t2",
+        "top": "SEA",
+        "bottom": "WAY"
+      },
+      {
+        "id": "t3",
+        "top": "OVER",
+        "bottom": "RUN"
+      },
+      {
+        "id": "t4",
+        "top": "BARE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t5",
+        "top": "DRIFT",
+        "bottom": "WOOD"
+      }
+    ],
+    "hints": {
+      "topRow": "Across the Atlantic",
+      "bottomRow": "Strip where jets accelerate",
+      "leftCol": "Trample the competition",
+      "rightCol": "Lane for water traffic"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "RUN",
+      "slot1Top": "SEA",
+      "slot1Bottom": "WAY"
+    }
+  },
+  {
+    "id": 69,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OVER",
+        "bottom": "COOK"
+      },
+      {
+        "id": "t2",
+        "top": "MOON",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t3",
+        "top": "PAPER",
+        "bottom": "CLIP"
+      },
+      {
+        "id": "t4",
+        "top": "HAND",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t5",
+        "top": "TOOTH",
+        "bottom": "BRUSH"
+      }
+    ],
+    "hints": {
+      "topRow": "Pitcher's classic windup",
+      "bottomRow": "Burgers on the grill in the backyard",
+      "leftCol": "Burn the casserole, oops",
+      "rightCol": "Free swag tossed to the crowd"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "COOK",
+      "slot1Top": "HAND",
+      "slot1Bottom": "OUT"
+    }
+  },
+  {
+    "id": 70,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BLUE",
+        "bottom": "PRINT"
+      },
+      {
+        "id": "t2",
+        "top": "PLAY",
+        "bottom": "DATE"
+      },
+      {
+        "id": "t3",
+        "top": "TOOTH",
+        "bottom": "PICK"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "POST"
+      },
+      {
+        "id": "t5",
+        "top": "PIN",
+        "bottom": "WHEEL"
+      }
+    ],
+    "hints": {
+      "topRow": "Beat your opponent at their own game",
+      "bottomRow": "Slap an expired stamp on it",
+      "leftCol": "Lonely watch in a guard tower",
+      "rightCol": "Going out for dinner and a movie"
+    },
+    "solution": {
+      "slot0Top": "OUT",
+      "slot0Bottom": "POST",
+      "slot1Top": "PLAY",
+      "slot1Bottom": "DATE"
+    }
+  },
+  {
+    "id": 71,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "ICE",
+        "bottom": "CREAM"
+      },
+      {
+        "id": "t2",
+        "top": "HAIR",
+        "bottom": "CUT"
+      },
+      {
+        "id": "t3",
+        "top": "BEAN",
+        "bottom": "STALK"
+      },
+      {
+        "id": "t4",
+        "top": "TIME",
+        "bottom": "TABLE"
+      },
+      {
+        "id": "t5",
+        "top": "UP",
+        "bottom": "TURN"
+      }
+    ],
+    "hints": {
+      "topRow": "Server's stretch without a crash",
+      "bottomRow": "DJ's spinning vinyl platform",
+      "leftCol": "Reversal of a recent setback",
+      "rightCol": "Schedule for the trains"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "TURN",
+      "slot1Top": "TIME",
+      "slot1Bottom": "TABLE"
+    }
+  },
+  {
+    "id": 72,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "TOWN",
+        "bottom": "SMAN"
+      },
+      {
+        "id": "t2",
+        "top": "GRAPE",
+        "bottom": "VINE"
+      },
+      {
+        "id": "t3",
+        "top": "UP",
+        "bottom": "STATE"
+      },
+      {
+        "id": "t4",
+        "top": "PEA",
+        "bottom": "NUT"
+      },
+      {
+        "id": "t5",
+        "top": "BUTTER",
+        "bottom": "FLY"
+      }
+    ],
+    "hints": {
+      "topRow": "The fancy part of Manhattan",
+      "bottomRow": "A respected political elder",
+      "leftCol": "Out where the dairy cows are",
+      "rightCol": "Polite word for villager"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "STATE",
+      "slot1Top": "TOWN",
+      "slot1Bottom": "SMAN"
+    }
+  },
+  {
+    "id": 73,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OVER",
+        "bottom": "DRAFT"
+      },
+      {
+        "id": "t2",
+        "top": "DRIFT",
+        "bottom": "WOOD"
+      },
+      {
+        "id": "t3",
+        "top": "BLUE",
+        "bottom": "PRINT"
+      },
+      {
+        "id": "t4",
+        "top": "PUSH",
+        "bottom": "UP"
+      },
+      {
+        "id": "t5",
+        "top": "BUTTER",
+        "bottom": "FLY"
+      }
+    ],
+    "hints": {
+      "topRow": "An easy mark to beat",
+      "bottomRow": "A rising breeze beneath the glider",
+      "leftCol": "An exercise on the floor",
+      "rightCol": "Bank account in the negative"
+    },
+    "solution": {
+      "slot0Top": "PUSH",
+      "slot0Bottom": "UP",
+      "slot1Top": "OVER",
+      "slot1Bottom": "DRAFT"
+    }
+  },
+  {
+    "id": 74,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "EARTH",
+        "bottom": "WORM"
+      },
+      {
+        "id": "t2",
+        "top": "BUTTER",
+        "bottom": "CUP"
+      },
+      {
+        "id": "t3",
+        "top": "DOG",
+        "bottom": "SLED"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "CLASS"
+      },
+      {
+        "id": "t5",
+        "top": "BACK",
+        "bottom": "ROOM"
+      }
+    ],
+    "hints": {
+      "topRow": "Australia's wide-open interior",
+      "bottomRow": "Where the teacher writes on the board",
+      "leftCol": "Got more polish than the competition",
+      "rightCol": "Mop closet behind the kitchen"
+    },
+    "solution": {
+      "slot0Top": "OUT",
+      "slot0Bottom": "CLASS",
+      "slot1Top": "BACK",
+      "slot1Bottom": "ROOM"
+    }
+  },
+  {
+    "id": 75,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BACK",
+        "bottom": "YARD"
+      },
+      {
+        "id": "t2",
+        "top": "GOLD",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t3",
+        "top": "EYE",
+        "bottom": "BROW"
+      },
+      {
+        "id": "t4",
+        "top": "HARD",
+        "bottom": "SHIP"
+      },
+      {
+        "id": "t5",
+        "top": "LOCK",
+        "bottom": "SMITH"
+      }
+    ],
+    "hints": {
+      "topRow": "Stiff-bound novel",
+      "bottomRow": "Backyard where the grill lives",
+      "leftCol": "Tough times to endure",
+      "rightCol": "Where boats are built and repaired"
+    },
+    "solution": {
+      "slot0Top": "HARD",
+      "slot0Bottom": "SHIP",
+      "slot1Top": "BACK",
+      "slot1Bottom": "YARD"
+    }
+  },
+  {
+    "id": 76,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "PEPPER",
+        "bottom": "MINT"
+      },
+      {
+        "id": "t2",
+        "top": "TOOTH",
+        "bottom": "BRUSH"
+      },
+      {
+        "id": "t3",
+        "top": "IN",
+        "bottom": "PUT"
+      },
+      {
+        "id": "t4",
+        "top": "WITH",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t5",
+        "top": "WATER",
+        "bottom": "MELON"
+      }
+    ],
+    "hints": {
+      "topRow": "Inside the walls of the castle",
+      "bottomRow": "Total widgets manufactured",
+      "leftCol": "Lacking; not having",
+      "rightCol": "Data fed into the machine"
+    },
+    "solution": {
+      "slot0Top": "WITH",
+      "slot0Bottom": "OUT",
+      "slot1Top": "IN",
+      "slot1Bottom": "PUT"
+    }
+  },
+  {
+    "id": 77,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DESK",
+        "bottom": "TOP"
+      },
+      {
+        "id": "t2",
+        "top": "CORN",
+        "bottom": "FIELD"
+      },
+      {
+        "id": "t3",
+        "top": "LAND",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t4",
+        "top": "UP",
+        "bottom": "ON"
+      },
+      {
+        "id": "t5",
+        "top": "FIRE",
+        "bottom": "PLACE"
+      }
+    ],
+    "hints": {
+      "topRow": "Hilly farm country up north",
+      "bottomRow": "Currently logged into the internet",
+      "leftCol": "Resting; positioned atop",
+      "rightCol": "Hard-wired phone to your house"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "ON",
+      "slot1Top": "LAND",
+      "slot1Bottom": "LINE"
+    }
+  },
+  {
+    "id": 78,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SCARE",
+        "bottom": "CROW"
+      },
+      {
+        "id": "t2",
+        "top": "ARM",
+        "bottom": "HOLE"
+      },
+      {
+        "id": "t3",
+        "top": "MUSH",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t4",
+        "top": "SAND",
+        "bottom": "CASTLE"
+      },
+      {
+        "id": "t5",
+        "top": "FIRE",
+        "bottom": "WATER"
+      }
+    ],
+    "hints": {
+      "topRow": "Pistol or rifle, formally",
+      "bottomRow": "Pond where antelope drink in the savannah",
+      "leftCol": "Old slang for strong whiskey",
+      "rightCol": "The opening for your hand in a sleeve"
+    },
+    "solution": {
+      "slot0Top": "FIRE",
+      "slot0Bottom": "WATER",
+      "slot1Top": "ARM",
+      "slot1Bottom": "HOLE"
+    }
+  },
+  {
+    "id": 79,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "MOON",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t2",
+        "top": "WALK",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t3",
+        "top": "LIFE",
+        "bottom": "GUARD"
+      },
+      {
+        "id": "t4",
+        "top": "DRAGON",
+        "bottom": "FLY"
+      },
+      {
+        "id": "t5",
+        "top": "WAY",
+        "bottom": "WARD"
+      }
+    ],
+    "hints": {
+      "topRow": "Paved path to the porch",
+      "bottomRow": "In reverse, against the grain",
+      "leftCol": "Quietly retract a statement",
+      "rightCol": "Shy, hesitant, and a bit clumsy"
+    },
+    "solution": {
+      "slot0Top": "WALK",
+      "slot0Bottom": "BACK",
+      "slot1Top": "WAY",
+      "slot1Bottom": "WARD"
+    }
+  },
+  {
+    "id": 80,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "AIR",
+        "bottom": "PLANE"
+      },
+      {
+        "id": "t2",
+        "top": "SHUT",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t3",
+        "top": "OFF",
+        "bottom": "BEAT"
+      },
+      {
+        "id": "t4",
+        "top": "TOOTH",
+        "bottom": "BRUSH"
+      },
+      {
+        "id": "t5",
+        "top": "EYE",
+        "bottom": "BROW"
+      }
+    ],
+    "hints": {
+      "topRow": "Killswitch on the gas pump",
+      "bottomRow": "Slow tempo for a moody song",
+      "leftCol": "Sleep mode for the office at night",
+      "rightCol": "Quirky and a bit unconventional"
+    },
+    "solution": {
+      "slot0Top": "SHUT",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "OFF",
+      "slot1Bottom": "BEAT"
+    }
+  },
+  {
+    "id": 81,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "TAKE",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t2",
+        "top": "DOG",
+        "bottom": "SLED"
+      },
+      {
+        "id": "t3",
+        "top": "GOLD",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t4",
+        "top": "MOON",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t5",
+        "top": "UNDER",
+        "bottom": "PLAY"
+      }
+    ],
+    "hints": {
+      "topRow": "Vow to handle a big project",
+      "bottomRow": "Post-season championship round",
+      "leftCol": "Brush off as no big deal",
+      "rightCol": "When the jet leaves the runway"
+    },
+    "solution": {
+      "slot0Top": "UNDER",
+      "slot0Bottom": "PLAY",
+      "slot1Top": "TAKE",
+      "slot1Bottom": "OFF"
+    }
+  },
+  {
+    "id": 82,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BOOK",
+        "bottom": "MARK"
+      },
+      {
+        "id": "t2",
+        "top": "CAT",
+        "bottom": "WALK"
+      },
+      {
+        "id": "t3",
+        "top": "AIR",
+        "bottom": "PLANE"
+      },
+      {
+        "id": "t4",
+        "top": "WIND",
+        "bottom": "MILL"
+      },
+      {
+        "id": "t5",
+        "top": "OVER",
+        "bottom": "LAND"
+      }
+    ],
+    "hints": {
+      "topRow": "Sell more airline seats than there are",
+      "bottomRow": "Famous statue or building in town",
+      "leftCol": "On solid ground, not at sea",
+      "rightCol": "Page-saving corner-fold"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "LAND",
+      "slot1Top": "BOOK",
+      "slot1Bottom": "MARK"
+    }
+  },
+  {
+    "id": 83,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOWN",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t2",
+        "top": "TYPE",
+        "bottom": "WRITER"
+      },
+      {
+        "id": "t3",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t4",
+        "top": "ICE",
+        "bottom": "CREAM"
+      },
+      {
+        "id": "t5",
+        "top": "WIND",
+        "bottom": "BURN"
+      }
+    ],
+    "hints": {
+      "topRow": "Where the smoke drifts toward",
+      "bottomRow": "Patch of hair down the cheek",
+      "leftCol": "The drawback of the deal",
+      "rightCol": "Chapped face after a winter ride"
+    },
+    "solution": {
+      "slot0Top": "DOWN",
+      "slot0Bottom": "SIDE",
+      "slot1Top": "WIND",
+      "slot1Bottom": "BURN"
+    }
+  },
+  {
+    "id": 84,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LAND",
+        "bottom": "SCAPE"
+      },
+      {
+        "id": "t2",
+        "top": "BREAK",
+        "bottom": "UP"
+      },
+      {
+        "id": "t3",
+        "top": "BAG",
+        "bottom": "PIPE"
+      },
+      {
+        "id": "t4",
+        "top": "DOWN",
+        "bottom": "STREAM"
+      },
+      {
+        "id": "t5",
+        "top": "BARE",
+        "bottom": "FOOT"
+      }
+    ],
+    "hints": {
+      "topRow": "Car stalled on the freeway shoulder",
+      "bottomRow": "Toward the river's source",
+      "leftCol": "The painful end of a couple",
+      "rightCol": "Toward the river's mouth"
+    },
+    "solution": {
+      "slot0Top": "BREAK",
+      "slot0Bottom": "UP",
+      "slot1Top": "DOWN",
+      "slot1Bottom": "STREAM"
+    }
+  },
+  {
+    "id": 85,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t2",
+        "top": "LIME",
+        "bottom": "STONE"
+      },
+      {
+        "id": "t3",
+        "top": "SUIT",
+        "bottom": "CASE"
+      },
+      {
+        "id": "t4",
+        "top": "ROAD",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t5",
+        "top": "SHOW",
+        "bottom": "BOAT"
+      }
+    ],
+    "hints": {
+      "topRow": "Touring band's circuit of small venues",
+      "bottomRow": "Floating home docked at the marina",
+      "leftCol": "Cozy stop along the highway with food and a bed",
+      "rightCol": "Glitzy entertainer-revue on the water"
+    },
+    "solution": {
+      "slot0Top": "ROAD",
+      "slot0Bottom": "HOUSE",
+      "slot1Top": "SHOW",
+      "slot1Bottom": "BOAT"
+    }
+  },
+  {
+    "id": 86,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BARE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t2",
+        "top": "OVER",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t3",
+        "top": "HONEY",
+        "bottom": "COMB"
+      },
+      {
+        "id": "t4",
+        "top": "SUN",
+        "bottom": "FLOWER"
+      },
+      {
+        "id": "t5",
+        "top": "COAT",
+        "bottom": "ROOM"
+      }
+    ],
+    "hints": {
+      "topRow": "Heavy garment for winter",
+      "bottomRow": "Where the kids dump their LEGOs",
+      "leftCol": "Underdo it, in a baseball sense",
+      "rightCol": "Closet where the jackets hang"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "PLAY",
+      "slot1Top": "COAT",
+      "slot1Bottom": "ROOM"
+    }
+  },
+  {
+    "id": 87,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "UNDER",
+        "bottom": "STAND"
+      },
+      {
+        "id": "t2",
+        "top": "HONEY",
+        "bottom": "COMB"
+      },
+      {
+        "id": "t3",
+        "top": "BIRTH",
+        "bottom": "DAY"
+      },
+      {
+        "id": "t4",
+        "top": "LAY",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t5",
+        "top": "GRAPE",
+        "bottom": "VINE"
+      }
+    ],
+    "hints": {
+      "topRow": "Padding beneath the carpet",
+      "bottomRow": "Tense armed pause between two sides",
+      "leftCol": "Get the gist of a tricky concept",
+      "rightCol": "Lull in the action"
+    },
+    "solution": {
+      "slot0Top": "UNDER",
+      "slot0Bottom": "STAND",
+      "slot1Top": "LAY",
+      "slot1Bottom": "OFF"
+    }
+  },
+  {
+    "id": 88,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SNOW",
+        "bottom": "FLAKE"
+      },
+      {
+        "id": "t2",
+        "top": "MUSH",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t3",
+        "top": "FIRE",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t4",
+        "top": "PEPPER",
+        "bottom": "MINT"
+      },
+      {
+        "id": "t5",
+        "top": "CROSS",
+        "bottom": "ROAD"
+      }
+    ],
+    "hints": {
+      "topRow": "Caught between two shooters",
+      "bottomRow": "Where you flag down the bus",
+      "leftCol": "Where two highways meet",
+      "rightCol": "Glowing by the hearth and a tale"
+    },
+    "solution": {
+      "slot0Top": "CROSS",
+      "slot0Bottom": "ROAD",
+      "slot1Top": "FIRE",
+      "slot1Bottom": "SIDE"
+    }
+  },
+  {
+    "id": 89,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BIRD",
+        "bottom": "SEED"
+      },
+      {
+        "id": "t2",
+        "top": "WIND",
+        "bottom": "MILL"
+      },
+      {
+        "id": "t3",
+        "top": "UP",
+        "bottom": "STAIRS"
+      },
+      {
+        "id": "t4",
+        "top": "SHAKE",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t5",
+        "top": "BARE",
+        "bottom": "FOOT"
+      }
+    ],
+    "hints": {
+      "topRow": "Big management reshuffle at HQ",
+      "bottomRow": "Steps leading to the basement",
+      "leftCol": "Hash it out face to face",
+      "rightCol": "Steps to the second floor"
+    },
+    "solution": {
+      "slot0Top": "SHAKE",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "UP",
+      "slot1Bottom": "STAIRS"
+    }
+  },
+  {
+    "id": 90,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t2",
+        "top": "WHITE",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t3",
+        "top": "FOOT",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t4",
+        "top": "SCARE",
+        "bottom": "CROW"
+      },
+      {
+        "id": "t5",
+        "top": "WASH",
+        "bottom": "BOWL"
+      }
+    ],
+    "hints": {
+      "topRow": "Sweep an embarrassment under the rug",
+      "bottomRow": "Round glass home for a goldfish",
+      "leftCol": "Cod or flounder on the menu",
+      "rightCol": "Big sink for getting the suds out"
+    },
+    "solution": {
+      "slot0Top": "WHITE",
+      "slot0Bottom": "FISH",
+      "slot1Top": "WASH",
+      "slot1Bottom": "BOWL"
+    }
+  },
+  {
+    "id": 91,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t2",
+        "top": "BLUE",
+        "bottom": "PRINT"
+      },
+      {
+        "id": "t3",
+        "top": "LIGHT",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t4",
+        "top": "BACK",
+        "bottom": "WASH"
+      },
+      {
+        "id": "t5",
+        "top": "AIR",
+        "bottom": "PLANE"
+      }
+    ],
+    "hints": {
+      "topRow": "Soft glow behind a phone screen",
+      "bottomRow": "Old-time laundry shed out back",
+      "leftCol": "Foamy wake trailing the boat's stern",
+      "rightCol": "Lonely tower with a sweeping beam"
+    },
+    "solution": {
+      "slot0Top": "BACK",
+      "slot0Bottom": "WASH",
+      "slot1Top": "LIGHT",
+      "slot1Bottom": "HOUSE"
+    }
+  },
+  {
+    "id": 92,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SPILL",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t2",
+        "top": "GRAPE",
+        "bottom": "VINE"
+      },
+      {
+        "id": "t3",
+        "top": "WAY",
+        "bottom": "LAID"
+      },
+      {
+        "id": "t4",
+        "top": "DRIFT",
+        "bottom": "WOOD"
+      },
+      {
+        "id": "t5",
+        "top": "PINE",
+        "bottom": "APPLE"
+      }
+    ],
+    "hints": {
+      "topRow": "Side-effect splashing onto another sector",
+      "bottomRow": "Ambushed by bandits on the road",
+      "leftCol": "Dam channel for floodwater",
+      "rightCol": "Stretched out atop, in old usage"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "SPILL",
+      "slot1Top": "LAID",
+      "slot1Bottom": "WAY"
+    }
+  },
+  {
+    "id": 93,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "RAIN",
+        "bottom": "BOW"
+      },
+      {
+        "id": "t2",
+        "top": "DOG",
+        "bottom": "SLED"
+      },
+      {
+        "id": "t3",
+        "top": "ICE",
+        "bottom": "CREAM"
+      },
+      {
+        "id": "t4",
+        "top": "COTTON",
+        "bottom": "TAIL"
+      },
+      {
+        "id": "t5",
+        "top": "MOUTH",
+        "bottom": "PIECE"
+      }
+    ],
+    "hints": {
+      "topRow": "Bunny munching in the bramble patch",
+      "bottomRow": "Trumpet's lip cup",
+      "leftCol": "Venomous southern swamp snake",
+      "rightCol": "Engagement ring's setting at the end of a band"
+    },
+    "solution": {
+      "slot0Top": "TAIL",
+      "slot0Bottom": "COTTON",
+      "slot1Top": "PIECE",
+      "slot1Bottom": "MOUTH"
+    }
+  },
+  {
+    "id": 94,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FOOT",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t2",
+        "top": "TYPE",
+        "bottom": "WRITER"
+      },
+      {
+        "id": "t3",
+        "top": "HAND",
+        "bottom": "STAND"
+      },
+      {
+        "id": "t4",
+        "top": "GUN",
+        "bottom": "POINT"
+      },
+      {
+        "id": "t5",
+        "top": "LAND",
+        "bottom": "SCAPE"
+      }
+    ],
+    "hints": {
+      "topRow": "Balanced upside-down on your palms",
+      "bottomRow": "Held up by a bandit's pistol",
+      "leftCol": "Concealed-carry sidearm",
+      "rightCol": "The bayonet tip; or your angle on the matter"
+    },
+    "solution": {
+      "slot0Top": "STAND",
+      "slot0Bottom": "HAND",
+      "slot1Top": "POINT",
+      "slot1Bottom": "GUN"
+    }
+  },
+  {
+    "id": 95,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "KEY",
+        "bottom": "NOTE"
+      },
+      {
+        "id": "t2",
+        "top": "OVER",
+        "bottom": "WEIGHT"
+      },
+      {
+        "id": "t3",
+        "top": "STOP",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t4",
+        "top": "PINE",
+        "bottom": "APPLE"
+      },
+      {
+        "id": "t5",
+        "top": "HONEY",
+        "bottom": "COMB"
+      }
+    ],
+    "hints": {
+      "topRow": "Red bulb at the intersection",
+      "bottomRow": "Above the recommended pounds",
+      "leftCol": "Quick layover on your road trip",
+      "rightCol": "A boxer's class above featherweight"
+    },
+    "solution": {
+      "slot0Top": "LIGHT",
+      "slot0Bottom": "STOP",
+      "slot1Top": "WEIGHT",
+      "slot1Bottom": "OVER"
+    }
+  },
+  {
+    "id": 96,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BUTTER",
+        "bottom": "CUP"
+      },
+      {
+        "id": "t2",
+        "top": "FIRE",
+        "bottom": "PLACE"
+      },
+      {
+        "id": "t3",
+        "top": "PASS",
+        "bottom": "BOOK"
+      },
+      {
+        "id": "t4",
+        "top": "UNDER",
+        "bottom": "COOK"
+      },
+      {
+        "id": "t5",
+        "top": "BIRD",
+        "bottom": "SEED"
+      }
+    ],
+    "hints": {
+      "topRow": "Pull the steak before it's done",
+      "bottomRow": "A recipe collection on the shelf",
+      "leftCol": "Tunnel for cars or pedestrians",
+      "rightCol": "Savings record from the bank teller"
+    },
+    "solution": {
+      "slot0Top": "COOK",
+      "slot0Bottom": "UNDER",
+      "slot1Top": "BOOK",
+      "slot1Bottom": "PASS"
+    }
+  },
+  {
+    "id": 97,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "THERE",
+        "bottom": "FORE"
+      },
+      {
+        "id": "t2",
+        "top": "IN",
+        "bottom": "SIGHT"
+      },
+      {
+        "id": "t3",
+        "top": "JELLY",
+        "bottom": "BEAN"
+      },
+      {
+        "id": "t4",
+        "top": "SKY",
+        "bottom": "LARK"
+      },
+      {
+        "id": "t5",
+        "top": "BUTTER",
+        "bottom": "CUP"
+      }
+    ],
+    "hints": {
+      "topRow": "Logically, it follows that",
+      "bottomRow": "Wise foreknowledge of what's coming",
+      "leftCol": "In that place, archaically",
+      "rightCol": "Visible up ahead"
+    },
+    "solution": {
+      "slot0Top": "FORE",
+      "slot0Bottom": "THERE",
+      "slot1Top": "SIGHT",
+      "slot1Bottom": "IN"
+    }
+  },
+  {
+    "id": 98,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "AIR",
+        "bottom": "PLANE"
+      },
+      {
+        "id": "t2",
+        "top": "PEA",
+        "bottom": "NUT"
+      },
+      {
+        "id": "t3",
+        "top": "CLOSE",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t4",
+        "top": "UP",
+        "bottom": "RIGHT"
+      },
+      {
+        "id": "t5",
+        "top": "EYE",
+        "bottom": "BROW"
+      }
+    ],
+    "hints": {
+      "topRow": "Shutter the shop for good",
+      "bottomRow": "Standing tall and vertical",
+      "leftCol": "Tight portrait shot of a face",
+      "rightCol": "Plainly and unequivocally"
+    },
+    "solution": {
+      "slot0Top": "DOWN",
+      "slot0Bottom": "CLOSE",
+      "slot1Top": "RIGHT",
+      "slot1Bottom": "UP"
+    }
+  },
+  {
+    "id": 99,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SHIP",
+        "bottom": "MATE"
+      },
+      {
+        "id": "t2",
+        "top": "GOLD",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t3",
+        "top": "SUN",
+        "bottom": "FLOWER"
+      },
+      {
+        "id": "t4",
+        "top": "COURT",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t5",
+        "top": "FOOT",
+        "bottom": "BALL"
+      }
+    ],
+    "hints": {
+      "topRow": "Where the judge gavels",
+      "bottomRow": "Fellow sailor on your vessel",
+      "leftCol": "Old-fashioned wooing",
+      "rightCol": "Roommate for the spare bedroom"
+    },
+    "solution": {
+      "slot0Top": "HOUSE",
+      "slot0Bottom": "COURT",
+      "slot1Top": "MATE",
+      "slot1Bottom": "SHIP"
+    }
+  },
+  {
+    "id": 100,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SUN",
+        "bottom": "FLOWER"
+      },
+      {
+        "id": "t2",
+        "top": "STAR",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t3",
+        "top": "SCHOOL",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t4",
+        "top": "YARD",
+        "bottom": "MAN"
+      },
+      {
+        "id": "t5",
+        "top": "KEY",
+        "bottom": "NOTE"
+      }
+    ],
+    "hints": {
+      "topRow": "Where kids play at recess",
+      "bottomRow": "A handy, capable laborer",
+      "leftCol": "Homework brought home from class",
+      "rightCol": "Hired hand on the lawn crew"
+    },
+    "solution": {
+      "slot0Top": "SCHOOL",
+      "slot0Bottom": "WORK",
+      "slot1Top": "YARD",
+      "slot1Bottom": "MAN"
+    }
+  },
+  {
+    "id": 101,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SCHOOL",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t2",
+        "top": "FISH",
+        "bottom": "BOWL"
+      },
+      {
+        "id": "t3",
+        "top": "BARE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t4",
+        "top": "MUSH",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t5",
+        "top": "BOOK",
+        "bottom": "KEEPER"
+      }
+    ],
+    "hints": {
+      "topRow": "Sixth-grade textbook",
+      "bottomRow": "The one who tidies the manor",
+      "leftCol": "Little red one-room building of yore",
+      "rightCol": "Accountant tracking the ledger"
+    },
+    "solution": {
+      "slot0Top": "SCHOOL",
+      "slot0Bottom": "HOUSE",
+      "slot1Top": "BOOK",
+      "slot1Bottom": "KEEPER"
     }
   }
 ]

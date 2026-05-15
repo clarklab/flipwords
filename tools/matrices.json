@@ -3,7 +3,12 @@
     "id": 1,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["AIR", "MAN", "PORT", "HOLE"],
+    "matrix": [
+      "AIR",
+      "MAN",
+      "PORT",
+      "HOLE"
+    ],
     "compounds": {
       "top": "AIRMAN",
       "bottom": "PORTHOLE",
@@ -21,7 +26,12 @@
     "id": 2,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["HOT", "HEAD", "BED", "ROOM"],
+    "matrix": [
+      "HOT",
+      "HEAD",
+      "BED",
+      "ROOM"
+    ],
     "compounds": {
       "top": "HOTHEAD",
       "bottom": "BEDROOM",
@@ -39,7 +49,12 @@
     "id": 3,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["FIRE", "BALL", "WORK", "ROOM"],
+    "matrix": [
+      "FIRE",
+      "BALL",
+      "WORK",
+      "ROOM"
+    ],
     "compounds": {
       "top": "FIREBALL",
       "bottom": "WORKROOM",
@@ -57,7 +72,12 @@
     "id": 4,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["BED", "SIDE", "TIME", "LINE"],
+    "matrix": [
+      "BED",
+      "SIDE",
+      "TIME",
+      "LINE"
+    ],
     "compounds": {
       "top": "BEDSIDE",
       "bottom": "TIMELINE",
@@ -75,7 +95,12 @@
     "id": 5,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["CUP", "CAKE", "BOARD", "WALK"],
+    "matrix": [
+      "CUP",
+      "CAKE",
+      "BOARD",
+      "WALK"
+    ],
     "compounds": {
       "top": "CUPCAKE",
       "bottom": "BOARDWALK",
@@ -93,7 +118,12 @@
     "id": 6,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["BACK", "DOOR", "FIRE", "MAN"],
+    "matrix": [
+      "BACK",
+      "DOOR",
+      "FIRE",
+      "MAN"
+    ],
     "compounds": {
       "top": "BACKDOOR",
       "bottom": "FIREMAN",
@@ -111,7 +141,12 @@
     "id": 7,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["RAIN", "DROP", "FALL", "OUT"],
+    "matrix": [
+      "RAIN",
+      "DROP",
+      "FALL",
+      "OUT"
+    ],
     "compounds": {
       "top": "RAINDROP",
       "bottom": "FALLOUT",
@@ -129,7 +164,12 @@
     "id": 8,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["SNOW", "BALL", "BOARD", "ROOM"],
+    "matrix": [
+      "SNOW",
+      "BALL",
+      "BOARD",
+      "ROOM"
+    ],
     "compounds": {
       "top": "SNOWBALL",
       "bottom": "BOARDROOM",
@@ -147,7 +187,12 @@
     "id": 9,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["BLACK", "OUT", "BIRD", "HOUSE"],
+    "matrix": [
+      "BLACK",
+      "OUT",
+      "BIRD",
+      "HOUSE"
+    ],
     "compounds": {
       "top": "BLACKOUT",
       "bottom": "BIRDHOUSE",
@@ -165,7 +210,12 @@
     "id": 10,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["WAR", "HEAD", "PATH", "WAY"],
+    "matrix": [
+      "WAR",
+      "HEAD",
+      "PATH",
+      "WAY"
+    ],
     "compounds": {
       "top": "WARHEAD",
       "bottom": "PATHWAY",
@@ -183,7 +233,12 @@
     "id": 11,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["NIGHT", "FALL", "TIME", "OUT"],
+    "matrix": [
+      "NIGHT",
+      "FALL",
+      "TIME",
+      "OUT"
+    ],
     "compounds": {
       "top": "NIGHTFALL",
       "bottom": "TIMEOUT",
@@ -201,7 +256,12 @@
     "id": 12,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["HALF", "WAY", "BACK", "SIDE"],
+    "matrix": [
+      "HALF",
+      "WAY",
+      "BACK",
+      "SIDE"
+    ],
     "compounds": {
       "top": "HALFWAY",
       "bottom": "BACKSIDE",
@@ -219,7 +279,12 @@
     "id": 13,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["FOOT", "WORK", "NOTE", "BOOK"],
+    "matrix": [
+      "FOOT",
+      "WORK",
+      "NOTE",
+      "BOOK"
+    ],
     "compounds": {
       "top": "FOOTWORK",
       "bottom": "NOTEBOOK",
@@ -237,7 +302,12 @@
     "id": 14,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["HONEY", "MOON", "POT", "SHOT"],
+    "matrix": [
+      "HONEY",
+      "MOON",
+      "POT",
+      "SHOT"
+    ],
     "compounds": {
       "top": "HONEYMOON",
       "bottom": "POTSHOT",
@@ -255,7 +325,12 @@
     "id": 15,
     "tier": 1,
     "requires_rotation": false,
-    "matrix": ["BED", "TIME", "SIDE", "LINE"],
+    "matrix": [
+      "BED",
+      "TIME",
+      "SIDE",
+      "LINE"
+    ],
     "compounds": {
       "top": "BEDTIME",
       "bottom": "SIDELINE",
@@ -273,7 +348,12 @@
     "id": 16,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["BASE", "BOARD", "BALL", "ROOM"],
+    "matrix": [
+      "BASE",
+      "BOARD",
+      "BALL",
+      "ROOM"
+    ],
     "compounds": {
       "top": "BASEBOARD",
       "bottom": "BALLROOM",
@@ -291,7 +371,12 @@
     "id": 17,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["DOWN", "TOWN", "PLAY", "HOUSE"],
+    "matrix": [
+      "DOWN",
+      "TOWN",
+      "PLAY",
+      "HOUSE"
+    ],
     "compounds": {
       "top": "DOWNTOWN",
       "bottom": "PLAYHOUSE",
@@ -309,7 +394,12 @@
     "id": 18,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["LAKE", "SIDE", "SHORE", "LINE"],
+    "matrix": [
+      "LAKE",
+      "SIDE",
+      "SHORE",
+      "LINE"
+    ],
     "compounds": {
       "top": "LAKESIDE",
       "bottom": "SHORELINE",
@@ -327,7 +417,12 @@
     "id": 19,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["WASTE", "LAND", "WATER", "FALL"],
+    "matrix": [
+      "WASTE",
+      "LAND",
+      "WATER",
+      "FALL"
+    ],
     "compounds": {
       "top": "WASTELAND",
       "bottom": "WATERFALL",
@@ -345,7 +440,12 @@
     "id": 20,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["WILD", "FIRE", "LIFE", "BOAT"],
+    "matrix": [
+      "WILD",
+      "FIRE",
+      "LIFE",
+      "BOAT"
+    ],
     "compounds": {
       "top": "WILDFIRE",
       "bottom": "LIFEBOAT",
@@ -363,7 +463,12 @@
     "id": 21,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["RAIN", "CHECK", "FALL", "OUT"],
+    "matrix": [
+      "RAIN",
+      "CHECK",
+      "FALL",
+      "OUT"
+    ],
     "compounds": {
       "top": "RAINCHECK",
       "bottom": "FALLOUT",
@@ -381,7 +486,12 @@
     "id": 22,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["FORE", "HEAD", "FOOT", "LIGHT"],
+    "matrix": [
+      "FORE",
+      "HEAD",
+      "FOOT",
+      "LIGHT"
+    ],
     "compounds": {
       "top": "FOREHEAD",
       "bottom": "FOOTLIGHT",
@@ -399,7 +509,12 @@
     "id": 23,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["LOW", "DOWN", "LIFE", "TIME"],
+    "matrix": [
+      "LOW",
+      "DOWN",
+      "LIFE",
+      "TIME"
+    ],
     "compounds": {
       "top": "LOWDOWN",
       "bottom": "LIFETIME",
@@ -417,7 +532,12 @@
     "id": 24,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["GOD", "FATHER", "MOTHER", "LAND"],
+    "matrix": [
+      "GOD",
+      "FATHER",
+      "MOTHER",
+      "LAND"
+    ],
     "compounds": {
       "top": "GODFATHER",
       "bottom": "MOTHERLAND",
@@ -435,7 +555,12 @@
     "id": 25,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["BEACH", "HEAD", "SIDE", "LINE"],
+    "matrix": [
+      "BEACH",
+      "HEAD",
+      "SIDE",
+      "LINE"
+    ],
     "compounds": {
       "top": "BEACHHEAD",
       "bottom": "SIDELINE",
@@ -453,7 +578,12 @@
     "id": 26,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["ROUND", "TABLE", "HOUSE", "TOP"],
+    "matrix": [
+      "ROUND",
+      "TABLE",
+      "HOUSE",
+      "TOP"
+    ],
     "compounds": {
       "top": "ROUNDTABLE",
       "bottom": "HOUSETOP",
@@ -471,7 +601,12 @@
     "id": 27,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["AIR", "TIME", "DROP", "OUT"],
+    "matrix": [
+      "AIR",
+      "TIME",
+      "DROP",
+      "OUT"
+    ],
     "compounds": {
       "top": "AIRTIME",
       "bottom": "DROPOUT",
@@ -489,7 +624,12 @@
     "id": 28,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["HORSE", "POWER", "PLAY", "HOUSE"],
+    "matrix": [
+      "HORSE",
+      "POWER",
+      "PLAY",
+      "HOUSE"
+    ],
     "compounds": {
       "top": "HORSEPOWER",
       "bottom": "PLAYHOUSE",
@@ -507,7 +647,12 @@
     "id": 29,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["WALK", "OVER", "OUT", "COME"],
+    "matrix": [
+      "WALK",
+      "OVER",
+      "OUT",
+      "COME"
+    ],
     "compounds": {
       "top": "WALKOVER",
       "bottom": "OUTCOME",
@@ -525,7 +670,12 @@
     "id": 30,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["CROSS", "WALK", "CUT", "OUT"],
+    "matrix": [
+      "CROSS",
+      "WALK",
+      "CUT",
+      "OUT"
+    ],
     "compounds": {
       "top": "CROSSWALK",
       "bottom": "CUTOUT",
@@ -543,7 +693,12 @@
     "id": 31,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["AIR", "DROP", "LOCK", "DOWN"],
+    "matrix": [
+      "AIR",
+      "DROP",
+      "LOCK",
+      "DOWN"
+    ],
     "compounds": {
       "top": "AIRDROP",
       "bottom": "LOCKDOWN",
@@ -561,7 +716,12 @@
     "id": 32,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["BACK", "WATER", "DOOR", "WAY"],
+    "matrix": [
+      "BACK",
+      "WATER",
+      "DOOR",
+      "WAY"
+    ],
     "compounds": {
       "top": "BACKWATER",
       "bottom": "DOORWAY",
@@ -579,7 +739,12 @@
     "id": 33,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["SCHOOL", "BOY", "GIRL", "HOOD"],
+    "matrix": [
+      "SCHOOL",
+      "BOY",
+      "GIRL",
+      "HOOD"
+    ],
     "compounds": {
       "top": "SCHOOLBOY",
       "bottom": "GIRLHOOD",
@@ -597,7 +762,12 @@
     "id": 34,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["UNDER", "WATER", "HAND", "CRAFT"],
+    "matrix": [
+      "UNDER",
+      "WATER",
+      "HAND",
+      "CRAFT"
+    ],
     "compounds": {
       "top": "UNDERWATER",
       "bottom": "HANDCRAFT",
@@ -615,7 +785,12 @@
     "id": 35,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["SEA", "SIDE", "COAST", "LINE"],
+    "matrix": [
+      "SEA",
+      "SIDE",
+      "COAST",
+      "LINE"
+    ],
     "compounds": {
       "top": "SEASIDE",
       "bottom": "COASTLINE",
@@ -633,7 +808,12 @@
     "id": 36,
     "tier": 2,
     "requires_rotation": false,
-    "matrix": ["HOT", "SPOT", "HEAD", "LIGHT"],
+    "matrix": [
+      "HOT",
+      "SPOT",
+      "HEAD",
+      "LIGHT"
+    ],
     "compounds": {
       "top": "HOTSPOT",
       "bottom": "HEADLIGHT",
@@ -651,7 +831,12 @@
     "id": 37,
     "tier": 3,
     "requires_rotation": false,
-    "matrix": ["GRAND", "MOTHER", "CHILD", "HOOD"],
+    "matrix": [
+      "GRAND",
+      "MOTHER",
+      "CHILD",
+      "HOOD"
+    ],
     "compounds": {
       "top": "GRANDMOTHER",
       "bottom": "CHILDHOOD",
@@ -669,7 +854,12 @@
     "id": 38,
     "tier": 3,
     "requires_rotation": false,
-    "matrix": ["UNDER", "TOW", "FOOT", "PATH"],
+    "matrix": [
+      "UNDER",
+      "TOW",
+      "FOOT",
+      "PATH"
+    ],
     "compounds": {
       "top": "UNDERTOW",
       "bottom": "FOOTPATH",
@@ -687,7 +877,12 @@
     "id": 39,
     "tier": 3,
     "requires_rotation": false,
-    "matrix": ["OFF", "SPRING", "SIDE", "BOARD"],
+    "matrix": [
+      "OFF",
+      "SPRING",
+      "SIDE",
+      "BOARD"
+    ],
     "compounds": {
       "top": "OFFSPRING",
       "bottom": "SIDEBOARD",
@@ -705,7 +900,12 @@
     "id": 40,
     "tier": 3,
     "requires_rotation": false,
-    "matrix": ["FLAT", "IRON", "FOOT", "WORK"],
+    "matrix": [
+      "FLAT",
+      "IRON",
+      "FOOT",
+      "WORK"
+    ],
     "compounds": {
       "top": "FLATIRON",
       "bottom": "FOOTWORK",
@@ -723,7 +923,12 @@
     "id": 41,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["BACK", "HAND", "TRACK", "BALL"],
+    "matrix": [
+      "BACK",
+      "HAND",
+      "TRACK",
+      "BALL"
+    ],
     "compounds": {
       "top": "BACKHAND",
       "bottom": "TRACKBALL",
@@ -741,7 +946,12 @@
     "id": 42,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["TOW", "HEAD", "PATH", "WAY"],
+    "matrix": [
+      "TOW",
+      "HEAD",
+      "PATH",
+      "WAY"
+    ],
     "compounds": {
       "top": "TOWHEAD",
       "bottom": "PATHWAY",
@@ -759,7 +969,12 @@
     "id": 43,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["STAGE", "HAND", "PLAY", "BOOK"],
+    "matrix": [
+      "STAGE",
+      "HAND",
+      "PLAY",
+      "BOOK"
+    ],
     "compounds": {
       "top": "STAGEHAND",
       "bottom": "PLAYBOOK",
@@ -777,7 +992,12 @@
     "id": 44,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["BACK", "WATER", "SPACE", "CRAFT"],
+    "matrix": [
+      "BACK",
+      "WATER",
+      "SPACE",
+      "CRAFT"
+    ],
     "compounds": {
       "top": "BACKWATER",
       "bottom": "SPACECRAFT",
@@ -795,7 +1015,12 @@
     "id": 45,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["BEACH", "HEAD", "SIDE", "BOARD"],
+    "matrix": [
+      "BEACH",
+      "HEAD",
+      "SIDE",
+      "BOARD"
+    ],
     "compounds": {
       "top": "BEACHHEAD",
       "bottom": "SIDEBOARD",
@@ -813,7 +1038,12 @@
     "id": 46,
     "tier": 3,
     "requires_rotation": false,
-    "matrix": ["SUN", "SCREEN", "DOWN", "PLAY"],
+    "matrix": [
+      "SUN",
+      "SCREEN",
+      "DOWN",
+      "PLAY"
+    ],
     "compounds": {
       "top": "SUNSCREEN",
       "bottom": "DOWNPLAY",
@@ -831,7 +1061,12 @@
     "id": 47,
     "tier": 3,
     "requires_rotation": false,
-    "matrix": ["OVER", "RIDE", "TIME", "SHARE"],
+    "matrix": [
+      "OVER",
+      "RIDE",
+      "TIME",
+      "SHARE"
+    ],
     "compounds": {
       "top": "OVERRIDE",
       "bottom": "TIMESHARE",
@@ -849,7 +1084,12 @@
     "id": 48,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["QUICK", "SAND", "STEP", "STONE"],
+    "matrix": [
+      "QUICK",
+      "SAND",
+      "STEP",
+      "STONE"
+    ],
     "compounds": {
       "top": "QUICKSAND",
       "bottom": "STEPSTONE",
@@ -867,7 +1107,12 @@
     "id": 49,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["SEA", "WATER", "SHORE", "LINE"],
+    "matrix": [
+      "SEA",
+      "WATER",
+      "SHORE",
+      "LINE"
+    ],
     "compounds": {
       "top": "SEAWATER",
       "bottom": "SHORELINE",
@@ -885,7 +1130,12 @@
     "id": 50,
     "tier": 3,
     "requires_rotation": false,
-    "matrix": ["WEEK", "DAY", "NIGHT", "TIME"],
+    "matrix": [
+      "WEEK",
+      "DAY",
+      "NIGHT",
+      "TIME"
+    ],
     "compounds": {
       "top": "WEEKDAY",
       "bottom": "NIGHTTIME",
@@ -903,7 +1153,12 @@
     "id": 51,
     "tier": 3,
     "requires_rotation": true,
-    "matrix": ["FORE", "HEAD", "FOOT", "REST"],
+    "matrix": [
+      "FORE",
+      "HEAD",
+      "FOOT",
+      "REST"
+    ],
     "compounds": {
       "top": "FOREHEAD",
       "bottom": "FOOTREST",
@@ -915,6 +1170,1156 @@
       "bottom": "Ottoman for tired toes",
       "left": "A four-legged animal's front paws",
       "right": "Cushion against your skull in the car"
+    }
+  },
+  {
+    "id": 52,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "PAY",
+      "CHECK",
+      "BACK",
+      "UP"
+    ],
+    "compounds": {
+      "top": "PAYCHECK",
+      "bottom": "BACKUP",
+      "left": "PAYBACK",
+      "right": "CHECKUP"
+    },
+    "clues": {
+      "top": "Friday's reward in the mail",
+      "bottom": "Spare copy on the hard drive",
+      "left": "Sweet revenge for a slight",
+      "right": "Yearly visit to the doctor"
+    }
+  },
+  {
+    "id": 53,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "IN",
+      "COME",
+      "TAKE",
+      "DOWN"
+    ],
+    "compounds": {
+      "top": "INCOME",
+      "bottom": "TAKEDOWN",
+      "left": "INTAKE",
+      "right": "COMEDOWN"
+    },
+    "clues": {
+      "top": "What the IRS wants a piece of",
+      "bottom": "Wrestler's match-ending move",
+      "left": "Mouthful of air or food",
+      "right": "When the price drops back to earth"
+    }
+  },
+  {
+    "id": 54,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "MARK",
+      "UP",
+      "DOWN",
+      "GRADE"
+    ],
+    "compounds": {
+      "top": "MARKUP",
+      "bottom": "DOWNGRADE",
+      "left": "MARKDOWN",
+      "right": "UPGRADE"
+    },
+    "clues": {
+      "top": "Retail price hike",
+      "bottom": "Trip from C+ to C-",
+      "left": "Clearance-rack savings",
+      "right": "Reward for a tougher job"
+    }
+  },
+  {
+    "id": 55,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "OVER",
+      "PAY",
+      "WORK",
+      "DAY"
+    ],
+    "compounds": {
+      "top": "OVERPAY",
+      "bottom": "WORKDAY",
+      "left": "OVERWORK",
+      "right": "PAYDAY"
+    },
+    "clues": {
+      "top": "Hand the cashier too much",
+      "bottom": "Monday-to-Friday grind",
+      "left": "Pile on the assignments",
+      "right": "Friday's reward for a job well done"
+    }
+  },
+  {
+    "id": 56,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "MID",
+      "NIGHT",
+      "DAY",
+      "LIGHT"
+    ],
+    "compounds": {
+      "top": "MIDNIGHT",
+      "bottom": "DAYLIGHT",
+      "left": "MIDDAY",
+      "right": "NIGHTLIGHT"
+    },
+    "clues": {
+      "top": "When Cinderella's coach turns back",
+      "bottom": "Sun streaming through the window",
+      "left": "Twelve sharp at lunchtime",
+      "right": "Little plug-in bulb in the hallway"
+    }
+  },
+  {
+    "id": 57,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "COW",
+      "GIRL",
+      "BOY",
+      "FRIEND"
+    ],
+    "compounds": {
+      "top": "COWGIRL",
+      "bottom": "BOYFRIEND",
+      "left": "COWBOY",
+      "right": "GIRLFRIEND"
+    },
+    "clues": {
+      "top": "Yee-haw, says the rancher gal",
+      "bottom": "Your steady fella",
+      "left": "Lasso-twirling rodeo guy",
+      "right": "Your steady gal"
+    }
+  },
+  {
+    "id": 58,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "FORE",
+      "PLAY",
+      "ARM",
+      "FUL"
+    ],
+    "compounds": {
+      "top": "FOREPLAY",
+      "bottom": "ARMFUL",
+      "left": "FOREARM",
+      "right": "PLAYFUL"
+    },
+    "clues": {
+      "top": "Warm-up to the main event",
+      "bottom": "All you can hold in two hands",
+      "left": "Elbow to wrist",
+      "right": "Like a clown romping for laughs"
+    }
+  },
+  {
+    "id": 59,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "PAY",
+      "OUT",
+      "OFF",
+      "SET"
+    ],
+    "compounds": {
+      "top": "PAYOUT",
+      "bottom": "OFFSET",
+      "left": "PAYOFF",
+      "right": "OUTSET"
+    },
+    "clues": {
+      "top": "Lottery winner's big haul",
+      "bottom": "Balance one cost against another",
+      "left": "What the bookie hands you when you win",
+      "right": "Start of a quest or adventure"
+    }
+  },
+  {
+    "id": 60,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "RUN",
+      "OFF",
+      "DOWN",
+      "LOAD"
+    ],
+    "compounds": {
+      "top": "RUNOFF",
+      "bottom": "DOWNLOAD",
+      "left": "RUNDOWN",
+      "right": "OFFLOAD"
+    },
+    "clues": {
+      "top": "Election tiebreaker round",
+      "bottom": "Pull a file from the internet",
+      "left": "Stale and beat-looking",
+      "right": "Unhitch the trailer at the warehouse"
+    }
+  },
+  {
+    "id": 61,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "WORK",
+      "OUT",
+      "TABLE",
+      "LAND"
+    ],
+    "compounds": {
+      "top": "WORKOUT",
+      "bottom": "TABLELAND",
+      "left": "WORKTABLE",
+      "right": "OUTLAND"
+    },
+    "clues": {
+      "top": "Gym sweat session",
+      "bottom": "Flat plain stretching to the horizon",
+      "left": "Carpenter's bench in the garage",
+      "right": "A wide, sleepy frontier"
+    }
+  },
+  {
+    "id": 62,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "HOLD",
+      "OUT",
+      "OVER",
+      "DO"
+    ],
+    "compounds": {
+      "top": "HOLDOUT",
+      "bottom": "OVERDO",
+      "left": "HOLDOVER",
+      "right": "OUTDO"
+    },
+    "clues": {
+      "top": "Stubborn negotiation refuser",
+      "bottom": "Take it way too far",
+      "left": "Lingering from the old regime",
+      "right": "Beat them by a country mile"
+    }
+  },
+  {
+    "id": 63,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "LOCK",
+      "OUT",
+      "UP",
+      "SIDE"
+    ],
+    "compounds": {
+      "top": "LOCKOUT",
+      "bottom": "UPSIDE",
+      "left": "LOCKUP",
+      "right": "OUTSIDE"
+    },
+    "clues": {
+      "top": "What gets you stuck on the porch",
+      "bottom": "Silver lining in disguise",
+      "left": "Stick the kids in for the night",
+      "right": "Where the picnic happens"
+    }
+  },
+  {
+    "id": 64,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "BLOW",
+      "UP",
+      "GUN",
+      "SHOT"
+    ],
+    "compounds": {
+      "top": "BLOWUP",
+      "bottom": "GUNSHOT",
+      "left": "BLOWGUN",
+      "right": "UPSHOT"
+    },
+    "clues": {
+      "top": "A sudden temper explosion",
+      "bottom": "Loud crack from a pistol",
+      "left": "Pea-shooter from a tribal jungle",
+      "right": "An unexpected longshot of fortune"
+    }
+  },
+  {
+    "id": 65,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "TURN",
+      "OUT",
+      "OFF",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "TURNOUT",
+      "bottom": "OFFLINE",
+      "left": "TURNOFF",
+      "right": "OUTLINE"
+    },
+    "clues": {
+      "top": "Crowd that showed up at the rally",
+      "bottom": "Sketch in bullet-point form",
+      "left": "Click the switch the other way",
+      "right": "Currently disconnected from the net"
+    }
+  },
+  {
+    "id": 66,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "MIS",
+      "TAKE",
+      "LAY",
+      "AWAY"
+    ],
+    "compounds": {
+      "top": "MISTAKE",
+      "bottom": "LAYAWAY",
+      "left": "MISLAY",
+      "right": "TAKEAWAY"
+    },
+    "clues": {
+      "top": "Honest blunder",
+      "bottom": "Store-credit plan: pay it off, then take it home",
+      "left": "Lose track of the keys briefly",
+      "right": "Burrito to-go, please"
+    }
+  },
+  {
+    "id": 67,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "WORK",
+      "UP",
+      "SHOP",
+      "LIFT"
+    ],
+    "compounds": {
+      "top": "WORKUP",
+      "bottom": "SHOPLIFT",
+      "left": "WORKSHOP",
+      "right": "UPLIFT"
+    },
+    "clues": {
+      "top": "Get the team buzzing with energy",
+      "bottom": "Sneak a candy bar out of the store",
+      "left": "Tool-filled room with a sawdust floor",
+      "right": "Sneakers with extra sole height"
+    }
+  },
+  {
+    "id": 68,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "OVER",
+      "SEA",
+      "RUN",
+      "WAY"
+    ],
+    "compounds": {
+      "top": "OVERSEA",
+      "bottom": "RUNWAY",
+      "left": "OVERRUN",
+      "right": "SEAWAY"
+    },
+    "clues": {
+      "top": "Across the Atlantic",
+      "bottom": "Strip where jets accelerate",
+      "left": "Trample the competition",
+      "right": "Lane for water traffic"
+    }
+  },
+  {
+    "id": 69,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "OVER",
+      "HAND",
+      "COOK",
+      "OUT"
+    ],
+    "compounds": {
+      "top": "OVERHAND",
+      "bottom": "COOKOUT",
+      "left": "OVERCOOK",
+      "right": "HANDOUT"
+    },
+    "clues": {
+      "top": "Pitcher's classic windup",
+      "bottom": "Burgers on the grill in the backyard",
+      "left": "Burn the casserole, oops",
+      "right": "Free swag tossed to the crowd"
+    }
+  },
+  {
+    "id": 70,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "OUT",
+      "PLAY",
+      "POST",
+      "DATE"
+    ],
+    "compounds": {
+      "top": "OUTPLAY",
+      "bottom": "POSTDATE",
+      "left": "OUTPOST",
+      "right": "PLAYDATE"
+    },
+    "clues": {
+      "top": "Beat your opponent at their own game",
+      "bottom": "Slap an expired stamp on it",
+      "left": "Lonely watch in a guard tower",
+      "right": "Going out for dinner and a movie"
+    }
+  },
+  {
+    "id": 71,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "UP",
+      "TIME",
+      "TURN",
+      "TABLE"
+    ],
+    "compounds": {
+      "top": "UPTIME",
+      "bottom": "TURNTABLE",
+      "left": "UPTURN",
+      "right": "TIMETABLE"
+    },
+    "clues": {
+      "top": "Server's stretch without a crash",
+      "bottom": "DJ's spinning vinyl platform",
+      "left": "Reversal of a recent setback",
+      "right": "Schedule for the trains"
+    }
+  },
+  {
+    "id": 72,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "UP",
+      "TOWN",
+      "STATE",
+      "SMAN"
+    ],
+    "compounds": {
+      "top": "UPTOWN",
+      "bottom": "STATESMAN",
+      "left": "UPSTATE",
+      "right": "TOWNSMAN"
+    },
+    "clues": {
+      "top": "The fancy part of Manhattan",
+      "bottom": "A respected political elder",
+      "left": "Out where the dairy cows are",
+      "right": "Polite word for villager"
+    }
+  },
+  {
+    "id": 73,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "PUSH",
+      "OVER",
+      "UP",
+      "DRAFT"
+    ],
+    "compounds": {
+      "top": "PUSHOVER",
+      "bottom": "UPDRAFT",
+      "left": "PUSHUP",
+      "right": "OVERDRAFT"
+    },
+    "clues": {
+      "top": "An easy mark to beat",
+      "bottom": "A rising breeze beneath the glider",
+      "left": "An exercise on the floor",
+      "right": "Bank account in the negative"
+    }
+  },
+  {
+    "id": 74,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "OUT",
+      "BACK",
+      "CLASS",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "OUTBACK",
+      "bottom": "CLASSROOM",
+      "left": "OUTCLASS",
+      "right": "BACKROOM"
+    },
+    "clues": {
+      "top": "Australia's wide-open interior",
+      "bottom": "Where the teacher writes on the board",
+      "left": "Got more polish than the competition",
+      "right": "Mop closet behind the kitchen"
+    }
+  },
+  {
+    "id": 75,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "HARD",
+      "BACK",
+      "SHIP",
+      "YARD"
+    ],
+    "compounds": {
+      "top": "HARDBACK",
+      "bottom": "SHIPYARD",
+      "left": "HARDSHIP",
+      "right": "BACKYARD"
+    },
+    "clues": {
+      "top": "Stiff-bound novel",
+      "bottom": "Backyard where the grill lives",
+      "left": "Tough times to endure",
+      "right": "Where boats are built and repaired"
+    }
+  },
+  {
+    "id": 76,
+    "tier": 1,
+    "requires_rotation": false,
+    "matrix": [
+      "WITH",
+      "IN",
+      "OUT",
+      "PUT"
+    ],
+    "compounds": {
+      "top": "WITHIN",
+      "bottom": "OUTPUT",
+      "left": "WITHOUT",
+      "right": "INPUT"
+    },
+    "clues": {
+      "top": "Inside the walls of the castle",
+      "bottom": "Total widgets manufactured",
+      "left": "Lacking; not having",
+      "right": "Data fed into the machine"
+    }
+  },
+  {
+    "id": 77,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "UP",
+      "LAND",
+      "ON",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "UPLAND",
+      "bottom": "ONLINE",
+      "left": "UPON",
+      "right": "LANDLINE"
+    },
+    "clues": {
+      "top": "Hilly farm country up north",
+      "bottom": "Currently logged into the internet",
+      "left": "Resting; positioned atop",
+      "right": "Hard-wired phone to your house"
+    }
+  },
+  {
+    "id": 78,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "FIRE",
+      "ARM",
+      "WATER",
+      "HOLE"
+    ],
+    "compounds": {
+      "top": "FIREARM",
+      "bottom": "WATERHOLE",
+      "left": "FIREWATER",
+      "right": "ARMHOLE"
+    },
+    "clues": {
+      "top": "Pistol or rifle, formally",
+      "bottom": "Pond where antelope drink in the savannah",
+      "left": "Old slang for strong whiskey",
+      "right": "The opening for your hand in a sleeve"
+    }
+  },
+  {
+    "id": 79,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "WALK",
+      "WAY",
+      "BACK",
+      "WARD"
+    ],
+    "compounds": {
+      "top": "WALKWAY",
+      "bottom": "BACKWARD",
+      "left": "WALKBACK",
+      "right": "WAYWARD"
+    },
+    "clues": {
+      "top": "Paved path to the porch",
+      "bottom": "In reverse, against the grain",
+      "left": "Quietly retract a statement",
+      "right": "Shy, hesitant, and a bit clumsy"
+    }
+  },
+  {
+    "id": 80,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "SHUT",
+      "OFF",
+      "DOWN",
+      "BEAT"
+    ],
+    "compounds": {
+      "top": "SHUTOFF",
+      "bottom": "DOWNBEAT",
+      "left": "SHUTDOWN",
+      "right": "OFFBEAT"
+    },
+    "clues": {
+      "top": "Killswitch on the gas pump",
+      "bottom": "Slow tempo for a moody song",
+      "left": "Sleep mode for the office at night",
+      "right": "Quirky and a bit unconventional"
+    }
+  },
+  {
+    "id": 81,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "UNDER",
+      "TAKE",
+      "PLAY",
+      "OFF"
+    ],
+    "compounds": {
+      "top": "UNDERTAKE",
+      "bottom": "PLAYOFF",
+      "left": "UNDERPLAY",
+      "right": "TAKEOFF"
+    },
+    "clues": {
+      "top": "Vow to handle a big project",
+      "bottom": "Post-season championship round",
+      "left": "Brush off as no big deal",
+      "right": "When the jet leaves the runway"
+    }
+  },
+  {
+    "id": 82,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "OVER",
+      "BOOK",
+      "LAND",
+      "MARK"
+    ],
+    "compounds": {
+      "top": "OVERBOOK",
+      "bottom": "LANDMARK",
+      "left": "OVERLAND",
+      "right": "BOOKMARK"
+    },
+    "clues": {
+      "top": "Sell more airline seats than there are",
+      "bottom": "Famous statue or building in town",
+      "left": "On solid ground, not at sea",
+      "right": "Page-saving corner-fold"
+    }
+  },
+  {
+    "id": 83,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "DOWN",
+      "WIND",
+      "SIDE",
+      "BURN"
+    ],
+    "compounds": {
+      "top": "DOWNWIND",
+      "bottom": "SIDEBURN",
+      "left": "DOWNSIDE",
+      "right": "WINDBURN"
+    },
+    "clues": {
+      "top": "Where the smoke drifts toward",
+      "bottom": "Patch of hair down the cheek",
+      "left": "The drawback of the deal",
+      "right": "Chapped face after a winter ride"
+    }
+  },
+  {
+    "id": 84,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "BREAK",
+      "DOWN",
+      "UP",
+      "STREAM"
+    ],
+    "compounds": {
+      "top": "BREAKDOWN",
+      "bottom": "UPSTREAM",
+      "left": "BREAKUP",
+      "right": "DOWNSTREAM"
+    },
+    "clues": {
+      "top": "Car stalled on the freeway shoulder",
+      "bottom": "Toward the river's source",
+      "left": "The painful end of a couple",
+      "right": "Toward the river's mouth"
+    }
+  },
+  {
+    "id": 85,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "ROAD",
+      "SHOW",
+      "HOUSE",
+      "BOAT"
+    ],
+    "compounds": {
+      "top": "ROADSHOW",
+      "bottom": "HOUSEBOAT",
+      "left": "ROADHOUSE",
+      "right": "SHOWBOAT"
+    },
+    "clues": {
+      "top": "Touring band's circuit of small venues",
+      "bottom": "Floating home docked at the marina",
+      "left": "Cozy stop along the highway with food and a bed",
+      "right": "Glitzy entertainer-revue on the water"
+    }
+  },
+  {
+    "id": 86,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "OVER",
+      "COAT",
+      "PLAY",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "OVERCOAT",
+      "bottom": "PLAYROOM",
+      "left": "OVERPLAY",
+      "right": "COATROOM"
+    },
+    "clues": {
+      "top": "Heavy garment for winter",
+      "bottom": "Where the kids dump their LEGOs",
+      "left": "Underdo it, in a baseball sense",
+      "right": "Closet where the jackets hang"
+    }
+  },
+  {
+    "id": 87,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "UNDER",
+      "LAY",
+      "STAND",
+      "OFF"
+    ],
+    "compounds": {
+      "top": "UNDERLAY",
+      "bottom": "STANDOFF",
+      "left": "UNDERSTAND",
+      "right": "LAYOFF"
+    },
+    "clues": {
+      "top": "Padding beneath the carpet",
+      "bottom": "Tense armed pause between two sides",
+      "left": "Get the gist of a tricky concept",
+      "right": "Lull in the action"
+    }
+  },
+  {
+    "id": 88,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "CROSS",
+      "FIRE",
+      "ROAD",
+      "SIDE"
+    ],
+    "compounds": {
+      "top": "CROSSFIRE",
+      "bottom": "ROADSIDE",
+      "left": "CROSSROAD",
+      "right": "FIRESIDE"
+    },
+    "clues": {
+      "top": "Caught between two shooters",
+      "bottom": "Where you flag down the bus",
+      "left": "Where two highways meet",
+      "right": "Glowing by the hearth and a tale"
+    }
+  },
+  {
+    "id": 89,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "SHAKE",
+      "UP",
+      "DOWN",
+      "STAIRS"
+    ],
+    "compounds": {
+      "top": "SHAKEUP",
+      "bottom": "DOWNSTAIRS",
+      "left": "SHAKEDOWN",
+      "right": "UPSTAIRS"
+    },
+    "clues": {
+      "top": "Big management reshuffle at HQ",
+      "bottom": "Steps leading to the basement",
+      "left": "Hash it out face to face",
+      "right": "Steps to the second floor"
+    }
+  },
+  {
+    "id": 90,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "WHITE",
+      "WASH",
+      "FISH",
+      "BOWL"
+    ],
+    "compounds": {
+      "top": "WHITEWASH",
+      "bottom": "FISHBOWL",
+      "left": "WHITEFISH",
+      "right": "WASHBOWL"
+    },
+    "clues": {
+      "top": "Sweep an embarrassment under the rug",
+      "bottom": "Round glass home for a goldfish",
+      "left": "Cod or flounder on the menu",
+      "right": "Big sink for getting the suds out"
+    }
+  },
+  {
+    "id": 91,
+    "tier": 2,
+    "requires_rotation": false,
+    "matrix": [
+      "BACK",
+      "LIGHT",
+      "WASH",
+      "HOUSE"
+    ],
+    "compounds": {
+      "top": "BACKLIGHT",
+      "bottom": "WASHHOUSE",
+      "left": "BACKWASH",
+      "right": "LIGHTHOUSE"
+    },
+    "clues": {
+      "top": "Soft glow behind a phone screen",
+      "bottom": "Old-time laundry shed out back",
+      "left": "Foamy wake trailing the boat's stern",
+      "right": "Lonely tower with a sweeping beam"
+    }
+  },
+  {
+    "id": 92,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "SPILL",
+      "OVER",
+      "WAY",
+      "LAID"
+    ],
+    "compounds": {
+      "top": "SPILLOVER",
+      "bottom": "WAYLAID",
+      "left": "SPILLWAY",
+      "right": "OVERLAID"
+    },
+    "clues": {
+      "top": "Side-effect splashing onto another sector",
+      "bottom": "Ambushed by bandits on the road",
+      "left": "Dam channel for floodwater",
+      "right": "Stretched out atop, in old usage"
+    }
+  },
+  {
+    "id": 93,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "COTTON",
+      "TAIL",
+      "MOUTH",
+      "PIECE"
+    ],
+    "compounds": {
+      "top": "COTTONTAIL",
+      "bottom": "MOUTHPIECE",
+      "left": "COTTONMOUTH",
+      "right": "TAILPIECE"
+    },
+    "clues": {
+      "top": "Bunny munching in the bramble patch",
+      "bottom": "Trumpet's lip cup",
+      "left": "Venomous southern swamp snake",
+      "right": "Engagement ring's setting at the end of a band"
+    }
+  },
+  {
+    "id": 94,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "HAND",
+      "STAND",
+      "GUN",
+      "POINT"
+    ],
+    "compounds": {
+      "top": "HANDSTAND",
+      "bottom": "GUNPOINT",
+      "left": "HANDGUN",
+      "right": "STANDPOINT"
+    },
+    "clues": {
+      "top": "Balanced upside-down on your palms",
+      "bottom": "Held up by a bandit's pistol",
+      "left": "Concealed-carry sidearm",
+      "right": "The bayonet tip; or your angle on the matter"
+    }
+  },
+  {
+    "id": 95,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "STOP",
+      "LIGHT",
+      "OVER",
+      "WEIGHT"
+    ],
+    "compounds": {
+      "top": "STOPLIGHT",
+      "bottom": "OVERWEIGHT",
+      "left": "STOPOVER",
+      "right": "LIGHTWEIGHT"
+    },
+    "clues": {
+      "top": "Red bulb at the intersection",
+      "bottom": "Above the recommended pounds",
+      "left": "Quick layover on your road trip",
+      "right": "A boxer's class above featherweight"
+    }
+  },
+  {
+    "id": 96,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "UNDER",
+      "COOK",
+      "PASS",
+      "BOOK"
+    ],
+    "compounds": {
+      "top": "UNDERCOOK",
+      "bottom": "PASSBOOK",
+      "left": "UNDERPASS",
+      "right": "COOKBOOK"
+    },
+    "clues": {
+      "top": "Pull the steak before it's done",
+      "bottom": "A recipe collection on the shelf",
+      "left": "Tunnel for cars or pedestrians",
+      "right": "Savings record from the bank teller"
+    }
+  },
+  {
+    "id": 97,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "THERE",
+      "FORE",
+      "IN",
+      "SIGHT"
+    ],
+    "compounds": {
+      "top": "THEREFORE",
+      "bottom": "INSIGHT",
+      "left": "THEREIN",
+      "right": "FORESIGHT"
+    },
+    "clues": {
+      "top": "Logically, it follows that",
+      "bottom": "Wise foreknowledge of what's coming",
+      "left": "In that place, archaically",
+      "right": "Visible up ahead"
+    }
+  },
+  {
+    "id": 98,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "CLOSE",
+      "DOWN",
+      "UP",
+      "RIGHT"
+    ],
+    "compounds": {
+      "top": "CLOSEDOWN",
+      "bottom": "UPRIGHT",
+      "left": "CLOSEUP",
+      "right": "DOWNRIGHT"
+    },
+    "clues": {
+      "top": "Shutter the shop for good",
+      "bottom": "Standing tall and vertical",
+      "left": "Tight portrait shot of a face",
+      "right": "Plainly and unequivocally"
+    }
+  },
+  {
+    "id": 99,
+    "tier": 3,
+    "requires_rotation": true,
+    "matrix": [
+      "COURT",
+      "HOUSE",
+      "SHIP",
+      "MATE"
+    ],
+    "compounds": {
+      "top": "COURTHOUSE",
+      "bottom": "SHIPMATE",
+      "left": "COURTSHIP",
+      "right": "HOUSEMATE"
+    },
+    "clues": {
+      "top": "Where the judge gavels",
+      "bottom": "Fellow sailor on your vessel",
+      "left": "Old-fashioned wooing",
+      "right": "Roommate for the spare bedroom"
+    }
+  },
+  {
+    "id": 100,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": [
+      "SCHOOL",
+      "YARD",
+      "WORK",
+      "MAN"
+    ],
+    "compounds": {
+      "top": "SCHOOLYARD",
+      "bottom": "WORKMAN",
+      "left": "SCHOOLWORK",
+      "right": "YARDMAN"
+    },
+    "clues": {
+      "top": "Where kids play at recess",
+      "bottom": "A handy, capable laborer",
+      "left": "Homework brought home from class",
+      "right": "Hired hand on the lawn crew"
+    }
+  },
+  {
+    "id": 101,
+    "tier": 3,
+    "requires_rotation": false,
+    "matrix": [
+      "SCHOOL",
+      "BOOK",
+      "HOUSE",
+      "KEEPER"
+    ],
+    "compounds": {
+      "top": "SCHOOLBOOK",
+      "bottom": "HOUSEKEEPER",
+      "left": "SCHOOLHOUSE",
+      "right": "BOOKKEEPER"
+    },
+    "clues": {
+      "top": "Sixth-grade textbook",
+      "bottom": "The one who tidies the manor",
+      "left": "Little red one-room building of yore",
+      "right": "Accountant tracking the ledger"
     }
   }
 ]
