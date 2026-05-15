@@ -1,5 +1,12 @@
 import { useEffect, useRef } from "react";
-import { motion, PanInfo } from "framer-motion";
+import {
+  motion,
+  PanInfo,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import type { Tile as TileType } from "@/game/types";
@@ -27,6 +34,22 @@ export default function Tile({
 }: Props) {
   const innerRef = useRef<HTMLDivElement>(null);
 
+  // Inertia swing — tile pivots from the thumb (top) and lags behind as you
+  // swing it left/right, with a small wobble as it settles.
+  const x = useMotionValue(0);
+  const xVelocity = useVelocity(x);
+  const rotateFromVelocity = useTransform(
+    xVelocity,
+    [-1800, 1800],
+    [9, -9],
+    { clamp: true }
+  );
+  const swing = useSpring(rotateFromVelocity, {
+    stiffness: 220,
+    damping: 14,
+    mass: 0.35,
+  });
+
   useEffect(() => {
     if (!innerRef.current) return;
     gsap.to(innerRef.current, {
@@ -48,7 +71,7 @@ export default function Tile({
       layoutId={tile.id}
       whileHover={{ scale: 1.04, y: -2 }}
       whileTap={{ scale: 0.97 }}
-      whileDrag={{ scale: 1.08, zIndex: 100, rotate: 0 }}
+      whileDrag={{ scale: 1.08, zIndex: 100 }}
       onClick={onClick}
       drag={draggable}
       dragSnapToOrigin={draggable}
@@ -59,7 +82,16 @@ export default function Tile({
         dimensions,
         inSlot ? "shadow-tile-lift" : "shadow-tile hover:shadow-tile-hover"
       )}
-      style={{ perspective: 1200 }}
+      style={
+        draggable
+          ? {
+              perspective: 1200,
+              x,
+              rotate: swing,
+              transformOrigin: "50% 0%",
+            }
+          : { perspective: 1200 }
+      }
     >
       <div
         ref={innerRef}
