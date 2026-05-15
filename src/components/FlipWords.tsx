@@ -7,11 +7,8 @@ import TutorialModal from "./TutorialModal";
 import Tile from "./Tile";
 import type { Level, Slots, Tile as TileType } from "@/game/types";
 import {
-  getBoardFaces,
-  getEdges,
   getExpectedEdges,
   isLevelSolved,
-  normalizeRotation,
   sanitizeState,
 } from "@/game/transforms";
 import { getNextHintAction, getLevelHintPattern } from "@/game/hint";
@@ -87,6 +84,32 @@ const playPopSound = (() => {
   };
 })();
 
+const playFailSound = (() => {
+  let muted = false;
+  return () => {
+    if (muted) return;
+    try {
+      const Ctx: typeof AudioContext =
+        (window.AudioContext || (window as any).webkitAudioContext) as any;
+      if (!Ctx) return;
+      const ctx = new Ctx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(240, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.32);
+      gain.gain.setValueAtTime(0.18, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.34);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.36);
+    } catch (e) {
+      muted = true;
+    }
+  };
+})();
+
 export default function FlipWords() {
   const [showTutorial, setShowTutorial] = useState(false);
   const [gameLevels, setGameLevels] = useState<Level[]>([]);
@@ -94,11 +117,14 @@ export default function FlipWords() {
   const [bank, setBank] = useState<TileType[]>([]);
   const [slots, setSlots] = useState<Slots>([null, null]);
   const [boardRotation, setBoardRotation] = useState(0);
-  const [turns, setTurns] = useState(0);
+  const [attempts, setAttempts] = useState(0);
   const [hintMessage, setHintMessage] = useState("");
   const [isSolved, setIsSolved] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
   const [activeSlot, setActiveSlot] = useState<number | null>(null);
+  const [checkState, setCheckState] = useState<
+    "idle" | "judging" | "correct" | "incorrect"
+  >("idle");
 
   const slotRefs = useRef<(HTMLDivElement | null)[]>([null, null]);
   const trayRef = useRef<HTMLDivElement>(null);
@@ -138,19 +164,20 @@ export default function FlipWords() {
     (
       nextSlots: Slots,
       nextBank: TileType[],
-      nextBoardRotation: number,
-      bumpTurns = false
+      nextBoardRotation: number
     ) => {
       if (!level) return;
       const normalized = sanitizeState(level, nextSlots, nextBank);
-      const normalizedRotation = normalizeRotation(nextBoardRotation);
       slotsRef.current = normalized.slots;
       bankRef.current = normalized.bank;
-      boardRotationRef.current = normalizedRotation;
+      // Keep the raw (un-normalized) rotation so GSAP animates in the same
+      // direction forever — otherwise 270 → 0 wraps and spins backward.
+      // Game logic that needs a canonical 0/90/180/270 value calls
+      // normalizeRotation on its own.
+      boardRotationRef.current = nextBoardRotation;
       setSlots(normalized.slots);
       setBank(normalized.bank);
-      setBoardRotation(normalizedRotation);
-      if (bumpTurns) setTurns((n) => n + 1);
+      setBoardRotation(nextBoardRotation);
     },
     [level]
   );
@@ -166,14 +193,20 @@ export default function FlipWords() {
     slotsRef.current = normalized.slots;
     bankRef.current = normalized.bank;
     boardRotationRef.current = 0;
+    // Snap visually to 0 so we don't unwind multiple turns when the previous
+    // level left the rotation at e.g. 360 or 720.
+    if (slotAreaRef.current) {
+      gsap.set(slotAreaRef.current, { rotate: 0 });
+    }
     setBank(normalized.bank);
     setSlots(normalized.slots);
     setIsSolved(false);
     setShowCelebration(false);
     setActiveSlot(null);
     setBoardRotation(0);
-    setTurns(0);
+    setAttempts(0);
     setHintMessage("");
+    setCheckState("idle");
     winSequenceFired.current = false;
   }, [levelIdx, level]);
 
@@ -189,39 +222,62 @@ export default function FlipWords() {
     });
   }, [boardRotation]);
 
-  // Win detection
-  useEffect(() => {
+  const runWinSequence = useCallback(() => {
+    setIsSolved(true);
+    setActiveSlot(null);
+    if (winSequenceFired.current) return;
+    winSequenceFired.current = true;
+    const edges = ["top", "right", "bottom", "left"];
+    edges.forEach((edge, i) => {
+      const el = boardFrameRef.current?.querySelector(`[data-edge="${edge}"]`);
+      if (!el) return;
+      gsap.to(el, {
+        boxShadow:
+          "0 0 0 2px var(--color-accent), 0 0 24px rgba(31,156,147,0.4)",
+        scale: 1.04,
+        duration: 0.22,
+        delay: i * 0.18,
+        yoyo: true,
+        repeat: 1,
+        ease: "power2.inOut",
+      });
+    });
+    setTimeout(() => {
+      fireConfetti();
+      setShowCelebration(true);
+    }, 950);
+  }, []);
+
+  const handleCheckAnswer = useCallback(() => {
     if (!level) return;
-    const solved = isLevelSolved(slots, boardRotation, level);
-    if (solved && !isSolved) {
-      setIsSolved(true);
-      setActiveSlot(null);
-      // Run the celebratory edge-glow sequence, then confetti, then bottom sheet
-      if (!winSequenceFired.current) {
-        winSequenceFired.current = true;
-        const edges = ["top", "right", "bottom", "left"];
-        edges.forEach((edge, i) => {
-          const el = boardFrameRef.current?.querySelector(`[data-edge="${edge}"]`);
-          if (!el) return;
-          gsap.to(el, {
-            boxShadow: "0 0 0 2px var(--color-accent), 0 0 24px rgba(31,156,147,0.4)",
-            scale: 1.04,
-            duration: 0.22,
-            delay: i * 0.18,
-            yoyo: true,
-            repeat: 1,
-            ease: "power2.inOut",
-          });
-        });
-        setTimeout(() => {
-          fireConfetti();
-          setShowCelebration(true);
-        }, 950);
+    if (checkState !== "idle") return;
+    if (isSolved) return;
+    // Require both slots to be filled before calling the judge.
+    if (!slotsRef.current[0] || !slotsRef.current[1]) return;
+
+    setAttempts((n) => n + 1);
+    setCheckState("judging");
+
+    window.setTimeout(() => {
+      const solved = isLevelSolved(
+        slotsRef.current,
+        boardRotationRef.current,
+        level
+      );
+      if (solved) {
+        setCheckState("correct");
+        playPopSound();
+        window.setTimeout(() => {
+          setCheckState("idle");
+          runWinSequence();
+        }, 750);
+      } else {
+        setCheckState("incorrect");
+        playFailSound();
+        window.setTimeout(() => setCheckState("idle"), 1400);
       }
-    } else if (!solved && isSolved) {
-      setIsSolved(false);
-    }
-  }, [slots, level, boardRotation, isSolved]);
+    }, 750);
+  }, [level, checkState, isSolved, runWinSequence]);
 
   if (!level || !expectedEdges) return null;
 
@@ -249,7 +305,7 @@ export default function FlipWords() {
         if (existingTile && existingTile.id !== tile.id) {
           nextBank = [...nextBank, existingTile];
         }
-        commitState(nextSlots, nextBank, boardRotationRef.current, true);
+        commitState(nextSlots, nextBank, boardRotationRef.current);
         setActiveSlot(null);
         setHintMessage("");
         playPopSound();
@@ -284,7 +340,7 @@ export default function FlipWords() {
         const otherTile = nextSlots[otherSlotIdx];
         nextSlots[sourceIdx] = otherTile;
         nextSlots[otherSlotIdx] = tile;
-        commitState(nextSlots, currentBank, boardRotationRef.current, true);
+        commitState(nextSlots, currentBank, boardRotationRef.current);
         setActiveSlot(null);
         setHintMessage("");
         playPopSound();
@@ -304,7 +360,7 @@ export default function FlipWords() {
     if (!droppedInSelf) {
       const nextSlots = [...currentSlots] as Slots;
       nextSlots[sourceIdx] = null;
-      commitState(nextSlots, [...currentBank, tile], boardRotationRef.current, true);
+      commitState(nextSlots, [...currentBank, tile], boardRotationRef.current);
       setActiveSlot(null);
       setHintMessage("");
       playPopSound();
@@ -427,7 +483,7 @@ export default function FlipWords() {
       if (existing && existing.id !== tile.id) {
         nextBank = [...nextBank, existing];
       }
-      commitState(nextSlots, nextBank, boardRotationRef.current, true);
+      commitState(nextSlots, nextBank, boardRotationRef.current);
       setActiveSlot(null);
       setHintMessage("");
       playPopSound();
@@ -462,7 +518,7 @@ export default function FlipWords() {
     const nextBank = bankRef.current.map((tile) =>
       tile.id === id ? { ...tile, isFlipped: !tile.isFlipped } : tile
     );
-    commitState(currentSlots, nextBank, boardRotationRef.current, true);
+    commitState(currentSlots, nextBank, boardRotationRef.current);
     setHintMessage("");
   };
 
@@ -474,7 +530,7 @@ export default function FlipWords() {
     const tile = nextSlots[slotIdx as 0 | 1];
     if (tile) {
       nextSlots[slotIdx as 0 | 1] = { ...tile, isFlipped: !tile.isFlipped };
-      commitState(nextSlots, currentBank, boardRotationRef.current, true);
+      commitState(nextSlots, currentBank, boardRotationRef.current);
       setHintMessage("");
       playPopSound();
     }
@@ -489,36 +545,20 @@ export default function FlipWords() {
     }
   };
 
-  // Pre-compute the visible edge text for live preview
-  const liveFaces = getBoardFaces(slots, boardRotation);
-  const liveEdges = getEdges(liveFaces);
-
   const ScreenEdgePill = ({
     edge,
     clue,
-    answer,
   }: {
     edge: "top" | "right" | "bottom" | "left";
     clue: string;
-    answer: string | null;
   }) => {
-    const correct =
-      answer !== null &&
-      (edge === "top"
-        ? answer === expectedEdges.top
-        : edge === "bottom"
-        ? answer === expectedEdges.bottom
-        : edge === "left"
-        ? answer === expectedEdges.left
-        : answer === expectedEdges.right);
     return (
       <div
         data-edge={edge}
         className={cn(
           "relative font-clue-strong text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge rounded-full px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs shadow-tile transition-colors",
           edge === "left" || edge === "right" ? "[writing-mode:vertical-rl]" : "",
-          edge === "left" ? "rotate-180" : "",
-          correct && "text-accent border-accent/40 bg-accent-soft"
+          edge === "left" ? "rotate-180" : ""
         )}
       >
         <span className="whitespace-nowrap">{clue}</span>
@@ -545,7 +585,7 @@ export default function FlipWords() {
               <span className="text-ink-soft/60">/{gameLevels.length}</span>
             </p>
             <p className="text-xs md:text-sm font-expand text-ink leading-none mt-1.5">
-              {turns} turn{turns === 1 ? "" : "s"}
+              {attempts} {attempts === 1 ? "check" : "checks"}
             </p>
           </div>
 
@@ -560,11 +600,30 @@ export default function FlipWords() {
 
           <button
             onClick={handleHint}
-            className="font-ui flex items-center gap-1.5 text-xs md:text-sm bg-ink text-surface px-3 py-2 md:px-4 md:py-2 rounded-full hover:bg-ink/85 transition-all active:scale-95 shadow-tile"
+            className="font-ui flex items-center gap-1.5 text-xs md:text-sm bg-tile-face border border-tile-edge text-ink-muted px-3 py-2 md:px-4 md:py-2 rounded-full hover:text-ink hover:shadow-tile-hover transition-all active:scale-95"
             title="Hint"
           >
             <span className="material-icons text-[16px]">lightbulb</span>
             <span className="hidden sm:inline">Hint</span>
+          </button>
+
+          <button
+            onClick={handleCheckAnswer}
+            disabled={
+              checkState !== "idle" ||
+              isSolved ||
+              !slots[0] ||
+              !slots[1]
+            }
+            className="font-ui flex items-center gap-1.5 text-xs md:text-sm bg-accent text-surface px-3 py-2 md:px-4 md:py-2 rounded-full hover:bg-accent/90 transition-all active:scale-95 shadow-tile disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100"
+            title={
+              !slots[0] || !slots[1]
+                ? "Fill both slots first"
+                : "Call the judge"
+            }
+          >
+            <span className="material-icons text-[16px]">gavel</span>
+            <span className="hidden sm:inline">Check</span>
           </button>
         </div>
       </header>
@@ -616,16 +675,12 @@ export default function FlipWords() {
           >
             {/* Top edge */}
             <div className="col-start-2 row-start-1">
-              <ScreenEdgePill edge="top" clue={level.hints.topRow} answer={liveEdges.top} />
+              <ScreenEdgePill edge="top" clue={level.hints.topRow} />
             </div>
 
             {/* Left edge */}
             <div className="col-start-1 row-start-2">
-              <ScreenEdgePill
-                edge="left"
-                clue={level.hints.leftCol}
-                answer={liveEdges.left}
-              />
+              <ScreenEdgePill edge="left" clue={level.hints.leftCol} />
             </div>
 
             {/* Slots */}
@@ -683,20 +738,12 @@ export default function FlipWords() {
 
             {/* Right edge */}
             <div className="col-start-3 row-start-2">
-              <ScreenEdgePill
-                edge="right"
-                clue={level.hints.rightCol}
-                answer={liveEdges.right}
-              />
+              <ScreenEdgePill edge="right" clue={level.hints.rightCol} />
             </div>
 
             {/* Bottom edge */}
             <div className="col-start-2 row-start-3">
-              <ScreenEdgePill
-                edge="bottom"
-                clue={level.hints.bottomRow}
-                answer={liveEdges.bottom}
-              />
+              <ScreenEdgePill edge="bottom" clue={level.hints.bottomRow} />
             </div>
           </div>
         </div>
@@ -765,7 +812,7 @@ export default function FlipWords() {
               <span className="material-icons text-[28px]">check</span>
             </div>
             <p className="font-ui text-xs text-ink-soft uppercase tracking-[0.2em] mb-2">
-              Solved · {turns} turn{turns === 1 ? "" : "s"}
+              Solved · {attempts} {attempts === 1 ? "check" : "checks"}
             </p>
             <h2 className="relative font-wide text-3xl md:text-4xl text-ink mb-1 text-center">
               Click. Click. Click.
@@ -780,6 +827,93 @@ export default function FlipWords() {
               {levelIdx < gameLevels.length - 1 ? "Next puzzle" : "New session"}
               <span className="material-icons text-[20px]">arrow_forward</span>
             </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Judge modal — pauses for a beat then reveals correct/incorrect */}
+      <AnimatePresence>
+        {checkState !== "idle" && (
+          <motion.div
+            key="check-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-sm flex items-center justify-center px-6"
+          >
+            <motion.div
+              key={`check-card-${checkState}`}
+              initial={{ scale: 0.9, opacity: 0, y: 8 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 280, damping: 22 }}
+              className="relative bg-tile-face border border-tile-edge rounded-3xl px-10 py-8 shadow-[0_20px_60px_rgba(60,40,10,0.25)] flex flex-col items-center gap-3 min-w-[16rem]"
+            >
+              <div
+                className="absolute inset-0 rounded-3xl pointer-events-none opacity-50"
+                style={{ background: "var(--paper-tex)" }}
+              />
+              {checkState === "judging" && (
+                <div className="relative flex flex-col items-center gap-3">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 1.1,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="w-14 h-14 rounded-full bg-accent-soft text-accent flex items-center justify-center shadow-tile"
+                  >
+                    <span className="material-icons text-[30px]">search</span>
+                  </motion.div>
+                  <p className="font-ui text-sm text-ink-muted uppercase tracking-[0.2em]">
+                    Judging…
+                  </p>
+                </div>
+              )}
+              {checkState === "correct" && (
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 360,
+                    damping: 16,
+                  }}
+                  className="relative flex flex-col items-center gap-3"
+                >
+                  <div className="w-14 h-14 rounded-full bg-accent text-surface flex items-center justify-center shadow-tile-lift">
+                    <span className="material-icons text-[34px]">check</span>
+                  </div>
+                  <p className="font-wide text-2xl text-ink">Correct!</p>
+                </motion.div>
+              )}
+              {checkState === "incorrect" && (
+                <motion.div
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{
+                    scale: 1,
+                    opacity: 1,
+                    x: [0, -8, 8, -5, 5, 0],
+                  }}
+                  transition={{
+                    scale: { type: "spring", stiffness: 360, damping: 16 },
+                    opacity: { duration: 0.2 },
+                    x: { duration: 0.45, delay: 0.12, ease: "easeInOut" },
+                  }}
+                  className="relative flex flex-col items-center gap-2"
+                >
+                  <div className="w-14 h-14 rounded-full bg-warn/15 text-warn flex items-center justify-center shadow-tile-lift">
+                    <span className="material-icons text-[34px]">close</span>
+                  </div>
+                  <p className="font-wide text-2xl text-ink">Not yet</p>
+                  <p className="font-ui text-xs text-ink-soft">
+                    Have another look.
+                  </p>
+                </motion.div>
+              )}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
