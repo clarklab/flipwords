@@ -122,6 +122,9 @@ export default function FlipWords() {
   const [isSolved, setIsSolved] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
   const [activeSlot, setActiveSlot] = useState<number | null>(null);
+  // Which slot the dragged tile is currently hovering over (or null). Drives
+  // the drop-target highlight.
+  const [hoveredSlotIdx, setHoveredSlotIdx] = useState<number | null>(null);
   const [checkState, setCheckState] = useState<
     "idle" | "judging" | "correct" | "incorrect"
   >("idle");
@@ -134,6 +137,9 @@ export default function FlipWords() {
   const boardFrameRef = useRef<HTMLDivElement>(null);
   const slotAreaRef = useRef<HTMLDivElement>(null);
   const winSequenceFired = useRef(false);
+  // Avoid spamming setState while the user drags by holding the latest value
+  // in a ref and only calling the setter when it actually changes.
+  const hoveredSlotRef = useRef<number | null>(null);
 
   const level = gameLevels[levelIdx];
 
@@ -281,7 +287,44 @@ export default function FlipWords() {
 
   if (!level || !expectedEdges) return null;
 
+  const updateHoveredSlot = (point: { x: number; y: number } | null) => {
+    let next: number | null = null;
+    if (point) {
+      for (let i = 0; i < 2; i++) {
+        const el = slotRefs.current[i];
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (
+          point.x >= rect.left &&
+          point.x <= rect.right &&
+          point.y >= rect.top &&
+          point.y <= rect.bottom
+        ) {
+          next = i;
+          break;
+        }
+      }
+    }
+    if (hoveredSlotRef.current !== next) {
+      hoveredSlotRef.current = next;
+      setHoveredSlotIdx(next);
+    }
+  };
+
+  const handleTileDrag = (_e: any, info: PanInfo) => {
+    if (isSolved) return;
+    updateHoveredSlot(info.point);
+  };
+
+  const clearHoveredSlot = () => {
+    if (hoveredSlotRef.current !== null) {
+      hoveredSlotRef.current = null;
+      setHoveredSlotIdx(null);
+    }
+  };
+
   const handleDragEnd = (_e: any, info: PanInfo, tile: TileType) => {
+    clearHoveredSlot();
     if (isSolved) return;
     const { point } = info;
     const currentSlots = [...slotsRef.current] as Slots;
@@ -320,6 +363,7 @@ export default function FlipWords() {
     tile: TileType,
     slotIdx: number
   ) => {
+    clearHoveredSlot();
     if (isSolved) return;
     const { point } = info;
     const sourceIdx = slotIdx as 0 | 1;
@@ -690,6 +734,7 @@ export default function FlipWords() {
               {[0, 1].map((idx) => {
                 const tile = slots[idx as 0 | 1];
                 const isActive = activeSlot === idx;
+                const isHovered = hoveredSlotIdx === idx;
                 return (
                   <div
                     key={`slot-${idx}`}
@@ -698,8 +743,13 @@ export default function FlipWords() {
                       slotRefs.current[idx] = el;
                     }}
                     className={cn(
-                      "w-[clamp(5rem,14vh,8rem)] h-[clamp(10rem,28vh,16rem)] rounded-2xl flex items-center justify-center relative transition-colors cursor-pointer",
-                      tile
+                      "w-[clamp(5rem,14vh,8rem)] h-[clamp(10rem,28vh,16rem)] rounded-2xl flex items-center justify-center relative cursor-pointer transition-[border-color,background-color,box-shadow,transform] duration-150",
+                      // Drop-target highlight wins over every other state. Solid
+                      // accent ring, soft glow, faint scale-up so the slot
+                      // reads as "I'll catch the tile if you let go now."
+                      isHovered
+                        ? "border-2 border-accent bg-accent-soft scale-[1.03] shadow-[0_0_0_4px_var(--color-accent-soft),0_12px_28px_-12px_rgba(31,156,147,0.45)]"
+                        : tile
                         ? "border-0"
                         : isActive
                         ? "border-2 border-accent bg-accent-soft/50"
@@ -713,6 +763,7 @@ export default function FlipWords() {
                           inSlot={true}
                           draggable={true}
                           boardRotation={boardRotation}
+                          onDrag={handleTileDrag}
                           onDragEnd={(e, info) => handleSlotDragEnd(e, info, tile, idx)}
                           onClick={() => handleSlotTileClick(idx, tile)}
                           onFlip={() => flipTileInSlot(idx)}
@@ -776,6 +827,7 @@ export default function FlipWords() {
                       tile={tile}
                       inSlot={false}
                       draggable={true}
+                      onDrag={handleTileDrag}
                       onDragEnd={(e, info) => handleDragEnd(e, info, tile)}
                       onClick={() => handleBankTileClick(tile)}
                       onFlip={() => flipTileInBank(tile.id)}

@@ -17,6 +17,8 @@ type Props = {
   onFlip?: (e: React.MouseEvent) => void;
   inSlot?: boolean;
   draggable?: boolean;
+  onDragStart?: () => void;
+  onDrag?: (e: any, info: PanInfo) => void;
   onDragEnd?: (e: any, info: PanInfo) => void;
   boardRotation?: number;
   size?: "default" | "small";
@@ -28,6 +30,8 @@ export default function Tile({
   onFlip,
   inSlot = false,
   draggable = false,
+  onDragStart,
+  onDrag,
   onDragEnd,
   boardRotation = 0,
   size = "default",
@@ -113,6 +117,8 @@ export default function Tile({
       dragSnapToOrigin={draggable}
       _dragX={dragX}
       _dragY={dragY}
+      onDragStart={onDragStart}
+      onDrag={onDrag}
       onDragEnd={onDragEnd}
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
       className={cn(
