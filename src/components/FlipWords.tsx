@@ -599,10 +599,16 @@ export default function FlipWords() {
       <div
         data-edge={edge}
         className={cn(
-          "relative font-clue-strong text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge rounded-full px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs shadow-tile transition-colors",
+          "relative font-clue-strong text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge rounded-full px-3.5 py-1.5 md:px-4 md:py-2 shadow-tile transition-colors",
           edge === "left" || edge === "right" ? "[writing-mode:vertical-rl]" : "",
           edge === "left" ? "rotate-180" : ""
         )}
+        style={{
+          // Fluid sizing — 12px floor on the smallest phones, scales up to
+          // ~15px on tablet/desktop. +2px from the previous 10/12 baseline.
+          fontSize: "clamp(0.75rem, 1.2vw + 0.62rem, 0.95rem)",
+          lineHeight: 1.15,
+        }}
       >
         <span className="whitespace-nowrap">{clue}</span>
       </div>
@@ -615,17 +621,7 @@ export default function FlipWords() {
 
       <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
         <div className="flex items-center justify-between">
-          {/* Left FAB — how to play */}
-          <button
-            onClick={() => setShowTutorial(true)}
-            className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
-            title="How to play"
-            aria-label="How to play"
-          >
-            <span className="material-icons text-[20px]">help_outline</span>
-          </button>
-
-          {/* Right cluster — tertiary hint + primary check */}
+          {/* Left cluster — hint (primary tertiary) then help */}
           <div className="flex items-center gap-2">
             <button
               onClick={handleHint}
@@ -636,23 +632,34 @@ export default function FlipWords() {
               <span className="material-icons text-[20px]">lightbulb</span>
             </button>
             <button
-              onClick={handleCheckAnswer}
-              disabled={
-                checkState !== "idle" ||
-                isSolved ||
-                !slots[0] ||
-                !slots[1]
-              }
-              className="font-ui flex items-center gap-1.5 text-sm bg-accent text-surface h-11 px-4 md:px-5 rounded-full hover:bg-accent/90 transition-all active:scale-95 shadow-tile disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100"
-              title={
-                !slots[0] || !slots[1]
-                  ? "Fill both slots first"
-                  : "Call the judge"
-              }
+              onClick={() => setShowTutorial(true)}
+              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+              title="How to play"
+              aria-label="How to play"
             >
-              <span className="material-icons text-[18px]">gavel</span>
-              <span>Check</span>
+              <span className="material-icons text-[20px]">help_outline</span>
             </button>
+          </div>
+
+          {/* Right cluster — Check button only appears once both slots are filled */}
+          <div className="flex items-center gap-2 min-h-11">
+            <AnimatePresence>
+              {!isSolved && slots[0] && slots[1] && checkState === "idle" && (
+                <motion.button
+                  key="check"
+                  initial={{ opacity: 0, scale: 0.8, x: 12 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, x: 12 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 26 }}
+                  onClick={handleCheckAnswer}
+                  className="font-ui flex items-center gap-1.5 text-sm bg-accent text-white h-11 px-4 md:px-5 rounded-full hover:bg-accent/90 transition-colors active:scale-95 shadow-tile"
+                  title="Call the judge"
+                >
+                  <span className="material-icons text-[18px]">gavel</span>
+                  <span>Check</span>
+                </motion.button>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 
@@ -699,6 +706,24 @@ export default function FlipWords() {
       {/* Game board — sits directly on the paper surface, no container chrome */}
       <div className="flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-4 md:mt-6 flex items-center justify-center z-10">
         <div className="relative w-full">
+          {/* Rotate FAB — bottom-right of the clue/label area, solid accent */}
+          <button
+            onClick={() => {
+              commitState(
+                slotsRef.current,
+                bankRef.current,
+                boardRotationRef.current + 90
+              );
+              setHintMessage("");
+              playPopSound();
+            }}
+            className="absolute -bottom-2 right-0 md:-bottom-3 md:right-2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 shadow-tile-lift"
+            title="Rotate board"
+            aria-label="Rotate board"
+          >
+            <span className="material-icons text-[22px] md:text-[24px]">rotate_right</span>
+          </button>
+
           <div
             ref={boardFrameRef}
             className="grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] gap-2 md:gap-4 place-items-center"
@@ -786,25 +811,8 @@ export default function FlipWords() {
         </div>
       </div>
 
-      {/* Bank — relative parent for the rotate FAB that floats just above it */}
+      {/* Bank */}
       <div className="w-full flex-shrink-0 relative z-10 pt-4 md:pt-6 pb-6 md:pb-8">
-        {/* Rotate FAB — perches on the boundary between board and tile rail */}
-        <button
-          onClick={() => {
-            commitState(
-              slotsRef.current,
-              bankRef.current,
-              boardRotationRef.current + 90
-            );
-            setHintMessage("");
-            playPopSound();
-          }}
-          className="absolute -top-6 right-4 md:right-6 z-30 w-12 h-12 rounded-full flex items-center justify-center bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
-          title="Rotate board"
-          aria-label="Rotate board"
-        >
-          <span className="material-icons text-[22px]">rotate_right</span>
-        </button>
         <div className="text-center mb-4">
           <p className="font-ui text-[10px] md:text-xs text-ink-soft uppercase tracking-[0.2em]">
             Tile rail
