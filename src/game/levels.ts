@@ -60,22 +60,91 @@ if (typeof window !== "undefined" && import.meta.env.DEV) {
 
 export const allLevels: Level[] = RAW;
 
-/** Pick a session set (preserves curve ordering). */
-export const pickLevels = (count: number, startTier?: 1 | 2 | 3): Level[] => {
-  const pool = startTier
-    ? RAW.filter((l) => (l.tier ?? 1) >= startTier)
-    : RAW.slice();
-  return pool.slice(0, count);
+const shuffle = <T,>(arr: T[]): T[] => arr.slice().sort(() => Math.random() - 0.5);
+
+const pickOne = <T,>(arr: T[], rejectIds?: Set<number>): T | undefined => {
+  const candidates = rejectIds
+    ? arr.filter((item: any) => !rejectIds.has(item.id))
+    : arr;
+  if (candidates.length === 0) return undefined;
+  return candidates[Math.floor(Math.random() * candidates.length)];
 };
 
-/** Pick a randomized session, but biased toward easier puzzles up front. */
-export const pickSessionLevels = (count: number): Level[] => {
+/**
+ * Builds a difficulty-escalating session. By default the curve is:
+ *
+ *   slot 1 — tier 1, no rotation       (placement only — gentle warm-up)
+ *   slot 2 — tier 1, no rotation       (placement + flipping starts mattering)
+ *   slot 3 — tier 2, no rotation       (trickier vocabulary)
+ *   slot 4 — tier 2 or non-rotated 3   (bridge into harder material)
+ *   slot 5 — tier 3, REQUIRES rotation (uses every mechanic: place, flip, rotate)
+ *
+ * Falls back gracefully if any pool runs dry — the picker is opportunistic
+ * about substitutions but always tries to keep difficulty monotonic.
+ */
+export const pickSessionLevels = (count: number = 5): Level[] => {
   const tier1 = RAW.filter((l) => (l.tier ?? 1) === 1);
   const tier2 = RAW.filter((l) => l.tier === 2);
   const tier3 = RAW.filter((l) => l.tier === 3);
-  const shuffle = <T,>(arr: T[]): T[] => arr.slice().sort(() => Math.random() - 0.5);
-  const easy = shuffle(tier1);
-  const mid = shuffle(tier2);
-  const hard = shuffle(tier3);
-  return [...easy, ...mid, ...hard].slice(0, count);
+  const tier3Rotated = tier3.filter((l) => l.requiresRotation);
+  const tier3Flat = tier3.filter((l) => !l.requiresRotation);
+
+  const picked: Level[] = [];
+  const used = new Set<number>();
+
+  const take = (pool: Level[]) => {
+    const choice = pickOne(pool, used);
+    if (choice) {
+      picked.push(choice);
+      used.add(choice.id);
+    }
+    return choice;
+  };
+
+  if (count >= 5) {
+    // Canonical 5-slot session.
+    take(tier1);
+    take(tier1);
+    take(tier2);
+    // Bridge slot: prefer t2, allow flat t3, fall back to t1.
+    take([...tier2, ...tier3Flat].length > 0 ? [...tier2, ...tier3Flat] : tier1);
+    // Final slot must require rotation so the session uses every mechanic.
+    take(
+      tier3Rotated.length > 0
+        ? tier3Rotated
+        : RAW.filter((l) => l.requiresRotation)
+    );
+    // Any remaining slots top up with the hardest pool we have.
+    while (picked.length < count) {
+      const extra = take(shuffle([...tier3, ...tier2]));
+      if (!extra) break;
+    }
+  } else {
+    // Shorter session: just walk easy → hard.
+    const pools = [tier1, tier1, tier2, tier2, tier3Rotated.length ? tier3Rotated : tier3];
+    for (let i = 0; i < count; i++) {
+      take(pools[Math.min(i, pools.length - 1)]);
+    }
+  }
+
+  // Final safety net — if pools were exhausted, fill from the full set so we
+  // never hand the UI a session shorter than requested.
+  if (picked.length < count) {
+    for (const lvl of shuffle(RAW)) {
+      if (picked.length >= count) break;
+      if (!used.has(lvl.id)) {
+        picked.push(lvl);
+        used.add(lvl.id);
+      }
+    }
+  }
+
+  return picked.slice(0, count);
+};
+
+/** Lightweight escape hatch — same difficulty intent without a fixed count. */
+export const pickLevels = (count: number, startTier?: 1 | 2 | 3): Level[] => {
+  if (!startTier) return pickSessionLevels(count);
+  const pool = RAW.filter((l) => (l.tier ?? 1) >= startTier);
+  return shuffle(pool).slice(0, count);
 };

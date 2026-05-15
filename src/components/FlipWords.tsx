@@ -22,7 +22,7 @@ export const getSolvedEdgeAnswers = (level: Level) => {
   return { top: e.top, bottom: e.bottom, left: e.left, right: e.right };
 };
 
-const SESSION_SIZE = 7;
+const SESSION_SIZE = 5;
 
 const SOLVE_HEADLINES = [
   "Click. Click. Click.",

@@ -291,9 +291,14 @@ def main() -> int:
         clues = m["clues"]
         soln = expected_solution(m["matrix"], rotation)
 
+        # Tier is curated in matrices.json (1=easy, 2=medium, 3=hard) and
+        # drives the session picker's difficulty escalation. Default to 1 if
+        # a matrix entry forgets to set it.
+        tier = int(m.get("tier", 1))
         levels.append(
             {
                 "id": len(levels) + 1,
+                "tier": tier,
                 "requiresRotation": rotation,
                 "tiles": tiles,
                 "hints": {
