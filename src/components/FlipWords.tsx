@@ -597,8 +597,7 @@ export default function FlipWords() {
               commitState(
                 slotsRef.current,
                 bankRef.current,
-                boardRotationRef.current + 90,
-                true
+                boardRotationRef.current + 90
               );
               setHintMessage("");
               playPopSound();
