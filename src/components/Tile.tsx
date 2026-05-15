@@ -35,19 +35,20 @@ export default function Tile({
   const innerRef = useRef<HTMLDivElement>(null);
 
   // Inertia swing — tile pivots from the thumb (top) and lags behind as you
-  // swing it left/right, with a small wobble as it settles.
+  // swing it left/right, like a pendulum with weight at the bottom. Under-
+  // damped so it overshoots and oscillates a couple times before settling.
   const x = useMotionValue(0);
   const xVelocity = useVelocity(x);
   const rotateFromVelocity = useTransform(
     xVelocity,
-    [-1800, 1800],
-    [9, -9],
+    [-1400, 1400],
+    [22, -22],
     { clamp: true }
   );
   const swing = useSpring(rotateFromVelocity, {
-    stiffness: 220,
-    damping: 14,
-    mass: 0.35,
+    stiffness: 110,
+    damping: 6,
+    mass: 1,
   });
 
   useEffect(() => {
