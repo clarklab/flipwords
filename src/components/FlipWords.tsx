@@ -992,14 +992,16 @@ export default function FlipWords() {
               dragConstraints={trayRef}
               className="flex gap-3 md:gap-4 w-max cursor-grab active:cursor-grabbing pb-2"
             >
-              <AnimatePresence mode="popLayout">
+              <AnimatePresence mode="popLayout" initial={false}>
                 {bank.map((tile) => (
                   <motion.div
                     key={tile.id}
                     layout
-                    initial={{ opacity: 0, scale: 0.85, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
+                    // No enter/exit fade — the Tile's own layoutId handles
+                    // visual continuity when it moves bank↔slot. A wrapper
+                    // exit here renders a ghost copy of the tile fading out
+                    // on top of the slot-mounted copy ("translucent for ~1s"
+                    // after drop). Snap-in / snap-out keeps the move clean.
                     transition={{ type: "spring", stiffness: 400, damping: 28 }}
                     className="flex-shrink-0"
                   >
