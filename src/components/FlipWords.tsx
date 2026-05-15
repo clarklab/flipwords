@@ -11,7 +11,6 @@ import {
   getEdges,
   getExpectedEdges,
   isLevelSolved,
-  normalizeRotation,
   sanitizeState,
 } from "@/game/transforms";
 import { getNextHintAction, getLevelHintPattern } from "@/game/hint";
@@ -143,13 +142,16 @@ export default function FlipWords() {
     ) => {
       if (!level) return;
       const normalized = sanitizeState(level, nextSlots, nextBank);
-      const normalizedRotation = normalizeRotation(nextBoardRotation);
       slotsRef.current = normalized.slots;
       bankRef.current = normalized.bank;
-      boardRotationRef.current = normalizedRotation;
+      // Keep the raw (un-normalized) rotation so GSAP animates in the same
+      // direction forever — otherwise 270 → 0 wraps and spins backward.
+      // Game logic that needs a canonical 0/90/180/270 value calls
+      // normalizeRotation on its own.
+      boardRotationRef.current = nextBoardRotation;
       setSlots(normalized.slots);
       setBank(normalized.bank);
-      setBoardRotation(normalizedRotation);
+      setBoardRotation(nextBoardRotation);
       if (bumpTurns) setTurns((n) => n + 1);
     },
     [level]
@@ -166,6 +168,11 @@ export default function FlipWords() {
     slotsRef.current = normalized.slots;
     bankRef.current = normalized.bank;
     boardRotationRef.current = 0;
+    // Snap visually to 0 so we don't unwind multiple turns when the previous
+    // level left the rotation at e.g. 360 or 720.
+    if (slotAreaRef.current) {
+      gsap.set(slotAreaRef.current, { rotate: 0 });
+    }
     setBank(normalized.bank);
     setSlots(normalized.slots);
     setIsSolved(false);
