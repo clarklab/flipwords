@@ -106,6 +106,7 @@ export default function FlipWords() {
   const bankRef = useRef<TileType[]>([]);
   const boardRotationRef = useRef(0);
   const boardFrameRef = useRef<HTMLDivElement>(null);
+  const slotAreaRef = useRef<HTMLDivElement>(null);
   const winSequenceFired = useRef(false);
 
   const level = gameLevels[levelIdx];
@@ -176,10 +177,11 @@ export default function FlipWords() {
     winSequenceFired.current = false;
   }, [levelIdx, level]);
 
-  // Animate board rotation through GSAP for a richer feel
+  // Animate board rotation through GSAP for a richer feel — only the slot
+  // area rotates so the edge labels stay anchored at top/right/bottom/left.
   useEffect(() => {
-    if (!boardFrameRef.current) return;
-    gsap.to(boardFrameRef.current, {
+    if (!slotAreaRef.current) return;
+    gsap.to(slotAreaRef.current, {
       rotate: boardRotation,
       duration: 0.65,
       ease: "back.out(1.3)",
@@ -610,8 +612,7 @@ export default function FlipWords() {
 
           <div
             ref={boardFrameRef}
-            className="grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] gap-2 md:gap-4 place-items-center gpu"
-            style={{ transformOrigin: "center center" }}
+            className="grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] gap-2 md:gap-4 place-items-center"
           >
             {/* Top edge */}
             <div className="col-start-2 row-start-1">
@@ -628,7 +629,11 @@ export default function FlipWords() {
             </div>
 
             {/* Slots */}
-            <div className="col-start-2 row-start-2 flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 rounded-2xl shadow-slot-inset">
+            <div
+              ref={slotAreaRef}
+              className="col-start-2 row-start-2 flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 rounded-2xl shadow-slot-inset gpu"
+              style={{ transformOrigin: "center center" }}
+            >
               {[0, 1].map((idx) => {
                 const tile = slots[idx as 0 | 1];
                 const isActive = activeSlot === idx;
