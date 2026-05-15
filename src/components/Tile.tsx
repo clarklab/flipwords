@@ -37,8 +37,26 @@ export default function Tile({
   // Inertia swing — tile pivots from the thumb (top) and lags behind as you
   // swing it left/right, like a pendulum with weight at the bottom. Under-
   // damped so it overshoots and oscillates a couple times before settling.
-  const x = useMotionValue(0);
-  const xVelocity = useVelocity(x);
+  //
+  // Drag deltas are captured in screen space via _dragX/_dragY, then
+  // counter-rotated into the parent's local frame so the tile follows the
+  // thumb on screen even when the board is rotated 90/180/270°.
+  const dragX = useMotionValue(0);
+  const dragY = useMotionValue(0);
+
+  const boardRad = (boardRotation * Math.PI) / 180;
+  const cosBoard = Math.cos(boardRad);
+  const sinBoard = Math.sin(boardRad);
+  const x = useTransform(
+    [dragX, dragY],
+    ([dx, dy]: number[]) => cosBoard * dx + sinBoard * dy
+  );
+  const y = useTransform(
+    [dragX, dragY],
+    ([dx, dy]: number[]) => -sinBoard * dx + cosBoard * dy
+  );
+
+  const xVelocity = useVelocity(dragX);
   const rotateFromVelocity = useTransform(
     xVelocity,
     [-1400, 1400],
@@ -50,6 +68,12 @@ export default function Tile({
     damping: 6,
     mass: 1,
   });
+
+  // Pivot the swing at the screen-top of the tile (where the thumb grabs),
+  // regardless of how the board is rotated.
+  const swingOriginX = 50 - 50 * sinBoard;
+  const swingOriginY = 50 - 50 * cosBoard;
+  const swingOrigin = `${swingOriginX}% ${swingOriginY}%`;
 
   useEffect(() => {
     if (!innerRef.current) return;
@@ -76,6 +100,8 @@ export default function Tile({
       onClick={onClick}
       drag={draggable}
       dragSnapToOrigin={draggable}
+      _dragX={dragX}
+      _dragY={dragY}
       onDragEnd={onDragEnd}
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
       className={cn(
@@ -88,8 +114,9 @@ export default function Tile({
           ? {
               perspective: 1200,
               x,
+              y,
               rotate: swing,
-              transformOrigin: "50% 0%",
+              transformOrigin: swingOrigin,
             }
           : { perspective: 1200 }
       }
