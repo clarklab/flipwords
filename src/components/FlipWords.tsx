@@ -5,6 +5,9 @@ import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
 import TutorialModal from "./TutorialModal";
 import Tile from "./Tile";
+import AnimatedWordmark, {
+  type AnimatedWordmarkHandle,
+} from "./AnimatedWordmark";
 import type { Level, Slots, Tile as TileType } from "@/game/types";
 import {
   getExpectedEdges,
@@ -225,6 +228,7 @@ export default function FlipWords() {
   // Avoid spamming setState while the user drags by holding the latest value
   // in a ref and only calling the setter when it actually changes.
   const hoveredSlotRef = useRef<number | null>(null);
+  const wordmarkRef = useRef<AnimatedWordmarkHandle>(null);
   // Session-scoped stats. Refs because we read them inside callbacks that
   // would otherwise close over stale state. attempts/hints get mirrored from
   // their state setters; perPuzzle accumulates one entry per solve.
@@ -251,6 +255,8 @@ export default function FlipWords() {
       window.localStorage.setItem("flipwords_tutorial_seen", "true");
     }
     setShowTutorial(false);
+    // Greet the player as the modal slides out.
+    window.setTimeout(() => wordmarkRef.current?.flip(), 240);
   }, []);
 
   useEffect(() => {
@@ -832,9 +838,10 @@ export default function FlipWords() {
 
         {/* Centered wordmark + meta — pointer-events-none so it doesn't intercept FAB taps */}
         <div className="absolute inset-x-0 top-4 md:top-6 h-11 flex flex-col items-center justify-center pointer-events-none">
-          <h1 className="font-wide text-xl md:text-2xl text-ink leading-none tracking-wide">
-            FLIPWORDS
-          </h1>
+          <AnimatedWordmark
+            ref={wordmarkRef}
+            className="text-xl md:text-2xl text-ink"
+          />
           <p className="font-ui text-[10px] md:text-[11px] text-ink-soft uppercase tracking-[0.16em] leading-none mt-1 flex items-center gap-1.5">
             <span>
               Puzzle {levelIdx + 1}
