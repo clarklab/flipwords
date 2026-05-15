@@ -613,61 +613,66 @@ export default function FlipWords() {
     <div className="min-h-[100dvh] flex flex-col bg-paper">
       {showTutorial && <TutorialModal onComplete={handleTutorialComplete} />}
 
-      <header className="w-full max-w-3xl mx-auto px-4 md:px-6 pt-4 md:pt-6 flex items-center justify-between flex-shrink-0">
-        <div className="flex items-baseline gap-2">
-          <h1 className="font-wide text-2xl md:text-3xl text-ink leading-none">
-            FLIPWORDS
-          </h1>
-          <span className="text-accent text-xl md:text-2xl leading-none">·</span>
-        </div>
-
-        <div className="flex items-center gap-2 md:gap-3">
-          <div className="flex flex-col items-end mr-1">
-            <p className="text-[10px] md:text-[11px] font-ui text-ink-soft uppercase tracking-[0.14em] leading-none">
-              Puzzle {levelIdx + 1}
-              <span className="text-ink-soft/60">/{gameLevels.length}</span>
-            </p>
-            <p className="text-xs md:text-sm font-expand text-ink leading-none mt-1.5">
-              {attempts} {attempts === 1 ? "check" : "checks"}
-            </p>
-          </div>
-
+      <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
+        <div className="flex items-center justify-between">
+          {/* Left FAB — how to play */}
           <button
             onClick={() => setShowTutorial(true)}
-            className="w-9 h-9 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95"
+            className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
             title="How to play"
             aria-label="How to play"
           >
-            <span className="material-icons text-[18px]">help_outline</span>
+            <span className="material-icons text-[20px]">help_outline</span>
           </button>
 
-          <button
-            onClick={handleHint}
-            className="font-ui flex items-center gap-1.5 text-xs md:text-sm bg-tile-face border border-tile-edge text-ink-muted px-3 py-2 md:px-4 md:py-2 rounded-full hover:text-ink hover:shadow-tile-hover transition-all active:scale-95"
-            title="Hint"
-          >
-            <span className="material-icons text-[16px]">lightbulb</span>
-            <span className="hidden sm:inline">Hint</span>
-          </button>
+          {/* Right cluster — tertiary hint + primary check */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleHint}
+              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+              title="Hint"
+              aria-label="Hint"
+            >
+              <span className="material-icons text-[20px]">lightbulb</span>
+            </button>
+            <button
+              onClick={handleCheckAnswer}
+              disabled={
+                checkState !== "idle" ||
+                isSolved ||
+                !slots[0] ||
+                !slots[1]
+              }
+              className="font-ui flex items-center gap-1.5 text-sm bg-accent text-surface h-11 px-4 md:px-5 rounded-full hover:bg-accent/90 transition-all active:scale-95 shadow-tile disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100"
+              title={
+                !slots[0] || !slots[1]
+                  ? "Fill both slots first"
+                  : "Call the judge"
+              }
+            >
+              <span className="material-icons text-[18px]">gavel</span>
+              <span>Check</span>
+            </button>
+          </div>
+        </div>
 
-          <button
-            onClick={handleCheckAnswer}
-            disabled={
-              checkState !== "idle" ||
-              isSolved ||
-              !slots[0] ||
-              !slots[1]
-            }
-            className="font-ui flex items-center gap-1.5 text-xs md:text-sm bg-accent text-surface px-3 py-2 md:px-4 md:py-2 rounded-full hover:bg-accent/90 transition-all active:scale-95 shadow-tile disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100"
-            title={
-              !slots[0] || !slots[1]
-                ? "Fill both slots first"
-                : "Call the judge"
-            }
-          >
-            <span className="material-icons text-[16px]">gavel</span>
-            <span className="hidden sm:inline">Check</span>
-          </button>
+        {/* Centered wordmark + meta — pointer-events-none so it doesn't intercept FAB taps */}
+        <div className="absolute inset-x-0 top-4 md:top-6 h-11 flex flex-col items-center justify-center pointer-events-none">
+          <h1 className="font-wide text-xl md:text-2xl text-ink leading-none tracking-wide">
+            FLIPWORDS
+          </h1>
+          <p className="font-ui text-[10px] md:text-[11px] text-ink-soft uppercase tracking-[0.16em] leading-none mt-1 flex items-center gap-1.5">
+            <span>
+              Puzzle {levelIdx + 1}
+              <span className="text-ink-soft/60">/{gameLevels.length}</span>
+            </span>
+            {attempts > 0 && (
+              <>
+                <span className="w-1 h-1 rounded-full bg-accent" />
+                <span>{attempts}</span>
+              </>
+            )}
+          </p>
         </div>
       </header>
 
@@ -691,26 +696,9 @@ export default function FlipWords() {
         </AnimatePresence>
       </div>
 
-      {/* Game board */}
-      <div className="flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-2 md:mt-4 flex items-center justify-center z-10">
-        <div className="relative bg-tile-face/60 backdrop-blur-sm border border-tile-edge rounded-3xl shadow-tile p-4 md:p-8 w-full">
-          <button
-            onClick={() => {
-              commitState(
-                slotsRef.current,
-                bankRef.current,
-                boardRotationRef.current + 90
-              );
-              setHintMessage("");
-              playPopSound();
-            }}
-            className="absolute top-3 right-3 md:top-5 md:right-5 w-10 h-10 rounded-full flex items-center justify-center bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 z-20"
-            title="Rotate board"
-            aria-label="Rotate board"
-          >
-            <span className="material-icons text-xl">rotate_right</span>
-          </button>
-
+      {/* Game board — sits directly on the paper surface, no container chrome */}
+      <div className="flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-4 md:mt-6 flex items-center justify-center z-10">
+        <div className="relative w-full">
           <div
             ref={boardFrameRef}
             className="grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] gap-2 md:gap-4 place-items-center"
@@ -798,8 +786,25 @@ export default function FlipWords() {
         </div>
       </div>
 
-      {/* Bank */}
+      {/* Bank — relative parent for the rotate FAB that floats just above it */}
       <div className="w-full flex-shrink-0 relative z-10 pt-4 md:pt-6 pb-6 md:pb-8">
+        {/* Rotate FAB — perches on the boundary between board and tile rail */}
+        <button
+          onClick={() => {
+            commitState(
+              slotsRef.current,
+              bankRef.current,
+              boardRotationRef.current + 90
+            );
+            setHintMessage("");
+            playPopSound();
+          }}
+          className="absolute -top-6 right-4 md:right-6 z-30 w-12 h-12 rounded-full flex items-center justify-center bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+          title="Rotate board"
+          aria-label="Rotate board"
+        >
+          <span className="material-icons text-[22px]">rotate_right</span>
+        </button>
         <div className="text-center mb-4">
           <p className="font-ui text-[10px] md:text-xs text-ink-soft uppercase tracking-[0.2em]">
             Tile rail
