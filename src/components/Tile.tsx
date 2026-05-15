@@ -75,14 +75,25 @@ export default function Tile({
   const swingOriginY = 50 - 50 * cosBoard;
   const swingOrigin = `${swingOriginX}% ${swingOriginY}%`;
 
+  // First useEffect run for this component instance snaps to the current flip
+  // state — moving a tile from bank↔slot remounts it, and we don't want a
+  // visible flop as the inner face animates from CSS-default rotateX(0) to
+  // its actual orientation. Subsequent isFlipped changes animate normally.
+  const isFirstApplyRef = useRef(true);
   useEffect(() => {
     if (!innerRef.current) return;
-    gsap.to(innerRef.current, {
-      rotateX: tile.isFlipped ? 180 : 0,
-      duration: 0.55,
-      ease: "back.out(1.3)",
-      overwrite: "auto",
-    });
+    const target = tile.isFlipped ? 180 : 0;
+    if (isFirstApplyRef.current) {
+      gsap.set(innerRef.current, { rotateX: target });
+      isFirstApplyRef.current = false;
+    } else {
+      gsap.to(innerRef.current, {
+        rotateX: target,
+        duration: 0.55,
+        ease: "back.out(1.3)",
+        overwrite: "auto",
+      });
+    }
   }, [tile.isFlipped]);
 
   const dimensions = inSlot

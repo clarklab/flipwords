@@ -504,8 +504,7 @@ export default function FlipWords() {
     commitState(
       nextSlots,
       [...currentBank, tile],
-      boardRotationRef.current,
-      true
+      boardRotationRef.current
     );
     setHintMessage("");
     playPopSound();
@@ -656,8 +655,7 @@ export default function FlipWords() {
               commitState(
                 slotsRef.current,
                 bankRef.current,
-                boardRotationRef.current + 90,
-                true
+                boardRotationRef.current + 90
               );
               setHintMessage("");
               playPopSound();
