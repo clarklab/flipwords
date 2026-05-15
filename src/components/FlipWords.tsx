@@ -24,6 +24,84 @@ export const getSolvedEdgeAnswers = (level: Level) => {
 
 const SESSION_SIZE = 7;
 
+const SOLVE_HEADLINES = [
+  "Click. Click. Click.",
+  "Oh yeah!",
+  "Bingo.",
+  "Locked in.",
+  "Beautiful.",
+  "Snap. Crackle. Pop.",
+  "Got it.",
+  "Boom.",
+  "All four.",
+  "Crystal clear.",
+  "Dead on.",
+  "That'll do.",
+  "Snug fit.",
+  "Bullseye.",
+  "Smooth.",
+  "Sharp.",
+  "Solid.",
+  "On the nose.",
+  "Money.",
+  "Tidy.",
+  "Cracked it.",
+  "Confirmed.",
+  "Pieced together.",
+  "Buttoned up.",
+  "All matched.",
+  "There it is.",
+  "Bang on.",
+  "Hooked it.",
+  "Lined up.",
+  "Picture perfect.",
+  "Done and done.",
+  "Sweet.",
+  "Stuck the landing.",
+  "Threaded the needle.",
+  "Yes!",
+  "Sealed.",
+  "Flipped, fitted, finished.",
+  "Effortless.",
+  "Page turner.",
+  "Nailed it.",
+  "Crisp.",
+  "Compound complete.",
+  "Word.",
+  "Tile by tile.",
+  "Cards on the table.",
+  "Mic drop.",
+  "Done deal.",
+  "Wordsmith.",
+  "Spelled out.",
+  "Slot-perfect.",
+];
+
+const SESSION_HEADLINES = [
+  "Run the table.",
+  "Game, set, match.",
+  "Vocabulary check passed.",
+  "Seven up.",
+  "All the way through.",
+  "Dictionary unlocked.",
+];
+
+const pickHeadline = (pool: string[]) =>
+  pool[Math.floor(Math.random() * pool.length)];
+
+const computeStars = (attempts: number, hints: number): 1 | 2 | 3 => {
+  if (attempts <= 1 && hints === 0) return 3;
+  if (attempts <= 2 && hints <= 1) return 2;
+  return 1;
+};
+
+const formatDuration = (ms: number): string => {
+  const totalSec = Math.max(0, Math.round(ms / 1000));
+  const m = Math.floor(totalSec / 60);
+  const s = totalSec % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
+};
+
 const fireConfetti = () => {
   const reduceMotion =
     typeof window !== "undefined" &&
@@ -128,6 +206,13 @@ export default function FlipWords() {
   const [checkState, setCheckState] = useState<
     "idle" | "judging" | "correct" | "incorrect"
   >("idle");
+  // Hint counter for the current puzzle. Reset on level change.
+  const [hintsThisPuzzle, setHintsThisPuzzle] = useState(0);
+  const [winHeadline, setWinHeadline] = useState<string>(SOLVE_HEADLINES[0]);
+  const [showSessionSummary, setShowSessionSummary] = useState(false);
+  const [sessionHeadline, setSessionHeadline] = useState<string>(
+    SESSION_HEADLINES[0]
+  );
 
   const slotRefs = useRef<(HTMLDivElement | null)[]>([null, null]);
   const trayRef = useRef<HTMLDivElement>(null);
@@ -140,6 +225,17 @@ export default function FlipWords() {
   // Avoid spamming setState while the user drags by holding the latest value
   // in a ref and only calling the setter when it actually changes.
   const hoveredSlotRef = useRef<number | null>(null);
+  // Session-scoped stats. Refs because we read them inside callbacks that
+  // would otherwise close over stale state. attempts/hints get mirrored from
+  // their state setters; perPuzzle accumulates one entry per solve.
+  const attemptsRef = useRef(0);
+  const hintsThisPuzzleRef = useRef(0);
+  const sessionStartRef = useRef<number | null>(null);
+  const sessionEndRef = useRef<number | null>(null);
+  const perPuzzleRef = useRef<
+    Array<{ attempts: number; hints: number; durationMs: number }>
+  >([]);
+  const puzzleStartRef = useRef<number | null>(null);
 
   const level = gameLevels[levelIdx];
 
@@ -211,9 +307,17 @@ export default function FlipWords() {
     setActiveSlot(null);
     setBoardRotation(0);
     setAttempts(0);
+    attemptsRef.current = 0;
+    setHintsThisPuzzle(0);
+    hintsThisPuzzleRef.current = 0;
     setHintMessage("");
     setCheckState("idle");
     winSequenceFired.current = false;
+    // Session-scoped state: start the clock on the first puzzle of a session.
+    if (sessionStartRef.current === null) {
+      sessionStartRef.current = Date.now();
+    }
+    puzzleStartRef.current = Date.now();
   }, [levelIdx, level]);
 
   // Animate board rotation through GSAP for a richer feel — only the slot
@@ -233,6 +337,17 @@ export default function FlipWords() {
     setActiveSlot(null);
     if (winSequenceFired.current) return;
     winSequenceFired.current = true;
+    // Record per-puzzle stats. attemptsRef was already incremented by
+    // handleCheckAnswer before this call, so it reflects the winning guess.
+    const now = Date.now();
+    const startedAt = puzzleStartRef.current ?? now;
+    perPuzzleRef.current.push({
+      attempts: attemptsRef.current,
+      hints: hintsThisPuzzleRef.current,
+      durationMs: now - startedAt,
+    });
+    // Pick a fresh win headline so the celebration doesn't repeat itself.
+    setWinHeadline(pickHeadline(SOLVE_HEADLINES));
     const edges = ["top", "right", "bottom", "left"];
     edges.forEach((edge, i) => {
       const el = boardFrameRef.current?.querySelector(`[data-edge="${edge}"]`);
@@ -261,7 +376,8 @@ export default function FlipWords() {
     // Require both slots to be filled before calling the judge.
     if (!slotsRef.current[0] || !slotsRef.current[1]) return;
 
-    setAttempts((n) => n + 1);
+    attemptsRef.current += 1;
+    setAttempts(attemptsRef.current);
     setCheckState("judging");
 
     window.setTimeout(() => {
@@ -420,6 +536,9 @@ export default function FlipWords() {
       boardRotationRef.current
     );
     setHintMessage(hint.text);
+    // Count this as a hint used for the session scorecard.
+    hintsThisPuzzleRef.current += 1;
+    setHintsThisPuzzle(hintsThisPuzzleRef.current);
 
     // Auto-apply the suggested move
     if (!hint.action) return;
@@ -579,14 +698,62 @@ export default function FlipWords() {
     }
   };
 
+  const isLastPuzzle = levelIdx >= gameLevels.length - 1;
+
   const nextLevel = () => {
-    if (levelIdx < gameLevels.length - 1) {
+    if (!isLastPuzzle) {
       setLevelIdx(levelIdx + 1);
-    } else {
-      setGameLevels(pickSessionLevels(SESSION_SIZE));
-      setLevelIdx(0);
+      return;
     }
+    // Last puzzle just got solved — close the per-puzzle sheet and surface
+    // the session scorecard.
+    if (sessionEndRef.current === null) {
+      sessionEndRef.current = Date.now();
+    }
+    setSessionHeadline(pickHeadline(SESSION_HEADLINES));
+    setShowCelebration(false);
+    setShowSessionSummary(true);
   };
+
+  const startNewSession = () => {
+    sessionStartRef.current = null;
+    sessionEndRef.current = null;
+    perPuzzleRef.current = [];
+    setShowSessionSummary(false);
+    setShowCelebration(false);
+    setGameLevels(pickSessionLevels(SESSION_SIZE));
+    setLevelIdx(0);
+  };
+
+  // Derived scorecard values — only meaningful when showSessionSummary is true,
+  // but cheap to compute every render.
+  const sessionDuration =
+    sessionStartRef.current && sessionEndRef.current
+      ? sessionEndRef.current - sessionStartRef.current
+      : 0;
+  const totalGuesses = perPuzzleRef.current.reduce(
+    (sum, p) => sum + p.attempts,
+    0
+  );
+  const totalHints = perPuzzleRef.current.reduce(
+    (sum, p) => sum + p.hints,
+    0
+  );
+  const perPuzzleStars = perPuzzleRef.current.map((p) =>
+    computeStars(p.attempts, p.hints)
+  );
+  const totalStars = perPuzzleStars.reduce((sum, s) => sum + s, 0);
+  const possibleStars = perPuzzleStars.length * 3;
+  // Overall stars mirror the per-puzzle scale: a perfect run earns 3 stars,
+  // an average of >= 2 earns 2 stars, anything below averages out to 1.
+  const overallStars: 1 | 2 | 3 =
+    perPuzzleStars.length === 0
+      ? 1
+      : totalStars === possibleStars
+      ? 3
+      : totalStars >= possibleStars * (2 / 3)
+      ? 2
+      : 1;
 
   const ScreenEdgePill = ({
     edge,
@@ -859,37 +1026,183 @@ export default function FlipWords() {
         </div>
       </div>
 
-      {/* Win bottom sheet */}
+      {/* Win card — floats above the tile rail, no colored chin */}
       <AnimatePresence>
         {showCelebration && (
           <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", damping: 26, stiffness: 220 }}
-            className="fixed bottom-0 left-0 w-full z-40 flex flex-col items-center justify-center bg-tile-face border-t-4 border-accent rounded-t-[2rem] p-8 pb-12 shadow-[0_-20px_50px_rgba(60,40,10,0.15)]"
+            initial={{ y: 28, opacity: 0, scale: 0.96 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: 20, opacity: 0, scale: 0.96 }}
+            transition={{ type: "spring", damping: 26, stiffness: 280 }}
+            className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md z-40 flex flex-col items-center bg-tile-face rounded-3xl p-6 md:p-7 shadow-tile-lift"
           >
-            <div className="absolute inset-0 rounded-t-[2rem] pointer-events-none opacity-50"
-                 style={{ background: "var(--paper-tex)" }} />
-            <div className="relative w-12 h-12 rounded-full bg-accent-soft text-accent flex items-center justify-center mb-3 shadow-tile">
-              <span className="material-icons text-[28px]">check</span>
+            <div className="w-11 h-11 rounded-full bg-accent-soft text-accent flex items-center justify-center mb-3">
+              <span className="material-icons text-[24px]">check</span>
             </div>
-            <p className="font-ui text-xs text-ink-soft uppercase tracking-[0.2em] mb-2">
+            <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.18em] mb-1.5">
               Solved · {attempts} {attempts === 1 ? "check" : "checks"}
+              {hintsThisPuzzle > 0 && (
+                <>
+                  {" · "}
+                  {hintsThisPuzzle} {hintsThisPuzzle === 1 ? "hint" : "hints"}
+                </>
+              )}
             </p>
-            <h2 className="relative font-wide text-3xl md:text-4xl text-ink mb-1 text-center">
-              Click. Click. Click.
+            <h2 className="font-wide text-2xl md:text-3xl text-ink mb-1 text-center leading-tight">
+              {winHeadline}
             </h2>
-            <p className="relative font-clue text-sm text-ink-muted mb-6 text-center max-w-md px-4">
-              {expectedEdges.top.toLowerCase()} · {expectedEdges.bottom.toLowerCase()} · {expectedEdges.left.toLowerCase()} · {expectedEdges.right.toLowerCase()}
+            <p className="font-clue text-[13px] text-ink-muted mb-5 text-center px-2">
+              {expectedEdges.top.toLowerCase()} ·{" "}
+              {expectedEdges.bottom.toLowerCase()} ·{" "}
+              {expectedEdges.left.toLowerCase()} ·{" "}
+              {expectedEdges.right.toLowerCase()}
             </p>
             <button
               onClick={nextLevel}
-              className="relative font-ui flex items-center gap-2 bg-ink hover:bg-ink/85 text-surface px-8 py-3 md:px-10 md:py-4 rounded-full text-base md:text-lg shadow-tile transition-all active:scale-95"
+              className="font-ui flex items-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-3 rounded-full text-base shadow-tile transition-all active:scale-95"
             >
-              {levelIdx < gameLevels.length - 1 ? "Next puzzle" : "New session"}
-              <span className="material-icons text-[20px]">arrow_forward</span>
+              {isLastPuzzle ? "See scorecard" : "Next puzzle"}
+              <span className="material-icons text-[20px]">
+                {isLastPuzzle ? "emoji_events" : "arrow_forward"}
+              </span>
             </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* End-of-session scorecard */}
+      <AnimatePresence>
+        {showSessionSummary && (
+          <motion.div
+            key="scorecard-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(50,30,5,0.45) 0%, rgba(20,15,5,0.7) 100%)",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <motion.div
+              key="scorecard-card"
+              initial={{ y: 20, opacity: 0, scale: 0.94 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: 10, opacity: 0, scale: 0.96 }}
+              transition={{ type: "spring", damping: 26, stiffness: 260 }}
+              className="bg-tile-face rounded-3xl w-full max-w-md p-6 md:p-8 shadow-tile-lift flex flex-col items-center"
+            >
+              <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.22em] mb-3">
+                Session complete
+              </p>
+
+              {/* Big stars */}
+              <div className="flex items-center gap-2 mb-4">
+                {[1, 2, 3].map((n) => {
+                  const filled = n <= overallStars;
+                  return (
+                    <motion.span
+                      key={n}
+                      initial={{ scale: 0, rotate: -30 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{
+                        delay: 0.2 + n * 0.15,
+                        type: "spring",
+                        damping: 14,
+                        stiffness: 220,
+                      }}
+                      className="material-icons text-[44px]"
+                      style={{ color: filled ? "var(--color-accent)" : "var(--color-tile-edge)" }}
+                    >
+                      {filled ? "star" : "star_outline"}
+                    </motion.span>
+                  );
+                })}
+              </div>
+
+              <h2 className="font-wide text-2xl md:text-3xl text-ink text-center leading-tight mb-1">
+                {sessionHeadline}
+              </h2>
+              <p className="font-clue text-sm text-ink-muted text-center mb-5">
+                {totalStars} of {possibleStars} stars across {perPuzzleStars.length}{" "}
+                puzzles
+              </p>
+
+              {/* Headline stats */}
+              <div className="w-full grid grid-cols-3 gap-2 mb-5">
+                {[
+                  { label: "Time", value: formatDuration(sessionDuration) },
+                  { label: "Guesses", value: totalGuesses.toString() },
+                  { label: "Hints", value: totalHints.toString() },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-2xl bg-surface-deep/40 px-2 py-3 text-center shadow-slot-inset"
+                  >
+                    <p className="font-ui text-[10px] text-ink-soft uppercase tracking-[0.16em] mb-1">
+                      {stat.label}
+                    </p>
+                    <p className="font-expand text-xl text-ink leading-none">
+                      {stat.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Per-puzzle breakdown */}
+              <div className="w-full mb-6 max-h-44 overflow-y-auto rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
+                {perPuzzleRef.current.map((stat, i) => {
+                  const stars = perPuzzleStars[i];
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center justify-between px-3.5 py-2"
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-ui text-xs text-ink-soft uppercase tracking-wider">
+                          {(i + 1).toString().padStart(2, "0")}
+                        </span>
+                        <span className="font-clue text-sm text-ink-muted">
+                          {stat.attempts} {stat.attempts === 1 ? "guess" : "guesses"}
+                          {stat.hints > 0 && (
+                            <>, {stat.hints} hint{stat.hints === 1 ? "" : "s"}</>
+                          )}
+                          <span className="text-ink-soft/60">
+                            {" "}
+                            · {formatDuration(stat.durationMs)}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-0.5">
+                        {[1, 2, 3].map((n) => (
+                          <span
+                            key={n}
+                            className="material-icons text-[16px]"
+                            style={{
+                              color:
+                                n <= stars
+                                  ? "var(--color-accent)"
+                                  : "var(--color-tile-edge)",
+                            }}
+                          >
+                            {n <= stars ? "star" : "star_outline"}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={startNewSession}
+                className="w-full font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface py-3.5 rounded-full text-base shadow-tile transition-all active:scale-95"
+              >
+                Play another session
+                <span className="material-icons text-[20px]">refresh</span>
+              </button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
