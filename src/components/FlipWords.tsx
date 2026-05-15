@@ -726,7 +726,7 @@ export default function FlipWords() {
 
           <div
             ref={boardFrameRef}
-            className="grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] gap-2 md:gap-4 place-items-center"
+            className="grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] gap-x-2 md:gap-x-4 gap-y-5 md:gap-y-10 place-items-center"
           >
             {/* Top edge */}
             <div className="col-start-2 row-start-1">
