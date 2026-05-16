@@ -1134,12 +1134,15 @@ export default function FlipWords() {
           The bottom padding includes the iOS home-indicator safe area so
           the row never gets covered by the system handle. */}
       <div
-        className="flex-shrink-0 bg-chin text-surface relative z-0"
+        className="flex-shrink-0 bg-chin text-surface relative"
         style={{
           paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))",
         }}
       >
-        <div className="w-full max-w-3xl mx-auto px-5 md:px-7 pt-3 md:pt-4 pb-1 flex items-center justify-between gap-4">
+        {/* Inner row lifted above the play-surface shadow (z-20 > z-10) so
+            the timer + counter render at full opacity instead of being
+            dimmed by the cushion that's falling onto the chin behind. */}
+        <div className="relative z-20 w-full max-w-3xl mx-auto px-5 md:px-7 pt-3 md:pt-4 pb-1 flex items-center justify-between gap-4">
           {/* Left — session stopwatch */}
           <div className="flex items-center gap-2">
             <span
