@@ -987,9 +987,7 @@ export default function FlipWords() {
           </p>
         </div>
         <div className="w-full relative flex flex-col items-center justify-center">
-          {/* overflow-x-hidden so a long tile bank can't push the document
-              wider than the viewport — drag still works inside trayRef. */}
-          <div ref={trayRef} className="w-full flex items-center justify-center overflow-x-hidden overflow-y-visible z-10 px-4">
+          <div ref={trayRef} className="w-full flex items-center justify-center overflow-visible z-10 px-4">
             <motion.div
               drag="x"
               dragConstraints={trayRef}
