@@ -7,7 +7,7 @@ export const Route = createFileRoute('/')({
 
 function Home() {
   return (
-    <div className="min-h-[100dvh] bg-paper relative">
+    <div className="h-[100dvh] w-full overflow-hidden bg-paper relative">
       <FlipWords />
     </div>
   )
