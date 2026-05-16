@@ -14,6 +14,7 @@ level's requiresRotation, and the slot state matches the level's solution.
 """
 
 import json
+import re
 import sys
 from itertools import product
 from pathlib import Path
@@ -22,6 +23,9 @@ TOOLS_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = TOOLS_DIR.parent
 COMPOUND_FILE = TOOLS_DIR / "compound_words.txt"
 LEVELS_FILE = PROJECT_DIR / "levels_generated.json"
+
+# Clue pill ceiling — see build_levels.py for the rationale.
+CLUE_CHAR_CAP = 32
 
 
 def load_compounds() -> set[str]:
@@ -89,6 +93,57 @@ def expected_edges(level: dict) -> tuple[str, str, str, str]:
     return a + b, c + d, a + c, b + d
 
 
+def verify_clue_hygiene(level: dict, edges: tuple[str, str, str, str]) -> tuple[bool, str]:
+    """Check the cosmetic/quality rules on the four clues:
+
+      - <= CLUE_CHAR_CAP characters so the screen pills don't overflow.
+      - Clue text must not contain any of the puzzle's own 4 compounds.
+      - Clue text must not contain BOTH halves of its own answer as words.
+    """
+    top, bot, left, right = edges
+    compound_by_side = {"topRow": top, "bottomRow": bot, "leftCol": left, "rightCol": right}
+    # Recover the 4 storage half-words from the visible edges so the half-leakage
+    # check can run on the built level without re-reading matrices.json. For a
+    # non-rotated visual [a,b,c,d] = [TL,TR,BL,BR], top=a+b -> a, b; bottom=c+d -> c, d.
+    # For rotated visual the same a,b,c,d definitions still hold because we already
+    # produced the visual matrix in expected_edges().
+    s = level["solution"]
+    if not level["requiresRotation"]:
+        a, b = s["slot0Top"], s["slot1Top"]
+        c, d = s["slot0Bottom"], s["slot1Bottom"]
+    else:
+        a = s["slot0Bottom"]
+        b = s["slot0Top"]
+        c = s["slot1Bottom"]
+        d = s["slot1Top"]
+    halves_by_side = {
+        "topRow": (a, b),
+        "bottomRow": (c, d),
+        "leftCol": (a, c),
+        "rightCol": (b, d),
+    }
+    for side, clue in level["hints"].items():
+        if len(clue) > CLUE_CHAR_CAP:
+            return False, (
+                f"level {level['id']} {side}: length {len(clue)} > {CLUE_CHAR_CAP}: {clue!r}"
+            )
+        low = clue.lower()
+        for other_side, word in compound_by_side.items():
+            if word.lower() in low:
+                tag = "OWN" if other_side == side else f"OTHER {other_side}"
+                return False, (
+                    f"level {level['id']} {side}={compound_by_side[side]} contains {tag}={word}: {clue!r}"
+                )
+        h1, h2 = (h.lower() for h in halves_by_side[side])
+        words = set(re.findall(r"[a-zA-Z]+", low))
+        if h1 in words and h2 in words:
+            return False, (
+                f"level {level['id']} {side}={compound_by_side[side]} contains BOTH halves "
+                f"{h1.upper()}+{h2.upper()}: {clue!r}"
+            )
+    return True, ""
+
+
 def verify_level(level: dict, compounds: set[str]) -> tuple[bool, str]:
     tiles = level["tiles"]
     exp_rot = bool(level["requiresRotation"])
@@ -102,6 +157,10 @@ def verify_level(level: dict, compounds: set[str]) -> tuple[bool, str]:
             return False, (
                 f"level {level['id']}: expected {label} edge {w!r} is NOT in compound list"
             )
+
+    ok, err = verify_clue_hygiene(level, exp_edges)
+    if not ok:
+        return False, err
 
     valid_configs: list[str] = []
     matching = 0
