@@ -185,12 +185,17 @@ code, pre {
 
 /* The chin: deep accent strip beneath the play surface. Sits flush to the
    viewport bottom and pads for the iOS home indicator so content never hides
-   behind it. The play-surface drop shadow lands on top of this color, which
-   is why we keep the chin a solid fill — no gradients, no noise. */
+   behind it.
+   The TOP of the gradient must exactly match the <meta name="theme-color">
+   value (#1f9c93) so the browser chrome and the visible page teal read as
+   one continuous strip. Chrome uses theme-color as the literal URL-bar
+   color (not a hint), so any drift between this and the meta value shows
+   up as a seam where the page meets the chrome. The bottom of the gradient
+   is a subtly darker version for a touch of depth on the chin itself. */
 .bg-chin {
-  background: var(--color-accent);
+  background: #1f9c93;
   background-image:
-    linear-gradient(180deg, oklch(63% 0.14 180) 0%, var(--color-accent) 55%, oklch(56% 0.135 180) 100%);
+    linear-gradient(180deg, #1f9c93 0%, #1a8579 100%);
 }
 
 /* Drop shadow used where the cream play surface lifts off the chin.
