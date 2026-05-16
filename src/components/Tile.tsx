@@ -100,11 +100,14 @@ export default function Tile({
     }
   }, [tile.isFlipped]);
 
+  // Bank tile renders at exactly the same dimensions as a filled slot
+  // (clamp(5rem,14vh,8rem) × clamp(10rem,28vh,16rem)) so the text doesn't
+  // visually resize when a tile moves bank ↔ slot.
   const dimensions = inSlot
     ? "w-full h-full"
     : size === "small"
     ? "w-16 h-32 md:w-20 md:h-40"
-    : "w-20 h-40 md:w-24 md:h-48";
+    : "w-[clamp(5rem,14vh,8rem)] h-[clamp(10rem,28vh,16rem)]";
 
   return (
     <motion.div

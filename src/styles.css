@@ -75,8 +75,8 @@ code, pre {
   font-variation-settings: "wdth" 115, "wght" 700;
 }
 .font-normal-tile {
-  font-variation-settings: "wdth" 100, "wght" 750;
-  letter-spacing: 0.01em;
+  font-variation-settings: "wdth" 75, "wght" 750;
+  letter-spacing: 0.005em;
 }
 .font-clue {
   font-variation-settings: "wdth" 100, "wght" 500;
