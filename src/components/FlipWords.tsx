@@ -876,7 +876,7 @@ export default function FlipWords() {
           <div className="flex items-center">
             <button
               onClick={() => setShowTutorial(true)}
-              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
               title="Back"
               aria-label="Back"
             >
@@ -911,7 +911,7 @@ export default function FlipWords() {
                   exit={{ opacity: 0, scale: 0.85, x: 8 }}
                   transition={{ type: "spring", stiffness: 420, damping: 26 }}
                   onClick={() => setShowTutorial(true)}
-                  className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+                  className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
                   title="How to play"
                   aria-label="How to play"
                 >

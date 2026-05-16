@@ -209,7 +209,7 @@ function TileFace({
   return (
     <div
       className={cn(
-        "absolute inset-0 flex flex-col rounded-2xl overflow-hidden bg-tile-face border",
+        "absolute inset-0 flex flex-col rounded-2xl overflow-hidden bg-white border",
         inSlot ? "border-accent/40" : "border-tile-edge"
       )}
       style={{ backfaceVisibility: "hidden" }}
