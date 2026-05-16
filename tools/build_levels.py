@@ -233,76 +233,20 @@ def _build_atomic_vocab(matrices: list[dict], decoys_pool: list[dict]) -> set[st
     return vocab
 
 
-def _partner_map(
+def _filler_pool(
     atomic: set[str], soln_words: set[str], compounds: set[str]
-) -> dict[str, set[str]]:
-    """For each non-solution atomic word W, the set of solution words S such that S+W or W+S
-    is a valid compound. W is then a 'partner' of S — placing W next to S forms a real edge.
+) -> list[str]:
+    """Words from the atomic vocab that are 'unused' for this puzzle:
+    not a solution word, and not forming a compound with any solution word.
+    These are safe to pair with a solution word on a decoy tile — the player sees
+    the solution word duplicated but the other half is a dead end.
     """
-    partners: dict[str, set[str]] = {}
-    for w in atomic:
-        if w in soln_words:
-            continue
-        matched: set[str] = set()
-        for s in soln_words:
-            if (s + w) in compounds or (w + s) in compounds:
-                matched.add(s)
-        if matched:
-            partners[w] = matched
-    return partners
-
-
-def _build_candidate_tiles(
-    atomic: set[str],
-    soln_words: set[str],
-    compounds: set[str],
-) -> tuple[list[dict], list[dict]]:
-    """Return (singles, doubles).
-
-    A 'single' tile has exactly one partner word and one filler word; the tile itself
-    must be a valid compound (so it doesn't look like garbage on the rail).
-
-    A 'double' tile has two partner words that pair with DIFFERENT solution words; the
-    tile itself is still a valid compound. These are the most confounding decoys —
-    both halves look usable, but the vertical pairing doesn't fit the puzzle.
-    """
-    partners = _partner_map(atomic, soln_words, compounds)
-    partner_words = set(partners.keys())
-    non_partners = [w for w in atomic if w not in soln_words and w not in partner_words]
-
-    singles: list[dict] = []
-    seen_single: set[tuple[str, str]] = set()
-    for w in partner_words:
-        for f in non_partners:
-            for top, bottom in ((w, f), (f, w)):
-                if (top, bottom) in seen_single:
-                    continue
-                if (top + bottom) in compounds:
-                    singles.append(
-                        {"top": top, "bottom": bottom, "partner": w, "overlap": 1}
-                    )
-                    seen_single.add((top, bottom))
-                    break  # only one orientation per (w, f)
-
-    doubles: list[dict] = []
-    seen_double: set[tuple[str, str]] = set()
-    plist = sorted(partner_words)
-    for i, w1 in enumerate(plist):
-        for w2 in plist[i + 1 :]:
-            # Want the two partners to target DIFFERENT solution words so the tile
-            # genuinely straddles two compound positions — otherwise both halves
-            # tempt toward the same edge and it reads as a near-duplicate.
-            if partners[w1].isdisjoint(partners[w2]):
-                for top, bottom in ((w1, w2), (w2, w1)):
-                    if (top, bottom) in seen_double:
-                        continue
-                    if (top + bottom) in compounds:
-                        doubles.append(
-                            {"top": top, "bottom": bottom, "partners": [w1, w2], "overlap": 2}
-                        )
-                        seen_double.add((top, bottom))
-                        break
-    return singles, doubles
+    return [
+        w
+        for w in atomic
+        if w not in soln_words
+        and not any((s + w) in compounds or (w + s) in compounds for s in soln_words)
+    ]
 
 
 def pick_decoys(
@@ -314,95 +258,124 @@ def pick_decoys(
     compounds: set[str],
     expected: tuple[str, str, str, str],
 ) -> tuple[list[dict] | None, str]:
-    """Pick 3 decoys with maximum confounding overlap on the solution words.
+    """Pick 3 decoys that DUPLICATE solution words on extra tiles for confounding overlap.
 
-    Target layout:
-      1× double-overlap tile (both halves partner with solution words)
-      2× single-overlap tiles (one partner half + one filler half)
+    Target shape (using level 1 — AIR/PORT + MAN/HOLE — as the example):
+      2× single decoys: e.g. HOLE/HOG and AIR/FAIR — each tile contains one of the
+          four solution words and one filler word that is genuinely unused.
+      1× double decoy:  e.g. PORT/HOLE — two solution words paired in a way that
+          isn't either solution tile, so the player sees both words on one tile but
+          the vertical can't slot into the puzzle.
 
-    Falls back to: 3 singles → 2 singles + 1 neutral → 3 neutrals (from the
-    legacy decoy pool) if a richer configuration can't satisfy the uniqueness
-    safety checks. Returns the picked tiles plus a short label of the shape.
+    Falls back to 3 singles → legacy decoys if a safe double-overlap pairing
+    can't be found. Returns the picked tiles plus a short shape label.
     """
-    soln_words = {t1["top"], t1["bottom"], t2["top"], t2["bottom"]}
-    partners = _partner_map(atomic_vocab, soln_words, compounds)
-    singles, doubles = _build_candidate_tiles(atomic_vocab, soln_words, compounds)
+    soln_pair_t1 = (t1["top"], t1["bottom"])
+    soln_pair_t2 = (t2["top"], t2["bottom"])
+    soln_words = list(soln_pair_t1) + list(soln_pair_t2)
+    soln_set = set(soln_words)
+    soln_pair_set_t1 = set(soln_pair_t1)
+    soln_pair_set_t2 = set(soln_pair_t2)
 
-    def _bare(t: dict) -> dict:
-        return {"top": t["top"], "bottom": t["bottom"]}
+    fillers = _filler_pool(atomic_vocab, soln_set, compounds)
+    rng.shuffle(fillers)
+    # Cap fillers — anything past ~40 just slows the search without helping.
+    fillers = fillers[:40]
+
+    def _bare(top: str, bot: str) -> dict:
+        return {"top": top, "bottom": bot}
 
     def _safe_against_solution(tile: dict) -> bool:
-        return decoy_is_safe(_bare(tile), t1, t2, compounds, expected)
+        return decoy_is_safe(tile, t1, t2, compounds, expected)
 
-    safe_singles = [t for t in singles if _safe_against_solution(t)]
-    safe_doubles = [t for t in doubles if _safe_against_solution(t)]
+    # Build per-solution-word lists of safe single-decoy tiles. For each solution
+    # word S, try every filler F in both orientations (S/F and F/S) and keep
+    # those that don't create an alternate solution alongside t1/t2.
+    singles_by_word: dict[str, list[dict]] = {s: [] for s in soln_set}
+    for s in soln_set:
+        for f in fillers:
+            for top, bot in ((s, f), (f, s)):
+                tile = _bare(top, bot)
+                if _safe_against_solution(tile):
+                    singles_by_word[s].append(tile)
+        rng.shuffle(singles_by_word[s])
 
-    rng.shuffle(safe_singles)
-    rng.shuffle(safe_doubles)
-    # Cap candidate counts so the triple search stays bounded — these limits are
-    # comfortably above what any matrix needs to find a valid configuration but
-    # keep the worst case in the hundreds of thousands of iterations, not millions.
-    safe_singles = safe_singles[:120]
-    safe_doubles = safe_doubles[:40]
+    # Build double-decoy candidates: pairs of solution words that aren't either
+    # solution tile (so they're a genuine mismatch).
+    double_candidates: list[dict] = []
+    for i, a in enumerate(soln_words):
+        for b in soln_words[i + 1 :]:
+            if a == b:
+                continue
+            pair = {a, b}
+            if pair == soln_pair_set_t1 or pair == soln_pair_set_t2:
+                continue
+            for top, bot in ((a, b), (b, a)):
+                tile = _bare(top, bot)
+                if _safe_against_solution(tile):
+                    double_candidates.append(tile)
+    rng.shuffle(double_candidates)
 
-    def _triple_is_safe(triple: list[dict]) -> bool:
-        bare = [_bare(t) for t in triple]
-        for a, b in ((0, 1), (0, 2), (1, 2)):
-            if not pair_is_safe(bare[a], bare[b], compounds, expected):
-                return False
+    def _triple_safe(tiles: list[dict]) -> bool:
+        for i in range(3):
+            for j in range(i + 1, 3):
+                if not pair_is_safe(tiles[i], tiles[j], compounds, expected):
+                    return False
         return True
 
-    # Score singles pairs by solution-word diversity: prefer pairs whose partner
-    # words target DIFFERENT solution words so the puzzle's confounding area
-    # spreads across the whole board.
-    def _diversity_score(a: dict, b: dict) -> int:
-        pa = partners.get(a["partner"], set())
-        pb = partners.get(b["partner"], set())
-        return 1 if pa.isdisjoint(pb) else 0
+    def _distinct(tiles: list[dict]) -> bool:
+        seen: set[tuple[str, str]] = set()
+        for t in tiles:
+            key = tuple(sorted([t["top"], t["bottom"]]))
+            if key in seen:
+                return False
+            seen.add(key)
+        return True
 
-    singles_pairs: list[tuple[int, dict, dict]] = []
-    for i in range(len(safe_singles)):
-        for j in range(i + 1, len(safe_singles)):
-            a, b = safe_singles[i], safe_singles[j]
-            if a["partner"] == b["partner"]:
-                continue
-            if a["top"] in (b["top"], b["bottom"]) or a["bottom"] in (b["top"], b["bottom"]):
-                continue
-            singles_pairs.append((_diversity_score(a, b), a, b))
-    singles_pairs.sort(key=lambda kv: -kv[0])
-    # Cap the pair list too — sorting put the most diverse ones first.
-    singles_pairs = singles_pairs[:400]
+    # Preferred shape: 2 singles (covering 2 different solution words) + 1 double.
+    soln_word_order = list(soln_set)
+    rng.shuffle(soln_word_order)
+    for i, wa in enumerate(soln_word_order):
+        for wb in soln_word_order[i + 1 :]:
+            for s1 in singles_by_word[wa]:
+                for s2 in singles_by_word[wb]:
+                    # Different fillers on the two singles so they look distinct.
+                    f1 = s1["top"] if s1["bottom"] == wa else s1["bottom"]
+                    f2 = s2["top"] if s2["bottom"] == wb else s2["bottom"]
+                    if f1 == f2:
+                        continue
+                    for d in double_candidates:
+                        triple = [s1, s2, d]
+                        if not _distinct(triple):
+                            continue
+                        if _triple_safe(triple):
+                            return triple, "2-single-1-double"
 
-    # Preferred shape: 2 singles + 1 double.
-    for _, a, b in singles_pairs:
-        for d in safe_doubles:
-            if d["top"] in (a["top"], a["bottom"], b["top"], b["bottom"]):
+    # Fallback A: 3 singles covering 3 different solution words.
+    avail: list[tuple[str, dict]] = [
+        (s, t) for s in soln_word_order for t in singles_by_word[s]
+    ]
+    rng.shuffle(avail)
+    for i in range(len(avail)):
+        wi, ti = avail[i]
+        for j in range(i + 1, len(avail)):
+            wj, tj = avail[j]
+            if wj == wi:
                 continue
-            if d["bottom"] in (a["top"], a["bottom"], b["top"], b["bottom"]):
-                continue
-            triple = [a, b, d]
-            if _triple_is_safe(triple):
-                return [_bare(t) for t in triple], "2-single-1-double"
-
-    # Fallback A: 3 singles.
-    for idx, (_, a, b) in enumerate(singles_pairs):
-        if idx >= 80:
-            break
-        for k in range(len(safe_singles)):
-            c = safe_singles[k]
-            if c["partner"] == a["partner"] or c["partner"] == b["partner"]:
-                continue
-            words = {a["top"], a["bottom"], b["top"], b["bottom"]}
-            if c["top"] in words or c["bottom"] in words:
-                continue
-            triple = [a, b, c]
-            if _triple_is_safe(triple):
-                return [_bare(t) for t in triple], "3-singles"
+            for k in range(j + 1, len(avail)):
+                wk, tk = avail[k]
+                if wk in (wi, wj):
+                    continue
+                triple = [ti, tj, tk]
+                if not _distinct(triple):
+                    continue
+                if _triple_safe(triple):
+                    return triple, "3-singles"
 
     # Fallback B: legacy pool — neutral decoys with no required overlap.
     legacy = [
         d for d in decoys_pool
-        if d["top"] not in soln_words and d["bottom"] not in soln_words
+        if d["top"] not in soln_set and d["bottom"] not in soln_set
     ]
     legacy = [d for d in legacy if decoy_is_safe(d, t1, t2, compounds, expected)]
     rng.shuffle(legacy)
