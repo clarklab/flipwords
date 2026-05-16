@@ -40,6 +40,13 @@
 html, body {
   background: var(--color-surface);
   color: var(--color-ink);
+  /* Prevent horizontal pan — the only thing that ever pushes the page wider
+     than the viewport is the tile rail row, and its container already clips
+     that. Belt-and-suspenders so mobile browsers never have anything to
+     scroll sideways. Vertical scroll is left alone so non-game routes (like
+     the admin library) work normally. */
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 body {
