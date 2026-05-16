@@ -939,7 +939,15 @@ export default function FlipWords() {
                   >
                     {tile ? (
                       <div className="absolute inset-0 z-10">
+                        {/* key on tile.id forces a true remount when a slot
+                            tile is replaced (e.g., dropping a bank tile onto
+                            an occupied slot). Without it, React reuses the
+                            same <Tile> instance and just swaps the layoutId
+                            prop, which conflicts with the displaced tile
+                            now mounting fresh in the bank under that id —
+                            Framer Motion ends up hiding one of them. */}
                         <Tile
+                          key={tile.id}
                           tile={tile}
                           inSlot={true}
                           draggable={true}
