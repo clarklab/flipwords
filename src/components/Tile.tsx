@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import {
   motion,
   PanInfo,
@@ -79,12 +79,14 @@ export default function Tile({
   const swingOriginY = 50 - 50 * cosBoard;
   const swingOrigin = `${swingOriginX}% ${swingOriginY}%`;
 
-  // First useEffect run for this component instance snaps to the current flip
-  // state — moving a tile from bank↔slot remounts it, and we don't want a
-  // visible flop as the inner face animates from CSS-default rotateX(0) to
-  // its actual orientation. Subsequent isFlipped changes animate normally.
+  // First run snaps to the current flip state — moving a tile bank↔slot
+  // remounts it under a new parent, and we don't want a visible flop as the
+  // inner face animates from CSS-default rotateX(0) to its actual orientation.
+  // useLayoutEffect runs synchronously after commit but before paint, so the
+  // snap lands in the same frame the new mount paints. Subsequent isFlipped
+  // changes animate normally.
   const isFirstApplyRef = useRef(true);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!innerRef.current) return;
     const target = tile.isFlipped ? 180 : 0;
     if (isFirstApplyRef.current) {
@@ -111,6 +113,7 @@ export default function Tile({
 
   return (
     <motion.div
+      layout
       layoutId={tile.id}
       whileHover={{ scale: 1.04, y: -2 }}
       whileTap={{ scale: 0.97 }}

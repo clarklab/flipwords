@@ -993,31 +993,26 @@ export default function FlipWords() {
               dragConstraints={trayRef}
               className="flex gap-3 md:gap-4 w-max cursor-grab active:cursor-grabbing pb-2"
             >
-              <AnimatePresence mode="popLayout" initial={false}>
-                {bank.map((tile) => (
-                  <motion.div
-                    key={tile.id}
-                    layout
-                    // No enter/exit fade — the Tile's own layoutId handles
-                    // visual continuity when it moves bank↔slot. A wrapper
-                    // exit here renders a ghost copy of the tile fading out
-                    // on top of the slot-mounted copy ("translucent for ~1s"
-                    // after drop). Snap-in / snap-out keeps the move clean.
-                    transition={{ type: "spring", stiffness: 400, damping: 28 }}
-                    className="flex-shrink-0"
-                  >
-                    <Tile
-                      tile={tile}
-                      inSlot={false}
-                      draggable={true}
-                      onDrag={handleTileDrag}
-                      onDragEnd={(e, info) => handleDragEnd(e, info, tile)}
-                      onClick={() => handleBankTileClick(tile)}
-                      onFlip={() => flipTileInBank(tile.id)}
-                    />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+              {/* No AnimatePresence wrapper — a wrapped motion.div with the
+                  same layoutId as the Tile inside creates a duplicate
+                  shared-layout element during drop, which Framer Motion
+                  renders as a ghost copy on top of the freshly-placed slot
+                  tile. The Tile already exposes layoutId={tile.id} + layout
+                  on its own outer motion.div, so dropping the wrapper is
+                  enough: bank↔slot transitions stay smooth, and remaining
+                  bank tiles shift via their own layout prop. */}
+              {bank.map((tile) => (
+                <Tile
+                  key={tile.id}
+                  tile={tile}
+                  inSlot={false}
+                  draggable={true}
+                  onDrag={handleTileDrag}
+                  onDragEnd={(e, info) => handleDragEnd(e, info, tile)}
+                  onClick={() => handleBankTileClick(tile)}
+                  onFlip={() => flipTileInBank(tile.id)}
+                />
+              ))}
             </motion.div>
           </div>
 
