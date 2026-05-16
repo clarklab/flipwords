@@ -874,28 +874,8 @@ export default function FlipWords() {
       <div className="flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-4 md:mt-6 flex items-center justify-center z-10">
         {/* Wrapper is content-sized (no w-full) so the clue pills hug the
             slots even on wide viewports. The parent flex centers the
-            whole play area horizontally; the rotate FAB sits at the bottom-
-            right of THIS wrapper, which means right next to the play area
-            instead of stranded at the viewport's right edge. */}
+            whole play area horizontally. */}
         <div className="relative">
-          {/* Rotate FAB — bottom-right of the clue/label area, solid accent */}
-          <button
-            onClick={() => {
-              commitState(
-                slotsRef.current,
-                bankRef.current,
-                boardRotationRef.current + 90
-              );
-              setHintMessage("");
-              playBoardRotate();
-            }}
-            className="absolute -bottom-2 right-0 md:-bottom-3 md:right-2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 shadow-tile-lift"
-            title="Rotate board"
-            aria-label="Rotate board"
-          >
-            <span className="material-icons text-[22px] md:text-[24px]">rotate_right</span>
-          </button>
-
           <div
             ref={boardFrameRef}
             className="grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] gap-x-2 md:gap-x-4 gap-y-5 md:gap-y-10 place-items-center"
@@ -910,12 +890,31 @@ export default function FlipWords() {
               <ScreenEdgePill edge="left" clue={level.hints.leftCol} />
             </div>
 
-            {/* Slots */}
-            <div
-              ref={slotAreaRef}
-              className="col-start-2 row-start-2 flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 rounded-2xl shadow-slot-inset gpu"
-              style={{ transformOrigin: "center center" }}
-            >
+            {/* Slots — wrapped in a relative cell so the rotate FAB can
+                float dead-center over the slot area without rotating with
+                it (slotAreaRef is what GSAP spins). */}
+            <div className="col-start-2 row-start-2 relative">
+              <button
+                onClick={() => {
+                  commitState(
+                    slotsRef.current,
+                    bankRef.current,
+                    boardRotationRef.current + 90
+                  );
+                  setHintMessage("");
+                  playBoardRotate();
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 shadow-tile-lift"
+                title="Rotate board"
+                aria-label="Rotate board"
+              >
+                <span className="material-icons text-[18px] md:text-[20px]">rotate_right</span>
+              </button>
+              <div
+                ref={slotAreaRef}
+                className="flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 rounded-2xl shadow-slot-inset gpu"
+                style={{ transformOrigin: "center center" }}
+              >
               {[0, 1].map((idx) => {
                 const tile = slots[idx as 0 | 1];
                 const isActive = activeSlot === idx;
@@ -976,6 +975,7 @@ export default function FlipWords() {
                   </div>
                 );
               })}
+              </div>
             </div>
 
             {/* Right edge */}
@@ -997,7 +997,7 @@ export default function FlipWords() {
           and its bottom hangs past the viewport bottom by --tile-bleed; the
           root's overflow-hidden clips both. No horizontal scroll: with 5
           tiles fitting by design, scroll would just steal drag gestures. */}
-      <div className="w-full flex-shrink-0 relative z-10 pt-3 md:pt-5">
+      <div className="w-full flex-shrink-0 relative z-10 pt-3 md:pt-5 pb-10 md:pb-8">
         <div className="text-center mb-2">
           <p className="font-ui text-[10px] md:text-xs text-ink-soft uppercase tracking-[0.2em]">
             Tile rail
