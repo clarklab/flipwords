@@ -112,8 +112,8 @@ const computeStars = (attempts: number, durationMs: number): 1 | 2 | 3 => {
   const underFiveMin = durationMs < FIVE_MINUTES_MS;
   if (underFiveMin && wrongGuesses === 0) return 3;
   if (
-    (underFiveMin && wrongGuesses === 1) ||
-    (!underFiveMin && wrongGuesses <= 2)
+    (underFiveMin && wrongGuesses <= 2) ||
+    (!underFiveMin && wrongGuesses <= 1)
   )
     return 2;
   return 1;
