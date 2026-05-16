@@ -16,6 +16,18 @@ import {
 } from "@/game/transforms";
 import { getNextHintAction, getLevelHintPattern } from "@/game/hint";
 import { allLevels, pickSessionLevels } from "@/game/levels";
+import {
+  playBoardRotate,
+  playCorrect,
+  playHint,
+  playIncorrect,
+  playPuzzleComplete,
+  playSessionComplete,
+  playStarPop,
+  playTileDrop,
+  playTileFlip,
+  playTilePickup,
+} from "@/lib/sound";
 
 // Re-export for the admin route
 export { allLevels, getLevelHintPattern };
@@ -138,58 +150,6 @@ const fireConfetti = () => {
     });
   }, 250);
 };
-
-const playPopSound = (() => {
-  let muted = false;
-  return () => {
-    if (muted) return;
-    try {
-      const Ctx: typeof AudioContext =
-        (window.AudioContext || (window as any).webkitAudioContext) as any;
-      if (!Ctx) return;
-      const ctx = new Ctx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = "triangle";
-      osc.frequency.setValueAtTime(620, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.08);
-      gain.gain.setValueAtTime(0.22, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.09);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.1);
-    } catch (e) {
-      muted = true;
-    }
-  };
-})();
-
-const playFailSound = (() => {
-  let muted = false;
-  return () => {
-    if (muted) return;
-    try {
-      const Ctx: typeof AudioContext =
-        (window.AudioContext || (window as any).webkitAudioContext) as any;
-      if (!Ctx) return;
-      const ctx = new Ctx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = "sawtooth";
-      osc.frequency.setValueAtTime(240, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.32);
-      gain.gain.setValueAtTime(0.18, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.34);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.36);
-    } catch (e) {
-      muted = true;
-    }
-  };
-})();
 
 export default function FlipWords() {
   const [showTutorial, setShowTutorial] = useState(false);
@@ -338,6 +298,37 @@ export default function FlipWords() {
     });
   }, [boardRotation]);
 
+  // Session scorecard arrives — fire the grand fanfare and pop a bell for each
+  // star, timed against the star animation delays (0.2 + n * 0.15 seconds).
+  useEffect(() => {
+    if (!showSessionSummary) return;
+    playSessionComplete();
+    const stats = perPuzzleRef.current.map((p) =>
+      computeStars(p.attempts, p.hints)
+    );
+    const total = stats.reduce((sum, s) => sum + s, 0);
+    const possible = stats.length * 3;
+    const earned: 1 | 2 | 3 =
+      stats.length === 0
+        ? 1
+        : total === possible
+        ? 3
+        : total >= possible * (2 / 3)
+        ? 2
+        : 1;
+    const timers: number[] = [];
+    for (let n = 1; n <= earned; n++) {
+      const t = window.setTimeout(
+        () => playStarPop(n - 1),
+        (0.2 + n * 0.15) * 1000
+      );
+      timers.push(t);
+    }
+    return () => {
+      timers.forEach((t) => window.clearTimeout(t));
+    };
+  }, [showSessionSummary]);
+
   const runWinSequence = useCallback(() => {
     setIsSolved(true);
     setActiveSlot(null);
@@ -371,6 +362,7 @@ export default function FlipWords() {
     });
     setTimeout(() => {
       fireConfetti();
+      playPuzzleComplete();
       setShowCelebration(true);
     }, 950);
   }, []);
@@ -394,14 +386,14 @@ export default function FlipWords() {
       );
       if (solved) {
         setCheckState("correct");
-        playPopSound();
+        playCorrect();
         window.setTimeout(() => {
           setCheckState("idle");
           runWinSequence();
         }, 750);
       } else {
         setCheckState("incorrect");
-        playFailSound();
+        playIncorrect();
         window.setTimeout(() => setCheckState("idle"), 1400);
       }
     }, 750);
@@ -473,7 +465,7 @@ export default function FlipWords() {
         commitState(nextSlots, nextBank, boardRotationRef.current);
         setActiveSlot(null);
         setHintMessage("");
-        playPopSound();
+        playTileDrop();
         return;
       }
     }
@@ -509,7 +501,7 @@ export default function FlipWords() {
         commitState(nextSlots, currentBank, boardRotationRef.current);
         setActiveSlot(null);
         setHintMessage("");
-        playPopSound();
+        playTileDrop();
         return;
       }
     }
@@ -529,7 +521,7 @@ export default function FlipWords() {
       commitState(nextSlots, [...currentBank, tile], boardRotationRef.current);
       setActiveSlot(null);
       setHintMessage("");
-      playPopSound();
+      playTilePickup();
     }
   };
 
@@ -545,6 +537,7 @@ export default function FlipWords() {
     // Count this as a hint used for the session scorecard.
     hintsThisPuzzleRef.current += 1;
     setHintsThisPuzzle(hintsThisPuzzleRef.current);
+    playHint();
 
     // Auto-apply the suggested move
     if (!hint.action) return;
@@ -572,7 +565,7 @@ export default function FlipWords() {
             boardRotationRef.current
           );
           setActiveSlot(null);
-          playPopSound();
+          playTilePickup();
           return;
         }
       }
@@ -605,7 +598,7 @@ export default function FlipWords() {
         };
         commitState(nextSlots, nextBank, boardRotationRef.current);
         setActiveSlot(null);
-        playPopSound();
+        playTileDrop();
         return;
       }
     } else if (hint.action === "rotateTile") {
@@ -620,18 +613,18 @@ export default function FlipWords() {
           nextSlots[slotIdx] = { ...current, isFlipped: !current.isFlipped };
           commitState(nextSlots, currentBank, boardRotationRef.current);
           setActiveSlot(null);
-          playPopSound();
+          playTileFlip();
           return;
         }
       }
     } else if (hint.action === "rotateBoard") {
       commitState(currentSlots, currentBank, boardRotationRef.current + 90);
       setActiveSlot(null);
-      playPopSound();
+      playBoardRotate();
     } else if (hint.action === "rotateBoardBack") {
       commitState(currentSlots, currentBank, boardRotationRef.current - 90);
       setActiveSlot(null);
-      playPopSound();
+      playBoardRotate();
     }
   };
 
@@ -655,7 +648,7 @@ export default function FlipWords() {
       commitState(nextSlots, nextBank, boardRotationRef.current);
       setActiveSlot(null);
       setHintMessage("");
-      playPopSound();
+      playTileDrop();
     }
   };
 
@@ -676,7 +669,7 @@ export default function FlipWords() {
       boardRotationRef.current
     );
     setHintMessage("");
-    playPopSound();
+    playTilePickup();
     if (activeSlot === null) setActiveSlot(slotIdx);
   };
 
@@ -688,6 +681,7 @@ export default function FlipWords() {
     );
     commitState(currentSlots, nextBank, boardRotationRef.current);
     setHintMessage("");
+    playTileFlip();
   };
 
   const flipTileInSlot = (slotIdx: number) => {
@@ -700,7 +694,7 @@ export default function FlipWords() {
       nextSlots[slotIdx as 0 | 1] = { ...tile, isFlipped: !tile.isFlipped };
       commitState(nextSlots, currentBank, boardRotationRef.current);
       setHintMessage("");
-      playPopSound();
+      playTileFlip();
     }
   };
 
@@ -889,7 +883,7 @@ export default function FlipWords() {
                 boardRotationRef.current + 90
               );
               setHintMessage("");
-              playPopSound();
+              playBoardRotate();
             }}
             className="absolute -bottom-2 right-0 md:-bottom-3 md:right-2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 shadow-tile-lift"
             title="Rotate board"
