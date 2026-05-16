@@ -23,7 +23,8 @@ import {
   playIncorrect,
   playPuzzleComplete,
   playSessionComplete,
-  playStarPop,
+  playStarZing,
+  playStarMiss,
   playTileDrop,
   playTileFlip,
   playTilePickup,
@@ -104,9 +105,18 @@ const SESSION_HEADLINES = [
 const pickHeadline = (pool: string[]) =>
   pool[Math.floor(Math.random() * pool.length)];
 
-const computeStars = (attempts: number, hints: number): 1 | 2 | 3 => {
-  if (attempts <= 1 && hints === 0) return 3;
-  if (attempts <= 2 && hints <= 1) return 2;
+const FIVE_MINUTES_MS = 5 * 60 * 1000;
+const computeStars = (attempts: number, durationMs: number): 1 | 2 | 3 => {
+  // `attempts` counts every check, including the winning one, so wrong
+  // guesses is attempts - 1.
+  const wrongGuesses = Math.max(0, attempts - 1);
+  const underFiveMin = durationMs < FIVE_MINUTES_MS;
+  if (underFiveMin && wrongGuesses === 0) return 3;
+  if (
+    (underFiveMin && wrongGuesses <= 2) ||
+    (!underFiveMin && wrongGuesses <= 1)
+  )
+    return 2;
   return 1;
 };
 
@@ -359,7 +369,7 @@ export default function FlipWords() {
     if (!showSessionSummary) return;
     playSessionComplete();
     const stats = perPuzzleRef.current.map((p) =>
-      computeStars(p.attempts, p.hints)
+      computeStars(p.attempts, p.durationMs)
     );
     const total = stats.reduce((sum, s) => sum + s, 0);
     const possible = stats.length * 3;
@@ -371,10 +381,14 @@ export default function FlipWords() {
         : total >= possible * (2 / 3)
         ? 2
         : 1;
+    // Fire a sound for each of the three star slots so the rating reads
+    // audibly as well as visually: zing zing zing for 3 stars, zing zing pop
+    // for 2, zing pop pop for 1.
     const timers: number[] = [];
-    for (let n = 1; n <= earned; n++) {
+    for (let n = 1; n <= 3; n++) {
+      const filled = n <= earned;
       const t = window.setTimeout(
-        () => playStarPop(n - 1),
+        () => (filled ? playStarZing(n - 1) : playStarMiss()),
         (0.2 + n * 0.15) * 1000
       );
       timers.push(t);
@@ -802,7 +816,7 @@ export default function FlipWords() {
     0
   );
   const perPuzzleStars = perPuzzleRef.current.map((p) =>
-    computeStars(p.attempts, p.hints)
+    computeStars(p.attempts, p.durationMs)
   );
   const totalStars = perPuzzleStars.reduce((sum, s) => sum + s, 0);
   const possibleStars = perPuzzleStars.length * 3;
@@ -1267,26 +1281,77 @@ export default function FlipWords() {
                 Session complete
               </p>
 
-              {/* Big stars */}
+              {/* Big stars — overshoot scale + rotation, with a radial burst
+                  behind each filled star. Both layers ride transform/opacity
+                  on the GPU. */}
               <div className="flex items-center gap-2 mb-4">
                 {[1, 2, 3].map((n) => {
                   const filled = n <= overallStars;
+                  const delay = 0.2 + n * 0.15;
                   return (
-                    <motion.span
+                    <div
                       key={n}
-                      initial={{ scale: 0, rotate: -30 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{
-                        delay: 0.2 + n * 0.15,
-                        type: "spring",
-                        damping: 14,
-                        stiffness: 220,
-                      }}
-                      className="material-icons text-[44px]"
-                      style={{ color: filled ? "var(--color-accent)" : "var(--color-tile-edge)" }}
+                      className="relative inline-flex items-center justify-center w-[56px] h-[56px]"
                     >
-                      {filled ? "star" : "star_outline"}
-                    </motion.span>
+                      {filled && (
+                        <motion.span
+                          aria-hidden
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{
+                            scale: [0, 2.1, 2.4],
+                            opacity: [0, 0.85, 0],
+                          }}
+                          transition={{
+                            delay,
+                            duration: 0.65,
+                            times: [0, 0.35, 1],
+                            ease: "easeOut",
+                          }}
+                          className="absolute inset-0 rounded-full pointer-events-none"
+                          style={{
+                            background:
+                              "radial-gradient(circle, rgba(247,196,84,0.85) 0%, rgba(247,196,84,0.35) 38%, rgba(247,196,84,0) 70%)",
+                            willChange: "transform, opacity",
+                          }}
+                        />
+                      )}
+                      <motion.span
+                        initial={{ scale: 0, rotate: -180, opacity: 0 }}
+                        animate={
+                          filled
+                            ? {
+                                scale: [0, 1.55, 0.85, 1.12, 1],
+                                rotate: [-180, 25, -10, 5, 0],
+                                opacity: [0, 1, 1, 1, 1],
+                              }
+                            : {
+                                scale: [0, 0.7, 1],
+                                rotate: [-90, 10, 0],
+                                opacity: [0, 1, 1],
+                              }
+                        }
+                        transition={{
+                          delay,
+                          duration: filled ? 0.75 : 0.5,
+                          times: filled
+                            ? [0, 0.45, 0.68, 0.86, 1]
+                            : [0, 0.6, 1],
+                          ease: "easeOut",
+                        }}
+                        className="material-icons relative text-[44px] leading-none"
+                        style={{
+                          color: filled
+                            ? "var(--color-accent)"
+                            : "var(--color-tile-edge)",
+                          filter: filled
+                            ? "drop-shadow(0 4px 14px rgba(31,156,147,0.55))"
+                            : "none",
+                          willChange: "transform, opacity",
+                        }}
+                      >
+                        {filled ? "star" : "star_outline"}
+                      </motion.span>
+                    </div>
                   );
                 })}
               </div>
@@ -1321,7 +1386,7 @@ export default function FlipWords() {
               </div>
 
               {/* Per-puzzle breakdown */}
-              <div className="w-full mb-6 max-h-44 overflow-y-auto rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
+              <div className="w-full mb-6 rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
                 {perPuzzleRef.current.map((stat, i) => {
                   const stars = perPuzzleStars[i];
                   return (
