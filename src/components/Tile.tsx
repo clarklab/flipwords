@@ -228,7 +228,7 @@ function TileFace({
         className="flex-1 flex items-center justify-center px-2 text-center font-normal-tile text-ink select-none"
         style={{ transform: `rotate(${counter}deg)` }}
       >
-        <span className="text-[clamp(0.85rem,3.5vw,1.15rem)] leading-none break-all">
+        <span className="text-[clamp(0.975rem,3.9vw,1.275rem)] leading-none break-all">
           {top}
         </span>
       </div>
@@ -241,7 +241,7 @@ function TileFace({
         className="flex-1 flex items-center justify-center px-2 text-center font-normal-tile text-ink select-none"
         style={{ transform: `rotate(${counter}deg)` }}
       >
-        <span className="text-[clamp(0.85rem,3.5vw,1.15rem)] leading-none break-all">
+        <span className="text-[clamp(0.975rem,3.9vw,1.275rem)] leading-none break-all">
           {bottom}
         </span>
       </div>

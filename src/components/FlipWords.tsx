@@ -176,6 +176,10 @@ export default function FlipWords() {
   const [sessionHeadline, setSessionHeadline] = useState<string>(
     SESSION_HEADLINES[0]
   );
+  // Wall-clock elapsed time for the active session, ticked every second.
+  // Pauses when the browser tab is hidden and resumes on visibility, so the
+  // displayed value matches "time spent actually looking at the puzzle."
+  const [elapsedMs, setElapsedMs] = useState(0);
 
   const slotRefs = useRef<(HTMLDivElement | null)[]>([null, null]);
   const slotsRef = useRef<Slots>([null, null]);
@@ -199,6 +203,12 @@ export default function FlipWords() {
     Array<{ attempts: number; hints: number; durationMs: number }>
   >([]);
   const puzzleStartRef = useRef<number | null>(null);
+  // Timer bookkeeping. visibleStartRef is the wall-clock at which the current
+  // "visible" segment began; elapsedAccumRef is the sum of all prior visible
+  // segments. While the tab is hidden, visibleStartRef is null and the
+  // accumulator holds the frozen total.
+  const elapsedAccumRef = useRef(0);
+  const visibleStartRef = useRef<number | null>(null);
 
   const level = gameLevels[levelIdx];
 
@@ -296,6 +306,52 @@ export default function FlipWords() {
       overwrite: "auto",
     });
   }, [boardRotation]);
+
+  // Session timer. Runs from the first puzzle until the session scorecard
+  // shows. Pauses on tab hide via the Page Visibility API and resumes when
+  // the user comes back. We tick state at 1Hz; refs hold the source of
+  // truth so the value stays exact even when ticks are throttled.
+  useEffect(() => {
+    if (gameLevels.length === 0) return;
+    if (showSessionSummary) return;
+    if (showTutorial) return;
+
+    if (!document.hidden) {
+      visibleStartRef.current = Date.now();
+    }
+
+    const tick = () => {
+      if (visibleStartRef.current !== null) {
+        setElapsedMs(
+          elapsedAccumRef.current + (Date.now() - visibleStartRef.current)
+        );
+      }
+    };
+    const interval = window.setInterval(tick, 1000);
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        if (visibleStartRef.current !== null) {
+          elapsedAccumRef.current += Date.now() - visibleStartRef.current;
+          visibleStartRef.current = null;
+        }
+      } else {
+        visibleStartRef.current = Date.now();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", handleVisibility);
+      // Bank whatever was visible so resuming picks up where we left off
+      // instead of replaying the gap.
+      if (visibleStartRef.current !== null) {
+        elapsedAccumRef.current += Date.now() - visibleStartRef.current;
+        visibleStartRef.current = null;
+      }
+    };
+  }, [gameLevels.length, showSessionSummary, showTutorial]);
 
   // Session scorecard arrives — fire the grand fanfare and pop a bell for each
   // star, timed against the star animation delays (0.2 + n * 0.15 seconds).
@@ -626,6 +682,10 @@ export default function FlipWords() {
       playBoardRotate();
     }
   };
+  // Hint button was removed from the header for the current layout, but the
+  // hint system (auto-apply, counter, score weighting) is intentionally kept
+  // in place so a UI affordance can be re-added later without rewiring.
+  void handleHint;
 
   const handleBankTileClick = (tile: TileType) => {
     if (isSolved) return;
@@ -718,6 +778,9 @@ export default function FlipWords() {
     sessionStartRef.current = null;
     sessionEndRef.current = null;
     perPuzzleRef.current = [];
+    elapsedAccumRef.current = 0;
+    visibleStartRef.current = null;
+    setElapsedMs(0);
     setShowSessionSummary(false);
     setShowCelebration(false);
     setGameLevels(pickSessionLevels(SESSION_SIZE));
@@ -781,41 +844,57 @@ export default function FlipWords() {
     );
   };
 
+  // Material Symbols clock_loader_* increments 20 → 40 → 60 → 80 → 90 across
+  // the 5 puzzles of a session, so the icon visually fills as the player
+  // progresses. The session is fixed at SESSION_SIZE, so the lookup is
+  // straightforward; fall back to the most-full symbol if the index ever
+  // overshoots (it shouldn't, but it keeps a bad state from rendering blank).
+  const puzzleProgressIcon = [
+    "clock_loader_20",
+    "clock_loader_40",
+    "clock_loader_60",
+    "clock_loader_80",
+    "clock_loader_90",
+  ][levelIdx] ?? "clock_loader_90";
+
   return (
-    <div className="h-[100dvh] w-full flex flex-col bg-paper overflow-hidden">
+    <div className="h-[100dvh] w-full flex flex-col bg-chin overflow-hidden">
       {showTutorial && <TutorialModal onComplete={handleTutorialComplete} />}
+
+      {/* Play surface — the cream paper card that holds the puzzle. Rounded
+          bottom corners + a heavy lift shadow let it sit on the green chin
+          like a thick playing card on felt. overflow-hidden so the tile
+          rail's vertical bleed gets neatly tucked behind the curved edge.
+          Everything that was previously at the root (header / hint banner
+          / board / tile rail) now lives inside this surface. */}
+      <div className="flex-1 min-h-0 flex flex-col bg-paper rounded-b-[28px] md:rounded-b-[36px] shadow-play-lift relative z-10 overflow-hidden">
 
       <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
         <div className="flex items-center justify-between">
-          {/* Left cluster — hint (primary tertiary) then help */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleHint}
-              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
-              title="Hint"
-              aria-label="Hint"
-            >
-              <span className="material-icons text-[20px]">lightbulb</span>
-            </button>
+          {/* Left — Back FAB. Stand-in for a future title-screen route; for
+              now it surfaces the tutorial so users have somewhere to land. */}
+          <div className="flex items-center">
             <button
               onClick={() => setShowTutorial(true)}
               className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
-              title="How to play"
-              aria-label="How to play"
+              title="Back"
+              aria-label="Back"
             >
-              <span className="material-icons text-[20px]">help_outline</span>
+              <span className="material-icons text-[22px]">chevron_left</span>
             </button>
           </div>
 
-          {/* Right cluster — Check button only appears once both slots are filled */}
-          <div className="flex items-center gap-2 min-h-11">
-            <AnimatePresence>
-              {!isSolved && slots[0] && slots[1] && checkState === "idle" && (
+          {/* Right — Help, swapped for Check once the player has laid tiles.
+              The swap doubles as a tutorial: by the time both slots are
+              filled, the help button has done its job. */}
+          <div className="flex items-center min-h-11">
+            <AnimatePresence mode="wait" initial={false}>
+              {!isSolved && slots[0] && slots[1] && checkState === "idle" ? (
                 <motion.button
                   key="check"
-                  initial={{ opacity: 0, scale: 0.8, x: 12 }}
+                  initial={{ opacity: 0, scale: 0.85, x: 8 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, x: 12 }}
+                  exit={{ opacity: 0, scale: 0.85, x: 8 }}
                   transition={{ type: "spring", stiffness: 420, damping: 26 }}
                   onClick={handleCheckAnswer}
                   className="font-ui flex items-center gap-1.5 text-sm bg-accent text-white h-11 px-4 md:px-5 rounded-full hover:bg-accent/90 transition-colors active:scale-95 shadow-tile"
@@ -824,29 +903,32 @@ export default function FlipWords() {
                   <span className="material-icons text-[18px]">gavel</span>
                   <span>Check</span>
                 </motion.button>
+              ) : (
+                <motion.button
+                  key="help"
+                  initial={{ opacity: 0, scale: 0.85, x: 8 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 0.85, x: 8 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 26 }}
+                  onClick={() => setShowTutorial(true)}
+                  className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-tile-face border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+                  title="How to play"
+                  aria-label="How to play"
+                >
+                  <span className="material-icons text-[20px]">help_outline</span>
+                </motion.button>
               )}
             </AnimatePresence>
           </div>
         </div>
 
-        {/* Centered wordmark + meta — pointer-events-none so it doesn't intercept FAB taps */}
-        <div className="absolute inset-x-0 top-4 md:top-6 h-11 flex flex-col items-center justify-center pointer-events-none">
+        {/* Centered wordmark — no puzzle counter; that info lives in the chin
+            now. pointer-events-none so taps pass through to the FABs. */}
+        <div className="absolute inset-x-0 top-4 md:top-6 h-11 flex items-center justify-center pointer-events-none">
           <AnimatedWordmark
             ref={wordmarkRef}
             className="text-xl md:text-2xl text-ink"
           />
-          <p className="font-ui text-[10px] md:text-[11px] text-ink-soft uppercase tracking-[0.16em] leading-none mt-1 flex items-center gap-1.5">
-            <span>
-              Puzzle {levelIdx + 1}
-              <span className="text-ink-soft/60">/{gameLevels.length}</span>
-            </span>
-            {attempts > 0 && (
-              <>
-                <span className="w-1 h-1 rounded-full bg-accent" />
-                <span>{attempts}</span>
-              </>
-            )}
-          </p>
         </div>
       </header>
 
@@ -1041,7 +1123,64 @@ export default function FlipWords() {
         </div>
       </div>
 
-      {/* Win card — full-width bottom sheet on mobile, floating card on desktop. */}
+      </div>
+      {/* /play-surface */}
+
+      {/* Chin — deep accent strip beneath the play surface. Two-up row of
+          status pills: stopwatch on the left, puzzle progress on the right.
+          The bottom padding includes the iOS home-indicator safe area so
+          the row never gets covered by the system handle. */}
+      <div
+        className="flex-shrink-0 bg-chin text-surface relative z-0"
+        style={{
+          paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))",
+        }}
+      >
+        <div className="w-full max-w-3xl mx-auto px-5 md:px-7 pt-3 md:pt-4 pb-1 flex items-center justify-between gap-4">
+          {/* Left — session stopwatch */}
+          <div className="flex items-center gap-2">
+            <span
+              className="material-icons text-surface/85"
+              style={{
+                fontSize: 26,
+                fontVariationSettings:
+                  '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24',
+              }}
+              aria-hidden="true"
+            >
+              avg_pace
+            </span>
+            <span className="font-expand text-[22px] md:text-2xl leading-none tabular-nums tracking-[-0.01em] text-surface">
+              {formatDuration(elapsedMs)}
+            </span>
+          </div>
+
+          {/* Right — puzzle of total */}
+          <div className="flex items-center gap-2">
+            <span
+              className="material-icons text-surface/85"
+              style={{
+                fontSize: 26,
+                fontVariationSettings:
+                  '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24',
+              }}
+              aria-hidden="true"
+            >
+              {puzzleProgressIcon}
+            </span>
+            <p className="font-expand text-[22px] md:text-2xl leading-none text-surface flex items-baseline gap-1.5">
+              <span>{levelIdx + 1}</span>
+              <span className="font-ui text-sm md:text-base text-surface/70 tracking-wide">
+                of {gameLevels.length}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Win card — full-width bottom sheet on mobile, floating card on desktop.
+          Sits above the chin (z-40) and covers it while celebrating; the chin
+          reappears once the sheet exits and the next puzzle loads. */}
       <AnimatePresence>
         {showCelebration && (
           <motion.div
