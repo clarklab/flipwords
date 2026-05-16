@@ -35,6 +35,17 @@
       transparent 1px,
       transparent 8px
     );
+
+  /* Tile sizing — width is viewport-driven so 5 tiles fit the rack with
+     ~18% of each outer tile peeking past the side edges. The same amount
+     (in px) peeks below the bottom edge. Height is 2× width (1:2 portrait).
+     Slots use the same vars so a slotted tile is identical in size to a
+     rack tile. Cap at 7rem so tiles don't get absurd on desktop — the rack
+     then centers with normal margins (no bleed). */
+  --tile-gap: 0.5rem;
+  --tile-w: clamp(3.5rem, calc((100vw - 2rem) / 4.64), 7rem);
+  --tile-h: calc(var(--tile-w) * 2);
+  --tile-bleed: calc(var(--tile-w) * 0.18);
 }
 
 html, body {

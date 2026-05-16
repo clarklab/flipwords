@@ -178,7 +178,6 @@ export default function FlipWords() {
   );
 
   const slotRefs = useRef<(HTMLDivElement | null)[]>([null, null]);
-  const trayRef = useRef<HTMLDivElement>(null);
   const slotsRef = useRef<Slots>([null, null]);
   const bankRef = useRef<TileType[]>([]);
   const boardRotationRef = useRef(0);
@@ -924,7 +923,7 @@ export default function FlipWords() {
                       slotRefs.current[idx] = el;
                     }}
                     className={cn(
-                      "w-[clamp(5rem,14vh,8rem)] h-[clamp(10rem,28vh,16rem)] rounded-2xl flex items-center justify-center relative cursor-pointer transition-[border-color,background-color,box-shadow,transform] duration-150",
+                      "w-[var(--tile-w)] h-[var(--tile-h)] rounded-2xl flex items-center justify-center relative cursor-pointer transition-[border-color,background-color,box-shadow,transform] duration-150",
                       // Drop-target highlight wins over every other state. Solid
                       // accent ring, soft glow, faint scale-up so the slot
                       // reads as "I'll catch the tile if you let go now."
@@ -987,45 +986,50 @@ export default function FlipWords() {
         </div>
       </div>
 
-      {/* Bank */}
-      <div className="w-full flex-shrink-0 relative z-10 pt-4 md:pt-6 pb-6 md:pb-8">
-        <div className="text-center mb-4">
+      {/* Bank — 5 tiles, sized off --tile-w/--tile-h so the row is exactly
+          one viewport wide minus the side bleed. The rack is wider than the
+          viewport on small screens (outer tiles peek past the side edges)
+          and its bottom hangs past the viewport bottom by --tile-bleed; the
+          root's overflow-hidden clips both. No horizontal scroll: with 5
+          tiles fitting by design, scroll would just steal drag gestures. */}
+      <div className="w-full flex-shrink-0 relative z-10 pt-3 md:pt-5">
+        <div className="text-center mb-2">
           <p className="font-ui text-[10px] md:text-xs text-ink-soft uppercase tracking-[0.2em]">
             Tile rail
           </p>
         </div>
-        <div className="w-full relative flex flex-col items-center justify-center">
-          <div ref={trayRef} className="w-full flex items-center justify-center overflow-visible z-10 px-4">
-            <motion.div
-              drag="x"
-              dragConstraints={trayRef}
-              className="flex gap-3 md:gap-4 w-max cursor-grab active:cursor-grabbing pb-2"
-            >
-              {/* No AnimatePresence wrapper — a wrapped motion.div with the
-                  same layoutId as the Tile inside creates a duplicate
-                  shared-layout element during drop, which Framer Motion
-                  renders as a ghost copy on top of the freshly-placed slot
-                  tile. The Tile already exposes layoutId={tile.id} + layout
-                  on its own outer motion.div, so dropping the wrapper is
-                  enough: bank↔slot transitions stay smooth, and remaining
-                  bank tiles shift via their own layout prop. */}
-              {bank.map((tile) => (
-                <Tile
-                  key={tile.id}
-                  tile={tile}
-                  inSlot={false}
-                  draggable={true}
-                  onDrag={handleTileDrag}
-                  onDragEnd={(e, info) => handleDragEnd(e, info, tile)}
-                  onClick={() => handleBankTileClick(tile)}
-                  onFlip={() => flipTileInBank(tile.id)}
-                />
-              ))}
-            </motion.div>
+        <div
+          className="relative w-full"
+          style={{ height: "calc(var(--tile-h) - var(--tile-bleed))" }}
+        >
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 flex"
+            style={{ gap: "var(--tile-gap)" }}
+          >
+            {/* No AnimatePresence wrapper — a wrapped motion.div with the
+                same layoutId as the Tile inside creates a duplicate
+                shared-layout element during drop, which Framer Motion
+                renders as a ghost copy on top of the freshly-placed slot
+                tile. The Tile already exposes layoutId={tile.id} + layout
+                on its own outer motion.div, so dropping the wrapper is
+                enough: bank↔slot transitions stay smooth, and remaining
+                bank tiles shift via their own layout prop. */}
+            {bank.map((tile) => (
+              <Tile
+                key={tile.id}
+                tile={tile}
+                inSlot={false}
+                draggable={true}
+                onDrag={handleTileDrag}
+                onDragEnd={(e, info) => handleDragEnd(e, info, tile)}
+                onClick={() => handleBankTileClick(tile)}
+                onFlip={() => flipTileInBank(tile.id)}
+              />
+            ))}
           </div>
 
           {bank.length === 0 && !isSolved && (
-            <div className="flex items-center justify-center text-ink-soft font-ui w-full text-sm mt-4">
+            <div className="absolute inset-x-0 top-0 flex items-center justify-center text-ink-soft font-ui text-sm">
               Rail is empty.
             </div>
           )}
