@@ -989,11 +989,21 @@ export default function FlipWords() {
                   setHintMessage("");
                   playBoardRotate();
                 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center bg-accent text-white hover:bg-accent/90 transition-all active:scale-95 shadow-tile-lift"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center p-[2px] active:scale-95 group"
                 title="Rotate board"
                 aria-label="Rotate board"
               >
-                <span className="material-icons text-[18px] md:text-[20px]">rotate_right</span>
+                {/* Visible circle sits inside the tap zone with a 2px ring
+                    of padding around it. The padding keeps the thumb
+                    target the original w-10/w-11 while the rendered FAB
+                    reads a touch smaller and less dominant over the
+                    slot area. */}
+                <span
+                  aria-hidden="true"
+                  className="w-full h-full rounded-full bg-accent text-white group-hover:bg-accent/90 transition-colors flex items-center justify-center shadow-tile-lift"
+                >
+                  <span className="material-icons text-[18px] md:text-[20px]">rotate_right</span>
+                </span>
               </button>
               <div
                 ref={slotAreaRef}
