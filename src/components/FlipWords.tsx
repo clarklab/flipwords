@@ -167,7 +167,7 @@ export default function FlipWords() {
   // the drop-target highlight.
   const [hoveredSlotIdx, setHoveredSlotIdx] = useState<number | null>(null);
   const [checkState, setCheckState] = useState<
-    "idle" | "judging" | "correct" | "incorrect"
+    "idle" | "judging" | "incorrect"
   >("idle");
   // Hint counter for the current puzzle. Reset on level change.
   const [hintsThisPuzzle, setHintsThisPuzzle] = useState(0);
@@ -384,12 +384,12 @@ export default function FlipWords() {
         level
       );
       if (solved) {
-        setCheckState("correct");
+        // Drop straight from the judging modal into the win sequence — the
+        // edge-flash + bottom-sheet celebration is the visual confirmation,
+        // so a separate "Correct!" card would just double-dip.
+        setCheckState("idle");
         playCorrect();
-        window.setTimeout(() => {
-          setCheckState("idle");
-          runWinSequence();
-        }, 750);
+        runWinSequence();
       } else {
         setCheckState("incorrect");
         playIncorrect();
@@ -1041,15 +1041,15 @@ export default function FlipWords() {
         </div>
       </div>
 
-      {/* Win card — floats above the tile rail, no colored chin */}
+      {/* Win card — full-width bottom sheet on mobile, floating card on desktop. */}
       <AnimatePresence>
         {showCelebration && (
           <motion.div
-            initial={{ y: 28, opacity: 0, scale: 0.96 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 20, opacity: 0, scale: 0.96 }}
-            transition={{ type: "spring", damping: 26, stiffness: 280 }}
-            className="fixed bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md z-40 flex flex-col items-center bg-tile-face rounded-3xl p-6 md:p-7 shadow-tile-lift"
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "100%", opacity: 0 }}
+            transition={{ type: "spring", damping: 30, stiffness: 280 }}
+            className="fixed z-40 inset-x-0 bottom-0 md:left-1/2 md:right-auto md:-translate-x-1/2 md:bottom-6 md:w-[calc(100%-2rem)] md:max-w-md flex flex-col items-center bg-tile-face rounded-t-3xl md:rounded-3xl shadow-tile-lift px-6 pt-6 pb-[calc(env(safe-area-inset-bottom,0px)+1.5rem)] md:p-7"
           >
             <div className="w-11 h-11 rounded-full bg-accent-soft text-accent flex items-center justify-center mb-3">
               <span className="material-icons text-[24px]">check</span>
@@ -1262,23 +1262,6 @@ export default function FlipWords() {
                     Judging…
                   </p>
                 </div>
-              )}
-              {checkState === "correct" && (
-                <motion.div
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 360,
-                    damping: 16,
-                  }}
-                  className="relative flex flex-col items-center gap-3"
-                >
-                  <div className="w-14 h-14 rounded-full bg-accent text-surface flex items-center justify-center shadow-tile-lift">
-                    <span className="material-icons text-[34px]">check</span>
-                  </div>
-                  <p className="font-wide text-2xl text-ink">Correct!</p>
-                </motion.div>
               )}
               {checkState === "incorrect" && (
                 <motion.div
