@@ -104,9 +104,18 @@ const SESSION_HEADLINES = [
 const pickHeadline = (pool: string[]) =>
   pool[Math.floor(Math.random() * pool.length)];
 
-const computeStars = (attempts: number, hints: number): 1 | 2 | 3 => {
-  if (attempts <= 1 && hints === 0) return 3;
-  if (attempts <= 2 && hints <= 1) return 2;
+const FIVE_MINUTES_MS = 5 * 60 * 1000;
+const computeStars = (attempts: number, durationMs: number): 1 | 2 | 3 => {
+  // `attempts` counts every check, including the winning one, so wrong
+  // guesses is attempts - 1.
+  const wrongGuesses = Math.max(0, attempts - 1);
+  const underFiveMin = durationMs < FIVE_MINUTES_MS;
+  if (underFiveMin && wrongGuesses === 0) return 3;
+  if (
+    (underFiveMin && wrongGuesses === 1) ||
+    (!underFiveMin && wrongGuesses <= 2)
+  )
+    return 2;
   return 1;
 };
 
@@ -359,7 +368,7 @@ export default function FlipWords() {
     if (!showSessionSummary) return;
     playSessionComplete();
     const stats = perPuzzleRef.current.map((p) =>
-      computeStars(p.attempts, p.hints)
+      computeStars(p.attempts, p.durationMs)
     );
     const total = stats.reduce((sum, s) => sum + s, 0);
     const possible = stats.length * 3;
@@ -802,7 +811,7 @@ export default function FlipWords() {
     0
   );
   const perPuzzleStars = perPuzzleRef.current.map((p) =>
-    computeStars(p.attempts, p.hints)
+    computeStars(p.attempts, p.durationMs)
   );
   const totalStars = perPuzzleStars.reduce((sum, s) => sum + s, 0);
   const possibleStars = perPuzzleStars.length * 3;
@@ -1321,7 +1330,7 @@ export default function FlipWords() {
               </div>
 
               {/* Per-puzzle breakdown */}
-              <div className="w-full mb-6 max-h-44 overflow-y-auto rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
+              <div className="w-full mb-6 rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
                 {perPuzzleRef.current.map((stat, i) => {
                   const stars = perPuzzleStars[i];
                   return (
