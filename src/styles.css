@@ -193,21 +193,18 @@ code, pre {
     linear-gradient(180deg, oklch(63% 0.14 180) 0%, var(--color-accent) 55%, oklch(56% 0.135 180) 100%);
 }
 
-/* Drop shadow used where the cream play surface lifts off the surrounding
-   teal — chin below, browser chrome above. Mirrored so both edges feel
-   lifted in space rather than just stuck to the bottom strip. Each side
-   gets a tight contact-shadow and a wider diffuse cushion; inset top
-   highlight keeps the surface "lit from above" so the mirroring doesn't
-   flatten it. */
+/* Drop shadow used where the cream play surface lifts off the chin.
+   Downward-only — box-shadow can't bleed into the browser chrome above,
+   so we lean on a small visible teal band above the surface instead.
+   Multi-layer fade reaches all the way past the home-indicator safe
+   area so the shadow never shows a hard cutoff edge. Inset top
+   highlight keeps the surface "lit from above." */
 .shadow-play-lift {
   box-shadow:
-    /* downward cushion onto the chin */
-    0 6px 0 rgba(15, 50, 45, 0.18),
-    0 16px 22px -4px rgba(15, 50, 45, 0.55),
-    0 32px 44px -10px rgba(15, 50, 45, 0.42),
-    /* upward cushion onto the browser chrome */
-    0 -6px 0 rgba(15, 50, 45, 0.18),
-    0 -16px 22px -4px rgba(15, 50, 45, 0.55),
-    0 -32px 44px -10px rgba(15, 50, 45, 0.42),
+    0 4px 0 rgba(15, 50, 45, 0.15),
+    0 14px 18px -2px rgba(15, 50, 45, 0.5),
+    0 28px 36px -8px rgba(15, 50, 45, 0.42),
+    0 52px 68px -16px rgba(15, 50, 45, 0.32),
+    0 80px 100px -32px rgba(15, 50, 45, 0.22),
     0 2px 0 rgba(255, 255, 255, 0.4) inset;
 }

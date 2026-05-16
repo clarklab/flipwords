@@ -862,12 +862,15 @@ export default function FlipWords() {
       {showTutorial && <TutorialModal onComplete={handleTutorialComplete} />}
 
       {/* Play surface — the cream paper card that holds the puzzle. Rounded
-          bottom corners + a heavy lift shadow let it sit on the green chin
-          like a thick playing card on felt. overflow-hidden so the tile
-          rail's vertical bleed gets neatly tucked behind the curved edge.
-          Everything that was previously at the root (header / hint banner
-          / board / tile rail) now lives inside this surface. */}
-      <div className="flex-1 min-h-0 flex flex-col bg-paper rounded-[28px] md:rounded-[36px] shadow-play-lift relative z-10 overflow-hidden">
+          on all four corners + a heavy lift shadow let it sit on the green
+          chin like a thick playing card on felt. mt-1.5 leaves a visible
+          teal sliver above so the rounded top reads cleanly against the
+          browser chrome (which is also teal via theme-color). overflow-
+          hidden so the tile rail's vertical bleed gets neatly tucked
+          behind the curved edge. Everything that was previously at the
+          root (header / hint banner / board / tile rail) now lives inside
+          this surface. */}
+      <div className="flex-1 min-h-0 mt-1.5 md:mt-2 flex flex-col bg-paper rounded-[28px] md:rounded-[36px] shadow-play-lift relative z-10 overflow-hidden">
 
       <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
         <div className="flex items-center justify-between">
@@ -1140,7 +1143,7 @@ export default function FlipWords() {
           {/* Left — session stopwatch */}
           <div className="flex items-center gap-2">
             <span
-              className="material-icons text-surface/85"
+              className="material-icons text-black/60"
               style={{
                 fontSize: 26,
                 fontVariationSettings:
@@ -1155,10 +1158,12 @@ export default function FlipWords() {
             </span>
           </div>
 
-          {/* Right — puzzle of total */}
+          {/* Right — puzzle of total. "of N" inherits font/size from the
+              parent so it visually matches the timer; only the opacity
+              dims it so the current puzzle number reads first. */}
           <div className="flex items-center gap-2">
             <span
-              className="material-icons text-surface/85"
+              className="material-icons text-black/60"
               style={{
                 fontSize: 26,
                 fontVariationSettings:
@@ -1170,9 +1175,7 @@ export default function FlipWords() {
             </span>
             <p className="font-expand text-[22px] md:text-2xl leading-none text-surface flex items-baseline gap-1.5">
               <span>{levelIdx + 1}</span>
-              <span className="font-ui text-sm md:text-base text-surface/70 tracking-wide">
-                of {gameLevels.length}
-              </span>
+              <span className="text-surface/70">of {gameLevels.length}</span>
             </p>
           </div>
         </div>
