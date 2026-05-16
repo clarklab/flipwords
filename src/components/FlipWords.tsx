@@ -867,7 +867,7 @@ export default function FlipWords() {
           rail's vertical bleed gets neatly tucked behind the curved edge.
           Everything that was previously at the root (header / hint banner
           / board / tile rail) now lives inside this surface. */}
-      <div className="flex-1 min-h-0 flex flex-col bg-paper rounded-b-[28px] md:rounded-b-[36px] shadow-play-lift relative z-10 overflow-hidden">
+      <div className="flex-1 min-h-0 flex flex-col bg-paper rounded-[28px] md:rounded-[36px] shadow-play-lift relative z-10 overflow-hidden">
 
       <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
         <div className="flex items-center justify-between">

@@ -15,7 +15,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'theme-color',
-        content: '#f5f1e8',
+        content: '#1f9c93',
       },
       {
         title: 'FlipWords',
