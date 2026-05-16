@@ -297,7 +297,7 @@
     "hints": {
       "topRow": "A single bead from the sky",
       "bottomRow": "Bad aftertaste of a blowup",
-      "leftCol": "What meteorologists measure in inches",
+      "leftCol": "Inches the weather pros track",
       "rightCol": "Someone who left school early"
     },
     "solution": {
@@ -517,7 +517,7 @@
     "hints": {
       "topRow": "Right at the midpoint",
       "bottomRow": "Your, ahem, derriere",
-      "leftCol": "Football position behind the line",
+      "leftCol": "Football position past the line",
       "rightCol": "Where forgotten things fall"
     },
     "solution": {
@@ -561,7 +561,7 @@
     "hints": {
       "topRow": "Nimble dance-step skill",
       "bottomRow": "Spiral-bound for jotting",
-      "leftCol": "Tiny number that sends you to the bottom",
+      "leftCol": "Tiny number at the page's base",
       "rightCol": "Practice pages for students"
     },
     "solution": {
@@ -691,8 +691,8 @@
       }
     ],
     "hints": {
-      "topRow": "Trim along the bottom of the wall",
-      "bottomRow": "Where chandeliers and dancers meet",
+      "topRow": "Trim at the bottom of the wall",
+      "bottomRow": "Where chandeliers meet dancers",
       "leftCol": "America's pastime with a glove",
       "rightCol": "Where big decisions get made"
     },
@@ -826,7 +826,7 @@
       "topRow": "A desolate post-apocalypse zone",
       "bottomRow": "A cascading curtain of mist",
       "leftCol": "Used-up runoff from the drain",
-      "rightCol": "When the hurricane reaches the coast"
+      "rightCol": "When a hurricane hits the coast"
     },
     "solution": {
       "slot0Top": "WASTE",
@@ -869,8 +869,8 @@
     "hints": {
       "topRow": "Forest blaze spreading fast",
       "bottomRow": "Inflatable for the sinking ship",
-      "leftCol": "Critters in their natural habitat",
-      "rightCol": "Floating vessel with hoses ablaze"
+      "leftCol": "Critters in natural habitat",
+      "rightCol": "Vessel that hoses blazes out"
     },
     "solution": {
       "slot0Top": "WILD",
@@ -913,7 +913,7 @@
     "hints": {
       "topRow": "Postponed for another day",
       "bottomRow": "The grim aftermath of a bomb",
-      "leftCol": "How storms are measured in inches",
+      "leftCol": "How storms are measured",
       "rightCol": "Last stop at the grocery store"
     },
     "solution": {
@@ -956,8 +956,8 @@
     ],
     "hints": {
       "topRow": "Where you slap when you remember",
-      "bottomRow": "Glowing strip at the stage's edge",
-      "leftCol": "A four-legged animal's front toes",
+      "bottomRow": "Glowing strip at stage's edge",
+      "leftCol": "Front toes of a four-legged",
       "rightCol": "Bright eye on the car's front"
     },
     "solution": {
@@ -1131,7 +1131,7 @@
       }
     ],
     "hints": {
-      "topRow": "King Arthur's egalitarian meeting",
+      "topRow": "Arthur's meeting of equals",
       "bottomRow": "Where Santa lands his sleigh",
       "leftCol": "A sweeping cinematic kick",
       "rightCol": "Surface for setting your coffee"
@@ -1178,7 +1178,7 @@
       "topRow": "How long you're on the radio",
       "bottomRow": "Someone who quit school",
       "leftCol": "Care package from the sky",
-      "rightCol": "A coach-called pause in the action"
+      "rightCol": "Coach-called pause in action"
     },
     "solution": {
       "slot0Top": "AIR",
@@ -1219,7 +1219,7 @@
       }
     ],
     "hints": {
-      "topRow": "Car-spec unit that James Watt invented",
+      "topRow": "Engine spec James Watt named",
       "bottomRow": "A children's mini cottage",
       "leftCol": "Rough-and-tumble messing around",
       "rightCol": "An unstoppable force of nature"
@@ -1307,9 +1307,9 @@
       }
     ],
     "hints": {
-      "topRow": "Striped strip where pedestrians get right of way",
-      "bottomRow": "A paper silhouette in a kid's craft",
-      "leftCol": "A saw that slices across the grain",
+      "topRow": "Striped path for pedestrians",
+      "bottomRow": "Paper silhouette in kid craft",
+      "leftCol": "Saw that slices across grain",
       "rightCol": "A workforce strike"
     },
     "solution": {
@@ -1794,7 +1794,7 @@
       "topRow": "A tennis swing across your body",
       "bottomRow": "Vintage mouse alternative",
       "leftCol": "Retrace your steps",
-      "rightCol": "Olympic sport played with two teams and a goal"
+      "rightCol": "Olympic team sport with a goal"
     },
     "solution": {
       "slot0Top": "HAND",
@@ -1879,7 +1879,7 @@
       }
     ],
     "hints": {
-      "topRow": "Backstage worker shifting scenery",
+      "topRow": "Crew member moving scenery",
       "bottomRow": "A team's strategy guide",
       "leftCol": "Performed at a theater",
       "rightCol": "Pocket-sized how-to guide"
@@ -2014,7 +2014,7 @@
       "topRow": "Slather it on at the beach",
       "bottomRow": "Brush something aside",
       "leftCol": "Dusk, in poetic terms",
-      "rightCol": "A Hollywood script in standard format"
+      "rightCol": "Hollywood script in scene format"
     },
     "solution": {
       "slot0Top": "SUN",
@@ -2056,7 +2056,7 @@
     ],
     "hints": {
       "topRow": "Manually take over the controls",
-      "bottomRow": "Vacation condo split among owners",
+      "bottomRow": "Vacation condo split by owners",
       "leftCol": "Extra hours at time-and-a-half",
       "rightCol": "Uber or Lyft, generically"
     },
@@ -2146,7 +2146,7 @@
       "topRow": "Salty H2O from the ocean",
       "bottomRow": "Where the land meets the waves",
       "leftCol": "Beachy edge of the ocean",
-      "rightCol": "Mark on the hull where the float-level sits"
+      "rightCol": "Hull mark at the float level"
     },
     "solution": {
       "slot0Top": "WATER",
@@ -2233,8 +2233,8 @@
     "hints": {
       "topRow": "Where you slap when you remember",
       "bottomRow": "Ottoman for tired toes",
-      "leftCol": "A four-legged animal's front paws",
-      "rightCol": "Cushion against your skull in the car"
+      "leftCol": "Front paws of a four-legged",
+      "rightCol": "Cushion behind your skull"
     },
     "solution": {
       "slot0Top": "HEAD",
@@ -2322,7 +2322,7 @@
       "topRow": "What the IRS wants a piece of",
       "bottomRow": "Wrestler's match-ending move",
       "leftCol": "Mouthful of air or food",
-      "rightCol": "When the price drops back to earth"
+      "rightCol": "When the price drops to earth"
     },
     "solution": {
       "slot0Top": "IN",
@@ -2410,7 +2410,7 @@
       "topRow": "Hand the cashier too much",
       "bottomRow": "Monday-to-Friday grind",
       "leftCol": "Pile on the assignments",
-      "rightCol": "Friday's reward for a job well done"
+      "rightCol": "Friday's reward at the office"
     },
     "solution": {
       "slot0Top": "OVER",
@@ -2451,10 +2451,10 @@
       }
     ],
     "hints": {
-      "topRow": "When Cinderella's coach turns back",
+      "topRow": "When Cinderella's coach turns",
       "bottomRow": "Sun streaming through the window",
       "leftCol": "Twelve sharp at lunchtime",
-      "rightCol": "Little plug-in bulb in the hallway"
+      "rightCol": "Plug-in bulb in the hallway"
     },
     "solution": {
       "slot0Top": "MID",
@@ -2585,7 +2585,7 @@
     "hints": {
       "topRow": "Lottery winner's big haul",
       "bottomRow": "Balance one cost against another",
-      "leftCol": "What the bookie hands you when you win",
+      "leftCol": "What the bookie hands a winner",
       "rightCol": "Start of a quest or adventure"
     },
     "solution": {
@@ -2630,7 +2630,7 @@
       "topRow": "Election tiebreaker round",
       "bottomRow": "Pull a file from the internet",
       "leftCol": "Stale and beat-looking",
-      "rightCol": "Unhitch the trailer at the warehouse"
+      "rightCol": "Drop the cargo at the dock"
     },
     "solution": {
       "slot0Top": "RUN",
@@ -2672,7 +2672,7 @@
     ],
     "hints": {
       "topRow": "Gym sweat session",
-      "bottomRow": "Flat plain stretching to the horizon",
+      "bottomRow": "Flat plain to the horizon",
       "leftCol": "Carpenter's bench in the garage",
       "rightCol": "A wide, sleepy frontier"
     },
@@ -2806,7 +2806,7 @@
       "topRow": "A sudden temper explosion",
       "bottomRow": "Loud crack from a pistol",
       "leftCol": "Pea-shooter from a tribal jungle",
-      "rightCol": "An unexpected longshot of fortune"
+      "rightCol": "Final outcome of it all"
     },
     "solution": {
       "slot0Top": "BLOW",
@@ -2847,10 +2847,10 @@
       }
     ],
     "hints": {
-      "topRow": "Crowd that showed up at the rally",
-      "bottomRow": "Sketch in bullet-point form",
+      "topRow": "Crowd that showed at the rally",
+      "bottomRow": "Disconnected from the net",
       "leftCol": "Click the switch the other way",
-      "rightCol": "Currently disconnected from the net"
+      "rightCol": "Sketch in bullet-point form"
     },
     "solution": {
       "slot0Top": "TURN",
@@ -2892,7 +2892,7 @@
     ],
     "hints": {
       "topRow": "Honest blunder",
-      "bottomRow": "Store-credit plan: pay it off, then take it home",
+      "bottomRow": "Buy now, pay it off later",
       "leftCol": "Lose track of the keys briefly",
       "rightCol": "Burrito to-go, please"
     },
@@ -2936,8 +2936,8 @@
     ],
     "hints": {
       "topRow": "Get the team buzzing with energy",
-      "bottomRow": "Sneak a candy bar out of the store",
-      "leftCol": "Tool-filled room with a sawdust floor",
+      "bottomRow": "Sneak a candy from the store",
+      "leftCol": "Tool room with a sawdust floor",
       "rightCol": "Sneakers with extra sole height"
     },
     "solution": {
@@ -3024,7 +3024,7 @@
     ],
     "hints": {
       "topRow": "Pitcher's classic windup",
-      "bottomRow": "Burgers on the grill in the backyard",
+      "bottomRow": "Backyard burgers on the grill",
       "leftCol": "Burn the casserole, oops",
       "rightCol": "Free swag tossed to the crowd"
     },
@@ -3067,10 +3067,10 @@
       }
     ],
     "hints": {
-      "topRow": "Beat your opponent at their own game",
+      "topRow": "Beat them at their own game",
       "bottomRow": "Slap an expired stamp on it",
       "leftCol": "Lonely watch in a guard tower",
-      "rightCol": "Going out for dinner and a movie"
+      "rightCol": "Kids' scheduled play meetup"
     },
     "solution": {
       "slot0Top": "OUT",
@@ -3200,7 +3200,7 @@
     ],
     "hints": {
       "topRow": "An easy mark to beat",
-      "bottomRow": "A rising breeze beneath the glider",
+      "bottomRow": "Rising breeze beneath a glider",
       "leftCol": "An exercise on the floor",
       "rightCol": "Bank account in the negative"
     },
@@ -3244,8 +3244,8 @@
     ],
     "hints": {
       "topRow": "Australia's wide-open interior",
-      "bottomRow": "Where the teacher writes on the board",
-      "leftCol": "Got more polish than the competition",
+      "bottomRow": "Where students face a board",
+      "leftCol": "More polish than the rivals",
       "rightCol": "Mop closet behind the kitchen"
     },
     "solution": {
@@ -3288,7 +3288,7 @@
     ],
     "hints": {
       "topRow": "Stiff-bound novel",
-      "bottomRow": "Where boats are built and repaired",
+      "bottomRow": "Where boats are built or fixed",
       "leftCol": "Tough times to endure",
       "rightCol": "Where the grill lives"
     },
@@ -3376,7 +3376,7 @@
     ],
     "hints": {
       "topRow": "Hilly farm country up north",
-      "bottomRow": "Currently logged into the internet",
+      "bottomRow": "Currently logged into the net",
       "leftCol": "Resting; positioned atop",
       "rightCol": "Hard-wired phone to your house"
     },
@@ -3420,9 +3420,9 @@
     ],
     "hints": {
       "topRow": "Pistol or rifle, formally",
-      "bottomRow": "Pond where antelope drink in the savannah",
+      "bottomRow": "Pond where the herd drinks",
       "leftCol": "Old slang for strong whiskey",
-      "rightCol": "The opening for your hand in a sleeve"
+      "rightCol": "Sleeve opening for your hand"
     },
     "solution": {
       "slot0Top": "FIRE",
@@ -3466,7 +3466,7 @@
       "topRow": "Paved path to the porch",
       "bottomRow": "In reverse, against the grain",
       "leftCol": "Quietly retract a statement",
-      "rightCol": "Shy, hesitant, and a bit clumsy"
+      "rightCol": "Willfully off the proper path"
     },
     "solution": {
       "slot0Top": "WALK",
@@ -3509,7 +3509,7 @@
     "hints": {
       "topRow": "Killswitch on the gas pump",
       "bottomRow": "Slow tempo for a moody song",
-      "leftCol": "Sleep mode for the office at night",
+      "leftCol": "Sleep mode for the office",
       "rightCol": "Quirky and a bit unconventional"
     },
     "solution": {
@@ -3595,8 +3595,8 @@
       }
     ],
     "hints": {
-      "topRow": "Sell more airline seats than there are",
-      "bottomRow": "Famous statue or building in town",
+      "topRow": "Sell more seats than there are",
+      "bottomRow": "Famous statue in town",
       "leftCol": "On solid ground, not at sea",
       "rightCol": "Page-saving corner-fold"
     },
@@ -3683,7 +3683,7 @@
       }
     ],
     "hints": {
-      "topRow": "Car stalled on the freeway shoulder",
+      "topRow": "Car stalled on the shoulder",
       "bottomRow": "Toward the river's source",
       "leftCol": "The painful end of a couple",
       "rightCol": "Toward the river's mouth"
@@ -3727,10 +3727,10 @@
       }
     ],
     "hints": {
-      "topRow": "Touring band's circuit of small venues",
-      "bottomRow": "Floating home docked at the marina",
-      "leftCol": "Cozy stop along the highway with food and a bed",
-      "rightCol": "Glitzy entertainer-revue on the water"
+      "topRow": "Touring band's small-club tour",
+      "bottomRow": "Floating home at the marina",
+      "leftCol": "Highway inn with food and beds",
+      "rightCol": "Glitzy revue on the water"
     },
     "solution": {
       "slot0Top": "ROAD",
@@ -3773,7 +3773,7 @@
     "hints": {
       "topRow": "Heavy garment for winter",
       "bottomRow": "Where the kids dump their LEGOs",
-      "leftCol": "Underdo it, in a baseball sense",
+      "leftCol": "Ham it up too much on stage",
       "rightCol": "Closet where the jackets hang"
     },
     "solution": {
@@ -3816,7 +3816,7 @@
     ],
     "hints": {
       "topRow": "Padding beneath the carpet",
-      "bottomRow": "Tense armed pause between two sides",
+      "bottomRow": "Tense pause between two sides",
       "leftCol": "Get the gist of a tricky concept",
       "rightCol": "Lull in the action"
     },
@@ -3947,10 +3947,10 @@
       }
     ],
     "hints": {
-      "topRow": "Sweep an embarrassment under the rug",
+      "topRow": "Sweep the scandal under the rug",
       "bottomRow": "Round glass home for a goldfish",
       "leftCol": "Cod or flounder on the menu",
-      "rightCol": "Big sink for getting the suds out"
+      "rightCol": "Big sink for sudsy hands"
     },
     "solution": {
       "slot0Top": "WHITE",
@@ -3993,8 +3993,8 @@
     "hints": {
       "topRow": "Soft glow behind a phone screen",
       "bottomRow": "Old-time laundry shed out back",
-      "leftCol": "Foamy wake trailing the boat's stern",
-      "rightCol": "Lonely tower with a sweeping beam"
+      "leftCol": "Foamy wake at the boat's stern",
+      "rightCol": "Lonely tower with sweeping beam"
     },
     "solution": {
       "slot0Top": "BACK",
@@ -4035,7 +4035,7 @@
       }
     ],
     "hints": {
-      "topRow": "Side-effect splashing onto another sector",
+      "topRow": "Side-effect into another area",
       "bottomRow": "Ambushed by bandits on the road",
       "leftCol": "Dam channel for floodwater",
       "rightCol": "Stretched out atop, in old usage"
@@ -4079,10 +4079,10 @@
       }
     ],
     "hints": {
-      "topRow": "Bunny munching in the bramble patch",
+      "topRow": "Bunny in the bramble patch",
       "bottomRow": "Trumpet's lip cup",
       "leftCol": "Venomous southern swamp snake",
-      "rightCol": "Engagement ring's setting at the end of a band"
+      "rightCol": "Decorative end of a chapter"
     },
     "solution": {
       "slot0Top": "TAIL",
@@ -4123,10 +4123,10 @@
       }
     ],
     "hints": {
-      "topRow": "Balanced upside-down on your palms",
+      "topRow": "Balanced upside-down on palms",
       "bottomRow": "Held up by a bandit's pistol",
       "leftCol": "Concealed-carry sidearm",
-      "rightCol": "The bayonet tip; or your angle on the matter"
+      "rightCol": "Bayonet tip; your view angle"
     },
     "solution": {
       "slot0Top": "STAND",
@@ -4170,7 +4170,7 @@
       "topRow": "Red bulb at the intersection",
       "bottomRow": "Above the recommended pounds",
       "leftCol": "Quick layover on your road trip",
-      "rightCol": "A boxer's class above featherweight"
+      "rightCol": "Boxer's class above feather"
     },
     "solution": {
       "slot0Top": "LIGHT",
@@ -4212,9 +4212,9 @@
     ],
     "hints": {
       "topRow": "Pull the steak before it's done",
-      "bottomRow": "A recipe collection on the shelf",
+      "bottomRow": "Bank teller's savings ledger",
       "leftCol": "Tunnel for cars or pedestrians",
-      "rightCol": "Savings record from the bank teller"
+      "rightCol": "Recipe collection on the shelf"
     },
     "solution": {
       "slot0Top": "COOK",
@@ -4256,9 +4256,9 @@
     ],
     "hints": {
       "topRow": "Logically, it follows that",
-      "bottomRow": "Wise foreknowledge of what's coming",
+      "bottomRow": "A flash of deep understanding",
       "leftCol": "In that place, archaically",
-      "rightCol": "Visible up ahead"
+      "rightCol": "Wise foreknowledge ahead"
     },
     "solution": {
       "slot0Top": "FORE",
@@ -4433,7 +4433,7 @@
     "hints": {
       "topRow": "Sixth-grade textbook",
       "bottomRow": "The one who tidies the manor",
-      "leftCol": "Little red one-room building of yore",
+      "leftCol": "One-room red building of yore",
       "rightCol": "Accountant tracking the ledger"
     },
     "solution": {

@@ -156,7 +156,7 @@
     "clues": {
       "top": "A single bead from the sky",
       "bottom": "Bad aftertaste of a blowup",
-      "left": "What meteorologists measure in inches",
+      "left": "Inches the weather pros track",
       "right": "Someone who left school early"
     }
   },
@@ -271,7 +271,7 @@
     "clues": {
       "top": "Right at the midpoint",
       "bottom": "Your, ahem, derriere",
-      "left": "Football position behind the line",
+      "left": "Football position past the line",
       "right": "Where forgotten things fall"
     }
   },
@@ -294,7 +294,7 @@
     "clues": {
       "top": "Nimble dance-step skill",
       "bottom": "Spiral-bound for jotting",
-      "left": "Tiny number that sends you to the bottom",
+      "left": "Tiny number at the page's base",
       "right": "Practice pages for students"
     }
   },
@@ -361,8 +361,8 @@
       "right": "BOARDROOM"
     },
     "clues": {
-      "top": "Trim along the bottom of the wall",
-      "bottom": "Where chandeliers and dancers meet",
+      "top": "Trim at the bottom of the wall",
+      "bottom": "Where chandeliers meet dancers",
       "left": "America's pastime with a glove",
       "right": "Where big decisions get made"
     }
@@ -433,7 +433,7 @@
       "top": "A desolate post-apocalypse zone",
       "bottom": "A cascading curtain of mist",
       "left": "Used-up runoff from the drain",
-      "right": "When the hurricane reaches the coast"
+      "right": "When a hurricane hits the coast"
     }
   },
   {
@@ -455,8 +455,8 @@
     "clues": {
       "top": "Forest blaze spreading fast",
       "bottom": "Inflatable for the sinking ship",
-      "left": "Critters in their natural habitat",
-      "right": "Floating vessel with hoses ablaze"
+      "left": "Critters in natural habitat",
+      "right": "Vessel that hoses blazes out"
     }
   },
   {
@@ -478,7 +478,7 @@
     "clues": {
       "top": "Postponed for another day",
       "bottom": "The grim aftermath of a bomb",
-      "left": "How storms are measured in inches",
+      "left": "How storms are measured",
       "right": "Last stop at the grocery store"
     }
   },
@@ -500,8 +500,8 @@
     },
     "clues": {
       "top": "Where you slap when you remember",
-      "bottom": "Glowing strip at the stage's edge",
-      "left": "A four-legged animal's front toes",
+      "bottom": "Glowing strip at stage's edge",
+      "left": "Front toes of a four-legged",
       "right": "Bright eye on the car's front"
     }
   },
@@ -591,7 +591,7 @@
       "right": "TABLETOP"
     },
     "clues": {
-      "top": "King Arthur's egalitarian meeting",
+      "top": "Arthur's meeting of equals",
       "bottom": "Where Santa lands his sleigh",
       "left": "A sweeping cinematic kick",
       "right": "Surface for setting your coffee"
@@ -617,7 +617,7 @@
       "top": "How long you're on the radio",
       "bottom": "Someone who quit school",
       "left": "Care package from the sky",
-      "right": "A coach-called pause in the action"
+      "right": "Coach-called pause in action"
     }
   },
   {
@@ -637,7 +637,7 @@
       "right": "POWERHOUSE"
     },
     "clues": {
-      "top": "Car-spec unit that James Watt invented",
+      "top": "Engine spec James Watt named",
       "bottom": "A children's mini cottage",
       "left": "Rough-and-tumble messing around",
       "right": "An unstoppable force of nature"
@@ -683,9 +683,9 @@
       "right": "WALKOUT"
     },
     "clues": {
-      "top": "Striped strip where pedestrians get right of way",
-      "bottom": "A paper silhouette in a kid's craft",
-      "left": "A saw that slices across the grain",
+      "top": "Striped path for pedestrians",
+      "bottom": "Paper silhouette in kid craft",
+      "left": "Saw that slices across grain",
       "right": "A workforce strike"
     }
   },
@@ -939,7 +939,7 @@
       "top": "A tennis swing across your body",
       "bottom": "Vintage mouse alternative",
       "left": "Retrace your steps",
-      "right": "Olympic sport played with two teams and a goal"
+      "right": "Olympic team sport with a goal"
     }
   },
   {
@@ -982,7 +982,7 @@
       "right": "HANDBOOK"
     },
     "clues": {
-      "top": "Backstage worker shifting scenery",
+      "top": "Crew member moving scenery",
       "bottom": "A team's strategy guide",
       "left": "Performed at a theater",
       "right": "Pocket-sized how-to guide"
@@ -1054,7 +1054,7 @@
       "top": "Slather it on at the beach",
       "bottom": "Brush something aside",
       "left": "Dusk, in poetic terms",
-      "right": "A Hollywood script in standard format"
+      "right": "Hollywood script in scene format"
     }
   },
   {
@@ -1075,7 +1075,7 @@
     },
     "clues": {
       "top": "Manually take over the controls",
-      "bottom": "Vacation condo split among owners",
+      "bottom": "Vacation condo split by owners",
       "left": "Extra hours at time-and-a-half",
       "right": "Uber or Lyft, generically"
     }
@@ -1123,7 +1123,7 @@
       "top": "Salty H2O from the ocean",
       "bottom": "Where the land meets the waves",
       "left": "Beachy edge of the ocean",
-      "right": "Mark on the hull where the float-level sits"
+      "right": "Hull mark at the float level"
     }
   },
   {
@@ -1168,8 +1168,8 @@
     "clues": {
       "top": "Where you slap when you remember",
       "bottom": "Ottoman for tired toes",
-      "left": "A four-legged animal's front paws",
-      "right": "Cushion against your skull in the car"
+      "left": "Front paws of a four-legged",
+      "right": "Cushion behind your skull"
     }
   },
   {
@@ -1215,7 +1215,7 @@
       "top": "What the IRS wants a piece of",
       "bottom": "Wrestler's match-ending move",
       "left": "Mouthful of air or food",
-      "right": "When the price drops back to earth"
+      "right": "When the price drops to earth"
     }
   },
   {
@@ -1261,7 +1261,7 @@
       "top": "Hand the cashier too much",
       "bottom": "Monday-to-Friday grind",
       "left": "Pile on the assignments",
-      "right": "Friday's reward for a job well done"
+      "right": "Friday's reward at the office"
     }
   },
   {
@@ -1281,10 +1281,10 @@
       "right": "NIGHTLIGHT"
     },
     "clues": {
-      "top": "When Cinderella's coach turns back",
+      "top": "When Cinderella's coach turns",
       "bottom": "Sun streaming through the window",
       "left": "Twelve sharp at lunchtime",
-      "right": "Little plug-in bulb in the hallway"
+      "right": "Plug-in bulb in the hallway"
     }
   },
   {
@@ -1352,7 +1352,7 @@
     "clues": {
       "top": "Lottery winner's big haul",
       "bottom": "Balance one cost against another",
-      "left": "What the bookie hands you when you win",
+      "left": "What the bookie hands a winner",
       "right": "Start of a quest or adventure"
     }
   },
@@ -1376,7 +1376,7 @@
       "top": "Election tiebreaker round",
       "bottom": "Pull a file from the internet",
       "left": "Stale and beat-looking",
-      "right": "Unhitch the trailer at the warehouse"
+      "right": "Drop the cargo at the dock"
     }
   },
   {
@@ -1397,7 +1397,7 @@
     },
     "clues": {
       "top": "Gym sweat session",
-      "bottom": "Flat plain stretching to the horizon",
+      "bottom": "Flat plain to the horizon",
       "left": "Carpenter's bench in the garage",
       "right": "A wide, sleepy frontier"
     }
@@ -1468,7 +1468,7 @@
       "top": "A sudden temper explosion",
       "bottom": "Loud crack from a pistol",
       "left": "Pea-shooter from a tribal jungle",
-      "right": "An unexpected longshot of fortune"
+      "right": "Final outcome of it all"
     }
   },
   {
@@ -1488,10 +1488,10 @@
       "right": "OUTLINE"
     },
     "clues": {
-      "top": "Crowd that showed up at the rally",
-      "bottom": "Sketch in bullet-point form",
+      "top": "Crowd that showed at the rally",
+      "bottom": "Disconnected from the net",
       "left": "Click the switch the other way",
-      "right": "Currently disconnected from the net"
+      "right": "Sketch in bullet-point form"
     }
   },
   {
@@ -1512,7 +1512,7 @@
     },
     "clues": {
       "top": "Honest blunder",
-      "bottom": "Store-credit plan: pay it off, then take it home",
+      "bottom": "Buy now, pay it off later",
       "left": "Lose track of the keys briefly",
       "right": "Burrito to-go, please"
     }
@@ -1535,8 +1535,8 @@
     },
     "clues": {
       "top": "Get the team buzzing with energy",
-      "bottom": "Sneak a candy bar out of the store",
-      "left": "Tool-filled room with a sawdust floor",
+      "bottom": "Sneak a candy from the store",
+      "left": "Tool room with a sawdust floor",
       "right": "Sneakers with extra sole height"
     }
   },
@@ -1581,7 +1581,7 @@
     },
     "clues": {
       "top": "Pitcher's classic windup",
-      "bottom": "Burgers on the grill in the backyard",
+      "bottom": "Backyard burgers on the grill",
       "left": "Burn the casserole, oops",
       "right": "Free swag tossed to the crowd"
     }
@@ -1603,10 +1603,10 @@
       "right": "PLAYDATE"
     },
     "clues": {
-      "top": "Beat your opponent at their own game",
+      "top": "Beat them at their own game",
       "bottom": "Slap an expired stamp on it",
       "left": "Lonely watch in a guard tower",
-      "right": "Going out for dinner and a movie"
+      "right": "Kids' scheduled play meetup"
     }
   },
   {
@@ -1673,7 +1673,7 @@
     },
     "clues": {
       "top": "An easy mark to beat",
-      "bottom": "A rising breeze beneath the glider",
+      "bottom": "Rising breeze beneath a glider",
       "left": "An exercise on the floor",
       "right": "Bank account in the negative"
     }
@@ -1696,8 +1696,8 @@
     },
     "clues": {
       "top": "Australia's wide-open interior",
-      "bottom": "Where the teacher writes on the board",
-      "left": "Got more polish than the competition",
+      "bottom": "Where students face a board",
+      "left": "More polish than the rivals",
       "right": "Mop closet behind the kitchen"
     }
   },
@@ -1719,7 +1719,7 @@
     },
     "clues": {
       "top": "Stiff-bound novel",
-      "bottom": "Where boats are built and repaired",
+      "bottom": "Where boats are built or fixed",
       "left": "Tough times to endure",
       "right": "Where the grill lives"
     }
@@ -1765,7 +1765,7 @@
     },
     "clues": {
       "top": "Hilly farm country up north",
-      "bottom": "Currently logged into the internet",
+      "bottom": "Currently logged into the net",
       "left": "Resting; positioned atop",
       "right": "Hard-wired phone to your house"
     }
@@ -1788,9 +1788,9 @@
     },
     "clues": {
       "top": "Pistol or rifle, formally",
-      "bottom": "Pond where antelope drink in the savannah",
+      "bottom": "Pond where the herd drinks",
       "left": "Old slang for strong whiskey",
-      "right": "The opening for your hand in a sleeve"
+      "right": "Sleeve opening for your hand"
     }
   },
   {
@@ -1813,7 +1813,7 @@
       "top": "Paved path to the porch",
       "bottom": "In reverse, against the grain",
       "left": "Quietly retract a statement",
-      "right": "Shy, hesitant, and a bit clumsy"
+      "right": "Willfully off the proper path"
     }
   },
   {
@@ -1835,7 +1835,7 @@
     "clues": {
       "top": "Killswitch on the gas pump",
       "bottom": "Slow tempo for a moody song",
-      "left": "Sleep mode for the office at night",
+      "left": "Sleep mode for the office",
       "right": "Quirky and a bit unconventional"
     }
   },
@@ -1879,8 +1879,8 @@
       "right": "BOOKMARK"
     },
     "clues": {
-      "top": "Sell more airline seats than there are",
-      "bottom": "Famous statue or building in town",
+      "top": "Sell more seats than there are",
+      "bottom": "Famous statue in town",
       "left": "On solid ground, not at sea",
       "right": "Page-saving corner-fold"
     }
@@ -1925,7 +1925,7 @@
       "right": "DOWNSTREAM"
     },
     "clues": {
-      "top": "Car stalled on the freeway shoulder",
+      "top": "Car stalled on the shoulder",
       "bottom": "Toward the river's source",
       "left": "The painful end of a couple",
       "right": "Toward the river's mouth"
@@ -1948,10 +1948,10 @@
       "right": "SHOWBOAT"
     },
     "clues": {
-      "top": "Touring band's circuit of small venues",
-      "bottom": "Floating home docked at the marina",
-      "left": "Cozy stop along the highway with food and a bed",
-      "right": "Glitzy entertainer-revue on the water"
+      "top": "Touring band's small-club tour",
+      "bottom": "Floating home at the marina",
+      "left": "Highway inn with food and beds",
+      "right": "Glitzy revue on the water"
     }
   },
   {
@@ -1973,7 +1973,7 @@
     "clues": {
       "top": "Heavy garment for winter",
       "bottom": "Where the kids dump their LEGOs",
-      "left": "Underdo it, in a baseball sense",
+      "left": "Ham it up too much on stage",
       "right": "Closet where the jackets hang"
     }
   },
@@ -1995,7 +1995,7 @@
     },
     "clues": {
       "top": "Padding beneath the carpet",
-      "bottom": "Tense armed pause between two sides",
+      "bottom": "Tense pause between two sides",
       "left": "Get the gist of a tricky concept",
       "right": "Lull in the action"
     }
@@ -2063,10 +2063,10 @@
       "right": "WASHBOWL"
     },
     "clues": {
-      "top": "Sweep an embarrassment under the rug",
+      "top": "Sweep the scandal under the rug",
       "bottom": "Round glass home for a goldfish",
       "left": "Cod or flounder on the menu",
-      "right": "Big sink for getting the suds out"
+      "right": "Big sink for sudsy hands"
     }
   },
   {
@@ -2088,8 +2088,8 @@
     "clues": {
       "top": "Soft glow behind a phone screen",
       "bottom": "Old-time laundry shed out back",
-      "left": "Foamy wake trailing the boat's stern",
-      "right": "Lonely tower with a sweeping beam"
+      "left": "Foamy wake at the boat's stern",
+      "right": "Lonely tower with sweeping beam"
     }
   },
   {
@@ -2109,7 +2109,7 @@
       "right": "OVERLAID"
     },
     "clues": {
-      "top": "Side-effect splashing onto another sector",
+      "top": "Side-effect into another area",
       "bottom": "Ambushed by bandits on the road",
       "left": "Dam channel for floodwater",
       "right": "Stretched out atop, in old usage"
@@ -2132,10 +2132,10 @@
       "right": "TAILPIECE"
     },
     "clues": {
-      "top": "Bunny munching in the bramble patch",
+      "top": "Bunny in the bramble patch",
       "bottom": "Trumpet's lip cup",
       "left": "Venomous southern swamp snake",
-      "right": "Engagement ring's setting at the end of a band"
+      "right": "Decorative end of a chapter"
     }
   },
   {
@@ -2155,10 +2155,10 @@
       "right": "STANDPOINT"
     },
     "clues": {
-      "top": "Balanced upside-down on your palms",
+      "top": "Balanced upside-down on palms",
       "bottom": "Held up by a bandit's pistol",
       "left": "Concealed-carry sidearm",
-      "right": "The bayonet tip; or your angle on the matter"
+      "right": "Bayonet tip; your view angle"
     }
   },
   {
@@ -2181,7 +2181,7 @@
       "top": "Red bulb at the intersection",
       "bottom": "Above the recommended pounds",
       "left": "Quick layover on your road trip",
-      "right": "A boxer's class above featherweight"
+      "right": "Boxer's class above feather"
     }
   },
   {
@@ -2202,9 +2202,9 @@
     },
     "clues": {
       "top": "Pull the steak before it's done",
-      "bottom": "A recipe collection on the shelf",
+      "bottom": "Bank teller's savings ledger",
       "left": "Tunnel for cars or pedestrians",
-      "right": "Savings record from the bank teller"
+      "right": "Recipe collection on the shelf"
     }
   },
   {
@@ -2225,9 +2225,9 @@
     },
     "clues": {
       "top": "Logically, it follows that",
-      "bottom": "Wise foreknowledge of what's coming",
+      "bottom": "A flash of deep understanding",
       "left": "In that place, archaically",
-      "right": "Visible up ahead"
+      "right": "Wise foreknowledge ahead"
     }
   },
   {
@@ -2318,7 +2318,7 @@
     "clues": {
       "top": "Sixth-grade textbook",
       "bottom": "The one who tidies the manor",
-      "left": "Little red one-room building of yore",
+      "left": "One-room red building of yore",
       "right": "Accountant tracking the ledger"
     }
   }

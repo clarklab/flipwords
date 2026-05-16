@@ -3,6 +3,7 @@
 
 import json
 import random
+import re
 import sys
 from itertools import product
 from pathlib import Path
@@ -13,6 +14,11 @@ COMPOUND_FILE = TOOLS_DIR / "compound_words.txt"
 MATRICES_FILE = TOOLS_DIR / "matrices.json"
 DECOYS_FILE = TOOLS_DIR / "decoys.json"
 OUTPUT_FILE = PROJECT_DIR / "levels_generated.json"
+
+# Clue length cap. The on-screen pill is sized to hug the slot block (two tiles
+# wide), so on the smallest target phone (~360px wide) a 32-character cap is
+# what fits without truncation. Keep clues at this ceiling or trim them.
+CLUE_CHAR_CAP = 32
 
 
 def load_compounds() -> set[str]:
@@ -70,6 +76,49 @@ def validate_matrix(m: dict, compounds: set[str]) -> tuple[bool, str]:
         if word in compounds:
             return False, f"matrix[{m['id']}] diagonal/reverse {label}={word!r} is also a compound"
 
+    ok, err = validate_clues(m)
+    if not ok:
+        return False, err
+
+    return True, ""
+
+
+def validate_clues(m: dict) -> tuple[bool, str]:
+    """Enforce clue-quality rules independent of the compound-validity checks:
+
+      1. Each clue fits the on-screen pill (<= CLUE_CHAR_CAP characters).
+      2. No clue contains any of its own puzzle's 4 compounds as a substring
+         (case-insensitive) — that would reveal the answer or another edge.
+      3. No clue contains BOTH halves of its own answer as standalone words —
+         e.g. a HARDBACK clue must not say both "hard" and "back".
+    """
+    a, b, c, d = m["matrix"]
+    halves_by_side = {
+        "top": (a, b),
+        "bottom": (c, d),
+        "left": (a, c),
+        "right": (b, d),
+    }
+    compounds = m["compounds"]
+    for side, clue in m["clues"].items():
+        if len(clue) > CLUE_CHAR_CAP:
+            return False, (
+                f"matrix[{m['id']}] clue {side} length {len(clue)} > {CLUE_CHAR_CAP}: {clue!r}"
+            )
+        low = clue.lower()
+        for other_side, word in compounds.items():
+            if word.lower() in low:
+                tag = "OWN" if other_side == side else f"OTHER {other_side}"
+                return False, (
+                    f"matrix[{m['id']}] clue {side}={compounds[side]} contains {tag}={word}: {clue!r}"
+                )
+        h1, h2 = (h.lower() for h in halves_by_side[side])
+        words = set(re.findall(r"[a-zA-Z]+", low))
+        if h1 in words and h2 in words:
+            return False, (
+                f"matrix[{m['id']}] clue {side}={compounds[side]} contains BOTH halves "
+                f"{h1.upper()}+{h2.upper()}: {clue!r}"
+            )
     return True, ""
 
 
