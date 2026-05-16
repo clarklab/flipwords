@@ -335,21 +335,69 @@ export const playSessionComplete = () =>
     });
   });
 
-// Star pop — one bell tink. Use the index to pitch each successive pop higher.
-export const playStarPop = (index: number = 0) =>
+// Earned star — bright "zing" with an upward swoop into a bell strike and a
+// shimmery overtone. Use the index to pitch each successive zing higher so a
+// 3-star ascent climbs.
+export const playStarZing = (index: number = 0) =>
   safe(({ ctx, master }) => {
     const notes = [1047, 1319, 1568]; // C6 E6 G6
     const f = notes[Math.min(Math.max(index, 0), notes.length - 1)];
+    // Upward swoop into the bell strike
+    tone(ctx, master, {
+      freq: [f * 0.55, f],
+      type: "triangle",
+      duration: 0.1,
+      gain: 0.09,
+      rampType: "exponential",
+    });
+    // Main bell body
     tone(ctx, master, {
       freq: f,
       type: "triangle",
+      duration: 0.32,
+      gain: 0.14,
+      delay: 0.05,
+    });
+    // Bright shimmer one octave up
+    tone(ctx, master, {
+      freq: f * 2,
+      type: "sine",
+      duration: 0.26,
+      gain: 0.06,
+      delay: 0.05,
+    });
+    // Sparkle on top
+    tone(ctx, master, {
+      freq: f * 3,
+      type: "sine",
+      duration: 0.14,
+      gain: 0.035,
+      delay: 0.05,
+    });
+  });
+
+// Missed star — deflated downward "pop". The wah-wah cousin of the zing for
+// every empty slot in the rating.
+export const playStarMiss = () =>
+  safe(({ ctx, master }) => {
+    tone(ctx, master, {
+      freq: [500, 180],
+      type: "triangle",
       duration: 0.22,
-      gain: 0.12,
+      gain: 0.1,
+      rampType: "exponential",
     });
     tone(ctx, master, {
-      freq: f * 1.5,
+      freq: [260, 95],
       type: "sine",
-      duration: 0.18,
-      gain: 0.05,
+      duration: 0.24,
+      gain: 0.06,
+      rampType: "exponential",
+    });
+    noise(ctx, master, {
+      duration: 0.05,
+      filterStart: 900,
+      filterQ: 1.4,
+      gain: 0.04,
     });
   });
