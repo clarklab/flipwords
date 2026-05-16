@@ -872,7 +872,12 @@ export default function FlipWords() {
 
       {/* Game board — sits directly on the paper surface, no container chrome */}
       <div className="flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-4 md:mt-6 flex items-center justify-center z-10">
-        <div className="relative w-full">
+        {/* Wrapper is content-sized (no w-full) so the clue pills hug the
+            slots even on wide viewports. The parent flex centers the
+            whole play area horizontally; the rotate FAB sits at the bottom-
+            right of THIS wrapper, which means right next to the play area
+            instead of stranded at the viewport's right edge. */}
+        <div className="relative">
           {/* Rotate FAB — bottom-right of the clue/label area, solid accent */}
           <button
             onClick={() => {
@@ -893,7 +898,7 @@ export default function FlipWords() {
 
           <div
             ref={boardFrameRef}
-            className="grid grid-cols-[auto_1fr_auto] grid-rows-[auto_1fr_auto] gap-x-2 md:gap-x-4 gap-y-5 md:gap-y-10 place-items-center"
+            className="grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] gap-x-2 md:gap-x-4 gap-y-5 md:gap-y-10 place-items-center"
           >
             {/* Top edge */}
             <div className="col-start-2 row-start-1">
