@@ -62,7 +62,7 @@ function PlayRoute() {
         result={existingResult}
         dayNumber={dn}
         onPractice={handlePractice}
-        onArchive={() => navigate({ to: '/archive' as never })}
+        onArchive={() => navigate({ to: '/archive' })}
       />
     )
   }
