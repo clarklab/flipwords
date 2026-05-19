@@ -1346,10 +1346,13 @@ export default function FlipWords() {
                           filter: filled
                             ? "drop-shadow(0 4px 14px rgba(31,156,147,0.55))"
                             : "none",
+                          fontVariationSettings: filled
+                            ? '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 48'
+                            : '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 48',
                           willChange: "transform, opacity",
                         }}
                       >
-                        {filled ? "star" : "star_outline"}
+                        star
                       </motion.span>
                     </div>
                   );
@@ -1410,20 +1413,25 @@ export default function FlipWords() {
                         </span>
                       </div>
                       <div className="flex items-center gap-0.5">
-                        {[1, 2, 3].map((n) => (
-                          <span
-                            key={n}
-                            className="material-icons text-[16px]"
-                            style={{
-                              color:
-                                n <= stars
+                        {[1, 2, 3].map((n) => {
+                          const isFilled = n <= stars;
+                          return (
+                            <span
+                              key={n}
+                              className="material-icons text-[16px]"
+                              style={{
+                                color: isFilled
                                   ? "var(--color-accent)"
                                   : "var(--color-tile-edge)",
-                            }}
-                          >
-                            {n <= stars ? "star" : "star_outline"}
-                          </span>
-                        ))}
+                                fontVariationSettings: isFilled
+                                  ? '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 20'
+                                  : '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 20',
+                              }}
+                            >
+                              star
+                            </span>
+                          );
+                        })}
                       </div>
                     </div>
                   );
