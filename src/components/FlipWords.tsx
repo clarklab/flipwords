@@ -10,6 +10,7 @@ import AnimatedWordmark, {
   type AnimatedWordmarkHandle,
 } from "./AnimatedWordmark";
 import type { Level, Slots, Tile as TileType } from "@/game/types";
+import type { SessionMode, SessionResult, EasternDate } from '@/daily/types'
 import {
   getExpectedEdges,
   isLevelSolved,
@@ -39,7 +40,7 @@ export const getSolvedEdgeAnswers = (level: Level) => {
   return { top: e.top, bottom: e.bottom, left: e.left, right: e.right };
 };
 
-export type FlipWordsMode = 'daily' | 'archive' | 'practice'
+export type FlipWordsMode = SessionMode
 
 export type FlipWordsProps = {
   /** The pre-built 5-puzzle session this run will play. */
@@ -50,11 +51,11 @@ export type FlipWordsProps = {
    * Called once when the session is complete with the aggregated result.
    * The host page is responsible for persistence and navigation.
    */
-  onComplete?: (result: import('@/daily/types').SessionResult) => void
+  onComplete?: (result: SessionResult) => void
   /**
    * Eastern date string this session belongs to. Used for the SessionResult.
    */
-  date: import('@/daily/types').EasternDate
+  date: EasternDate
   /** Day number for this session (today's daily number, or archive's). */
   dayNumber: number
   /** Override the scorecard's primary CTA. */
@@ -269,6 +270,7 @@ export default function FlipWords(props: FlipWordsProps) {
     setGameLevels(session)
     setLevelIdx(0)
     setShowSessionSummary(false)
+    setShowCelebration(false)
     sessionStartRef.current = null
     sessionEndRef.current = null
     perPuzzleRef.current = []
@@ -403,58 +405,55 @@ export default function FlipWords(props: FlipWordsProps) {
   useEffect(() => {
     if (!showSessionSummary) return;
     playSessionComplete();
-    if (onComplete && perPuzzleRef.current.length > 0) {
+
+    const perPuzzleResults = perPuzzleRef.current.map((p) => ({
+      attempts: p.attempts,
+      hints: p.hints,
+      durationMs: p.durationMs,
+      stars: computeStars(p.attempts, p.durationMs),
+    }))
+    const stats = perPuzzleResults.map((p) => p.stars)
+    const totalStarsEarned = stats.reduce((s, n) => s + n, 0)
+    const possibleStars = stats.length * 3
+    const earned: 1 | 2 | 3 =
+      stats.length === 0
+        ? 1
+        : totalStarsEarned === possibleStars
+        ? 3
+        : totalStarsEarned >= possibleStars * (2 / 3)
+        ? 2
+        : 1
+
+    if (onComplete && perPuzzleResults.length > 0) {
       const totalDurationMs =
         sessionEndRef.current && sessionStartRef.current
           ? sessionEndRef.current - sessionStartRef.current
           : 0
-      const perPuzzleResults = perPuzzleRef.current.map((p) => ({
-        attempts: p.attempts,
-        hints: p.hints,
-        durationMs: p.durationMs,
-        stars: computeStars(p.attempts, p.durationMs),
-      }))
-      const completeTotalStars = perPuzzleResults.reduce((s, p) => s + p.stars, 0)
-      const completePossible = perPuzzleResults.length * 3
-      const overall: 1 | 2 | 3 =
-        completeTotalStars === completePossible ? 3 : completeTotalStars >= completePossible * (2 / 3) ? 2 : 1
       onComplete({
         date,
         dayNumber,
         completedAt: Date.now(),
-        stars: overall,
+        stars: earned,
         perPuzzle: perPuzzleResults,
         totalDurationMs,
       })
     }
-    const stats = perPuzzleRef.current.map((p) =>
-      computeStars(p.attempts, p.durationMs)
-    );
-    const total = stats.reduce((sum, s) => sum + s, 0);
-    const possible = stats.length * 3;
-    const earned: 1 | 2 | 3 =
-      stats.length === 0
-        ? 1
-        : total === possible
-        ? 3
-        : total >= possible * (2 / 3)
-        ? 2
-        : 1;
+
     // Fire a sound for each of the three star slots so the rating reads
     // audibly as well as visually: zing zing zing for 3 stars, zing zing pop
     // for 2, zing pop pop for 1.
-    const timers: number[] = [];
+    const timers: number[] = []
     for (let n = 1; n <= 3; n++) {
-      const filled = n <= earned;
+      const filled = n <= earned
       const t = window.setTimeout(
         () => (filled ? playStarZing(n - 1) : playStarMiss()),
         (0.2 + n * 0.15) * 1000
-      );
-      timers.push(t);
+      )
+      timers.push(t)
     }
     return () => {
-      timers.forEach((t) => window.clearTimeout(t));
-    };
+      timers.forEach((t) => window.clearTimeout(t))
+    }
   }, [showSessionSummary]);
 
   const runWinSequence = useCallback(() => {
@@ -915,7 +914,7 @@ export default function FlipWords(props: FlipWordsProps) {
 
   // Material Symbols clock_loader_* increments 20 → 40 → 60 → 80 → 90 across
   // the 5 puzzles of a session, so the icon visually fills as the player
-  // progresses. The session is fixed at SESSION_SIZE, so the lookup is
+  // progresses. The session is always 5 puzzles, so the lookup is
   // straightforward; fall back to the most-full symbol if the index ever
   // overshoots (it shouldn't, but it keeps a bad state from rendering blank).
   const puzzleProgressIcon = [
