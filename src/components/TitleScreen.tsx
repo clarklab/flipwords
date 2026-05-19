@@ -221,7 +221,7 @@ export default function TitleScreen() {
             to="/play"
             className="font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-4 rounded-full text-base shadow-tile transition-all active:scale-95 border border-transparent"
           >
-            {todaysSessionDone ? "View today's scorecard" : "Play today's wordflip"}
+            {todaysSessionDone ? "View today's scorecard" : "Play FLIPWORDS"}
             <span className="material-icons text-[20px]">
               {todaysSessionDone ? 'chevron_right' : 'arrow_forward'}
             </span>
