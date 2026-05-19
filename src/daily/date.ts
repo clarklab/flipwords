@@ -15,5 +15,5 @@ const FORMATTER = new Intl.DateTimeFormat('en-CA', {
 
 /** Eastern-time calendar date (YYYY-MM-DD) at the given instant. */
 export function easternDateString(now: Date = new Date()): EasternDate {
-  return FORMATTER.format(now) as EasternDate
+  return FORMATTER.format(now)
 }
