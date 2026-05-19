@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import AnimatedWordmark from './AnimatedWordmark'
 import TutorialModal from './TutorialModal'
+import WelcomeCarousel from './WelcomeCarousel'
 import { easternDateString, dayNumber, msUntilNextRollover } from '@/daily/date'
 import { loadStorage, saveStorage } from '@/daily/storage'
 import { settleStreak } from '@/daily/streak'
@@ -110,28 +111,9 @@ export default function TitleScreen() {
             </p>
           </div>
 
-          {/* Stat row — or welcome card for first-time visitors */}
+          {/* Stat row — or welcome carousel for first-time visitors */}
           {sessionsPlayed === 0 ? (
-            <div
-              className="mt-4 px-5 py-4 rounded-2xl border text-center"
-              style={{
-                background: 'oklch(95% 0.04 180 / 0.55)',
-                borderColor: 'var(--color-accent)',
-              }}
-            >
-              <p className="font-ui flex items-center justify-center gap-1.5 text-accent text-[11px] uppercase tracking-[0.2em] mb-1.5">
-                <span
-                  className="material-icons text-[16px]"
-                  style={{ fontVariationSettings: '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24' }}
-                >
-                  auto_awesome
-                </span>
-                First wordflip
-              </p>
-              <p className="font-clue text-[14px] text-ink leading-snug">
-                Solve 5 compound-word puzzles to start your streak.
-              </p>
-            </div>
+            <WelcomeCarousel />
           ) : (
             <div className="grid grid-cols-3 mt-4 border border-tile-edge rounded-2xl bg-tile-face shadow-tile overflow-hidden">
               <StatCell
