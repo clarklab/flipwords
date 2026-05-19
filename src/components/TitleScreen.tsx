@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import AnimatedWordmark from './AnimatedWordmark'
+import TutorialModal from './TutorialModal'
 import { easternDateString, dayNumber, msUntilNextRollover } from '@/daily/date'
 import { loadStorage, saveStorage } from '@/daily/storage'
 import { settleStreak } from '@/daily/streak'
@@ -50,10 +51,11 @@ export default function TitleScreen() {
     return () => window.clearInterval(id)
   }, [])
 
+  const [showTutorial, setShowTutorial] = useState(false)
+
   const todaysSessionDone = !!storage?.sessions[today]
   const streak = storage?.streak.current ?? 0
   const sessionsPlayed = storage?.totals.sessionsPlayed ?? 0
-  const perfectSessions = storage?.totals.perfectSessions ?? 0
   const avgStars = (() => {
     if (!storage || sessionsPlayed === 0) return null
     const total = Object.values(storage.sessions).reduce((s, r) => s + r.stars, 0)
@@ -75,6 +77,7 @@ export default function TitleScreen() {
               <span className="material-icons text-[22px]">menu</span>
             </button>
             <button
+              onClick={() => setShowTutorial(true)}
               className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
               title="How to play"
               aria-label="How to play"
@@ -155,8 +158,9 @@ export default function TitleScreen() {
           </div>
         </div>
 
-        {/* Mention perfectSessions silently — not rendered, but available to V2 stats page */}
-        {perfectSessions >= 0 && null}
+        {showTutorial && (
+          <TutorialModal onComplete={() => setShowTutorial(false)} />
+        )}
       </div>
 
       {/* Chin */}

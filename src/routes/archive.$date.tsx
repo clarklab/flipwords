@@ -42,6 +42,7 @@ function ArchiveReplay() {
         scorecardPrimaryLabel="Back to archive"
         scorecardPrimaryIcon="history"
         onScorecardPrimary={() => navigate({ to: '/archive' })}
+        onBack={() => navigate({ to: '/archive' })}
       />
     </div>
   )

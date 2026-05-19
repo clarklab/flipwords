@@ -63,6 +63,8 @@ export type FlipWordsProps = {
   scorecardPrimaryLabel?: string
   scorecardPrimaryIcon?: string
   onScorecardPrimary?: () => void
+  /** Override the header's left FAB behavior (defaults to opening the tutorial). */
+  onBack?: () => void
 }
 
 const SOLVE_HEADLINES = [
@@ -188,8 +190,7 @@ const fireConfetti = () => {
 
 export default function FlipWords(props: FlipWordsProps) {
   const { session, mode, onComplete, date, dayNumber,
-          scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary } = props
-  void mode
+          scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary, onBack } = props
   const [showTutorial, setShowTutorial] = useState(false);
   const [gameLevels, setGameLevels] = useState<Level[]>(session);
   const [levelIdx, setLevelIdx] = useState(0);
@@ -964,11 +965,15 @@ export default function FlipWords(props: FlipWordsProps) {
 
       <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
         <div className="flex items-center justify-between">
-          {/* Left — Back FAB. Stand-in for a future title-screen route; for
-              now it surfaces the tutorial so users have somewhere to land. */}
+          {/* Left — Back FAB. If the host provides onBack (e.g., archive
+              replay), navigate back to the archive list. Otherwise surface
+              the tutorial so users have somewhere to land. */}
           <div className="flex items-center">
             <button
-              onClick={() => setShowTutorial(true)}
+              onClick={() => {
+                if (onBack) onBack()
+                else setShowTutorial(true)
+              }}
               className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
               title="Back"
               aria-label="Back"
