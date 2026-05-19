@@ -4,18 +4,21 @@ import gsap from "gsap";
 import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
 import TutorialModal from "./TutorialModal";
+import Scorecard from "./Scorecard";
 import Tile from "./Tile";
 import AnimatedWordmark, {
   type AnimatedWordmarkHandle,
 } from "./AnimatedWordmark";
 import type { Level, Slots, Tile as TileType } from "@/game/types";
+import type { SessionMode, SessionResult, EasternDate } from '@/daily/types'
+import { loadStorage } from '@/daily/storage'
 import {
   getExpectedEdges,
   isLevelSolved,
   sanitizeState,
 } from "@/game/transforms";
 import { getNextHintAction, getLevelHintPattern } from "@/game/hint";
-import { allLevels, pickSessionLevels } from "@/game/levels";
+import { allLevels } from "@/game/levels";
 import {
   playBoardRotate,
   playCorrect,
@@ -38,7 +41,31 @@ export const getSolvedEdgeAnswers = (level: Level) => {
   return { top: e.top, bottom: e.bottom, left: e.left, right: e.right };
 };
 
-const SESSION_SIZE = 5;
+export type FlipWordsMode = SessionMode
+
+export type FlipWordsProps = {
+  /** The pre-built 5-puzzle session this run will play. */
+  session: Level[]
+  /** Identifies the persistence/CTA flavor. */
+  mode: FlipWordsMode
+  /**
+   * Called once when the session is complete with the aggregated result.
+   * The host page is responsible for persistence and navigation.
+   */
+  onComplete?: (result: SessionResult) => void
+  /**
+   * Eastern date string this session belongs to. Used for the SessionResult.
+   */
+  date: EasternDate
+  /** Day number for this session (today's daily number, or archive's). */
+  dayNumber: number
+  /** Override the scorecard's primary CTA. */
+  scorecardPrimaryLabel?: string
+  scorecardPrimaryIcon?: string
+  onScorecardPrimary?: () => void
+  /** Override the header's left FAB behavior (defaults to opening the tutorial). */
+  onBack?: () => void
+}
 
 const SOLVE_HEADLINES = [
   "Click. Click. Click.",
@@ -161,9 +188,11 @@ const fireConfetti = () => {
   }, 250);
 };
 
-export default function FlipWords() {
+export default function FlipWords(props: FlipWordsProps) {
+  const { session, mode, onComplete, date, dayNumber,
+          scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary, onBack } = props
   const [showTutorial, setShowTutorial] = useState(false);
-  const [gameLevels, setGameLevels] = useState<Level[]>([]);
+  const [gameLevels, setGameLevels] = useState<Level[]>(session);
   const [levelIdx, setLevelIdx] = useState(0);
   const [bank, setBank] = useState<TileType[]>([]);
   const [slots, setSlots] = useState<Slots>([null, null]);
@@ -190,6 +219,13 @@ export default function FlipWords() {
   // Pauses when the browser tab is hidden and resumes on visibility, so the
   // displayed value matches "time spent actually looking at the puzzle."
   const [elapsedMs, setElapsedMs] = useState(0);
+  // Streak snapshot captured after the host's onComplete writes to storage.
+  // Only populated in daily mode; passed to Scorecard for the streak chip.
+  const [streakSnapshot, setStreakSnapshot] = useState<{
+    current: number
+    best: number
+    deltaThisSession: boolean
+  } | null>(null);
 
   const slotRefs = useRef<(HTMLDivElement | null)[]>([null, null]);
   const slotsRef = useRef<Slots>([null, null]);
@@ -238,9 +274,20 @@ export default function FlipWords() {
     window.setTimeout(() => wordmarkRef.current?.flip(), 240);
   }, []);
 
+  // Update if session prop changes (host starts a new run).
   useEffect(() => {
-    setGameLevels(pickSessionLevels(SESSION_SIZE));
-  }, []);
+    setGameLevels(session)
+    setLevelIdx(0)
+    setShowSessionSummary(false)
+    setShowCelebration(false)
+    sessionStartRef.current = null
+    sessionEndRef.current = null
+    perPuzzleRef.current = []
+    elapsedAccumRef.current = 0
+    visibleStartRef.current = null
+    setElapsedMs(0)
+    setStreakSnapshot(null)
+  }, [session])
 
   const expectedEdges = useMemo(
     () => (level ? getExpectedEdges(level) : null),
@@ -368,34 +415,68 @@ export default function FlipWords() {
   useEffect(() => {
     if (!showSessionSummary) return;
     playSessionComplete();
-    const stats = perPuzzleRef.current.map((p) =>
-      computeStars(p.attempts, p.durationMs)
-    );
-    const total = stats.reduce((sum, s) => sum + s, 0);
-    const possible = stats.length * 3;
+
+    const perPuzzleResults = perPuzzleRef.current.map((p) => ({
+      attempts: p.attempts,
+      hints: p.hints,
+      durationMs: p.durationMs,
+      stars: computeStars(p.attempts, p.durationMs),
+    }))
+    const stats = perPuzzleResults.map((p) => p.stars)
+    const totalStarsEarned = stats.reduce((s, n) => s + n, 0)
+    const possibleStars = stats.length * 3
     const earned: 1 | 2 | 3 =
       stats.length === 0
         ? 1
-        : total === possible
+        : totalStarsEarned === possibleStars
         ? 3
-        : total >= possible * (2 / 3)
+        : totalStarsEarned >= possibleStars * (2 / 3)
         ? 2
-        : 1;
+        : 1
+
+    if (onComplete && perPuzzleResults.length > 0) {
+      const totalDurationMs =
+        sessionEndRef.current && sessionStartRef.current
+          ? sessionEndRef.current - sessionStartRef.current
+          : 0
+      onComplete({
+        date,
+        dayNumber,
+        completedAt: Date.now(),
+        stars: earned,
+        perPuzzle: perPuzzleResults,
+        totalDurationMs,
+      })
+    }
+
+    // Snapshot streak after persistence has run (host's onComplete writes first).
+    // We read it back from storage on the next tick.
+    if (mode === 'daily') {
+      window.setTimeout(() => {
+        const s = loadStorage()
+        setStreakSnapshot({
+          current: s.streak.current,
+          best: s.streak.best,
+          deltaThisSession: s.streak.lastCompletedDate === date,
+        })
+      }, 0)
+    }
+
     // Fire a sound for each of the three star slots so the rating reads
     // audibly as well as visually: zing zing zing for 3 stars, zing zing pop
     // for 2, zing pop pop for 1.
-    const timers: number[] = [];
+    const timers: number[] = []
     for (let n = 1; n <= 3; n++) {
-      const filled = n <= earned;
+      const filled = n <= earned
       const t = window.setTimeout(
         () => (filled ? playStarZing(n - 1) : playStarMiss()),
         (0.2 + n * 0.15) * 1000
-      );
-      timers.push(t);
+      )
+      timers.push(t)
     }
     return () => {
-      timers.forEach((t) => window.clearTimeout(t));
-    };
+      timers.forEach((t) => window.clearTimeout(t))
+    }
   }, [showSessionSummary]);
 
   const runWinSequence = useCallback(() => {
@@ -789,16 +870,12 @@ export default function FlipWords() {
   };
 
   const startNewSession = () => {
-    sessionStartRef.current = null;
-    sessionEndRef.current = null;
-    perPuzzleRef.current = [];
-    elapsedAccumRef.current = 0;
-    visibleStartRef.current = null;
-    setElapsedMs(0);
-    setShowSessionSummary(false);
-    setShowCelebration(false);
-    setGameLevels(pickSessionLevels(SESSION_SIZE));
-    setLevelIdx(0);
+    if (onScorecardPrimary) {
+      onScorecardPrimary()
+      return
+    }
+    // No host-provided primary — just close the scorecard.
+    setShowSessionSummary(false)
   };
 
   // Derived scorecard values — only meaningful when showSessionSummary is true,
@@ -860,7 +937,7 @@ export default function FlipWords() {
 
   // Material Symbols clock_loader_* increments 20 → 40 → 60 → 80 → 90 across
   // the 5 puzzles of a session, so the icon visually fills as the player
-  // progresses. The session is fixed at SESSION_SIZE, so the lookup is
+  // progresses. The session is always 5 puzzles, so the lookup is
   // straightforward; fall back to the most-full symbol if the index ever
   // overshoots (it shouldn't, but it keeps a bad state from rendering blank).
   const puzzleProgressIcon = [
@@ -888,11 +965,15 @@ export default function FlipWords() {
 
       <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
         <div className="flex items-center justify-between">
-          {/* Left — Back FAB. Stand-in for a future title-screen route; for
-              now it surfaces the tutorial so users have somewhere to land. */}
+          {/* Left — Back FAB. If the host provides onBack (e.g., archive
+              replay), navigate back to the archive list. Otherwise surface
+              the tutorial so users have somewhere to land. */}
           <div className="flex items-center">
             <button
-              onClick={() => setShowTutorial(true)}
+              onClick={() => {
+                if (onBack) onBack()
+                else setShowTutorial(true)
+              }}
               className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
               title="Back"
               aria-label="Back"
@@ -1255,200 +1336,26 @@ export default function FlipWords() {
       </AnimatePresence>
 
       {/* End-of-session scorecard */}
-      <AnimatePresence>
-        {showSessionSummary && (
-          <motion.div
-            key="scorecard-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, rgba(50,30,5,0.45) 0%, rgba(20,15,5,0.7) 100%)",
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            <motion.div
-              key="scorecard-card"
-              initial={{ y: 20, opacity: 0, scale: 0.94 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: 10, opacity: 0, scale: 0.96 }}
-              transition={{ type: "spring", damping: 26, stiffness: 260 }}
-              className="bg-tile-face rounded-3xl w-full max-w-md p-6 md:p-8 shadow-tile-lift flex flex-col items-center"
-            >
-              <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.22em] mb-3">
-                Session complete
-              </p>
-
-              {/* Big stars — overshoot scale + rotation, with a radial burst
-                  behind each filled star. Both layers ride transform/opacity
-                  on the GPU. */}
-              <div className="flex items-center gap-2 mb-4">
-                {[1, 2, 3].map((n) => {
-                  const filled = n <= overallStars;
-                  const delay = 0.2 + n * 0.15;
-                  return (
-                    <div
-                      key={n}
-                      className="relative inline-flex items-center justify-center w-[56px] h-[56px]"
-                    >
-                      {filled && (
-                        <motion.span
-                          aria-hidden
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{
-                            scale: [0, 2.1, 2.4],
-                            opacity: [0, 0.85, 0],
-                          }}
-                          transition={{
-                            delay,
-                            duration: 0.65,
-                            times: [0, 0.35, 1],
-                            ease: "easeOut",
-                          }}
-                          className="absolute inset-0 rounded-full pointer-events-none"
-                          style={{
-                            background:
-                              "radial-gradient(circle, rgba(247,196,84,0.85) 0%, rgba(247,196,84,0.35) 38%, rgba(247,196,84,0) 70%)",
-                            willChange: "transform, opacity",
-                          }}
-                        />
-                      )}
-                      <motion.span
-                        initial={{ scale: 0, rotate: -180, opacity: 0 }}
-                        animate={
-                          filled
-                            ? {
-                                scale: [0, 1.55, 0.85, 1.12, 1],
-                                rotate: [-180, 25, -10, 5, 0],
-                                opacity: [0, 1, 1, 1, 1],
-                              }
-                            : {
-                                scale: [0, 0.7, 1],
-                                rotate: [-90, 10, 0],
-                                opacity: [0, 1, 1],
-                              }
-                        }
-                        transition={{
-                          delay,
-                          duration: filled ? 0.75 : 0.5,
-                          times: filled
-                            ? [0, 0.45, 0.68, 0.86, 1]
-                            : [0, 0.6, 1],
-                          ease: "easeOut",
-                        }}
-                        className="material-icons relative text-[44px] leading-none"
-                        style={{
-                          color: filled
-                            ? "var(--color-accent)"
-                            : "var(--color-tile-edge)",
-                          filter: filled
-                            ? "drop-shadow(0 4px 14px rgba(31,156,147,0.55))"
-                            : "none",
-                          fontVariationSettings: filled
-                            ? '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 48'
-                            : '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 48',
-                          willChange: "transform, opacity",
-                        }}
-                      >
-                        star
-                      </motion.span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <h2 className="font-wide text-2xl md:text-3xl text-ink text-center leading-tight mb-1">
-                {sessionHeadline}
-              </h2>
-              <p className="font-clue text-sm text-ink-muted text-center mb-5">
-                {totalStars} of {possibleStars} stars across {perPuzzleStars.length}{" "}
-                puzzles
-              </p>
-
-              {/* Headline stats */}
-              <div className="w-full grid grid-cols-3 gap-2 mb-5">
-                {[
-                  { label: "Time", value: formatDuration(sessionDuration) },
-                  { label: "Guesses", value: totalGuesses.toString() },
-                  { label: "Hints", value: totalHints.toString() },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-2xl bg-surface-deep/40 px-2 py-3 text-center shadow-slot-inset"
-                  >
-                    <p className="font-ui text-[10px] text-ink-soft uppercase tracking-[0.16em] mb-1">
-                      {stat.label}
-                    </p>
-                    <p className="font-expand text-xl text-ink leading-none">
-                      {stat.value}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Per-puzzle breakdown */}
-              <div className="w-full mb-6 rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
-                {perPuzzleRef.current.map((stat, i) => {
-                  const stars = perPuzzleStars[i];
-                  return (
-                    <div
-                      key={i}
-                      className="flex items-center justify-between px-3.5 py-2"
-                    >
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-ui text-xs text-ink-soft uppercase tracking-wider">
-                          {(i + 1).toString().padStart(2, "0")}
-                        </span>
-                        <span className="font-clue text-sm text-ink-muted">
-                          {stat.attempts} {stat.attempts === 1 ? "guess" : "guesses"}
-                          {stat.hints > 0 && (
-                            <>, {stat.hints} hint{stat.hints === 1 ? "" : "s"}</>
-                          )}
-                          <span className="text-ink-soft/60">
-                            {" "}
-                            · {formatDuration(stat.durationMs)}
-                          </span>
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-0.5">
-                        {[1, 2, 3].map((n) => {
-                          const isFilled = n <= stars;
-                          return (
-                            <span
-                              key={n}
-                              className="material-icons text-[16px]"
-                              style={{
-                                color: isFilled
-                                  ? "var(--color-accent)"
-                                  : "var(--color-tile-edge)",
-                                fontVariationSettings: isFilled
-                                  ? '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 20'
-                                  : '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 20',
-                              }}
-                            >
-                              star
-                            </span>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <button
-                onClick={startNewSession}
-                className="w-full font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface py-3.5 rounded-full text-base shadow-tile transition-all active:scale-95"
-              >
-                Play another session
-                <span className="material-icons text-[20px]">refresh</span>
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Scorecard
+        open={showSessionSummary}
+        headline={sessionHeadline}
+        overallStars={overallStars}
+        totalStars={totalStars}
+        possibleStars={possibleStars}
+        sessionDurationMs={sessionDuration}
+        totalGuesses={totalGuesses}
+        totalHints={totalHints}
+        perPuzzle={perPuzzleRef.current.map((p, i) => ({
+          attempts: p.attempts,
+          hints: p.hints,
+          durationMs: p.durationMs,
+          stars: perPuzzleStars[i],
+        }))}
+        primaryLabel={scorecardPrimaryLabel ?? 'Play another session'}
+        primaryIcon={scorecardPrimaryIcon ?? 'refresh'}
+        onPrimary={onScorecardPrimary ?? startNewSession}
+        streak={streakSnapshot}
+      />
 
       {/* Judge modal — pauses for a beat then reveals correct/incorrect */}
       <AnimatePresence>

@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "rimraf dist && vite build"
+    "build": "rimraf dist && vite build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -28,14 +30,19 @@
   "devDependencies": {
     "@netlify/vite-plugin-tanstack-start": "^1.2.14",
     "@tailwindcss/vite": "^4.0.6",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
+    "@vitest/ui": "^4.1.6",
+    "jsdom": "^29.1.1",
     "lucide-react": "^0.576.0",
     "rimraf": "^6.0.1",
     "tailwindcss": "^4.0.6",
     "typescript": "^5.7.2",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "vitest": "^4.1.6"
   }
 }

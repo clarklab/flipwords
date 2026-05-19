@@ -148,3 +148,94 @@ export const pickLevels = (count: number, startTier?: 1 | 2 | 3): Level[] => {
   const pool = RAW.filter((l) => (l.tier ?? 1) >= startTier);
   return shuffle(pool).slice(0, count);
 };
+
+/** 32-bit FNV-1a hash of a string — used as the seed for the daily RNG. */
+function fnv1a(str: string): number {
+  let h = 0x811c9dc5 | 0
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i)
+    h = Math.imul(h, 0x01000193)
+  }
+  return h >>> 0
+}
+
+/** Mulberry32 — small, deterministic, well-distributed PRNG. */
+function mulberry32(seed: number): () => number {
+  let a = seed
+  return () => {
+    a = (a + 0x6d2b79f5) | 0
+    let t = a
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/**
+ * Same tier curve as pickSessionLevels, but every random call is seeded so the
+ * output is deterministic for a given seed string. Used by the daily scheduler.
+ */
+export const pickSessionLevelsSeeded = (
+  seedStr: string,
+  count: number = 5
+): Level[] => {
+  const rand = mulberry32(fnv1a(seedStr))
+  const seededPickOne = <T extends { id: number }>(arr: T[], reject: Set<number>): T | undefined => {
+    const candidates = arr.filter((item) => !reject.has(item.id))
+    if (candidates.length === 0) return undefined
+    return candidates[Math.floor(rand() * candidates.length)]
+  }
+  const seededShuffle = <T,>(arr: T[]): T[] => {
+    const out = arr.slice()
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1))
+      ;[out[i], out[j]] = [out[j], out[i]]
+    }
+    return out
+  }
+
+  const tier1 = RAW.filter((l) => (l.tier ?? 1) === 1)
+  const tier2 = RAW.filter((l) => l.tier === 2)
+  const tier3 = RAW.filter((l) => l.tier === 3)
+  const tier3Rotated = tier3.filter((l) => l.requiresRotation)
+  const tier3Flat = tier3.filter((l) => !l.requiresRotation)
+
+  const picked: Level[] = []
+  const used = new Set<number>()
+  const take = (pool: Level[]) => {
+    const c = seededPickOne(pool, used)
+    if (c) {
+      picked.push(c)
+      used.add(c.id)
+    }
+    return c
+  }
+
+  if (count >= 5) {
+    take(tier1)
+    take(tier1)
+    take(tier2)
+    const bridgePool = [...tier2, ...tier3Flat]
+    take(bridgePool.length > 0 ? bridgePool : tier1)
+    take(tier3Rotated.length > 0 ? tier3Rotated : RAW.filter((l) => l.requiresRotation))
+    while (picked.length < count) {
+      const extra = take(seededShuffle([...tier3, ...tier2]))
+      if (!extra) break
+    }
+  } else {
+    const pools = [tier1, tier1, tier2, tier2, tier3Rotated.length ? tier3Rotated : tier3]
+    for (let i = 0; i < count; i++) take(pools[Math.min(i, pools.length - 1)])
+  }
+
+  if (picked.length < count) {
+    for (const lvl of seededShuffle(RAW)) {
+      if (picked.length >= count) break
+      if (!used.has(lvl.id)) {
+        picked.push(lvl)
+        used.add(lvl.id)
+      }
+    }
+  }
+
+  return picked.slice(0, count)
+}
