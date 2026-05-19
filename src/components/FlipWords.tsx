@@ -11,6 +11,7 @@ import AnimatedWordmark, {
 } from "./AnimatedWordmark";
 import type { Level, Slots, Tile as TileType } from "@/game/types";
 import type { SessionMode, SessionResult, EasternDate } from '@/daily/types'
+import { loadStorage } from '@/daily/storage'
 import {
   getExpectedEdges,
   isLevelSolved,
@@ -217,6 +218,13 @@ export default function FlipWords(props: FlipWordsProps) {
   // Pauses when the browser tab is hidden and resumes on visibility, so the
   // displayed value matches "time spent actually looking at the puzzle."
   const [elapsedMs, setElapsedMs] = useState(0);
+  // Streak snapshot captured after the host's onComplete writes to storage.
+  // Only populated in daily mode; passed to Scorecard for the streak chip.
+  const [streakSnapshot, setStreakSnapshot] = useState<{
+    current: number
+    best: number
+    deltaThisSession: boolean
+  } | null>(null);
 
   const slotRefs = useRef<(HTMLDivElement | null)[]>([null, null]);
   const slotsRef = useRef<Slots>([null, null]);
@@ -277,6 +285,7 @@ export default function FlipWords(props: FlipWordsProps) {
     elapsedAccumRef.current = 0
     visibleStartRef.current = null
     setElapsedMs(0)
+    setStreakSnapshot(null)
   }, [session])
 
   const expectedEdges = useMemo(
@@ -437,6 +446,19 @@ export default function FlipWords(props: FlipWordsProps) {
         perPuzzle: perPuzzleResults,
         totalDurationMs,
       })
+    }
+
+    // Snapshot streak after persistence has run (host's onComplete writes first).
+    // We read it back from storage on the next tick.
+    if (mode === 'daily') {
+      window.setTimeout(() => {
+        const s = loadStorage()
+        setStreakSnapshot({
+          current: s.streak.current,
+          best: s.streak.best,
+          deltaThisSession: s.streak.lastCompletedDate === date,
+        })
+      }, 0)
     }
 
     // Fire a sound for each of the three star slots so the rating reads
@@ -1327,6 +1349,7 @@ export default function FlipWords(props: FlipWordsProps) {
         primaryLabel={scorecardPrimaryLabel ?? 'Play another session'}
         primaryIcon={scorecardPrimaryIcon ?? 'refresh'}
         onPrimary={onScorecardPrimary ?? startNewSession}
+        streak={streakSnapshot}
       />
 
       {/* Judge modal — pauses for a beat then reveals correct/incorrect */}

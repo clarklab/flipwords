@@ -20,6 +20,11 @@ export type ScorecardProps = {
   primaryLabel: string
   primaryIcon: string
   onPrimary: () => void
+  streak?: {
+    current: number
+    best: number
+    deltaThisSession: boolean
+  } | null
 }
 
 const formatDuration = (ms: number): string => {
@@ -43,6 +48,7 @@ export default function Scorecard(props: ScorecardProps) {
     primaryLabel,
     primaryIcon,
     onPrimary,
+    streak,
   } = props
 
   return (
@@ -135,6 +141,44 @@ export default function Scorecard(props: ScorecardProps) {
             <p className="font-clue text-sm text-ink-muted text-center mb-5">
               {totalStars} of {possibleStars} stars across {perPuzzle.length} puzzles
             </p>
+
+            {streak && (
+              <div className="w-full mb-4 bg-tile-face border border-tile-edge rounded-[18px] px-3.5 py-3 flex items-center justify-between shadow-tile">
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="w-10 h-10 rounded-full inline-flex items-center justify-center"
+                    style={{ background: 'oklch(94% 0.04 38)', color: 'oklch(64% 0.16 38)' }}
+                  >
+                    <span
+                      className="material-icons text-[22px]"
+                      style={{ fontVariationSettings: '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24' }}
+                    >
+                      local_fire_department
+                    </span>
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="font-ui text-[9.5px] text-ink-soft uppercase tracking-[0.18em]">
+                      Streak
+                    </span>
+                    <span className="font-wide text-[26px] text-ink leading-none flex items-baseline gap-1.5">
+                      {streak.current}
+                      {streak.deltaThisSession && (
+                        <span
+                          className="font-ui text-[10px] px-1.5 py-0.5 rounded-full uppercase tracking-[0.08em]"
+                          style={{ background: 'oklch(94% 0.04 38)', color: 'oklch(64% 0.16 38)' }}
+                        >
+                          +1 today
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-ui text-[9.5px] text-ink-soft uppercase tracking-[0.18em]">Best</p>
+                  <p className="font-expand text-[18px] text-ink leading-none mt-0.5">{streak.best}</p>
+                </div>
+              </div>
+            )}
 
             <div className="w-full grid grid-cols-3 gap-2 mb-5">
               {[
