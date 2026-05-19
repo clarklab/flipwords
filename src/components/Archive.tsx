@@ -139,7 +139,7 @@ export default function Archive() {
                 today={today}
                 launch={LAUNCH_DATE}
                 stored={storage?.sessions[cell.date]}
-                onClick={() => (navigate as any)({ to: '/archive/$date', params: { date: cell.date } })}
+                onClick={() => navigate({ to: '/archive/$date', params: { date: cell.date } })}
               />
             )
           })}

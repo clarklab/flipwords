@@ -134,9 +134,8 @@ export default function TitleScreen() {
           <div className="flex-1 min-h-4" />
 
           {/* Primary CTA */}
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           <Link
-            to={'/play' as any}
+            to="/play"
             className="font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-4 rounded-full text-base shadow-tile transition-all active:scale-95"
           >
             {todaysSessionDone ? "View today's scorecard" : "Play today's session"}
@@ -146,9 +145,8 @@ export default function TitleScreen() {
           </Link>
 
           <div className="flex items-center justify-center mt-4 mb-3">
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <Link
-              to={'/archive' as any}
+              to="/archive"
               className="font-ui flex items-center gap-1.5 text-ink-muted hover:text-ink text-sm py-1.5"
             >
               <span className="material-icons text-[18px] text-ink-soft">history</span>

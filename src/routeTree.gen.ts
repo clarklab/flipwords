@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ArchiveRouteImport } from './routes/archive'
+import { Route as ArchiveDateRouteImport } from './routes/archive.$date'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlayRouteImport } from './routes/play'
 
@@ -23,6 +24,11 @@ const ArchiveRoute = ArchiveRouteImport.update({
   id: '/archive',
   path: '/archive',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ArchiveDateRoute = ArchiveDateRouteImport.update({
+  id: '/archive/$date',
+  path: '$date',
+  getParentRoute: () => ArchiveRoute,
 } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
+  '/archive/$date': typeof ArchiveDateRoute
   '/play': typeof PlayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
+  '/archive/$date': typeof ArchiveDateRoute
   '/play': typeof PlayRoute
 }
 export interface FileRoutesById {
@@ -52,15 +60,19 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
+  '/archive/$date': typeof ArchiveDateRoute
   '/play': typeof PlayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/archive' | '/play'
+  fullPaths: '/' | '/admin' | '/archive' | '/archive/$date' | '/play'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/archive' | '/play'
-  id: '__root__' | '/' | '/admin' | '/archive' | '/play'
+  to: '/' | '/admin' | '/archive' | '/archive/$date' | '/play'
+  id: '__root__' | '/' | '/admin' | '/archive' | '/archive/$date' | '/play'
   fileRoutesById: FileRoutesById
+}
+export interface ArchiveRouteChildren {
+  ArchiveDateRoute: typeof ArchiveDateRoute
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
@@ -85,6 +97,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArchiveRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/archive/$date': {
+      id: '/archive/$date'
+      path: '$date'
+      fullPath: '/archive/$date'
+      preLoaderRoute: typeof ArchiveDateRouteImport
+      parentRoute: typeof ArchiveRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -102,10 +121,15 @@ declare module '@tanstack/react-router' {
   }
 }
 
+const archiveRouteChildren: ArchiveRouteChildren = {
+  ArchiveDateRoute: ArchiveDateRoute,
+}
+const ArchiveRouteWithChildren = ArchiveRoute._addFileChildren(archiveRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
-  ArchiveRoute: ArchiveRoute,
+  ArchiveRoute: ArchiveRouteWithChildren,
   PlayRoute: PlayRoute,
 }
 export const routeTree = rootRouteImport
