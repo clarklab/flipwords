@@ -33,7 +33,7 @@ export default function WelcomeCarousel() {
   const { label, title, Anim } = STEPS[step]
 
   return (
-    <div className="mt-4 px-4 py-3 rounded-[26px] border border-tile-edge bg-tile-face flex items-center gap-4 overflow-hidden h-[104px]">
+    <div className="mt-4 px-4 py-3 rounded-[26px] border border-tile-edge bg-white flex items-center gap-4 overflow-hidden h-[104px]">
       <div className="flex-shrink-0 w-[80px] h-[80px] flex items-center justify-center relative">
         <AnimatePresence mode="wait">
           <motion.div
