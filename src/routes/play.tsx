@@ -22,9 +22,8 @@ function PlayRoute() {
   const session = useMemo(() => getSessionForDate(startDate), [startDate])
   const dn = dayNumber(startDate)
 
-  const initial = loadStorage()
   const [existingResult, setExistingResult] = useState<StoredSession | null>(
-    initial.sessions[startDate] ?? null
+    () => loadStorage().sessions[startDate] ?? null
   )
   const [practiceMode, setPracticeMode] = useState(false)
 
@@ -135,7 +134,10 @@ function ScorecardLock({
           })
         }
       />
-      <div className="fixed bottom-6 inset-x-0 z-[60] flex flex-col items-center gap-2 px-6 pointer-events-none">
+      <div
+        className="fixed bottom-0 inset-x-0 z-[60] flex flex-col items-center gap-2 px-6 pointer-events-none"
+        style={{ paddingBottom: 'max(1.5rem, calc(env(safe-area-inset-bottom) + 0.5rem))' }}
+      >
         <button
           onClick={onPractice}
           className="pointer-events-auto font-ui flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink py-2 px-3"
