@@ -16,7 +16,7 @@ import {
   sanitizeState,
 } from "@/game/transforms";
 import { getNextHintAction, getLevelHintPattern } from "@/game/hint";
-import { allLevels, pickSessionLevels } from "@/game/levels";
+import { allLevels } from "@/game/levels";
 import {
   playBoardRotate,
   playCorrect,
@@ -39,7 +39,29 @@ export const getSolvedEdgeAnswers = (level: Level) => {
   return { top: e.top, bottom: e.bottom, left: e.left, right: e.right };
 };
 
-const SESSION_SIZE = 5;
+export type FlipWordsMode = 'daily' | 'archive' | 'practice'
+
+export type FlipWordsProps = {
+  /** The pre-built 5-puzzle session this run will play. */
+  session: Level[]
+  /** Identifies the persistence/CTA flavor. */
+  mode: FlipWordsMode
+  /**
+   * Called once when the session is complete with the aggregated result.
+   * The host page is responsible for persistence and navigation.
+   */
+  onComplete?: (result: import('@/daily/types').SessionResult) => void
+  /**
+   * Eastern date string this session belongs to. Used for the SessionResult.
+   */
+  date: import('@/daily/types').EasternDate
+  /** Day number for this session (today's daily number, or archive's). */
+  dayNumber: number
+  /** Override the scorecard's primary CTA. */
+  scorecardPrimaryLabel?: string
+  scorecardPrimaryIcon?: string
+  onScorecardPrimary?: () => void
+}
 
 const SOLVE_HEADLINES = [
   "Click. Click. Click.",
@@ -162,9 +184,12 @@ const fireConfetti = () => {
   }, 250);
 };
 
-export default function FlipWords() {
+export default function FlipWords(props: FlipWordsProps) {
+  const { session, mode, onComplete, date, dayNumber,
+          scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary } = props
+  void mode
   const [showTutorial, setShowTutorial] = useState(false);
-  const [gameLevels, setGameLevels] = useState<Level[]>([]);
+  const [gameLevels, setGameLevels] = useState<Level[]>(session);
   const [levelIdx, setLevelIdx] = useState(0);
   const [bank, setBank] = useState<TileType[]>([]);
   const [slots, setSlots] = useState<Slots>([null, null]);
@@ -239,9 +264,18 @@ export default function FlipWords() {
     window.setTimeout(() => wordmarkRef.current?.flip(), 240);
   }, []);
 
+  // Update if session prop changes (host starts a new run).
   useEffect(() => {
-    setGameLevels(pickSessionLevels(SESSION_SIZE));
-  }, []);
+    setGameLevels(session)
+    setLevelIdx(0)
+    setShowSessionSummary(false)
+    sessionStartRef.current = null
+    sessionEndRef.current = null
+    perPuzzleRef.current = []
+    elapsedAccumRef.current = 0
+    visibleStartRef.current = null
+    setElapsedMs(0)
+  }, [session])
 
   const expectedEdges = useMemo(
     () => (level ? getExpectedEdges(level) : null),
@@ -369,6 +403,30 @@ export default function FlipWords() {
   useEffect(() => {
     if (!showSessionSummary) return;
     playSessionComplete();
+    if (onComplete && perPuzzleRef.current.length > 0) {
+      const totalDurationMs =
+        sessionEndRef.current && sessionStartRef.current
+          ? sessionEndRef.current - sessionStartRef.current
+          : 0
+      const perPuzzleResults = perPuzzleRef.current.map((p) => ({
+        attempts: p.attempts,
+        hints: p.hints,
+        durationMs: p.durationMs,
+        stars: computeStars(p.attempts, p.durationMs),
+      }))
+      const completeTotalStars = perPuzzleResults.reduce((s, p) => s + p.stars, 0)
+      const completePossible = perPuzzleResults.length * 3
+      const overall: 1 | 2 | 3 =
+        completeTotalStars === completePossible ? 3 : completeTotalStars >= completePossible * (2 / 3) ? 2 : 1
+      onComplete({
+        date,
+        dayNumber,
+        completedAt: Date.now(),
+        stars: overall,
+        perPuzzle: perPuzzleResults,
+        totalDurationMs,
+      })
+    }
     const stats = perPuzzleRef.current.map((p) =>
       computeStars(p.attempts, p.durationMs)
     );
@@ -790,16 +848,12 @@ export default function FlipWords() {
   };
 
   const startNewSession = () => {
-    sessionStartRef.current = null;
-    sessionEndRef.current = null;
-    perPuzzleRef.current = [];
-    elapsedAccumRef.current = 0;
-    visibleStartRef.current = null;
-    setElapsedMs(0);
-    setShowSessionSummary(false);
-    setShowCelebration(false);
-    setGameLevels(pickSessionLevels(SESSION_SIZE));
-    setLevelIdx(0);
+    if (onScorecardPrimary) {
+      onScorecardPrimary()
+      return
+    }
+    // No host-provided primary — just close the scorecard.
+    setShowSessionSummary(false)
   };
 
   // Derived scorecard values — only meaningful when showSessionSummary is true,
@@ -1271,9 +1325,9 @@ export default function FlipWords() {
           durationMs: p.durationMs,
           stars: perPuzzleStars[i],
         }))}
-        primaryLabel="Play another session"
-        primaryIcon="refresh"
-        onPrimary={startNewSession}
+        primaryLabel={scorecardPrimaryLabel ?? 'Play another session'}
+        primaryIcon={scorecardPrimaryIcon ?? 'refresh'}
+        onPrimary={onScorecardPrimary ?? startNewSession}
       />
 
       {/* Judge modal — pauses for a beat then reveals correct/incorrect */}
