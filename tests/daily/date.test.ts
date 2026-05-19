@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { easternDateString, dayNumber, shiftDate, LAUNCH_DATE } from '@/daily/date'
+import { easternDateString, dayNumber, shiftDate, msUntilNextRollover, LAUNCH_DATE } from '@/daily/date'
 
 describe('easternDateString', () => {
   it('returns YYYY-MM-DD format', () => {
@@ -55,5 +55,24 @@ describe('shiftDate', () => {
 
   it('handles year boundaries', () => {
     expect(shiftDate('2026-12-31', 1)).toBe('2027-01-01')
+  })
+})
+
+describe('msUntilNextRollover', () => {
+  it('returns ms until the next Eastern midnight', () => {
+    // 14:00 UTC on May 18 = 10:00 AM EDT. Next midnight is 04:00 UTC May 19
+    // (14 hours later).
+    const now = new Date('2026-05-18T14:00:00Z')
+    const ms = msUntilNextRollover(now)
+    expect(ms).toBe(14 * 60 * 60 * 1000)
+  })
+
+  it('returns ~24h just past midnight', () => {
+    // 04:00:01 UTC May 19 = 00:00:01 EDT
+    const now = new Date('2026-05-19T04:00:01Z')
+    const ms = msUntilNextRollover(now)
+    // Should be ~24h minus 1s
+    expect(ms).toBeGreaterThan(24 * 60 * 60 * 1000 - 5000)
+    expect(ms).toBeLessThan(24 * 60 * 60 * 1000)
   })
 })
