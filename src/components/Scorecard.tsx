@@ -59,7 +59,7 @@ export default function Scorecard(props: ScorecardProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center px-4 pt-4 pb-24"
           style={{
             background:
               'radial-gradient(ellipse at center, rgba(50,30,5,0.45) 0%, rgba(20,15,5,0.7) 100%)',
@@ -72,20 +72,20 @@ export default function Scorecard(props: ScorecardProps) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 10, opacity: 0, scale: 0.96 }}
             transition={{ type: 'spring', damping: 26, stiffness: 260 }}
-            className="bg-tile-face rounded-3xl w-full max-w-md p-6 md:p-8 shadow-tile-lift flex flex-col items-center"
+            className="bg-tile-face rounded-3xl w-full max-w-md p-5 md:p-6 shadow-tile-lift flex flex-col items-center"
           >
-            <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.22em] mb-3">
-              Session complete
-            </p>
+            <h2 className="font-wide text-2xl md:text-3xl text-ink text-center leading-tight mb-3">
+              {headline}
+            </h2>
 
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-2">
               {[1, 2, 3].map((n) => {
                 const filled = n <= overallStars
                 const delay = 0.2 + n * 0.15
                 return (
                   <div
                     key={n}
-                    className="relative inline-flex items-center justify-center w-[56px] h-[56px]"
+                    className="relative inline-flex items-center justify-center w-[48px] h-[48px]"
                   >
                     {filled && (
                       <motion.span
@@ -118,7 +118,7 @@ export default function Scorecard(props: ScorecardProps) {
                         times: filled ? [0, 0.45, 0.68, 0.86, 1] : [0, 0.6, 1],
                         ease: 'easeOut',
                       }}
-                      className="material-icons relative text-[44px] leading-none"
+                      className="material-icons relative text-[38px] leading-none"
                       style={{
                         color: filled ? 'var(--color-accent)' : 'var(--color-tile-edge)',
                         filter: filled ? 'drop-shadow(0 4px 14px rgba(31,156,147,0.55))' : 'none',
@@ -135,15 +135,12 @@ export default function Scorecard(props: ScorecardProps) {
               })}
             </div>
 
-            <h2 className="font-wide text-2xl md:text-3xl text-ink text-center leading-tight mb-1">
-              {headline}
-            </h2>
-            <p className="font-clue text-sm text-ink-muted text-center mb-5">
+            <p className="font-clue text-sm text-ink-muted text-center mb-4">
               {totalStars} of {possibleStars} stars across {perPuzzle.length} puzzles
             </p>
 
             {streak && (
-              <div className="w-full mb-4 bg-tile-face border border-tile-edge rounded-[18px] px-3.5 py-3 flex items-center justify-between shadow-tile">
+              <div className="w-full mb-3 bg-tile-face border border-tile-edge rounded-[18px] px-3.5 py-2.5 flex items-center justify-between shadow-tile">
                 <div className="flex items-center gap-2.5">
                   <span
                     className="w-10 h-10 rounded-full inline-flex items-center justify-center"
@@ -180,7 +177,7 @@ export default function Scorecard(props: ScorecardProps) {
               </div>
             )}
 
-            <div className="w-full grid grid-cols-3 gap-2 mb-5">
+            <div className="w-full grid grid-cols-3 gap-2 mb-3">
               {[
                 { label: 'Time', value: formatDuration(sessionDurationMs) },
                 { label: 'Guesses', value: totalGuesses.toString() },
@@ -188,7 +185,7 @@ export default function Scorecard(props: ScorecardProps) {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-2xl bg-surface-deep/40 px-2 py-3 text-center shadow-slot-inset"
+                  className="rounded-2xl bg-surface-deep/40 px-2 py-2.5 text-center shadow-slot-inset"
                 >
                   <p className="font-ui text-[10px] text-ink-soft uppercase tracking-[0.16em] mb-1">
                     {stat.label}
@@ -198,9 +195,9 @@ export default function Scorecard(props: ScorecardProps) {
               ))}
             </div>
 
-            <div className="w-full mb-6 rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
+            <div className="w-full mb-4 rounded-2xl border border-tile-edge bg-surface/50 divide-y divide-paper-line/30">
               {perPuzzle.map((stat, i) => (
-                <div key={i} className="flex items-center justify-between px-3.5 py-2">
+                <div key={i} className="flex items-center justify-between px-3.5 py-1.5">
                   <div className="flex items-baseline gap-2">
                     <span className="font-ui text-xs text-ink-soft uppercase tracking-wider">
                       {(i + 1).toString().padStart(2, '0')}
@@ -240,7 +237,7 @@ export default function Scorecard(props: ScorecardProps) {
 
             <button
               onClick={onPrimary}
-              className="w-full font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface py-3.5 rounded-full text-base shadow-tile transition-all active:scale-95"
+              className="w-full font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface py-3 rounded-full text-base shadow-tile transition-all active:scale-95"
             >
               {primaryLabel}
               <span className="material-icons text-[20px]">{primaryIcon}</span>
