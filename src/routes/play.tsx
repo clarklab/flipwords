@@ -11,6 +11,12 @@ import type { SessionResult, StoredSession } from '@/daily/types'
 
 export const Route = createFileRoute('/play')({
   component: PlayRoute,
+  validateSearch: (search: Record<string, unknown>): { tutorial?: boolean } => ({
+    tutorial:
+      search.tutorial === true ||
+      search.tutorial === 'true' ||
+      search.tutorial === '1',
+  }),
 })
 
 function ShareFallback({ text, onClose }: { text: string; onClose: () => void }) {
@@ -44,6 +50,7 @@ function ShareFallback({ text, onClose }: { text: string; onClose: () => void })
 
 function PlayRoute() {
   const navigate = useNavigate()
+  const { tutorial: tutorialFromSearch } = Route.useSearch()
 
   // Snapshot the start date so a cross-midnight session still resolves to its
   // original day (per the design spec edge case).
@@ -123,6 +130,7 @@ function PlayRoute() {
           date={startDate}
           dayNumber={dn}
           mode="daily"
+          showTutorial={tutorialFromSearch}
           scorecardPrimaryLabel="Share result"
           scorecardPrimaryIcon="ios_share"
           onScorecardPrimary={() => {

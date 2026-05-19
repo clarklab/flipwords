@@ -65,6 +65,11 @@ export type FlipWordsProps = {
   onScorecardPrimary?: () => void
   /** Override the header's left FAB behavior (defaults to opening the tutorial). */
   onBack?: () => void
+  /**
+   * If true, show the tutorial modal on mount. The host decides — this
+   * component no longer auto-shows it based on localStorage.
+   */
+  showTutorial?: boolean
 }
 
 const SOLVE_HEADLINES = [
@@ -190,8 +195,9 @@ const fireConfetti = () => {
 
 export default function FlipWords(props: FlipWordsProps) {
   const { session, mode, onComplete, date, dayNumber,
-          scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary, onBack } = props
-  const [showTutorial, setShowTutorial] = useState(false);
+          scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary, onBack,
+          showTutorial: showTutorialProp } = props
+  const [showTutorial, setShowTutorial] = useState(showTutorialProp ?? false);
   const [gameLevels, setGameLevels] = useState<Level[]>(session);
   const [levelIdx, setLevelIdx] = useState(0);
   const [bank, setBank] = useState<TileType[]>([]);
@@ -258,17 +264,7 @@ export default function FlipWords(props: FlipWordsProps) {
 
   const level = gameLevels[levelIdx];
 
-  useEffect(() => {
-    const hasSeenTutorial =
-      typeof window !== "undefined" &&
-      window.localStorage.getItem("flipwords_tutorial_seen");
-    if (!hasSeenTutorial) setShowTutorial(true);
-  }, []);
-
   const handleTutorialComplete = useCallback(() => {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("flipwords_tutorial_seen", "true");
-    }
     setShowTutorial(false);
     // Greet the player as the modal slides out.
     window.setTimeout(() => wordmarkRef.current?.flip(), 240);

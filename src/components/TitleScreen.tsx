@@ -110,29 +110,52 @@ export default function TitleScreen() {
             </p>
           </div>
 
-          {/* Stat row */}
-          <div className="grid grid-cols-3 mt-4 border border-tile-edge rounded-2xl bg-tile-face shadow-tile overflow-hidden">
-            <StatCell
-              tone="warm"
-              icon="local_fire_department"
-              filled
-              value={streak === 0 ? '—' : streak.toString()}
-              label="Streak"
-            />
-            <StatCell
-              tone="gold"
-              icon="star"
-              filled
-              value={avgStars ?? '—'}
-              label="Avg ★"
-            />
-            <StatCell
-              tone="accent"
-              icon="grid_view"
-              value={sessionsPlayed.toString()}
-              label="Played"
-            />
-          </div>
+          {/* Stat row — or welcome card for first-time visitors */}
+          {sessionsPlayed === 0 ? (
+            <div
+              className="mt-4 px-5 py-4 rounded-2xl border text-center"
+              style={{
+                background: 'oklch(95% 0.04 180 / 0.55)',
+                borderColor: 'var(--color-accent)',
+              }}
+            >
+              <p className="font-ui flex items-center justify-center gap-1.5 text-accent text-[11px] uppercase tracking-[0.2em] mb-1.5">
+                <span
+                  className="material-icons text-[16px]"
+                  style={{ fontVariationSettings: '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 24' }}
+                >
+                  auto_awesome
+                </span>
+                First wordflip
+              </p>
+              <p className="font-clue text-[14px] text-ink leading-snug">
+                Solve 5 compound-word puzzles to start your streak.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 mt-4 border border-tile-edge rounded-2xl bg-tile-face shadow-tile overflow-hidden">
+              <StatCell
+                tone="warm"
+                icon="local_fire_department"
+                filled
+                value={streak === 0 ? '—' : streak.toString()}
+                label="Streak"
+              />
+              <StatCell
+                tone="gold"
+                icon="star"
+                filled
+                value={avgStars ?? '—'}
+                label="Avg ★"
+              />
+              <StatCell
+                tone="accent"
+                icon="grid_view"
+                value={sessionsPlayed.toString()}
+                label="Played"
+              />
+            </div>
+          )}
 
           <div className="flex-1 min-h-4" />
 
@@ -141,11 +164,23 @@ export default function TitleScreen() {
             to="/play"
             className="font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-4 rounded-full text-base shadow-tile transition-all active:scale-95"
           >
-            {todaysSessionDone ? "View today's scorecard" : "Play today's session"}
+            {todaysSessionDone ? "View today's scorecard" : "Play today's wordflip"}
             <span className="material-icons text-[20px]">
               {todaysSessionDone ? 'chevron_right' : 'arrow_forward'}
             </span>
           </Link>
+
+          {/* Secondary CTA — only when there's something to learn (i.e. not yet done today) */}
+          {!todaysSessionDone && (
+            <Link
+              to="/play"
+              search={{ tutorial: true }}
+              className="mt-3 font-ui flex items-center justify-center gap-2 bg-white border border-tile-edge text-ink-muted hover:text-ink py-3 rounded-full text-sm shadow-tile transition-all active:scale-95"
+            >
+              <span className="material-icons text-[18px] text-ink-soft">school</span>
+              Learn to play
+            </Link>
+          )}
 
           <div className="flex items-center justify-center mt-4 mb-3">
             <Link
