@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from '@tanstack/react-router'
 import AnimatedWordmark from './AnimatedWordmark'
 import TutorialModal from './TutorialModal'
@@ -29,6 +30,80 @@ function easternHeaderDate(today: string): string {
   const [y, m, d] = today.split('-').map(Number)
   const date = new Date(Date.UTC(y, m - 1, d))
   return `${WEEKDAYS[date.getUTCDay()]} · ${MONTHS[date.getUTCMonth()]} ${date.getUTCDate()}`
+}
+
+// Sub-label flair: the middle word in "Daily ___ word puzzle" cycles through
+// FLIP / FLOP / SWAP, each transitioning with a motion that matches its name —
+// flip = horizontal-axis spin (rotateY), flop = vertical-axis spin (rotateX),
+// swap = in-plane Z rotation. Width is pinned in `ch` so the surrounding
+// "Daily ... word puzzle" doesn't reflow when the word changes. Defined above
+// TitleScreen so Vite's React Fast Refresh transform (which converts function
+// declarations to const-like bindings) doesn't break with a TDZ ReferenceError.
+const FLIP_FLOP_SWAP_WORDS = [
+  {
+    word: 'FLIP',
+    initial: { rotateY: 90, opacity: 0 },
+    animate: { rotateY: 0, opacity: 1 },
+    exit: { rotateY: -90, opacity: 0 },
+  },
+  {
+    word: 'FLOP',
+    initial: { rotateX: 90, opacity: 0 },
+    animate: { rotateX: 0, opacity: 1 },
+    exit: { rotateX: -90, opacity: 0 },
+  },
+  {
+    word: 'SWAP',
+    initial: { rotate: 90, opacity: 0 },
+    animate: { rotate: 0, opacity: 1 },
+    exit: { rotate: -90, opacity: 0 },
+  },
+] as const
+
+function FlipFlopSwap() {
+  const [i, setI] = useState(0)
+
+  useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return
+    }
+    const id = window.setInterval(
+      () => setI((p) => (p + 1) % FLIP_FLOP_SWAP_WORDS.length),
+      2000
+    )
+    return () => window.clearInterval(id)
+  }, [])
+
+  const current = FLIP_FLOP_SWAP_WORDS[i]
+
+  return (
+    <span
+      className="inline-flex items-center justify-center align-baseline text-accent mx-[0.35em]"
+      style={{
+        perspective: 200,
+        width: '4.6ch',
+        height: '1em',
+        verticalAlign: 'baseline',
+      }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={current.word}
+          initial={current.initial}
+          animate={current.animate}
+          exit={current.exit}
+          transition={{ duration: 0.35, ease: 'easeInOut' }}
+          className="inline-block"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
+          {current.word}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  )
 }
 
 export default function TitleScreen() {
@@ -92,7 +167,7 @@ export default function TitleScreen() {
         </header>
 
         <p className="text-center font-ui text-[11px] text-ink-soft uppercase tracking-[0.2em] mt-3">
-          Daily word puzzle
+          Daily <FlipFlopSwap /> word puzzle
         </p>
 
         <div className="flex-1 min-h-0 w-full max-w-md mx-auto px-5 md:px-6 mt-5 flex flex-col">
