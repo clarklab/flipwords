@@ -219,7 +219,7 @@ export default function TitleScreen() {
           {/* Primary CTA */}
           <Link
             to="/play"
-            className="font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-4 rounded-full text-base shadow-tile transition-all active:scale-95"
+            className="font-ui flex items-center justify-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-4 rounded-full text-base shadow-tile transition-all active:scale-95 border border-transparent"
           >
             {todaysSessionDone ? "View today's scorecard" : "Play today's wordflip"}
             <span className="material-icons text-[20px]">
@@ -232,9 +232,9 @@ export default function TitleScreen() {
             <Link
               to="/play"
               search={{ tutorial: true }}
-              className="mt-3 font-ui flex items-center justify-center gap-2 bg-white border border-tile-edge text-ink-muted hover:text-ink py-3 rounded-full text-sm shadow-tile transition-all active:scale-95"
+              className="mt-3 font-ui flex items-center justify-center gap-2 bg-white border border-tile-edge text-ink-muted hover:text-ink py-4 rounded-full text-base shadow-tile transition-all active:scale-95"
             >
-              <span className="material-icons text-[18px] text-ink-soft">school</span>
+              <span className="material-icons text-[20px] text-ink-soft">school</span>
               Learn to play
             </Link>
           )}
