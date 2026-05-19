@@ -224,7 +224,7 @@ function DayCell({
   const isToday = date === today
   const isThreeStar = stored?.stars === 3
   const isPlayed = !!stored && !isThreeStar
-  const isMissed = !stored && !isFuture && !isPreLaunch
+  const isMissed = !stored && !isFuture && !isPreLaunch && !isToday
 
   let cls = 'aspect-square rounded-[5px] flex flex-col items-center justify-center text-[12px] font-ui '
   if (isFuture) {
