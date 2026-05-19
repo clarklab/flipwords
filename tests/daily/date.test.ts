@@ -28,18 +28,18 @@ describe('dayNumber', () => {
   })
 
   it('one day after launch is day 2', () => {
-    // LAUNCH_DATE is '2026-05-19' — day 2 is '2026-05-20'
-    expect(dayNumber('2026-05-20')).toBe(2)
+    // LAUNCH_DATE is '2026-05-18' — day 2 is '2026-05-19'
+    expect(dayNumber('2026-05-19')).toBe(2)
   })
 
   it('returns 0 or negative for pre-launch dates', () => {
-    expect(dayNumber('2026-05-18')).toBe(0)
-    expect(dayNumber('2026-05-17')).toBe(-1)
+    expect(dayNumber('2026-05-17')).toBe(0)
+    expect(dayNumber('2026-05-16')).toBe(-1)
   })
 
   it('handles month and year boundaries', () => {
-    // 13 days after May 19 = June 1 → day 14
-    expect(dayNumber('2026-06-01')).toBe(14)
+    // 14 days after May 18 = June 1 → day 15
+    expect(dayNumber('2026-06-01')).toBe(15)
   })
 })
 

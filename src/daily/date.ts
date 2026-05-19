@@ -4,7 +4,7 @@ import type { EasternDate } from './types'
  * The first day the daily feature is live. Day 1 of the puzzle numbering.
  * Set right before shipping. Until shipped, leave at the planned launch date.
  */
-export const LAUNCH_DATE: EasternDate = '2026-05-19'
+export const LAUNCH_DATE: EasternDate = '2026-05-18'
 
 const FORMATTER = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'America/New_York',
