@@ -41,7 +41,7 @@ export function recordCompletion(
         stars: result.stars,
         perPuzzle: result.perPuzzle,
         totalDurationMs: result.totalDurationMs,
-        isDailyResult: true,
+        mode: 'daily',
       },
     },
     totals: {
