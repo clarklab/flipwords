@@ -65,14 +65,26 @@ body {
   font-family: "Mona Sans", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-variation-settings: "wdth" 100, "wght" 400;
   font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Paper backdrop lives on a fixed, composited pseudo-element instead of
+   `background-attachment: fixed`, which forces a full-background repaint on
+   every scrolled frame (jank on the archive page and any scrollable route). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
     radial-gradient(ellipse at 50% -10%, oklch(95% 0.03 80) 0%, transparent 60%),
     var(--paper-tex),
     var(--color-surface);
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  transform: translateZ(0);
 }
 
 code, pre {
