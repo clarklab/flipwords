@@ -2,260 +2,392 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 /**
- * A compact, auto-advancing teaser of the full TutorialModal. Shown in place
- * of the stat row on the title screen for first-time visitors (sessionsPlayed === 0).
- * Three slides cycle every ~3.8s with crossfade transitions. Animations are
- * scaled-down versions of the tutorial's flip / clues / rotate scenes.
+ * First-visit onboarding teaser on the title screen (shown in place of the
+ * stat row while sessionsPlayed === 0).
+ *
+ * One persistent mini-board — the real level-1 tiles, AIR/PORT + MAN/HOLE —
+ * morphs through four steps instead of crossfading unrelated icons, so a new
+ * player watches ONE continuous scene tell the whole story:
+ *
+ *   1. Two tiles, four words — row/column highlights + the compound they form
+ *   2. Flip to fix — the right tile flips (HOLE/MAN → MAN/HOLE), MANHOLE ✓
+ *   3. Follow the clues — pills pulse around the four edges
+ *   4. Rotate when stuck — the board quarter-turns, words stay upright
+ *
+ * Steps auto-advance; tapping the card skips ahead. Reduced motion pins the
+ * scene to step 1 with no cycling.
  */
 
-const STEP_MS = 3800
+const STEP_MS = 4400
+const SPRING = { type: 'spring', stiffness: 220, damping: 22 } as const
 
 const STEPS = [
-  { label: 'Step 1', title: 'Flip the tiles', Anim: FlipAnim },
-  { label: 'Step 2', title: 'Read the clues', Anim: CluesAnim },
-  { label: 'Step 3', title: 'Rotate when stuck', Anim: RotateAnim },
+  { title: 'Two tiles, four words', desc: 'Pairs read across and down.' },
+  { title: 'Flip to fix', desc: 'Every tile is double-sided.' },
+  { title: 'Follow the clues', desc: 'One clue for every edge.' },
+  { title: 'Rotate when stuck', desc: 'Some answers sit sideways.' },
 ] as const
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
 export default function WelcomeCarousel() {
   const [step, setStep] = useState(0)
+  // The right tile reads HOLE/MAN (wrong way up) until the flip step fixes it.
+  const [flipped, setFlipped] = useState(false)
+  const [reduce] = useState(prefersReducedMotion)
 
   useEffect(() => {
-    if (
-      typeof window !== 'undefined' &&
-      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-    ) {
-      return
-    }
+    if (reduce) return
     const id = window.setInterval(() => setStep((s) => (s + 1) % STEPS.length), STEP_MS)
     return () => window.clearInterval(id)
-  }, [])
+  }, [reduce])
 
-  const { label, title, Anim } = STEPS[step]
+  // Choreograph the flip: it happens mid-step-2 (after the FAB pulse draws the
+  // eye), and resets when the loop comes back around to step 1.
+  useEffect(() => {
+    if (step === 0) setFlipped(false)
+    if (step !== 1) return
+    const t = window.setTimeout(() => setFlipped(true), 1500)
+    return () => window.clearTimeout(t)
+  }, [step])
+
+  const advance = () => setStep((s) => (s + 1) % STEPS.length)
+
+  const boardRotation = step === 3 ? 90 : 0
+  // Words counter-rotate so they stay readable while the board turns — same
+  // trick the real game uses.
+  const counter = -boardRotation
+  const rotateTransition = { ...SPRING, delay: step === 3 ? 0.7 : 0 }
 
   return (
-    <div className="relative z-10 mt-4 px-4 py-3 rounded-[26px] border border-tile-edge bg-transparent flex items-center gap-4 overflow-hidden h-[104px]">
-      <div className="flex-shrink-0 w-[80px] h-[80px] flex items-center justify-center relative">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={step}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.25 }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <Anim />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      <div className="flex-1 min-w-0">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={step}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.25 }}
-          >
-            <p className="font-ui text-[10px] text-accent uppercase tracking-[0.18em] mb-1">
-              {label}
-            </p>
-            <p className="font-wide-700 text-[16px] text-ink leading-tight mb-2">
-              {title}
-            </p>
-          </motion.div>
-        </AnimatePresence>
+    <div
+      onClick={advance}
+      className="relative z-10 mt-4 px-4 pt-3 pb-4 rounded-[26px] border border-tile-edge bg-transparent overflow-hidden cursor-pointer select-none"
+    >
+      {/* Eyebrow + progress dots */}
+      <div className="flex items-center justify-between">
+        <p className="font-ui text-[10px] text-accent uppercase tracking-[0.2em]">
+          How to play
+        </p>
         <div className="flex gap-1">
           {STEPS.map((_, i) => (
             <div
               key={i}
-              className={`h-[3px] rounded-full transition-all duration-300 ${
-                i === step ? 'w-5 bg-accent' : 'w-1.5 bg-paper-line/50'
+              className={`h-[4px] rounded-full transition-all duration-300 ${
+                i === step ? 'w-5 bg-accent' : 'w-1.5 bg-paper-line/60'
               }`}
             />
           ))}
         </div>
       </div>
+
+      {/* Stage */}
+      <div aria-hidden="true" className="relative h-28 mt-1 flex items-end justify-center">
+        {/* Compound chips — the payoff line for steps 1 & 2. One position,
+            staggered fades, so the eye always knows where to look. */}
+        <div className="absolute top-0 inset-x-0 h-6 flex items-start justify-center pointer-events-none">
+          {step === 0 && !reduce && (
+            <>
+              <CompoundChip label="AIRMAN" arrow="→" times={[0.06, 0.12, 0.42, 0.5]} />
+              <CompoundChip label="AIRPORT" arrow="↓" times={[0.52, 0.58, 0.9, 0.98]} />
+            </>
+          )}
+          {step === 0 && reduce && <StaticChip label="AIRMAN" arrow="→" />}
+          {step === 1 && (
+            <motion.span
+              initial={{ opacity: 0, y: 4, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ ...SPRING, delay: reduce ? 0 : 2.15 }}
+              className="font-ui inline-flex items-center gap-1 rounded-full bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1"
+            >
+              ↓ MANHOLE
+              <span className="material-icons text-[11px]">check</span>
+            </motion.span>
+          )}
+        </div>
+
+        {/* Board wrapper — pills for the clue step live here so they hug the
+            board without rotating with it. */}
+        <div className="relative mb-1">
+          <CluePill side="top" active={step === 2} order={0} />
+          <CluePill side="right" active={step === 2} order={1} />
+          <CluePill side="bottom" active={step === 2} order={2} />
+          <CluePill side="left" active={step === 2} order={3} />
+
+          {/* Rotate FAB — appears for the rotation step, pulses, board turns. */}
+          {step === 3 && (
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: [0, 1.25, 1], opacity: 1 }}
+              transition={{ duration: 0.5, times: [0, 0.7, 1] }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 size-6 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
+            >
+              <span className="material-icons text-[14px]">rotate_right</span>
+            </motion.div>
+          )}
+
+          <motion.div
+            animate={{ rotate: boardRotation }}
+            transition={rotateTransition}
+            className="relative flex gap-1 rounded-xl bg-surface-deep/40 p-1.5 shadow-slot-inset"
+          >
+            {/* Row/column highlights for the four-words step */}
+            {step === 0 && !reduce && (
+              <>
+                {/* Across: top halves of both tiles → AIRMAN */}
+                <HighlightRect
+                  className="left-1.5 right-1.5 top-1.5 h-[30px]"
+                  times={[0.06, 0.12, 0.42, 0.5]}
+                />
+                {/* Down: the whole left tile → AIRPORT */}
+                <HighlightRect
+                  className="left-1.5 top-1.5 bottom-1.5 w-[42px]"
+                  times={[0.52, 0.58, 0.9, 0.98]}
+                />
+              </>
+            )}
+            {step === 0 && reduce && (
+              <div className="absolute left-1.5 right-1.5 top-1.5 h-[30px] rounded-md bg-accent/15 ring-2 ring-accent/70 z-10" />
+            )}
+
+            <MiniTile top="AIR" bottom="PORT" counter={counter} counterTransition={rotateTransition} />
+            <FlippableTile flipped={flipped || reduce} counter={counter} counterTransition={rotateTransition} showFab={step === 1 && !flipped && !reduce} />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Caption */}
+      <div className="mt-2 text-center h-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.22 }}
+          >
+            <p className="font-wide-700 text-[16px] text-ink leading-tight">
+              {STEPS[step].title}
+            </p>
+            <p className="font-clue text-[12px] text-ink-muted mt-0.5">
+              {STEPS[step].desc}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   )
 }
 
-// Tile face matched to the project's Tile component — gradient bg, paper
-// texture, top highlight, divider with divot. Kept inline so the carousel is
-// self-contained and the tutorial's MiniTileFace stays at its own scale.
-function CarouselTile({ top, bottom }: { top: string; bottom: string }) {
+/**
+ * A word-pair chip ("→ AIRMAN") that fades in/out on a fraction-of-step
+ * schedule, synchronized with its HighlightRect via the same `times`.
+ */
+function CompoundChip({
+  label,
+  arrow,
+  times,
+}: {
+  label: string
+  arrow: string
+  times: [number, number, number, number]
+}) {
+  const [t0, t1, t2, t3] = times
+  return (
+    <motion.span
+      animate={{ opacity: [0, 0, 1, 1, 0, 0], y: [4, 4, 0, 0, -2, -2] }}
+      transition={{
+        duration: STEP_MS / 1000,
+        times: [0, t0, t1, t2, t3, 1],
+        repeat: Infinity,
+      }}
+      className="absolute font-ui inline-flex items-center gap-1 rounded-full bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1"
+    >
+      {arrow} {label}
+    </motion.span>
+  )
+}
+
+function StaticChip({ label, arrow }: { label: string; arrow: string }) {
+  return (
+    <span className="font-ui inline-flex items-center rounded-full bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1">
+      {arrow} {label}
+    </span>
+  )
+}
+
+/** Accent overlay that sweeps a row/column of the mini-board. */
+function HighlightRect({
+  className,
+  times,
+}: {
+  className: string
+  times: [number, number, number, number]
+}) {
+  const [t0, t1, t2, t3] = times
+  return (
+    <motion.div
+      animate={{ opacity: [0, 0, 1, 1, 0, 0] }}
+      transition={{
+        duration: STEP_MS / 1000,
+        times: [0, t0, t1, t2, t3, 1],
+        repeat: Infinity,
+      }}
+      className={`absolute rounded-md bg-accent/15 ring-2 ring-accent/70 z-10 pointer-events-none ${className}`}
+    />
+  )
+}
+
+/** Edge clue pill that pulses in sequence during the clue step. */
+function CluePill({
+  side,
+  active,
+  order,
+}: {
+  side: 'top' | 'right' | 'bottom' | 'left'
+  active: boolean
+  order: number
+}) {
+  const pos =
+    side === 'top'
+      ? '-top-[9px] left-1/2 -translate-x-1/2 h-[5px] w-12'
+      : side === 'bottom'
+      ? '-bottom-[9px] left-1/2 -translate-x-1/2 h-[5px] w-12'
+      : side === 'left'
+      ? '-left-[9px] top-1/2 -translate-y-1/2 w-[5px] h-12'
+      : '-right-[9px] top-1/2 -translate-y-1/2 w-[5px] h-12'
+  return (
+    <AnimatePresence>
+      {active && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.35, 1, 0.35] }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.6, repeat: Infinity, delay: order * 0.4 }}
+          className={`absolute rounded-full bg-accent ${pos}`}
+        />
+      )}
+    </AnimatePresence>
+  )
+}
+
+/** Static mini tile styled after the real game tile. */
+function MiniTile({
+  top,
+  bottom,
+  counter,
+  counterTransition,
+}: {
+  top: string
+  bottom: string
+  counter: number
+  counterTransition: object
+}) {
+  return (
+    <div className="relative w-[42px] h-[76px]">
+      <TileFace top={top} bottom={bottom} counter={counter} counterTransition={counterTransition} />
+    </div>
+  )
+}
+
+/**
+ * The double-sided tile. Front reads HOLE/MAN (unhelpfully upside down);
+ * flipping shows the back, MAN/HOLE, completing the right-hand column.
+ */
+function FlippableTile({
+  flipped,
+  counter,
+  counterTransition,
+  showFab,
+}: {
+  flipped: boolean
+  counter: number
+  counterTransition: object
+  showFab: boolean
+}) {
+  return (
+    <div className="relative w-[42px] h-[76px]" style={{ perspective: 500 }}>
+      <motion.div
+        animate={{ rotateX: flipped ? 180 : 0 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+        className="absolute inset-0"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        <TileFace top="HOLE" bottom="MAN" counter={counter} counterTransition={counterTransition} />
+        {/* Back face: rotateX flips z-rotation handedness, so the counter
+            rotation is negated to keep words upright after a board turn. */}
+        <TileFace
+          top="MAN"
+          bottom="HOLE"
+          counter={-counter}
+          counterTransition={counterTransition}
+          back
+        />
+      </motion.div>
+      {/* Flip affordance — mirrors the in-game swap_vert FAB. */}
+      <AnimatePresence>
+        {showFab && (
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: [0, 1.25, 1], opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.45, times: [0, 0.7, 1], delay: 0.5 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 size-5 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
+          >
+            <span className="material-icons text-[12px]">swap_vert</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function TileFace({
+  top,
+  bottom,
+  counter,
+  counterTransition,
+  back = false,
+}: {
+  top: string
+  bottom: string
+  counter: number
+  counterTransition: object
+  back?: boolean
+}) {
   return (
     <div
-      className="absolute inset-0 flex flex-col rounded-md overflow-hidden bg-tile-face border border-tile-edge"
-      style={{ backfaceVisibility: 'hidden' }}
+      className="absolute inset-0 flex flex-col rounded-md overflow-hidden bg-tile-face border border-tile-edge shadow-tile"
+      style={{
+        backfaceVisibility: 'hidden',
+        transform: back ? 'rotateX(180deg)' : undefined,
+      }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{
-          background:
-            'repeating-linear-gradient(135deg, rgba(120,90,40,0.03) 0px, rgba(120,90,40,0.03) 1px, transparent 1px, transparent 6px)',
-        }}
-      />
       <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none bg-gradient-to-b from-white/55 to-transparent" />
-      <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-[7px] leading-none px-0.5">
-        {top}
+      <div className="flex-1 flex items-center justify-center">
+        <motion.span
+          animate={{ rotate: counter }}
+          transition={counterTransition}
+          className="font-normal-tile text-ink text-[10px] leading-none inline-block"
+        >
+          {top}
+        </motion.span>
       </div>
       <div className="relative h-px w-full">
         <div className="absolute inset-x-1 h-px bg-paper-line/60" />
-        <div className="absolute left-1/2 -translate-x-1/2 -top-[2px] h-[3px] w-[3px] rounded-full bg-tile-edge" />
+        <div className="absolute left-1/2 -translate-x-1/2 -top-[2px] size-[4px] rounded-full bg-tile-edge" />
       </div>
-      <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-[7px] leading-none px-0.5">
-        {bottom}
-      </div>
-    </div>
-  )
-}
-
-function FlipAnim() {
-  return (
-    <div className="relative flex items-center justify-center" style={{ perspective: 800 }}>
-      <motion.div
-        animate={{ rotateX: [0, 0, 180, 180, 0, 0] }}
-        transition={{
-          duration: 3.4,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          times: [0, 0.18, 0.38, 0.62, 0.82, 1],
-        }}
-        style={{ transformStyle: 'preserve-3d' }}
-        className="relative w-[38px] h-[64px] gpu shadow-tile rounded-md"
-      >
-        {/* front face */}
-        <div
-          className="absolute inset-0 flex flex-col rounded-md overflow-hidden bg-tile-face border border-tile-edge"
-          style={{ backfaceVisibility: 'hidden' }}
+      <div className="flex-1 flex items-center justify-center">
+        <motion.span
+          animate={{ rotate: counter }}
+          transition={counterTransition}
+          className="font-normal-tile text-ink text-[10px] leading-none inline-block"
         >
-          <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none bg-gradient-to-b from-white/55 to-transparent" />
-          <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-[9px] leading-none">
-            PAPER
-          </div>
-          <div className="relative h-px w-full">
-            <div className="absolute inset-x-1.5 h-px bg-paper-line/60" />
-            <div className="absolute left-1/2 -translate-x-1/2 -top-[2px] h-[4px] w-[4px] rounded-full bg-tile-edge" />
-          </div>
-          <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-[9px] leading-none">
-            CLIP
-          </div>
-        </div>
-        {/* back face */}
-        <div
-          className="absolute inset-0 flex flex-col rounded-md overflow-hidden bg-tile-face border border-tile-edge"
-          style={{ backfaceVisibility: 'hidden', transform: 'rotateX(180deg)' }}
-        >
-          <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none bg-gradient-to-b from-white/55 to-transparent" />
-          <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-[9px] leading-none">
-            CLIP
-          </div>
-          <div className="relative h-px w-full">
-            <div className="absolute inset-x-1.5 h-px bg-paper-line/60" />
-            <div className="absolute left-1/2 -translate-x-1/2 -top-[2px] h-[4px] w-[4px] rounded-full bg-tile-edge" />
-          </div>
-          <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-[9px] leading-none">
-            PAPER
-          </div>
-        </div>
-      </motion.div>
-      {/* Stationary flip handle — overlays the spinning tile, evokes the in-game
-          swap_vert FAB. */}
-      <motion.div
-        animate={{ scale: [1, 1, 1.18, 1, 1] }}
-        transition={{
-          duration: 3.4,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          times: [0, 0.12, 0.2, 0.34, 1],
-        }}
-        className="absolute w-4 h-4 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift z-10"
-      >
-        <span className="material-icons text-[10px]">swap_vert</span>
-      </motion.div>
-    </div>
-  )
-}
-
-function CluesAnim() {
-  // Mini board with two slots and four pulsing clue bars — one per edge.
-  return (
-    <div className="relative grid grid-cols-[8px_auto_8px] grid-rows-[8px_auto_8px] gap-x-1 gap-y-1 place-items-center">
-      {/* Top clue */}
-      <motion.div
-        animate={{ opacity: [0.35, 1, 0.35] }}
-        transition={{ duration: 1.8, repeat: Infinity, delay: 0 }}
-        className="col-start-2 row-start-1 h-[3px] w-[28px] rounded-full bg-accent"
-      />
-      {/* Left clue (vertical) */}
-      <motion.div
-        animate={{ opacity: [0.35, 1, 0.35] }}
-        transition={{ duration: 1.8, repeat: Infinity, delay: 0.45 }}
-        className="col-start-1 row-start-2 w-[3px] h-[28px] rounded-full bg-accent"
-      />
-      {/* Slots */}
-      <div className="col-start-2 row-start-2 flex gap-0.5 p-0.5 bg-surface-deep/40 rounded-md shadow-slot-inset">
-        <div className="relative w-[16px] h-[28px]">
-          <CarouselTile top="AIR" bottom="WAY" />
-        </div>
-        <div className="relative w-[16px] h-[28px]">
-          <CarouselTile top="PORT" bottom="SIDE" />
-        </div>
+          {bottom}
+        </motion.span>
       </div>
-      {/* Right clue (vertical) */}
-      <motion.div
-        animate={{ opacity: [0.35, 1, 0.35] }}
-        transition={{ duration: 1.8, repeat: Infinity, delay: 0.9 }}
-        className="col-start-3 row-start-2 w-[3px] h-[28px] rounded-full bg-accent"
-      />
-      {/* Bottom clue */}
-      <motion.div
-        animate={{ opacity: [0.35, 1, 0.35] }}
-        transition={{ duration: 1.8, repeat: Infinity, delay: 1.35 }}
-        className="col-start-2 row-start-3 h-[3px] w-[28px] rounded-full bg-accent"
-      />
-    </div>
-  )
-}
-
-function RotateAnim() {
-  return (
-    <div className="relative">
-      <motion.div
-        animate={{ rotate: [0, 0, 90, 90, 0, 0] }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: [0.34, 1.3, 0.64, 1],
-          times: [0, 0.18, 0.38, 0.6, 0.82, 1],
-        }}
-        style={{ transformOrigin: 'center center' }}
-        className="flex gap-0.5 p-0.5 bg-surface-deep/40 rounded-md shadow-slot-inset gpu"
-      >
-        <div className="relative w-[18px] h-[32px]">
-          <CarouselTile top="AIR" bottom="WAY" />
-        </div>
-        <div className="relative w-[18px] h-[32px]">
-          <CarouselTile top="PORT" bottom="SIDE" />
-        </div>
-      </motion.div>
-      {/* Rotate FAB — pulses on the beats where the board turns. */}
-      <motion.div
-        animate={{
-          scale: [1, 1, 1.18, 1, 1, 1.18, 1, 1],
-          rotate: [0, 0, 90, 0, 0, 90, 0, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          times: [0, 0.14, 0.2, 0.32, 0.56, 0.62, 0.74, 1],
-        }}
-        className="absolute -bottom-1 -right-1 w-[18px] h-[18px] rounded-full flex items-center justify-center bg-accent text-white shadow-tile-lift"
-      >
-        <span className="material-icons text-[11px]">rotate_right</span>
-      </motion.div>
     </div>
   )
 }
