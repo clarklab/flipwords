@@ -74,7 +74,12 @@ function PlayRoute() {
     setPracticeMode(true)
   }
 
-  const handleShare = async (input: { dayNumber: number; stars: 1 | 2 | 3; totalDurationMs: number }) => {
+  const handleShare = async (input: {
+    dayNumber: number
+    perPuzzleStars: Array<1 | 2 | 3>
+    totalDurationMs: number
+    streak: number
+  }) => {
     const result = await shareSession(input)
     if (result === 'failed') {
       setShareFallbackText(formatShareString(input))
@@ -112,7 +117,15 @@ function PlayRoute() {
           result={existingResult}
           onPractice={handlePractice}
           onArchive={() => navigate({ to: '/archive' })}
-          onShare={() => void handleShare({ dayNumber: dn, stars: existingResult.stars, totalDurationMs: existingResult.totalDurationMs })}
+          onShare={() => {
+            const stored = loadStorage()
+            void handleShare({
+              dayNumber: dn,
+              perPuzzleStars: existingResult.perPuzzle.map((p) => p.stars),
+              totalDurationMs: existingResult.totalDurationMs,
+              streak: stored.streak.current,
+            })
+          }}
         />
         {shareFallbackText && (
           <ShareFallback text={shareFallbackText} onClose={() => setShareFallbackText(null)} />
@@ -136,9 +149,15 @@ function PlayRoute() {
           onScorecardPrimary={() => {
             // Read fresh from storage — existingResult state may not have updated
             // yet on the very first React re-render after onComplete fires.
-            const stored = loadStorage().sessions[startDate]
-            if (!stored) return
-            void handleShare({ dayNumber: dn, stars: stored.stars, totalDurationMs: stored.totalDurationMs })
+            const stored = loadStorage()
+            const session = stored.sessions[startDate]
+            if (!session) return
+            void handleShare({
+              dayNumber: dn,
+              perPuzzleStars: session.perPuzzle.map((p) => p.stars),
+              totalDurationMs: session.totalDurationMs,
+              streak: stored.streak.current,
+            })
           }}
           onComplete={handleComplete}
         />

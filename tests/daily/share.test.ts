@@ -1,40 +1,52 @@
 import { describe, it, expect } from 'vitest'
 import { formatShareString } from '@/daily/share'
 
+const FIVE_STARS: Array<1 | 2 | 3> = [3, 2, 3, 3, 3]
+
 describe('formatShareString', () => {
-  it('3-star session', () => {
+  it('daily result with streak >= 2 includes the streak line', () => {
     expect(
-      formatShareString({ dayNumber: 42, stars: 3, totalDurationMs: 252_000 })
-    ).toBe('FlipWords No. 042\n★★★ — 4:12\nflipwords.superfun.games')
+      formatShareString({
+        dayNumber: 46,
+        perPuzzleStars: FIVE_STARS,
+        totalDurationMs: 211_000,
+        streak: 12,
+      })
+    ).toBe(
+      'FLIPWORDS No. 046\n★★★ ★★☆ ★★★ ★★★ ★★★ — 3:31\n🔥 12-day streak\nflipwords.superfun.games'
+    )
   })
 
-  it('2-star session', () => {
+  it('streak of 1 (or 0) omits the streak line', () => {
     expect(
-      formatShareString({ dayNumber: 42, stars: 2, totalDurationMs: 348_000 })
-    ).toBe('FlipWords No. 042\n★★☆ — 5:48\nflipwords.superfun.games')
+      formatShareString({
+        dayNumber: 46,
+        perPuzzleStars: FIVE_STARS,
+        totalDurationMs: 211_000,
+        streak: 1,
+      })
+    ).toBe(
+      'FLIPWORDS No. 046\n★★★ ★★☆ ★★★ ★★★ ★★★ — 3:31\nflipwords.superfun.games'
+    )
   })
 
-  it('1-star session', () => {
+  it('makeup result is marked (late) and never shows a streak line', () => {
     expect(
-      formatShareString({ dayNumber: 42, stars: 1, totalDurationMs: 570_000 })
-    ).toBe('FlipWords No. 042\n★☆☆ — 9:30\nflipwords.superfun.games')
+      formatShareString({
+        dayNumber: 38,
+        perPuzzleStars: [1, 2, 2, 3, 3],
+        totalDurationMs: 611_000,
+        streak: 12,
+        late: true,
+      })
+    ).toBe(
+      'FLIPWORDS No. 038 (late)\n★☆☆ ★★☆ ★★☆ ★★★ ★★★ — 10:11\nflipwords.superfun.games'
+    )
   })
 
-  it('pads small numbers to 3 digits', () => {
-    expect(
-      formatShareString({ dayNumber: 7, stars: 3, totalDurationMs: 60_000 })
-    ).toBe('FlipWords No. 007\n★★★ — 1:00\nflipwords.superfun.games')
-  })
-
-  it('does not pad large numbers', () => {
-    expect(
-      formatShareString({ dayNumber: 1234, stars: 3, totalDurationMs: 60_000 })
-    ).toBe('FlipWords No. 1234\n★★★ — 1:00\nflipwords.superfun.games')
-  })
-
-  it('formats sub-minute times correctly', () => {
-    expect(
-      formatShareString({ dayNumber: 1, stars: 3, totalDurationMs: 5_000 })
-    ).toBe('FlipWords No. 001\n★★★ — 0:05\nflipwords.superfun.games')
+  it('pads small day numbers to 3 digits, leaves large ones alone', () => {
+    const base = { perPuzzleStars: FIVE_STARS, totalDurationMs: 60_000, streak: 0 }
+    expect(formatShareString({ ...base, dayNumber: 7 })).toContain('No. 007')
+    expect(formatShareString({ ...base, dayNumber: 1234 })).toContain('No. 1234')
   })
 })

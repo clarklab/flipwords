@@ -2,8 +2,13 @@ const SITE_URL = 'flipwords.superfun.games'
 
 export type ShareInput = {
   dayNumber: number
-  stars: 1 | 2 | 3
+  /** One entry per puzzle, in play order. */
+  perPuzzleStars: Array<1 | 2 | 3>
   totalDurationMs: number
+  /** Current streak; rendered only when >= 2 and not a late share. */
+  streak: number
+  /** True when sharing a makeup (played-late) result. */
+  late?: boolean
 }
 
 function formatTime(ms: number): string {
@@ -23,7 +28,14 @@ function starString(stars: 1 | 2 | 3): string {
 }
 
 export function formatShareString(input: ShareInput): string {
-  return `FlipWords No. ${padNumber(input.dayNumber)}\n${starString(input.stars)} — ${formatTime(input.totalDurationMs)}\n${SITE_URL}`
+  const headline = `FLIPWORDS No. ${padNumber(input.dayNumber)}${input.late ? ' (late)' : ''}`
+  const grid = input.perPuzzleStars.map(starString).join(' ')
+  const lines = [headline, `${grid} — ${formatTime(input.totalDurationMs)}`]
+  if (!input.late && input.streak >= 2) {
+    lines.push(`🔥 ${input.streak}-day streak`)
+  }
+  lines.push(SITE_URL)
+  return lines.join('\n')
 }
 
 /**
