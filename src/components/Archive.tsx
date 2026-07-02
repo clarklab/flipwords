@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { easternDateString, dayNumber, LAUNCH_DATE, shiftDate } from '@/daily/date'
-import { loadStorage } from '@/daily/storage'
-import type { DailyStorage, StoredSession } from '@/daily/types'
+import { dayNumber, LAUNCH_DATE, shiftDate } from '@/daily/date'
+import { useEasternDate } from '@/daily/useEasternDate'
+import { useDailyStorage } from '@/daily/useDailyStorage'
+import type { StoredSession } from '@/daily/types'
 
 const WEEKDAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -26,17 +27,16 @@ function dayOfWeek(year: number, month0: number, day: number): number {
 
 export default function Archive() {
   const navigate = useNavigate()
-  const today = easternDateString()
+  // Live date + cross-tab-synced storage: the calendar's today ring, future
+  // gating, and played counts stay correct without a reload.
+  const today = useEasternDate()
   const launch = parseYM(LAUNCH_DATE)
   const todayYM = parseYM(today)
 
   // Default: show today's month
   const [{ y, m }, setMonth] = useState(todayYM)
 
-  const [storage, setStorage] = useState<DailyStorage | null>(null)
-  useEffect(() => {
-    setStorage(loadStorage())
-  }, [])
+  const { storage } = useDailyStorage()
 
   const playedCount = storage ? Object.keys(storage.sessions).length : 0
   const totalDaysSinceLaunch = Math.max(0, dayNumber(today))

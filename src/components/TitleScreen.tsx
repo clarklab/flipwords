@@ -4,10 +4,10 @@ import { Link } from '@tanstack/react-router'
 import AnimatedWordmark from './AnimatedWordmark'
 import TutorialModal from './TutorialModal'
 import WelcomeCarousel from './WelcomeCarousel'
-import { easternDateString, dayNumber, msUntilNextRollover } from '@/daily/date'
-import { loadStorage, saveStorage } from '@/daily/storage'
+import { dayNumber, msUntilNextRollover } from '@/daily/date'
 import { settleStreak } from '@/daily/streak'
-import type { DailyStorage } from '@/daily/types'
+import { useEasternDate } from '@/daily/useEasternDate'
+import { useDailyStorage } from '@/daily/useDailyStorage'
 
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
@@ -107,16 +107,17 @@ function FlipFlopSwap() {
 }
 
 export default function TitleScreen() {
-  const today = easternDateString()
+  // Live Eastern date — flips at midnight so day number, CTA, and stats never
+  // go stale in a long-lived tab.
+  const today = useEasternDate()
   const dn = dayNumber(today)
 
-  // Settle streak on mount so a missed-day reset shows immediately.
-  const [storage, setStorage] = useState<DailyStorage | null>(null)
+  // Live storage with cross-tab sync. Settle the streak whenever the date
+  // changes (mount + midnight rollover) so a missed-day reset shows at once.
+  const { storage, update } = useDailyStorage()
   useEffect(() => {
-    const settled = settleStreak(loadStorage(), today)
-    saveStorage(settled)
-    setStorage(settled)
-  }, [today])
+    update((s) => settleStreak(s, today))
+  }, [today, update])
 
   // Countdown ticker (60s cadence — good enough for `9h 37m`).
   const [countdown, setCountdown] = useState(msUntilNextRollover())
@@ -177,9 +178,17 @@ export default function TitleScreen() {
             <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.2em] mb-2">
               {easternHeaderDate(today)}
             </p>
-            <p className="font-wide text-[44px] md:text-[46px] text-ink leading-none tracking-[-0.01em]">
+            {/* Keyed on the day number: when midnight flips it, the number
+                pops in with a spring — the "new puzzle!" moment. */}
+            <motion.p
+              key={dn}
+              initial={{ scale: 0.9, opacity: 0.4 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+              className="font-wide text-[44px] md:text-[46px] text-ink leading-none tracking-[-0.01em]"
+            >
               No. {formatPuzzleNumber(dn)}
-            </p>
+            </motion.p>
             <p className="font-clue text-[13px] text-ink-muted mt-3 inline-flex items-center gap-1.5">
               <span className="material-icons text-[16px] text-ink-soft">view_carousel</span>
               5 puzzles · Tier 1 → 3
