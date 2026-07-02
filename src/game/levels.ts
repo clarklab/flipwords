@@ -174,10 +174,15 @@ function mulberry32(seed: number): () => number {
 /**
  * Same tier curve as pickSessionLevels, but every random call is seeded so the
  * output is deterministic for a given seed string. Used by the daily scheduler.
+ *
+ * `pool` defaults to the full library. The daily scheduler passes a
+ * date-gated subset so that levels added AFTER launch never rewrite the
+ * sessions of days players have already played (see daily/schedule.ts).
  */
 export const pickSessionLevelsSeeded = (
   seedStr: string,
-  count: number = 5
+  count: number = 5,
+  pool: Level[] = RAW
 ): Level[] => {
   const rand = mulberry32(fnv1a(seedStr))
   const seededPickOne = <T extends { id: number }>(arr: T[], reject: Set<number>): T | undefined => {
@@ -194,16 +199,16 @@ export const pickSessionLevelsSeeded = (
     return out
   }
 
-  const tier1 = RAW.filter((l) => (l.tier ?? 1) === 1)
-  const tier2 = RAW.filter((l) => l.tier === 2)
-  const tier3 = RAW.filter((l) => l.tier === 3)
+  const tier1 = pool.filter((l) => (l.tier ?? 1) === 1)
+  const tier2 = pool.filter((l) => l.tier === 2)
+  const tier3 = pool.filter((l) => l.tier === 3)
   const tier3Rotated = tier3.filter((l) => l.requiresRotation)
   const tier3Flat = tier3.filter((l) => !l.requiresRotation)
 
   const picked: Level[] = []
   const used = new Set<number>()
-  const take = (pool: Level[]) => {
-    const c = seededPickOne(pool, used)
+  const take = (candidates: Level[]) => {
+    const c = seededPickOne(candidates, used)
     if (c) {
       picked.push(c)
       used.add(c.id)
@@ -217,7 +222,7 @@ export const pickSessionLevelsSeeded = (
     take(tier2)
     const bridgePool = [...tier2, ...tier3Flat]
     take(bridgePool.length > 0 ? bridgePool : tier1)
-    take(tier3Rotated.length > 0 ? tier3Rotated : RAW.filter((l) => l.requiresRotation))
+    take(tier3Rotated.length > 0 ? tier3Rotated : pool.filter((l) => l.requiresRotation))
     while (picked.length < count) {
       const extra = take(seededShuffle([...tier3, ...tier2]))
       if (!extra) break
@@ -228,7 +233,7 @@ export const pickSessionLevelsSeeded = (
   }
 
   if (picked.length < count) {
-    for (const lvl of seededShuffle(RAW)) {
+    for (const lvl of seededShuffle(pool)) {
       if (picked.length >= count) break
       if (!used.has(lvl.id)) {
         picked.push(lvl)
