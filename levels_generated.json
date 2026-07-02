@@ -41,7 +41,8 @@
       "slot0Bottom": "PORT",
       "slot1Top": "MAN",
       "slot1Bottom": "HOLE"
-    }
+    },
+    "title": "Cleared for Landing"
   },
   {
     "id": 2,
@@ -85,7 +86,8 @@
       "slot0Bottom": "BED",
       "slot1Top": "HEAD",
       "slot1Bottom": "ROOM"
-    }
+    },
+    "title": "Sleeping Angry"
   },
   {
     "id": 3,
@@ -129,7 +131,8 @@
       "slot0Bottom": "WORK",
       "slot1Top": "BALL",
       "slot1Bottom": "ROOM"
-    }
+    },
+    "title": "Dance Floor Sparks"
   },
   {
     "id": 4,
@@ -173,7 +176,8 @@
       "slot0Bottom": "TIME",
       "slot1Top": "SIDE",
       "slot1Bottom": "LINE"
-    }
+    },
+    "title": "Tucked In"
   },
   {
     "id": 5,
@@ -217,7 +221,8 @@
       "slot0Bottom": "BOARD",
       "slot1Top": "CAKE",
       "slot1Bottom": "WALK"
-    }
+    },
+    "title": "Sweet Stroll"
   },
   {
     "id": 6,
@@ -261,7 +266,8 @@
       "slot0Bottom": "FIRE",
       "slot1Top": "DOOR",
       "slot1Bottom": "MAN"
-    }
+    },
+    "title": "Five-Alarm Exit"
   },
   {
     "id": 7,
@@ -305,7 +311,8 @@
       "slot0Bottom": "FALL",
       "slot1Top": "DROP",
       "slot1Bottom": "OUT"
-    }
+    },
+    "title": "April Showers"
   },
   {
     "id": 8,
@@ -349,7 +356,8 @@
       "slot0Bottom": "BOARD",
       "slot1Top": "BALL",
       "slot1Bottom": "ROOM"
-    }
+    },
+    "title": "Winter Meeting"
   },
   {
     "id": 9,
@@ -393,7 +401,8 @@
       "slot0Bottom": "BIRD",
       "slot1Top": "OUT",
       "slot1Bottom": "HOUSE"
-    }
+    },
+    "title": "Dark Wings"
   },
   {
     "id": 10,
@@ -437,7 +446,8 @@
       "slot0Bottom": "PATH",
       "slot1Top": "HEAD",
       "slot1Bottom": "WAY"
-    }
+    },
+    "title": "March Forward"
   },
   {
     "id": 11,
@@ -481,7 +491,8 @@
       "slot0Bottom": "TIME",
       "slot1Top": "FALL",
       "slot1Bottom": "OUT"
-    }
+    },
+    "title": "After Dark"
   },
   {
     "id": 12,
@@ -525,7 +536,8 @@
       "slot0Bottom": "BACK",
       "slot1Top": "WAY",
       "slot1Bottom": "SIDE"
-    }
+    },
+    "title": "Fifty-Yard Line"
   },
   {
     "id": 13,
@@ -569,7 +581,8 @@
       "slot0Bottom": "NOTE",
       "slot1Top": "WORK",
       "slot1Bottom": "BOOK"
-    }
+    },
+    "title": "Study Steps"
   },
   {
     "id": 14,
@@ -613,7 +626,8 @@
       "slot0Bottom": "POT",
       "slot1Top": "MOON",
       "slot1Bottom": "SHOT"
-    }
+    },
+    "title": "Sweet Aim"
   },
   {
     "id": 15,
@@ -657,7 +671,8 @@
       "slot0Bottom": "SIDE",
       "slot1Top": "TIME",
       "slot1Bottom": "LINE"
-    }
+    },
+    "title": "Lights at Eleven"
   },
   {
     "id": 16,
@@ -701,7 +716,8 @@
       "slot0Bottom": "BALL",
       "slot1Top": "BOARD",
       "slot1Bottom": "ROOM"
-    }
+    },
+    "title": "Home Run Waltz"
   },
   {
     "id": 17,
@@ -745,7 +761,8 @@
       "slot0Bottom": "PLAY",
       "slot1Top": "TOWN",
       "slot1Bottom": "HOUSE"
-    }
+    },
+    "title": "Theater District"
   },
   {
     "id": 18,
@@ -789,7 +806,8 @@
       "slot0Bottom": "SHORE",
       "slot1Top": "SIDE",
       "slot1Bottom": "LINE"
-    }
+    },
+    "title": "Cabin Views"
   },
   {
     "id": 19,
@@ -833,7 +851,8 @@
       "slot0Bottom": "WATER",
       "slot1Top": "LAND",
       "slot1Bottom": "FALL"
-    }
+    },
+    "title": "Wild Terrain"
   },
   {
     "id": 20,
@@ -877,7 +896,8 @@
       "slot0Bottom": "LIFE",
       "slot1Top": "FIRE",
       "slot1Bottom": "BOAT"
-    }
+    },
+    "title": "Rescue Mission"
   },
   {
     "id": 21,
@@ -921,7 +941,8 @@
       "slot0Bottom": "FALL",
       "slot1Top": "CHECK",
       "slot1Bottom": "OUT"
-    }
+    },
+    "title": "Storm Refund"
   },
   {
     "id": 22,
@@ -965,7 +986,8 @@
       "slot0Bottom": "FOOT",
       "slot1Top": "HEAD",
       "slot1Bottom": "LIGHT"
-    }
+    },
+    "title": "Stage Presence"
   },
   {
     "id": 23,
@@ -1009,7 +1031,8 @@
       "slot0Bottom": "LIFE",
       "slot1Top": "DOWN",
       "slot1Bottom": "TIME"
-    }
+    },
+    "title": "The Whole Story"
   },
   {
     "id": 24,
@@ -1053,7 +1076,8 @@
       "slot0Bottom": "MOTHER",
       "slot1Top": "FATHER",
       "slot1Bottom": "LAND"
-    }
+    },
+    "title": "Old Country"
   },
   {
     "id": 25,
@@ -1097,7 +1121,8 @@
       "slot0Bottom": "SIDE",
       "slot1Top": "HEAD",
       "slot1Bottom": "LINE"
-    }
+    },
+    "title": "Front Page Surf"
   },
   {
     "id": 26,
@@ -1141,7 +1166,8 @@
       "slot0Bottom": "HOUSE",
       "slot1Top": "TABLE",
       "slot1Bottom": "TOP"
-    }
+    },
+    "title": "Seat of Power"
   },
   {
     "id": 27,
@@ -1185,7 +1211,8 @@
       "slot0Bottom": "DROP",
       "slot1Top": "TIME",
       "slot1Bottom": "OUT"
-    }
+    },
+    "title": "Signal Lost"
   },
   {
     "id": 28,
@@ -1229,7 +1256,8 @@
       "slot0Bottom": "PLAY",
       "slot1Top": "POWER",
       "slot1Bottom": "HOUSE"
-    }
+    },
+    "title": "Full Gallop"
   },
   {
     "id": 29,
@@ -1273,7 +1301,8 @@
       "slot0Bottom": "OUT",
       "slot1Top": "OVER",
       "slot1Bottom": "COME"
-    }
+    },
+    "title": "Easy Victory"
   },
   {
     "id": 30,
@@ -1317,7 +1346,8 @@
       "slot0Bottom": "CUT",
       "slot1Top": "WALK",
       "slot1Bottom": "OUT"
-    }
+    },
+    "title": "Paper Dolls"
   },
   {
     "id": 31,
@@ -1361,7 +1391,8 @@
       "slot0Bottom": "LOCK",
       "slot1Top": "DROP",
       "slot1Bottom": "DOWN"
-    }
+    },
+    "title": "Space Station"
   },
   {
     "id": 32,
@@ -1405,7 +1436,8 @@
       "slot0Bottom": "DOOR",
       "slot1Top": "WATER",
       "slot1Bottom": "WAY"
-    }
+    },
+    "title": "River Entrance"
   },
   {
     "id": 33,
@@ -1449,7 +1481,8 @@
       "slot0Bottom": "GIRL",
       "slot1Top": "BOY",
       "slot1Bottom": "HOOD"
-    }
+    },
+    "title": "Recess Days"
   },
   {
     "id": 34,
@@ -1493,7 +1526,8 @@
       "slot0Bottom": "HAND",
       "slot1Top": "WATER",
       "slot1Bottom": "CRAFT"
-    }
+    },
+    "title": "Deep Divers"
   },
   {
     "id": 35,
@@ -1537,7 +1571,8 @@
       "slot0Bottom": "COAST",
       "slot1Top": "SIDE",
       "slot1Bottom": "LINE"
-    }
+    },
+    "title": "Salt and Sand"
   },
   {
     "id": 36,
@@ -1581,7 +1616,8 @@
       "slot0Bottom": "HEAD",
       "slot1Top": "SPOT",
       "slot1Bottom": "LIGHT"
-    }
+    },
+    "title": "All Eyes Here"
   },
   {
     "id": 37,
@@ -1625,7 +1661,8 @@
       "slot0Bottom": "CHILD",
       "slot1Top": "MOTHER",
       "slot1Bottom": "HOOD"
-    }
+    },
+    "title": "Three Generations"
   },
   {
     "id": 38,
@@ -1669,7 +1706,8 @@
       "slot0Bottom": "FOOT",
       "slot1Top": "TOW",
       "slot1Bottom": "PATH"
-    }
+    },
+    "title": "River Walk"
   },
   {
     "id": 39,
@@ -1713,7 +1751,8 @@
       "slot0Bottom": "SIDE",
       "slot1Top": "SPRING",
       "slot1Bottom": "BOARD"
-    }
+    },
+    "title": "Diving In"
   },
   {
     "id": 40,
@@ -1757,7 +1796,8 @@
       "slot0Bottom": "FOOT",
       "slot1Top": "IRON",
       "slot1Bottom": "WORK"
-    }
+    },
+    "title": "Pressed and Polished"
   },
   {
     "id": 41,
@@ -1801,7 +1841,8 @@
       "slot0Bottom": "BACK",
       "slot1Top": "BALL",
       "slot1Bottom": "TRACK"
-    }
+    },
+    "title": "Return Serve"
   },
   {
     "id": 42,
@@ -1845,7 +1886,8 @@
       "slot0Bottom": "TOW",
       "slot1Top": "WAY",
       "slot1Bottom": "PATH"
-    }
+    },
+    "title": "Canal Walk"
   },
   {
     "id": 43,
@@ -1889,7 +1931,8 @@
       "slot0Bottom": "STAGE",
       "slot1Top": "BOOK",
       "slot1Bottom": "PLAY"
-    }
+    },
+    "title": "Behind the Curtain"
   },
   {
     "id": 44,
@@ -1933,7 +1976,8 @@
       "slot0Bottom": "BACK",
       "slot1Top": "CRAFT",
       "slot1Bottom": "SPACE"
-    }
+    },
+    "title": "Bayou Rocket"
   },
   {
     "id": 45,
@@ -1977,7 +2021,8 @@
       "slot0Bottom": "BEACH",
       "slot1Top": "BOARD",
       "slot1Bottom": "SIDE"
-    }
+    },
+    "title": "Beach Bedroom"
   },
   {
     "id": 46,
@@ -2021,7 +2066,8 @@
       "slot0Bottom": "DOWN",
       "slot1Top": "SCREEN",
       "slot1Bottom": "PLAY"
-    }
+    },
+    "title": "Hollywood Summer"
   },
   {
     "id": 47,
@@ -2065,7 +2111,8 @@
       "slot0Bottom": "TIME",
       "slot1Top": "RIDE",
       "slot1Bottom": "SHARE"
-    }
+    },
+    "title": "Split the Fare"
   },
   {
     "id": 48,
@@ -2109,7 +2156,8 @@
       "slot0Bottom": "QUICK",
       "slot1Top": "STONE",
       "slot1Bottom": "STEP"
-    }
+    },
+    "title": "Careful Steps"
   },
   {
     "id": 49,
@@ -2153,7 +2201,8 @@
       "slot0Bottom": "SEA",
       "slot1Top": "LINE",
       "slot1Bottom": "SHORE"
-    }
+    },
+    "title": "High Tide"
   },
   {
     "id": 50,
@@ -2197,7 +2246,8 @@
       "slot0Bottom": "NIGHT",
       "slot1Top": "DAY",
       "slot1Bottom": "TIME"
-    }
+    },
+    "title": "School Night"
   },
   {
     "id": 51,
@@ -2241,7 +2291,8 @@
       "slot0Bottom": "FORE",
       "slot1Top": "REST",
       "slot1Bottom": "FOOT"
-    }
+    },
+    "title": "Head to Toe"
   },
   {
     "id": 52,
@@ -2285,7 +2336,8 @@
       "slot0Bottom": "BACK",
       "slot1Top": "CHECK",
       "slot1Bottom": "UP"
-    }
+    },
+    "title": "Direct Deposit"
   },
   {
     "id": 53,
@@ -2329,7 +2381,8 @@
       "slot0Bottom": "TAKE",
       "slot1Top": "COME",
       "slot1Bottom": "DOWN"
-    }
+    },
+    "title": "Tax Season"
   },
   {
     "id": 54,
@@ -2373,7 +2426,8 @@
       "slot0Bottom": "DOWN",
       "slot1Top": "UP",
       "slot1Bottom": "GRADE"
-    }
+    },
+    "title": "Price Check"
   },
   {
     "id": 55,
@@ -2417,7 +2471,8 @@
       "slot0Bottom": "WORK",
       "slot1Top": "PAY",
       "slot1Bottom": "DAY"
-    }
+    },
+    "title": "Long Shift"
   },
   {
     "id": 56,
@@ -2461,7 +2516,8 @@
       "slot0Bottom": "DAY",
       "slot1Top": "NIGHT",
       "slot1Bottom": "LIGHT"
-    }
+    },
+    "title": "Around the Clock"
   },
   {
     "id": 57,
@@ -2505,7 +2561,8 @@
       "slot0Bottom": "BOY",
       "slot1Top": "GIRL",
       "slot1Bottom": "FRIEND"
-    }
+    },
+    "title": "Rodeo Romance"
   },
   {
     "id": 58,
@@ -2549,7 +2606,8 @@
       "slot0Bottom": "ARM",
       "slot1Top": "PLAY",
       "slot1Bottom": "FUL"
-    }
+    },
+    "title": "Arm in Arm"
   },
   {
     "id": 59,
@@ -2593,7 +2651,8 @@
       "slot0Bottom": "OFF",
       "slot1Top": "OUT",
       "slot1Bottom": "SET"
-    }
+    },
+    "title": "Cash Out"
   },
   {
     "id": 60,
@@ -2637,7 +2696,8 @@
       "slot0Bottom": "DOWN",
       "slot1Top": "OFF",
       "slot1Bottom": "LOAD"
-    }
+    },
+    "title": "Spring Thaw"
   },
   {
     "id": 61,
@@ -2681,7 +2741,8 @@
       "slot0Bottom": "TABLE",
       "slot1Top": "OUT",
       "slot1Bottom": "LAND"
-    }
+    },
+    "title": "High Plains"
   },
   {
     "id": 62,
@@ -2725,7 +2786,8 @@
       "slot0Bottom": "OVER",
       "slot1Top": "OUT",
       "slot1Bottom": "DO"
-    }
+    },
+    "title": "Stubborn Streak"
   },
   {
     "id": 63,
@@ -2769,7 +2831,8 @@
       "slot0Bottom": "UP",
       "slot1Top": "OUT",
       "slot1Bottom": "SIDE"
-    }
+    },
+    "title": "Keys Inside"
   },
   {
     "id": 64,
@@ -2813,7 +2876,8 @@
       "slot0Bottom": "GUN",
       "slot1Top": "UP",
       "slot1Bottom": "SHOT"
-    }
+    },
+    "title": "Loud Noises"
   },
   {
     "id": 65,
@@ -2857,7 +2921,8 @@
       "slot0Bottom": "OFF",
       "slot1Top": "OUT",
       "slot1Bottom": "LINE"
-    }
+    },
+    "title": "Ballot Box"
   },
   {
     "id": 66,
@@ -2901,7 +2966,8 @@
       "slot0Bottom": "LAY",
       "slot1Top": "TAKE",
       "slot1Bottom": "AWAY"
-    }
+    },
+    "title": "Lost Receipt"
   },
   {
     "id": 67,
@@ -2945,7 +3011,8 @@
       "slot0Bottom": "SHOP",
       "slot1Top": "UP",
       "slot1Bottom": "LIFT"
-    }
+    },
+    "title": "Store Security"
   },
   {
     "id": 68,
@@ -2989,7 +3056,8 @@
       "slot0Bottom": "RUN",
       "slot1Top": "SEA",
       "slot1Bottom": "WAY"
-    }
+    },
+    "title": "Crossing the Pond"
   },
   {
     "id": 69,
@@ -3033,7 +3101,8 @@
       "slot0Bottom": "COOK",
       "slot1Top": "HAND",
       "slot1Bottom": "OUT"
-    }
+    },
+    "title": "Burnt Burgers"
   },
   {
     "id": 70,
@@ -3077,7 +3146,8 @@
       "slot0Bottom": "POST",
       "slot1Top": "PLAY",
       "slot1Bottom": "DATE"
-    }
+    },
+    "title": "Frontier Fun"
   },
   {
     "id": 71,
@@ -3121,7 +3191,8 @@
       "slot0Bottom": "TURN",
       "slot1Top": "TIME",
       "slot1Bottom": "TABLE"
-    }
+    },
+    "title": "DJ Schedule"
   },
   {
     "id": 72,
@@ -3165,7 +3236,8 @@
       "slot0Bottom": "STATE",
       "slot1Top": "TOWN",
       "slot1Bottom": "SMAN"
-    }
+    },
+    "title": "Capitol Steps"
   },
   {
     "id": 73,
@@ -3209,7 +3281,8 @@
       "slot0Bottom": "UP",
       "slot1Top": "OVER",
       "slot1Bottom": "DRAFT"
-    }
+    },
+    "title": "Feeling the Burn"
   },
   {
     "id": 74,
@@ -3253,7 +3326,8 @@
       "slot0Bottom": "CLASS",
       "slot1Top": "BACK",
       "slot1Bottom": "ROOM"
-    }
+    },
+    "title": "Study Abroad"
   },
   {
     "id": 75,
@@ -3297,7 +3371,8 @@
       "slot0Bottom": "SHIP",
       "slot1Top": "BACK",
       "slot1Bottom": "YARD"
-    }
+    },
+    "title": "Dry Dock"
   },
   {
     "id": 76,
@@ -3341,7 +3416,8 @@
       "slot0Bottom": "OUT",
       "slot1Top": "IN",
       "slot1Bottom": "PUT"
-    }
+    },
+    "title": "Ins and Outs"
   },
   {
     "id": 77,
@@ -3385,7 +3461,8 @@
       "slot0Bottom": "ON",
       "slot1Top": "LAND",
       "slot1Bottom": "LINE"
-    }
+    },
+    "title": "Dial Tone"
   },
   {
     "id": 78,
@@ -3429,7 +3506,8 @@
       "slot0Bottom": "WATER",
       "slot1Top": "ARM",
       "slot1Bottom": "HOLE"
-    }
+    },
+    "title": "Wild West Saloon"
   },
   {
     "id": 79,
@@ -3473,7 +3551,8 @@
       "slot0Bottom": "BACK",
       "slot1Top": "WAY",
       "slot1Bottom": "WARD"
-    }
+    },
+    "title": "Retrace Your Steps"
   },
   {
     "id": 80,
@@ -3517,7 +3596,8 @@
       "slot0Bottom": "DOWN",
       "slot1Top": "OFF",
       "slot1Bottom": "BEAT"
-    }
+    },
+    "title": "Power Chord"
   },
   {
     "id": 81,
@@ -3561,7 +3641,8 @@
       "slot0Bottom": "PLAY",
       "slot1Top": "TAKE",
       "slot1Bottom": "OFF"
-    }
+    },
+    "title": "Game Seven"
   },
   {
     "id": 82,
@@ -3605,7 +3686,8 @@
       "slot0Bottom": "LAND",
       "slot1Top": "BOOK",
       "slot1Bottom": "MARK"
-    }
+    },
+    "title": "Tourist Trap"
   },
   {
     "id": 83,
@@ -3649,7 +3731,8 @@
       "slot0Bottom": "SIDE",
       "slot1Top": "WIND",
       "slot1Bottom": "BURN"
-    }
+    },
+    "title": "Weathered Whiskers"
   },
   {
     "id": 84,
@@ -3693,7 +3776,8 @@
       "slot0Bottom": "UP",
       "slot1Top": "DOWN",
       "slot1Bottom": "STREAM"
-    }
+    },
+    "title": "Salmon Run"
   },
   {
     "id": 85,
@@ -3737,7 +3821,8 @@
       "slot0Bottom": "HOUSE",
       "slot1Top": "SHOW",
       "slot1Bottom": "BOAT"
-    }
+    },
+    "title": "Traveling Act"
   },
   {
     "id": 86,
@@ -3781,7 +3866,8 @@
       "slot0Bottom": "PLAY",
       "slot1Top": "COAT",
       "slot1Bottom": "ROOM"
-    }
+    },
+    "title": "Winter Wardrobe"
   },
   {
     "id": 87,
@@ -3825,7 +3911,8 @@
       "slot0Bottom": "STAND",
       "slot1Top": "LAY",
       "slot1Bottom": "OFF"
-    }
+    },
+    "title": "Tense Negotiations"
   },
   {
     "id": 88,
@@ -3869,7 +3956,8 @@
       "slot0Bottom": "ROAD",
       "slot1Top": "FIRE",
       "slot1Bottom": "SIDE"
-    }
+    },
+    "title": "Hearth and Highway"
   },
   {
     "id": 89,
@@ -3913,7 +4001,8 @@
       "slot0Bottom": "DOWN",
       "slot1Top": "UP",
       "slot1Bottom": "STAIRS"
-    }
+    },
+    "title": "House Shuffle"
   },
   {
     "id": 90,
@@ -3957,7 +4046,8 @@
       "slot0Bottom": "FISH",
       "slot1Top": "WASH",
       "slot1Bottom": "BOWL"
-    }
+    },
+    "title": "Clean Catch"
   },
   {
     "id": 91,
@@ -4001,7 +4091,8 @@
       "slot0Bottom": "WASH",
       "slot1Top": "LIGHT",
       "slot1Bottom": "HOUSE"
-    }
+    },
+    "title": "Harbor Glow"
   },
   {
     "id": 92,
@@ -4045,7 +4136,8 @@
       "slot0Bottom": "SPILL",
       "slot1Top": "LAID",
       "slot1Bottom": "WAY"
-    }
+    },
+    "title": "Dam Burst"
   },
   {
     "id": 93,
@@ -4089,7 +4181,8 @@
       "slot0Bottom": "COTTON",
       "slot1Top": "PIECE",
       "slot1Bottom": "MOUTH"
-    }
+    },
+    "title": "Rabbit and Snake"
   },
   {
     "id": 94,
@@ -4133,7 +4226,8 @@
       "slot0Bottom": "HAND",
       "slot1Top": "POINT",
       "slot1Bottom": "GUN"
-    }
+    },
+    "title": "Stick 'Em Up"
   },
   {
     "id": 95,
@@ -4177,7 +4271,8 @@
       "slot0Bottom": "STOP",
       "slot1Top": "WEIGHT",
       "slot1Bottom": "OVER"
-    }
+    },
+    "title": "Layover Limits"
   },
   {
     "id": 96,
@@ -4221,7 +4316,8 @@
       "slot0Bottom": "UNDER",
       "slot1Top": "BOOK",
       "slot1Bottom": "PASS"
-    }
+    },
+    "title": "Secret Recipes"
   },
   {
     "id": 97,
@@ -4265,7 +4361,8 @@
       "slot0Bottom": "THERE",
       "slot1Top": "SIGHT",
       "slot1Bottom": "IN"
-    }
+    },
+    "title": "Deep Thoughts"
   },
   {
     "id": 98,
@@ -4309,7 +4406,8 @@
       "slot0Bottom": "CLOSE",
       "slot1Top": "RIGHT",
       "slot1Bottom": "UP"
-    }
+    },
+    "title": "Final Frame"
   },
   {
     "id": 99,
@@ -4353,7 +4451,8 @@
       "slot0Bottom": "COURT",
       "slot1Top": "MATE",
       "slot1Bottom": "SHIP"
-    }
+    },
+    "title": "Love on Trial"
   },
   {
     "id": 100,
@@ -4397,7 +4496,8 @@
       "slot0Bottom": "WORK",
       "slot1Top": "YARD",
       "slot1Bottom": "MAN"
-    }
+    },
+    "title": "After the Bell"
   },
   {
     "id": 101,
@@ -4441,6 +4541,2257 @@
       "slot0Bottom": "HOUSE",
       "slot1Top": "BOOK",
       "slot1Bottom": "KEEPER"
-    }
+    },
+    "title": "Little Red Ledger"
+  },
+  {
+    "id": 102,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LOCK",
+        "bottom": "TOWN"
+      },
+      {
+        "id": "t2",
+        "top": "LOCK",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t3",
+        "top": "UP",
+        "bottom": "BROW"
+      },
+      {
+        "id": "t4",
+        "top": "WEEK",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t5",
+        "top": "UP",
+        "bottom": "TOWN"
+      }
+    ],
+    "hints": {
+      "topRow": "County jail, informally",
+      "bottomRow": "Where the skyscrapers cluster",
+      "leftCol": "Nobody in, nobody out",
+      "rightCol": "The ritzier end of the city"
+    },
+    "solution": {
+      "slot0Top": "LOCK",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "UP",
+      "slot1Bottom": "TOWN"
+    },
+    "title": "City Limits"
+  },
+  {
+    "id": 103,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "PORT",
+        "bottom": "WATER"
+      },
+      {
+        "id": "t2",
+        "top": "EVER",
+        "bottom": "SEA"
+      },
+      {
+        "id": "t3",
+        "top": "WATER",
+        "bottom": "HOLE"
+      },
+      {
+        "id": "t4",
+        "top": "EAR",
+        "bottom": "WATER"
+      },
+      {
+        "id": "t5",
+        "top": "SEA",
+        "bottom": "PORT"
+      }
+    ],
+    "hints": {
+      "topRow": "Salty stuff by the gallon",
+      "bottomRow": "Ship's little round window",
+      "leftCol": "Harbor city's claim to fame",
+      "rightCol": "Savanna sipping spot"
+    },
+    "solution": {
+      "slot0Top": "SEA",
+      "slot0Bottom": "PORT",
+      "slot1Top": "WATER",
+      "slot1Bottom": "HOLE"
+    },
+    "title": "Open Water"
+  },
+  {
+    "id": 104,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "AIR",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t2",
+        "top": "TIME",
+        "bottom": "HEAD"
+      },
+      {
+        "id": "t3",
+        "top": "PIECE",
+        "bottom": "BIRD"
+      },
+      {
+        "id": "t4",
+        "top": "TIME",
+        "bottom": "COOK"
+      },
+      {
+        "id": "t5",
+        "top": "HEAD",
+        "bottom": "PIECE"
+      }
+    ],
+    "hints": {
+      "topRow": "Total space cadet",
+      "bottomRow": "Fancy word for a watch",
+      "leftCol": "Minutes on the broadcast",
+      "rightCol": "Crown or fascinator"
+    },
+    "solution": {
+      "slot0Top": "AIR",
+      "slot0Bottom": "TIME",
+      "slot1Top": "HEAD",
+      "slot1Bottom": "PIECE"
+    },
+    "title": "Prime Time"
+  },
+  {
+    "id": 105,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "TYPE",
+        "bottom": "SHIP"
+      },
+      {
+        "id": "t2",
+        "top": "PLAY",
+        "bottom": "MATE"
+      },
+      {
+        "id": "t3",
+        "top": "AIR",
+        "bottom": "SHIP"
+      },
+      {
+        "id": "t4",
+        "top": "MATE",
+        "bottom": "AIR"
+      },
+      {
+        "id": "t5",
+        "top": "ROUND",
+        "bottom": "MATE"
+      }
+    ],
+    "hints": {
+      "topRow": "Spins on the radio",
+      "bottomRow": "Fellow sailor",
+      "leftCol": "Blimp's grander cousin",
+      "rightCol": "Sandbox companion"
+    },
+    "solution": {
+      "slot0Top": "AIR",
+      "slot0Bottom": "SHIP",
+      "slot1Top": "PLAY",
+      "slot1Bottom": "MATE"
+    },
+    "title": "First Mates"
+  },
+  {
+    "id": 106,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "WATER",
+        "bottom": "CRAFT"
+      },
+      {
+        "id": "t2",
+        "top": "WATER",
+        "bottom": "FLOWER"
+      },
+      {
+        "id": "t3",
+        "top": "FIRE",
+        "bottom": "WOOD"
+      },
+      {
+        "id": "t4",
+        "top": "CRAFT",
+        "bottom": "FIRE"
+      },
+      {
+        "id": "t5",
+        "top": "FIRE",
+        "bottom": "RIGHT"
+      }
+    ],
+    "hints": {
+      "topRow": "Frontier slang for whiskey",
+      "bottomRow": "Whittler's know-how",
+      "leftCol": "Fuel for the hearth",
+      "rightCol": "Kayaks and canoes"
+    },
+    "solution": {
+      "slot0Top": "FIRE",
+      "slot0Bottom": "WOOD",
+      "slot1Top": "WATER",
+      "slot1Bottom": "CRAFT"
+    },
+    "title": "Campfire Stories"
+  },
+  {
+    "id": 107,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SIDE",
+        "bottom": "DOOR"
+      },
+      {
+        "id": "t2",
+        "top": "OUT",
+        "bottom": "DOOR"
+      },
+      {
+        "id": "t3",
+        "top": "SIDE",
+        "bottom": "STEP"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "FLAT"
+      },
+      {
+        "id": "t5",
+        "top": "SIDE",
+        "bottom": "BOW"
+      }
+    ],
+    "hints": {
+      "topRow": "Where recess happens",
+      "bottomRow": "Where packages land",
+      "leftCol": "Al fresco",
+      "rightCol": "Dodge, as a question"
+    },
+    "solution": {
+      "slot0Top": "OUT",
+      "slot0Bottom": "DOOR",
+      "slot1Top": "SIDE",
+      "slot1Bottom": "STEP"
+    },
+    "title": "Front Porch"
+  },
+  {
+    "id": 108,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "CLASS",
+        "bottom": "MATE"
+      },
+      {
+        "id": "t2",
+        "top": "CLIP",
+        "bottom": "MATE"
+      },
+      {
+        "id": "t3",
+        "top": "OUT",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "MATE"
+      },
+      {
+        "id": "t5",
+        "top": "SEED",
+        "bottom": "CLASS"
+      }
+    ],
+    "hints": {
+      "topRow": "Beat with style to spare",
+      "bottomRow": "Shares your fridge",
+      "leftCol": "Backwoods bathroom",
+      "rightCol": "Peer from homeroom"
+    },
+    "solution": {
+      "slot0Top": "OUT",
+      "slot0Bottom": "HOUSE",
+      "slot1Top": "CLASS",
+      "slot1Bottom": "MATE"
+    },
+    "title": "Class Acts"
+  },
+  {
+    "id": 109,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OUT",
+        "bottom": "STEP"
+      },
+      {
+        "id": "t2",
+        "top": "LAND",
+        "bottom": "MARK"
+      },
+      {
+        "id": "t3",
+        "top": "POST",
+        "bottom": "LAND"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "POST"
+      },
+      {
+        "id": "t5",
+        "top": "PIECE",
+        "bottom": "LAND"
+      }
+    ],
+    "hints": {
+      "topRow": "The remote beyond",
+      "bottomRow": "Ink stamp on an envelope",
+      "leftCol": "Lonely frontier station",
+      "rightCol": "The Eiffel Tower, for one"
+    },
+    "solution": {
+      "slot0Top": "OUT",
+      "slot0Bottom": "POST",
+      "slot1Top": "LAND",
+      "slot1Bottom": "MARK"
+    },
+    "title": "Far-Flung Mail"
+  },
+  {
+    "id": 110,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOWN",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t2",
+        "top": "DOWN",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t3",
+        "top": "LINE",
+        "bottom": "FORE"
+      },
+      {
+        "id": "t4",
+        "top": "STREAM",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t5",
+        "top": "DOWN",
+        "bottom": "NUT"
+      }
+    ],
+    "hints": {
+      "topRow": "The way the river runs",
+      "bottomRow": "Where benched players wait",
+      "leftCol": "The catch",
+      "rightCol": "Trim for less drag"
+    },
+    "solution": {
+      "slot0Top": "DOWN",
+      "slot0Bottom": "SIDE",
+      "slot1Top": "STREAM",
+      "slot1Bottom": "LINE"
+    },
+    "title": "With the Flow"
+  },
+  {
+    "id": 111,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BEAN",
+        "bottom": "ARM"
+      },
+      {
+        "id": "t2",
+        "top": "TAKE",
+        "bottom": "MAN"
+      },
+      {
+        "id": "t3",
+        "top": "FORE",
+        "bottom": "ARM"
+      },
+      {
+        "id": "t4",
+        "top": "FORE",
+        "bottom": "HOLE"
+      },
+      {
+        "id": "t5",
+        "top": "MAN",
+        "bottom": "HOLE"
+      }
+    ],
+    "hints": {
+      "topRow": "Boss of the job site",
+      "bottomRow": "Sleeve's opening",
+      "leftCol": "Between wrist and elbow",
+      "rightCol": "Steamy street portal"
+    },
+    "solution": {
+      "slot0Top": "FORE",
+      "slot0Bottom": "ARM",
+      "slot1Top": "MAN",
+      "slot1Bottom": "HOLE"
+    },
+    "title": "Hard Hat Zone"
+  },
+  {
+    "id": 112,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "GUARD",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t2",
+        "top": "STAR",
+        "bottom": "UP"
+      },
+      {
+        "id": "t3",
+        "top": "WORK",
+        "bottom": "DAY"
+      },
+      {
+        "id": "t4",
+        "top": "TIME",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t5",
+        "top": "UP",
+        "bottom": "TIME"
+      }
+    ],
+    "hints": {
+      "topRow": "Full battery of medical tests",
+      "bottomRow": "Soap opera hours",
+      "leftCol": "Nine hours, give or take",
+      "rightCol": "When the servers are humming"
+    },
+    "solution": {
+      "slot0Top": "WORK",
+      "slot0Bottom": "DAY",
+      "slot1Top": "UP",
+      "slot1Bottom": "TIME"
+    },
+    "title": "Clocking In"
+  },
+  {
+    "id": 113,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "HORSE",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t2",
+        "top": "CAT",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t3",
+        "top": "OUT",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t4",
+        "top": "WORK",
+        "bottom": "SPOT"
+      },
+      {
+        "id": "t5",
+        "top": "WORK",
+        "bottom": "HORSE"
+      }
+    ],
+    "hints": {
+      "topRow": "Sweat session",
+      "bottomRow": "How knights traveled",
+      "leftCol": "The reliable grinder",
+      "rightCol": "Australia's wild middle"
+    },
+    "solution": {
+      "slot0Top": "WORK",
+      "slot0Bottom": "HORSE",
+      "slot1Top": "OUT",
+      "slot1Bottom": "BACK"
+    },
+    "title": "Saddle Up"
+  },
+  {
+    "id": 114,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "WORK",
+        "bottom": "BOOK"
+      },
+      {
+        "id": "t2",
+        "top": "WORK",
+        "bottom": "BOARD"
+      },
+      {
+        "id": "t3",
+        "top": "KEEPER",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t4",
+        "top": "SHOP",
+        "bottom": "EAR"
+      },
+      {
+        "id": "t5",
+        "top": "SHOP",
+        "bottom": "KEEPER"
+      }
+    ],
+    "hints": {
+      "topRow": "Tinkerer's garage haven",
+      "bottomRow": "Ledger-minding accountant",
+      "leftCol": "Fill-in pages for class",
+      "rightCol": "Owner behind the counter"
+    },
+    "solution": {
+      "slot0Top": "WORK",
+      "slot0Bottom": "BOOK",
+      "slot1Top": "SHOP",
+      "slot1Bottom": "KEEPER"
+    },
+    "title": "Mind the Store"
+  },
+  {
+    "id": 115,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FALL",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t2",
+        "top": "FLAKE",
+        "bottom": "EVER"
+      },
+      {
+        "id": "t3",
+        "top": "SNOW",
+        "bottom": "WHEEL"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "SNOW"
+      },
+      {
+        "id": "t5",
+        "top": "SNOW",
+        "bottom": "FLAKE"
+      }
+    ],
+    "hints": {
+      "topRow": "Overnight white blanket",
+      "bottomRow": "Last-minute bail",
+      "leftCol": "No two are alike",
+      "rightCol": "The messy aftermath"
+    },
+    "solution": {
+      "slot0Top": "SNOW",
+      "slot0Bottom": "FLAKE",
+      "slot1Top": "FALL",
+      "slot1Bottom": "OUT"
+    },
+    "title": "First Flurry"
+  },
+  {
+    "id": 116,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FALL",
+        "bottom": "STRAW"
+      },
+      {
+        "id": "t2",
+        "top": "UP",
+        "bottom": "HARD"
+      },
+      {
+        "id": "t3",
+        "top": "UP",
+        "bottom": "WIND"
+      },
+      {
+        "id": "t4",
+        "top": "FALL",
+        "bottom": "UP"
+      },
+      {
+        "id": "t5",
+        "top": "LAND",
+        "bottom": "FALL"
+      }
+    ],
+    "hints": {
+      "topRow": "High ground",
+      "bottomRow": "Sudden pile of money",
+      "leftCol": "Against the breeze",
+      "rightCol": "Where the hurricane hits"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "WIND",
+      "slot1Top": "LAND",
+      "slot1Bottom": "FALL"
+    },
+    "title": "Lucky Weather"
+  },
+  {
+    "id": 117,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "UP",
+        "bottom": "TURN"
+      },
+      {
+        "id": "t2",
+        "top": "OFF",
+        "bottom": "UP"
+      },
+      {
+        "id": "t3",
+        "top": "TAKE",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t4",
+        "top": "PUT",
+        "bottom": "TURN"
+      },
+      {
+        "id": "t5",
+        "top": "NOTE",
+        "bottom": "OFF"
+      }
+    ],
+    "hints": {
+      "topRow": "Quickness to catch on",
+      "bottomRow": "Instant dealbreaker",
+      "leftCol": "Swing for the better",
+      "rightCol": "Wheels-up moment"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "TURN",
+      "slot1Top": "TAKE",
+      "slot1Bottom": "OFF"
+    },
+    "title": "Exit Ramp"
+  },
+  {
+    "id": 118,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "HOUSE",
+        "bottom": "KEEPER"
+      },
+      {
+        "id": "t2",
+        "top": "PLAY",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t3",
+        "top": "KEEPER",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t4",
+        "top": "HOLE",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t5",
+        "top": "SAND",
+        "bottom": "TIME"
+      }
+    ],
+    "hints": {
+      "topRow": "Kid-sized theater",
+      "bottomRow": "Official with the stopwatch",
+      "leftCol": "Recess, at home",
+      "rightCol": "Tidier of the manor"
+    },
+    "solution": {
+      "slot0Top": "PLAY",
+      "slot0Bottom": "TIME",
+      "slot1Top": "HOUSE",
+      "slot1Bottom": "KEEPER"
+    },
+    "title": "Recess Patrol"
+  },
+  {
+    "id": 119,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "HARD",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t2",
+        "top": "HARD",
+        "bottom": "NUT"
+      },
+      {
+        "id": "t3",
+        "top": "SAND",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t4",
+        "top": "BALL",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t5",
+        "top": "HARD",
+        "bottom": "ROOM"
+      }
+    ],
+    "hints": {
+      "topRow": "No-mercy negotiating",
+      "bottomRow": "Where deals get cut",
+      "leftCol": "Sturdier book edition",
+      "rightCol": "Waltzing headquarters"
+    },
+    "solution": {
+      "slot0Top": "HARD",
+      "slot0Bottom": "BACK",
+      "slot1Top": "BALL",
+      "slot1Bottom": "ROOM"
+    },
+    "title": "Play Politics"
+  },
+  {
+    "id": 120,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SPACE",
+        "bottom": "MAN"
+      },
+      {
+        "id": "t2",
+        "top": "MAN",
+        "bottom": "BAG"
+      },
+      {
+        "id": "t3",
+        "top": "BACK",
+        "bottom": "MAN"
+      },
+      {
+        "id": "t4",
+        "top": "BACK",
+        "bottom": "BREAK"
+      },
+      {
+        "id": "t5",
+        "top": "BACK",
+        "bottom": "YARD"
+      }
+    ],
+    "hints": {
+      "topRow": "Typo eraser key",
+      "bottomRow": "He edges the lawn",
+      "leftCol": "Home of the grill",
+      "rightCol": "Suited-up rocket rider"
+    },
+    "solution": {
+      "slot0Top": "BACK",
+      "slot0Bottom": "YARD",
+      "slot1Top": "SPACE",
+      "slot1Bottom": "MAN"
+    },
+    "title": "Lawn Launch"
+  },
+  {
+    "id": 121,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LIGHT",
+        "bottom": "PLANE"
+      },
+      {
+        "id": "t2",
+        "top": "HEAD",
+        "bottom": "SHARE"
+      },
+      {
+        "id": "t3",
+        "top": "OVER",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t4",
+        "top": "OVER",
+        "bottom": "NIGHT"
+      },
+      {
+        "id": "t5",
+        "top": "HEAD",
+        "bottom": "LIGHT"
+      }
+    ],
+    "hints": {
+      "topRow": "Directly above you",
+      "bottomRow": "Tiny glow against the dark",
+      "leftCol": "While you slept",
+      "rightCol": "Car's bright eye"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "NIGHT",
+      "slot1Top": "HEAD",
+      "slot1Bottom": "LIGHT"
+    },
+    "title": "Lights Out"
+  },
+  {
+    "id": 122,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OVER",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t2",
+        "top": "FATHER",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t3",
+        "top": "BOOK",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t4",
+        "top": "NUT",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t5",
+        "top": "BOOK",
+        "bottom": "KEEPER"
+      }
+    ],
+    "hints": {
+      "topRow": "Sell more seats than exist",
+      "bottomRow": "Race official with a stopwatch",
+      "leftCol": "Extra innings at the office",
+      "rightCol": "Debits-and-credits pro"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "TIME",
+      "slot1Top": "BOOK",
+      "slot1Bottom": "KEEPER"
+    },
+    "title": "Double Booked"
+  },
+  {
+    "id": 123,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "HAND",
+        "bottom": "TOOTH"
+      },
+      {
+        "id": "t2",
+        "top": "STAND",
+        "bottom": "HOT"
+      },
+      {
+        "id": "t3",
+        "top": "STAND",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t4",
+        "top": "HAND",
+        "bottom": "STAND"
+      },
+      {
+        "id": "t5",
+        "top": "OVER",
+        "bottom": "NIGHT"
+      }
+    ],
+    "hints": {
+      "topRow": "Serve thrown from above",
+      "bottomRow": "Lamp's bedside perch",
+      "leftCol": "From dusk to breakfast",
+      "rightCol": "Gymnast's inversion"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "NIGHT",
+      "slot1Top": "HAND",
+      "slot1Bottom": "STAND"
+    },
+    "title": "Bedside Gymnastics"
+  },
+  {
+    "id": 124,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "TIME",
+        "bottom": "TABLE"
+      },
+      {
+        "id": "t2",
+        "top": "OVER",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t3",
+        "top": "WHEEL",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t4",
+        "top": "OVER",
+        "bottom": "CUP"
+      },
+      {
+        "id": "t5",
+        "top": "TIME",
+        "bottom": "WORK"
+      }
+    ],
+    "hints": {
+      "topRow": "Time-and-a-half hours",
+      "bottomRow": "Sturdy bench for projects",
+      "leftCol": "Burnout's favorite cause",
+      "rightCol": "The train station grid"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "WORK",
+      "slot1Top": "TIME",
+      "slot1Bottom": "TABLE"
+    },
+    "title": "Nine to Five"
+  },
+  {
+    "id": 125,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "COME",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t2",
+        "top": "BACK",
+        "bottom": "PICK"
+      },
+      {
+        "id": "t3",
+        "top": "COME",
+        "bottom": "CORN"
+      },
+      {
+        "id": "t4",
+        "top": "PLAY",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t5",
+        "top": "OVER",
+        "bottom": "COME"
+      }
+    ],
+    "hints": {
+      "topRow": "Milk the moment too hard",
+      "bottomRow": "Return from rock bottom",
+      "leftCol": "Triumph over trouble",
+      "rightCol": "Replay of the recording"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "COME",
+      "slot1Top": "PLAY",
+      "slot1Bottom": "BACK"
+    },
+    "title": "Encore, Encore"
+  },
+  {
+    "id": 126,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LOCK",
+        "bottom": "EYE"
+      },
+      {
+        "id": "t2",
+        "top": "FISH",
+        "bottom": "EYE"
+      },
+      {
+        "id": "t3",
+        "top": "TAIL",
+        "bottom": "EYE"
+      },
+      {
+        "id": "t4",
+        "top": "WAR",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t5",
+        "top": "TAIL",
+        "bottom": "PIECE"
+      }
+    ],
+    "hints": {
+      "topRow": "Ultra-wide lens effect",
+      "bottomRow": "The closing flourish",
+      "leftCol": "Skid side to side",
+      "rightCol": "Where you squint into a scope"
+    },
+    "solution": {
+      "slot0Top": "EYE",
+      "slot0Bottom": "FISH",
+      "slot1Top": "PIECE",
+      "slot1Bottom": "TAIL"
+    },
+    "title": "Something Fishy"
+  },
+  {
+    "id": 127,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OFF",
+        "bottom": "PIPE"
+      },
+      {
+        "id": "t2",
+        "top": "PIPE",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t3",
+        "top": "LINE",
+        "bottom": "ROAD"
+      },
+      {
+        "id": "t4",
+        "top": "STAND",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t5",
+        "top": "BED",
+        "bottom": "STAND"
+      }
+    ],
+    "hints": {
+      "topRow": "Tense stalemate",
+      "bottomRow": "Oil's cross-country route",
+      "leftCol": "Vertical water main",
+      "rightCol": "Unplugged from the web"
+    },
+    "solution": {
+      "slot0Top": "OFF",
+      "slot0Bottom": "STAND",
+      "slot1Top": "LINE",
+      "slot1Bottom": "PIPE"
+    },
+    "title": "Under Pressure"
+  },
+  {
+    "id": 128,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "CAT",
+        "bottom": "SAND"
+      },
+      {
+        "id": "t2",
+        "top": "STONE",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t3",
+        "top": "STONE",
+        "bottom": "PAPER"
+      },
+      {
+        "id": "t4",
+        "top": "SLED",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t5",
+        "top": "SAND",
+        "bottom": "PAPER"
+      }
+    ],
+    "hints": {
+      "topRow": "Red canyon rock",
+      "bottomRow": "Forms, forms, forms",
+      "leftCol": "Gritty smoothing sheet",
+      "rightCol": "A mason's handiwork"
+    },
+    "solution": {
+      "slot0Top": "SAND",
+      "slot0Bottom": "PAPER",
+      "slot1Top": "STONE",
+      "slot1Bottom": "WORK"
+    },
+    "title": "Rock, Paper"
+  },
+  {
+    "id": 129,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "WOOD",
+        "bottom": "CUT"
+      },
+      {
+        "id": "t2",
+        "top": "WORK",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t3",
+        "top": "WORK",
+        "bottom": "CUT"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "LARK"
+      },
+      {
+        "id": "t5",
+        "top": "HONEY",
+        "bottom": "WORK"
+      }
+    ],
+    "hints": {
+      "topRow": "Trim a carpenter installs",
+      "bottomRow": "Cardboard celebrity",
+      "leftCol": "Old-school print block",
+      "rightCol": "Reps and cardio"
+    },
+    "solution": {
+      "slot0Top": "WOOD",
+      "slot0Bottom": "CUT",
+      "slot1Top": "WORK",
+      "slot1Bottom": "OUT"
+    },
+    "title": "Sawdust Session"
+  },
+  {
+    "id": 130,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SIDE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t2",
+        "top": "FOOT",
+        "bottom": "NOTE"
+      },
+      {
+        "id": "t3",
+        "top": "SHOE",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t4",
+        "top": "UNDER",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t5",
+        "top": "UNDER",
+        "bottom": "HOT"
+      }
+    ],
+    "hints": {
+      "topRow": "The belly of the boat",
+      "bottomRow": "Tiny citation down below",
+      "leftCol": "Where the cat always is",
+      "rightCol": "By the way..."
+    },
+    "solution": {
+      "slot0Top": "SIDE",
+      "slot0Bottom": "UNDER",
+      "slot1Top": "NOTE",
+      "slot1Bottom": "FOOT"
+    },
+    "title": "The Fine Print"
+  },
+  {
+    "id": 131,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "COAT",
+        "bottom": "CLASS"
+      },
+      {
+        "id": "t2",
+        "top": "UNDER",
+        "bottom": "COAT"
+      },
+      {
+        "id": "t3",
+        "top": "CROW",
+        "bottom": "UNDER"
+      },
+      {
+        "id": "t4",
+        "top": "CLASS",
+        "bottom": "SET"
+      },
+      {
+        "id": "t5",
+        "top": "CLASS",
+        "bottom": "ROOM"
+      }
+    ],
+    "hints": {
+      "topRow": "Freshmen and sophomores",
+      "bottomRow": "Where the jackets wait",
+      "leftCol": "Primer layer of paint",
+      "rightCol": "Desks, chalk, one teacher"
+    },
+    "solution": {
+      "slot0Top": "UNDER",
+      "slot0Bottom": "COAT",
+      "slot1Top": "CLASS",
+      "slot1Bottom": "ROOM"
+    },
+    "title": "Back to School"
+  },
+  {
+    "id": 132,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FOOT",
+        "bottom": "LOAD"
+      },
+      {
+        "id": "t2",
+        "top": "BALL",
+        "bottom": "UNDER"
+      },
+      {
+        "id": "t3",
+        "top": "HONEY",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t4",
+        "top": "HAND",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t5",
+        "top": "UNDER",
+        "bottom": "FOOT"
+      }
+    ],
+    "hints": {
+      "topRow": "Softball pitch style",
+      "bottomRow": "Gridiron game",
+      "leftCol": "Right where you're stepping",
+      "rightCol": "Court game with no racket"
+    },
+    "solution": {
+      "slot0Top": "UNDER",
+      "slot0Bottom": "FOOT",
+      "slot1Top": "HAND",
+      "slot1Bottom": "BALL"
+    },
+    "title": "Gym Class"
+  },
+  {
+    "id": 133,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "UNDER",
+        "bottom": "PASS"
+      },
+      {
+        "id": "t2",
+        "top": "LIGHT",
+        "bottom": "PORT"
+      },
+      {
+        "id": "t3",
+        "top": "SEA",
+        "bottom": "PORT"
+      },
+      {
+        "id": "t4",
+        "top": "SEA",
+        "bottom": "PASS"
+      },
+      {
+        "id": "t5",
+        "top": "SEA",
+        "bottom": "SMAN"
+      }
+    ],
+    "hints": {
+      "topRow": "Road below the road",
+      "bottomRow": "Docks, cranes, cargo",
+      "leftCol": "Where submarines roam",
+      "rightCol": "Stamped at the border"
+    },
+    "solution": {
+      "slot0Top": "PASS",
+      "slot0Bottom": "UNDER",
+      "slot1Top": "PORT",
+      "slot1Bottom": "SEA"
+    },
+    "title": "Border Crossing"
+  },
+  {
+    "id": 134,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "COW",
+        "bottom": "DOG"
+      },
+      {
+        "id": "t2",
+        "top": "HOUSE",
+        "bottom": "SUIT"
+      },
+      {
+        "id": "t3",
+        "top": "UNDER",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t4",
+        "top": "UNDER",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t5",
+        "top": "DOG",
+        "bottom": "HOUSE"
+      }
+    ],
+    "hints": {
+      "topRow": "The longshot you root for",
+      "bottomRow": "Backyard fort with curtains",
+      "leftCol": "Keep it low-key",
+      "rightCol": "Where the disgraced sleep"
+    },
+    "solution": {
+      "slot0Top": "UNDER",
+      "slot0Bottom": "PLAY",
+      "slot1Top": "DOG",
+      "slot1Bottom": "HOUSE"
+    },
+    "title": "Bad Dog"
+  },
+  {
+    "id": 135,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOWN",
+        "bottom": "UP"
+      },
+      {
+        "id": "t2",
+        "top": "BITE",
+        "bottom": "UP"
+      },
+      {
+        "id": "t3",
+        "top": "SUN",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t4",
+        "top": "UP",
+        "bottom": "BEAT"
+      },
+      {
+        "id": "t5",
+        "top": "SUN",
+        "bottom": "CASTLE"
+      }
+    ],
+    "hints": {
+      "topRow": "Crack of dawn",
+      "bottomRow": "Conductor's first stroke",
+      "leftCol": "Dusk, cowboy style",
+      "rightCol": "Relentlessly cheery"
+    },
+    "solution": {
+      "slot0Top": "SUN",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "UP",
+      "slot1Bottom": "BEAT"
+    },
+    "title": "Morning Music"
+  },
+  {
+    "id": 136,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FOOT",
+        "bottom": "POWER"
+      },
+      {
+        "id": "t2",
+        "top": "HOLD",
+        "bottom": "GIRL"
+      },
+      {
+        "id": "t3",
+        "top": "HOLD",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "FOOT"
+      },
+      {
+        "id": "t5",
+        "top": "FOOT",
+        "bottom": "WORK"
+      }
+    ],
+    "hints": {
+      "topRow": "A boxer's fancy steps",
+      "bottomRow": "Last one refusing to sign",
+      "leftCol": "Climber's first grip",
+      "rightCol": "Leg day, e.g."
+    },
+    "solution": {
+      "slot0Top": "WORK",
+      "slot0Bottom": "FOOT",
+      "slot1Top": "OUT",
+      "slot1Bottom": "HOLD"
+    },
+    "title": "Cliff Hanger"
+  },
+  {
+    "id": 137,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "MATE",
+        "bottom": "WASH"
+      },
+      {
+        "id": "t2",
+        "top": "WASH",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t3",
+        "top": "ROOM",
+        "bottom": "MATE"
+      },
+      {
+        "id": "t4",
+        "top": "ROOM",
+        "bottom": "PIECE"
+      },
+      {
+        "id": "t5",
+        "top": "WASH",
+        "bottom": "BREAK"
+      }
+    ],
+    "hints": {
+      "topRow": "Polite word for the john",
+      "bottomRow": "Co-signer of the lease",
+      "leftCol": "Old-timey laundry shed",
+      "rightCol": "Splits the rent"
+    },
+    "solution": {
+      "slot0Top": "WASH",
+      "slot0Bottom": "HOUSE",
+      "slot1Top": "ROOM",
+      "slot1Bottom": "MATE"
+    },
+    "title": "Chore Wheel"
+  },
+  {
+    "id": 138,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BACK",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t2",
+        "top": "DOWN",
+        "bottom": "STAGE"
+      },
+      {
+        "id": "t3",
+        "top": "STAGE",
+        "bottom": "CREAM"
+      },
+      {
+        "id": "t4",
+        "top": "BOWL",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t5",
+        "top": "COME",
+        "bottom": "BACK"
+      }
+    ],
+    "hints": {
+      "topRow": "Snappy retort",
+      "bottomRow": "Toward the footlights",
+      "leftCol": "Sobering return to earth",
+      "rightCol": "Where the crew scrambles"
+    },
+    "solution": {
+      "slot0Top": "BACK",
+      "slot0Bottom": "COME",
+      "slot1Top": "STAGE",
+      "slot1Bottom": "DOWN"
+    },
+    "title": "Curtain Call"
+  },
+  {
+    "id": 139,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "HOLE",
+        "bottom": "WOOD"
+      },
+      {
+        "id": "t2",
+        "top": "KEY",
+        "bottom": "HOLE"
+      },
+      {
+        "id": "t3",
+        "top": "PORT",
+        "bottom": "KEY"
+      },
+      {
+        "id": "t4",
+        "top": "PASS",
+        "bottom": "PORT"
+      },
+      {
+        "id": "t5",
+        "top": "PASS",
+        "bottom": "STALK"
+      }
+    ],
+    "hints": {
+      "topRow": "Opens every hotel room",
+      "bottomRow": "Round window below deck",
+      "leftCol": "Little blue travel book",
+      "rightCol": "Spy's peeping spot"
+    },
+    "solution": {
+      "slot0Top": "PASS",
+      "slot0Bottom": "PORT",
+      "slot1Top": "KEY",
+      "slot1Bottom": "HOLE"
+    },
+    "title": "Papers, Please"
+  },
+  {
+    "id": 140,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FORE",
+        "bottom": "WATER"
+      },
+      {
+        "id": "t2",
+        "top": "WATER",
+        "bottom": "FALL"
+      },
+      {
+        "id": "t3",
+        "top": "BREAK",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t4",
+        "top": "CASE",
+        "bottom": "BREAK"
+      },
+      {
+        "id": "t5",
+        "top": "BREAK",
+        "bottom": "FALL"
+      }
+    ],
+    "hints": {
+      "topRow": "Harbor's wave shield",
+      "bottomRow": "What pride comes before",
+      "leftCol": "Car trouble on the shoulder",
+      "rightCol": "Niagara's main event"
+    },
+    "solution": {
+      "slot0Top": "BREAK",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "WATER",
+      "slot1Bottom": "FALL"
+    },
+    "title": "Over the Edge"
+  },
+  {
+    "id": 141,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "MAN",
+        "bottom": "HOLE"
+      },
+      {
+        "id": "t2",
+        "top": "HAND",
+        "bottom": "HOLE"
+      },
+      {
+        "id": "t3",
+        "top": "ICE",
+        "bottom": "WATER"
+      },
+      {
+        "id": "t4",
+        "top": "MAN",
+        "bottom": "BLOW"
+      },
+      {
+        "id": "t5",
+        "top": "ICE",
+        "bottom": "HOLE"
+      }
+    ],
+    "hints": {
+      "topRow": "He delivered the cold, once",
+      "bottomRow": "Desert oasis for wildlife",
+      "leftCol": "Coolest thing in the pitcher",
+      "rightCol": "Round cover in the road"
+    },
+    "solution": {
+      "slot0Top": "ICE",
+      "slot0Bottom": "WATER",
+      "slot1Top": "MAN",
+      "slot1Bottom": "HOLE"
+    },
+    "title": "Cold Plunge"
+  },
+  {
+    "id": 142,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "PIPE",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t2",
+        "top": "BAG",
+        "bottom": "PIPE"
+      },
+      {
+        "id": "t3",
+        "top": "EVER",
+        "bottom": "HAND"
+      },
+      {
+        "id": "t4",
+        "top": "HAND",
+        "bottom": "STAND"
+      },
+      {
+        "id": "t5",
+        "top": "BAG",
+        "bottom": "STAND"
+      }
+    ],
+    "hints": {
+      "topRow": "Upside-down balancing act",
+      "bottomRow": "Droning Scottish staple",
+      "leftCol": "Purse, more formally",
+      "rightCol": "Hydrant's vertical cousin"
+    },
+    "solution": {
+      "slot0Top": "STAND",
+      "slot0Bottom": "HAND",
+      "slot1Top": "PIPE",
+      "slot1Bottom": "BAG"
+    },
+    "title": "Highland Flip"
+  },
+  {
+    "id": 143,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "WORK",
+        "bottom": "PLACE"
+      },
+      {
+        "id": "t2",
+        "top": "SHOW",
+        "bottom": "DATE"
+      },
+      {
+        "id": "t3",
+        "top": "WORK",
+        "bottom": "SHOW"
+      },
+      {
+        "id": "t4",
+        "top": "BEAT",
+        "bottom": "PLACE"
+      },
+      {
+        "id": "t5",
+        "top": "ROAD",
+        "bottom": "SHOW"
+      }
+    ],
+    "hints": {
+      "topRow": "Orange-cone season",
+      "bottomRow": "House fit for a magazine",
+      "leftCol": "Touring production",
+      "rightCol": "Where the cubicles are"
+    },
+    "solution": {
+      "slot0Top": "ROAD",
+      "slot0Bottom": "SHOW",
+      "slot1Top": "WORK",
+      "slot1Bottom": "PLACE"
+    },
+    "title": "On Tour"
+  },
+  {
+    "id": 144,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LAND",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t2",
+        "top": "LOW",
+        "bottom": "LIFE"
+      },
+      {
+        "id": "t3",
+        "top": "LAND",
+        "bottom": "LIFE"
+      },
+      {
+        "id": "t4",
+        "top": "LIFE",
+        "bottom": "SUN"
+      },
+      {
+        "id": "t5",
+        "top": "COAT",
+        "bottom": "LAND"
+      }
+    ],
+    "hints": {
+      "topRow": "No-good scoundrel",
+      "bottomRow": "Phone with a cord",
+      "leftCol": "Valley country",
+      "rightCol": "The rope they throw you"
+    },
+    "solution": {
+      "slot0Top": "LIFE",
+      "slot0Bottom": "LOW",
+      "slot1Top": "LINE",
+      "slot1Bottom": "LAND"
+    },
+    "title": "Phone a Friend"
+  },
+  {
+    "id": 145,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BARE",
+        "bottom": "FIRE"
+      },
+      {
+        "id": "t2",
+        "top": "WORK",
+        "bottom": "DESK"
+      },
+      {
+        "id": "t3",
+        "top": "WORK",
+        "bottom": "CROSS"
+      },
+      {
+        "id": "t4",
+        "top": "CROSS",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t5",
+        "top": "FIRE",
+        "bottom": "WORK"
+      }
+    ],
+    "hints": {
+      "topRow": "Caught between arguments",
+      "bottomRow": "Run yourself ragged",
+      "leftCol": "When two shows collide",
+      "rightCol": "One rocket of the finale"
+    },
+    "solution": {
+      "slot0Top": "CROSS",
+      "slot0Bottom": "OVER",
+      "slot1Top": "FIRE",
+      "slot1Bottom": "WORK"
+    },
+    "title": "Sparks Fly"
+  },
+  {
+    "id": 146,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "CROSS",
+        "bottom": "ROAD"
+      },
+      {
+        "id": "t2",
+        "top": "WAY",
+        "bottom": "CROSS"
+      },
+      {
+        "id": "t3",
+        "top": "GOLD",
+        "bottom": "ROAD"
+      },
+      {
+        "id": "t4",
+        "top": "PAY",
+        "bottom": "CROSS"
+      },
+      {
+        "id": "t5",
+        "top": "WALK",
+        "bottom": "WAY"
+      }
+    ],
+    "hints": {
+      "topRow": "Striped pedestrian zone",
+      "bottomRow": "Where the traffic flows",
+      "leftCol": "Decision point, literally",
+      "rightCol": "Paved path for strollers"
+    },
+    "solution": {
+      "slot0Top": "CROSS",
+      "slot0Bottom": "ROAD",
+      "slot1Top": "WALK",
+      "slot1Bottom": "WAY"
+    },
+    "title": "Look Both Ways"
+  },
+  {
+    "id": 147,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "UP",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t2",
+        "top": "BEACH",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t3",
+        "top": "BACK",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t4",
+        "top": "WORK",
+        "bottom": "UP"
+      },
+      {
+        "id": "t5",
+        "top": "PAPER",
+        "bottom": "BACK"
+      }
+    ],
+    "hints": {
+      "topRow": "Red tape, in physical form",
+      "bottomRow": "Spare copy, just in case",
+      "leftCol": "Beach-read format",
+      "rightCol": "Battery of hospital tests"
+    },
+    "solution": {
+      "slot0Top": "PAPER",
+      "slot0Bottom": "BACK",
+      "slot1Top": "WORK",
+      "slot1Bottom": "UP"
+    },
+    "title": "Hard Copy"
+  },
+  {
+    "id": 148,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "ROUND",
+        "bottom": "UP"
+      },
+      {
+        "id": "t2",
+        "top": "UP",
+        "bottom": "HARD"
+      },
+      {
+        "id": "t3",
+        "top": "LAND",
+        "bottom": "BED"
+      },
+      {
+        "id": "t4",
+        "top": "TABLE",
+        "bottom": "LAND"
+      },
+      {
+        "id": "t5",
+        "top": "LAND",
+        "bottom": "ROUND"
+      }
+    ],
+    "hints": {
+      "topRow": "Cattle-herding sweep",
+      "bottomRow": "Flat-topped mesa country",
+      "leftCol": "Camelot's seating plan",
+      "rightCol": "The higher country"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "ROUND",
+      "slot1Top": "LAND",
+      "slot1Bottom": "TABLE"
+    },
+    "title": "Knights Out West"
+  },
+  {
+    "id": 149,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOWN",
+        "bottom": "KEEPER"
+      },
+      {
+        "id": "t2",
+        "top": "TAKE",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t3",
+        "top": "OFF",
+        "bottom": "POINT"
+      },
+      {
+        "id": "t4",
+        "top": "OFF",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t5",
+        "top": "DOWN",
+        "bottom": "OFF"
+      }
+    ],
+    "hints": {
+      "topRow": "Runway departure",
+      "bottomRow": "The drawback",
+      "leftCol": "Wrestler's move to the mat",
+      "rightCol": "Flag against the offense"
+    },
+    "solution": {
+      "slot0Top": "TAKE",
+      "slot0Bottom": "DOWN",
+      "slot1Top": "OFF",
+      "slot1Bottom": "SIDE"
+    },
+    "title": "Rough Landing"
+  },
+  {
+    "id": 150,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LAND",
+        "bottom": "CHILD"
+      },
+      {
+        "id": "t2",
+        "top": "SIDE",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t3",
+        "top": "IN",
+        "bottom": "LAND"
+      },
+      {
+        "id": "t4",
+        "top": "PORT",
+        "bottom": "IN"
+      },
+      {
+        "id": "t5",
+        "top": "LINE",
+        "bottom": "IN"
+      }
+    ],
+    "hints": {
+      "topRow": "Where it's climate-controlled",
+      "bottomRow": "Grandma's kitchen phone",
+      "leftCol": "Away from the coast",
+      "rightCol": "Coach's pacing strip"
+    },
+    "solution": {
+      "slot0Top": "IN",
+      "slot0Bottom": "LAND",
+      "slot1Top": "SIDE",
+      "slot1Bottom": "LINE"
+    },
+    "title": "House Call"
+  },
+  {
+    "id": 151,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LINE",
+        "bottom": "ICE"
+      },
+      {
+        "id": "t2",
+        "top": "OFF",
+        "bottom": "EARTH"
+      },
+      {
+        "id": "t3",
+        "top": "RUN",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t4",
+        "top": "OFF",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t5",
+        "top": "OFF",
+        "bottom": "TIME"
+      }
+    ],
+    "hints": {
+      "topRow": "Tiebreaker election",
+      "bottomRow": "Events, in order",
+      "leftCol": "Movie's length",
+      "rightCol": "Off the grid, digitally"
+    },
+    "solution": {
+      "slot0Top": "RUN",
+      "slot0Bottom": "TIME",
+      "slot1Top": "OFF",
+      "slot1Bottom": "LINE"
+    },
+    "title": "Election Night"
   }
 ]

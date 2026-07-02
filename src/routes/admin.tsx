@@ -47,7 +47,10 @@ function AdminPage() {
                 className="rounded-2xl border border-tile-edge bg-tile-face/80 backdrop-blur-sm p-5 shadow-tile"
               >
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <h2 className="font-expand text-lg text-ink">Puzzle {level.id}</h2>
+                  <h2 className="font-expand text-lg text-ink">
+                    {level.title ?? `Puzzle ${level.id}`}
+                  </h2>
+                  <span className="font-ui text-[11px] text-ink-soft">#{level.id}</span>
                   <span className="font-ui rounded-full bg-surface-deep/40 px-2.5 py-0.5 text-[11px] text-ink-muted uppercase tracking-wide">
                     Tier {level.tier ?? 1}
                   </span>

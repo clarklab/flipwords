@@ -14,6 +14,8 @@ export type Rotation = 0 | 90 | 180 | 270;
 
 export type Level = {
   id: number;
+  /** Punchy 2-4 word display name (e.g. "City Limits"). */
+  title?: string;
   tier?: 1 | 2 | 3;
   requiresRotation?: boolean;
   tiles: TileBase[];

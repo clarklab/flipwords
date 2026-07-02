@@ -144,6 +144,53 @@ def verify_clue_hygiene(level: dict, edges: tuple[str, str, str, str]) -> tuple[
     return True, ""
 
 
+def verify_overlap_shape(level: dict) -> tuple[bool, str]:
+    """THE OVERLAP RULE — every level's 3 decoys must visibly reuse solution words:
+
+      - 2 single-overlap decoys: one solution word + one dead-end filler each
+      - 1 double-overlap decoy: two solution words paired in a way that isn't
+        either solution tile
+
+    This is a core game-feel mechanic (tiles look like they could work in
+    multiple places). Introduced in commit adb7df6; enforced here so no future
+    generation path can quietly drop it. Mirrored in
+    tests/game/levels-fidelity.test.ts on the TypeScript side.
+    """
+    s = level["solution"]
+    soln_pairs = [
+        {s["slot0Top"], s["slot0Bottom"]},
+        {s["slot1Top"], s["slot1Bottom"]},
+    ]
+    soln_words = soln_pairs[0] | soln_pairs[1]
+
+    matched = [False, False]
+    decoys = []
+    for t in level["tiles"]:
+        pair = {t["top"], t["bottom"]}
+        for i, sp in enumerate(soln_pairs):
+            if not matched[i] and pair == sp:
+                matched[i] = True
+                break
+        else:
+            decoys.append(t)
+
+    if not all(matched) or len(decoys) != 3:
+        return False, f"level {level['id']}: solution tiles not identifiable among the 5"
+
+    singles = sum(
+        1 for t in decoys if (t["top"] in soln_words) + (t["bottom"] in soln_words) == 1
+    )
+    doubles = sum(
+        1 for t in decoys if (t["top"] in soln_words) + (t["bottom"] in soln_words) == 2
+    )
+    if (singles, doubles) != (2, 1):
+        return False, (
+            f"level {level['id']}: decoy overlap shape is {singles} singles + {doubles} doubles"
+            " — must be exactly 2 single-overlap + 1 double-overlap"
+        )
+    return True, ""
+
+
 def verify_level(level: dict, compounds: set[str]) -> tuple[bool, str]:
     tiles = level["tiles"]
     exp_rot = bool(level["requiresRotation"])
@@ -162,74 +209,71 @@ def verify_level(level: dict, compounds: set[str]) -> tuple[bool, str]:
     if not ok:
         return False, err
 
-    valid_configs: list[str] = []
-    matching = 0
+    ok, err = verify_overlap_shape(level)
+    if not ok:
+        return False, err
+
+    # The game judges a win purely by VISIBLE edges (isLevelSolved compares the
+    # rotated screen reading against the expected edges), and the board rotates
+    # freely through 0/90/180/270. Two raw configs are therefore expected to
+    # win: the canonical solution at the level's required rotation, and its
+    # 180° dual (both tiles swapped and flipped, board turned an extra 180°),
+    # which paints the identical screen. Anything beyond those two is a real
+    # ambiguity.
+    canonical_rot = 90 if exp_rot else 0
+    dual_rot = (canonical_rot + 180) % 360
+    wins: list[tuple] = []
+    canonical_seen = 0
 
     for i in range(len(tiles)):
         for j in range(len(tiles)):
             if i == j:
                 continue
             t0, t1 = tiles[i], tiles[j]
-            for flip0, flip1, rot in product((False, True), (False, True), (0, 90)):
+            for flip0, flip1, rot in product((False, True), (False, True), (0, 90, 180, 270)):
                 edges, state = edge_compounds(t0, t1, flip0, flip1, rot)
-                if not all(e in compounds for e in edges):
-                    continue
-
-                rot_matches = (rot == 90) == exp_rot
-                edges_match = edges == exp_edges
-                state_match = state == exp_soln
-
-                desc = (
-                    f"  tiles=({t0['id']},{t1['id']}) flip=({flip0},{flip1}) rot={rot} "
-                    f"-> top={edges[0]} bot={edges[1]} left={edges[2]} right={edges[3]} "
-                    f"state={state} rotMatch={rot_matches} edgesMatch={edges_match} stateMatch={state_match}"
+                # NOTE: edge_compounds only distinguishes rot 0 vs 90; extend to
+                # 180/270 by applying the quarter-turn transform repeatedly.
+                a, b = (t0["bottom"] if flip0 else t0["top"]), (t1["bottom"] if flip1 else t1["top"])
+                c, d = (t0["top"] if flip0 else t0["bottom"]), (t1["top"] if flip1 else t1["bottom"])
+                st = {"tl": a, "tr": b, "bl": c, "br": d}
+                for _ in range(rot // 90):
+                    st = {"tl": st["bl"], "tr": st["tl"], "bl": st["br"], "br": st["tr"]}
+                edges = (
+                    st["tl"] + st["tr"],
+                    st["bl"] + st["br"],
+                    st["tl"] + st["bl"],
+                    st["tr"] + st["br"],
                 )
-                valid_configs.append(desc)
 
-                if rot_matches and edges_match and state_match:
-                    matching += 1
-
-    if matching == 0:
-        return False, (
-            f"level {level['id']}: NO config matches expected solution.\n"
-            + "\n".join(valid_configs[:15])
-        )
-    if matching > 1:
-        return False, (
-            f"level {level['id']}: {matching} configs match expected solution — ambiguous"
-        )
-
-    # Now check: is there any OTHER config (i.e. all 4 in compound list AND matches level
-    # rotation flag, even if state doesn't match) that the player could ALSO win with?
-    # That counts as ambiguity from the player's perspective.
-    alt = 0
-    alt_descs: list[str] = []
-    for i in range(len(tiles)):
-        for j in range(len(tiles)):
-            if i == j:
-                continue
-            t0, t1 = tiles[i], tiles[j]
-            for flip0, flip1, rot in product((False, True), (False, True), (0, 90)):
-                edges, state = edge_compounds(t0, t1, flip0, flip1, rot)
-                if not all(e in compounds for e in edges):
+                if edges == exp_edges:
+                    wins.append((t0["id"], t1["id"], flip0, flip1, rot))
+                    if rot == canonical_rot and state == exp_soln:
+                        canonical_seen += 1
                     continue
-                rot_matches = (rot == 90) == exp_rot
-                if not rot_matches:
-                    continue
-                # All 4 valid + rotation matches the level's requirement.
-                # If edges differ from expected_edges OR state differs from expected_soln,
-                # that's an alternate winning path.
-                if edges != exp_edges or state != exp_soln:
-                    alt += 1
-                    alt_descs.append(
-                        f"  ALT tiles=({t0['id']},{t1['id']}) flip=({flip0},{flip1}) rot={rot} "
+
+                # Confusion guard: at the canonical or dual rotation, no other
+                # config may form 4 valid compounds — a player could assemble
+                # it and reasonably believe they've won.
+                if rot in (canonical_rot, dual_rot) and all(e in compounds for e in edges):
+                    return False, (
+                        f"level {level['id']}: alternate 4-compound config "
+                        f"tiles=({t0['id']},{t1['id']}) flip=({flip0},{flip1}) rot={rot} "
                         f"-> top={edges[0]} bot={edges[1]} left={edges[2]} right={edges[3]}"
                     )
 
-    if alt > 0:
+    if canonical_seen != 1:
         return False, (
-            f"level {level['id']}: {alt} alternate winning configs (same rotation flag, all 4 compounds)\n"
-            + "\n".join(alt_descs[:8])
+            f"level {level['id']}: canonical solution matched {canonical_seen} times (want 1)"
+        )
+    if len(wins) != 2:
+        return False, (
+            f"level {level['id']}: {len(wins)} winning configs (want canonical + 180° dual): {wins}"
+        )
+    rots = sorted(w[4] for w in wins)
+    if rots != sorted([canonical_rot, dual_rot]):
+        return False, (
+            f"level {level['id']}: winning rotations {rots} != [{canonical_rot}, {dual_rot}]"
         )
 
     return True, ""

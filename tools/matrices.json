@@ -20,7 +20,8 @@
       "bottom": "Round window on a ship",
       "left": "Where you catch a flight",
       "right": "Round cover in the street"
-    }
+    },
+    "title": "Cleared for Landing"
   },
   {
     "id": 2,
@@ -43,7 +44,8 @@
       "bottom": "Where the snoring happens",
       "left": "A place where trouble breeds",
       "right": "Clearance above your noggin"
-    }
+    },
+    "title": "Sleeping Angry"
   },
   {
     "id": 3,
@@ -66,7 +68,8 @@
       "bottom": "Cubicle for getting stuff done",
       "left": "A July 4th sparkler in the sky",
       "right": "Where dancers waltz in gowns"
-    }
+    },
+    "title": "Dance Floor Sparks"
   },
   {
     "id": 4,
@@ -89,7 +92,8 @@
       "bottom": "History laid out left-to-right",
       "left": "When the kids ought to be asleep",
       "right": "Edge of the football field"
-    }
+    },
+    "title": "Tucked In"
   },
   {
     "id": 5,
@@ -112,7 +116,8 @@
       "bottom": "Wooden stroll by the sea",
       "left": "Where the mugs and bowls hide",
       "right": "An absurdly easy task"
-    }
+    },
+    "title": "Sweet Stroll"
   },
   {
     "id": 6,
@@ -135,7 +140,8 @@
       "bottom": "A helmet-clad hero with a hose",
       "left": "When a plan blows up on you",
       "right": "Gatekeeper of the lobby"
-    }
+    },
+    "title": "Five-Alarm Exit"
   },
   {
     "id": 7,
@@ -158,7 +164,8 @@
       "bottom": "Bad aftertaste of a blowup",
       "left": "Inches the weather pros track",
       "right": "Someone who left school early"
-    }
+    },
+    "title": "April Showers"
   },
   {
     "id": 8,
@@ -181,7 +188,8 @@
       "bottom": "Where executives plot strategy",
       "left": "Ride down the slope sideways",
       "right": "Grand hall for waltzing"
-    }
+    },
+    "title": "Winter Meeting"
   },
   {
     "id": 9,
@@ -204,7 +212,8 @@
       "bottom": "Tiny wooden cottage for tweeters",
       "left": "Subject of a famous Beatles tune",
       "right": "Original throne room out back"
-    }
+    },
+    "title": "Dark Wings"
   },
   {
     "id": 10,
@@ -227,7 +236,8 @@
       "bottom": "Stone-paved garden route",
       "left": "On a determined rampage",
       "right": "Forward progress"
-    }
+    },
+    "title": "March Forward"
   },
   {
     "id": 11,
@@ -250,7 +260,8 @@
       "bottom": "Coach calls for a quick pause",
       "left": "After dusk and before dawn",
       "right": "The mess left after disaster"
-    }
+    },
+    "title": "After Dark"
   },
   {
     "id": 12,
@@ -273,7 +284,8 @@
       "bottom": "Your, ahem, derriere",
       "left": "Football position past the line",
       "right": "Where forgotten things fall"
-    }
+    },
+    "title": "Fifty-Yard Line"
   },
   {
     "id": 13,
@@ -296,7 +308,8 @@
       "bottom": "Spiral-bound for jotting",
       "left": "Tiny number at the page's base",
       "right": "Practice pages for students"
-    }
+    },
+    "title": "Study Steps"
   },
   {
     "id": 14,
@@ -319,7 +332,8 @@
       "bottom": "A cheap, easy insult",
       "left": "Sweet jar that lures bears",
       "right": "An audacious long-shot goal"
-    }
+    },
+    "title": "Sweet Aim"
   },
   {
     "id": 15,
@@ -342,7 +356,8 @@
       "bottom": "Bench seat for the benched",
       "left": "Where your alarm clock sits",
       "right": "History visualized in order"
-    }
+    },
+    "title": "Lights at Eleven"
   },
   {
     "id": 16,
@@ -365,7 +380,8 @@
       "bottom": "Where chandeliers meet dancers",
       "left": "America's pastime with a glove",
       "right": "Where big decisions get made"
-    }
+    },
+    "title": "Home Run Waltz"
   },
   {
     "id": 17,
@@ -388,7 +404,8 @@
       "bottom": "Kid-sized fort in the yard",
       "left": "To minimize importance",
       "right": "A row-house in the city"
-    }
+    },
+    "title": "Theater District"
   },
   {
     "id": 18,
@@ -411,7 +428,8 @@
       "bottom": "Where ocean meets sand",
       "left": "The beach beside a lake",
       "right": "Bench seat for the benched"
-    }
+    },
+    "title": "Cabin Views"
   },
   {
     "id": 19,
@@ -434,7 +452,8 @@
       "bottom": "A cascading curtain of mist",
       "left": "Used-up runoff from the drain",
       "right": "When a hurricane hits the coast"
-    }
+    },
+    "title": "Wild Terrain"
   },
   {
     "id": 20,
@@ -457,7 +476,8 @@
       "bottom": "Inflatable for the sinking ship",
       "left": "Critters in natural habitat",
       "right": "Vessel that hoses blazes out"
-    }
+    },
+    "title": "Rescue Mission"
   },
   {
     "id": 21,
@@ -480,7 +500,8 @@
       "bottom": "The grim aftermath of a bomb",
       "left": "How storms are measured",
       "right": "Last stop at the grocery store"
-    }
+    },
+    "title": "Storm Refund"
   },
   {
     "id": 22,
@@ -503,7 +524,8 @@
       "bottom": "Glowing strip at stage's edge",
       "left": "Front toes of a four-legged",
       "right": "Bright eye on the car's front"
-    }
+    },
+    "title": "Stage Presence"
   },
   {
     "id": 23,
@@ -526,7 +548,8 @@
       "bottom": "Your whole span on Earth",
       "left": "A no-good scoundrel",
       "right": "Quiet break between tasks"
-    }
+    },
+    "title": "The Whole Story"
   },
   {
     "id": 24,
@@ -549,7 +572,8 @@
       "bottom": "The country where you were born",
       "left": "Fairy-tale wish granter",
       "right": "Your patriotic homeland"
-    }
+    },
+    "title": "Old Country"
   },
   {
     "id": 25,
@@ -572,7 +596,8 @@
       "bottom": "Bench seat at the football game",
       "left": "Right next to the sand and surf",
       "right": "Front-page tease"
-    }
+    },
+    "title": "Front Page Surf"
   },
   {
     "id": 26,
@@ -595,7 +620,8 @@
       "bottom": "Where Santa lands his sleigh",
       "left": "A sweeping cinematic kick",
       "right": "Surface for setting your coffee"
-    }
+    },
+    "title": "Seat of Power"
   },
   {
     "id": 27,
@@ -618,7 +644,8 @@
       "bottom": "Someone who quit school",
       "left": "Care package from the sky",
       "right": "Coach-called pause in action"
-    }
+    },
+    "title": "Signal Lost"
   },
   {
     "id": 28,
@@ -641,7 +668,8 @@
       "bottom": "A children's mini cottage",
       "left": "Rough-and-tumble messing around",
       "right": "An unstoppable force of nature"
-    }
+    },
+    "title": "Full Gallop"
   },
   {
     "id": 29,
@@ -664,7 +692,8 @@
       "bottom": "How things end up",
       "left": "A dramatic union strike",
       "right": "To triumph over obstacles"
-    }
+    },
+    "title": "Easy Victory"
   },
   {
     "id": 30,
@@ -687,7 +716,8 @@
       "bottom": "Paper silhouette in kid craft",
       "left": "Saw that slices across grain",
       "right": "A workforce strike"
-    }
+    },
+    "title": "Paper Dolls"
   },
   {
     "id": 31,
@@ -710,7 +740,8 @@
       "bottom": "Stay-at-home order from above",
       "left": "Spacecraft's airtight chamber",
       "right": "Menu that unfolds when clicked"
-    }
+    },
+    "title": "Space Station"
   },
   {
     "id": 32,
@@ -733,7 +764,8 @@
       "bottom": "The frame you walk through",
       "left": "Sneaky alternate entrance",
       "right": "Canal or river highway"
-    }
+    },
+    "title": "River Entrance"
   },
   {
     "id": 33,
@@ -756,7 +788,8 @@
       "bottom": "A young female's growing years",
       "left": "A young miss with a backpack",
       "right": "A young chap's growing years"
-    }
+    },
+    "title": "Recess Days"
   },
   {
     "id": 34,
@@ -779,7 +812,8 @@
       "bottom": "An artisan-made item",
       "left": "A deceitful, sneaky move",
       "right": "Floating vessel of any size"
-    }
+    },
+    "title": "Deep Divers"
   },
   {
     "id": 35,
@@ -802,7 +836,8 @@
       "bottom": "Outline of the shore on a map",
       "left": "Where land meets the ocean",
       "right": "Bench area for benched players"
-    }
+    },
+    "title": "Salt and Sand"
   },
   {
     "id": 36,
@@ -825,7 +860,8 @@
       "bottom": "Bright eye on the car's front",
       "left": "Someone with a very short fuse",
       "right": "Center-stage beam of attention"
-    }
+    },
+    "title": "All Eyes Here"
   },
   {
     "id": 37,
@@ -848,7 +884,8 @@
       "bottom": "Your formative kid years",
       "left": "Spoiled by the matriarch",
       "right": "The state of having kids"
-    }
+    },
+    "title": "Three Generations"
   },
   {
     "id": 38,
@@ -871,7 +908,8 @@
       "bottom": "A narrow walking trail",
       "left": "Right beneath your soles",
       "right": "Trail where mules pulled barges"
-    }
+    },
+    "title": "River Walk"
   },
   {
     "id": 39,
@@ -894,7 +932,8 @@
       "bottom": "A buffet table against the wall",
       "left": "A soccer ref's frequent call",
       "right": "Diving platform with a bounce"
-    }
+    },
+    "title": "Diving In"
   },
   {
     "id": 40,
@@ -917,7 +956,8 @@
       "bottom": "Nimble dance steps",
       "left": "A clumsy cop, classically",
       "right": "Wrought metal scrollery"
-    }
+    },
+    "title": "Pressed and Polished"
   },
   {
     "id": 41,
@@ -940,7 +980,8 @@
       "bottom": "Vintage mouse alternative",
       "left": "Retrace your steps",
       "right": "Olympic team sport with a goal"
-    }
+    },
+    "title": "Return Serve"
   },
   {
     "id": 42,
@@ -963,7 +1004,8 @@
       "bottom": "Garden walkway",
       "left": "Old mule track beside a canal",
       "right": "Forward progress"
-    }
+    },
+    "title": "Canal Walk"
   },
   {
     "id": 43,
@@ -986,7 +1028,8 @@
       "bottom": "A team's strategy guide",
       "left": "Performed at a theater",
       "right": "Pocket-sized how-to guide"
-    }
+    },
+    "title": "Behind the Curtain"
   },
   {
     "id": 44,
@@ -1009,7 +1052,8 @@
       "bottom": "Rocket-powered ride to orbit",
       "left": "Keyboard key that erases left",
       "right": "Any boat or floating vessel"
-    }
+    },
+    "title": "Bayou Rocket"
   },
   {
     "id": 45,
@@ -1032,7 +1076,8 @@
       "bottom": "Dining-room buffet cabinet",
       "left": "Right next to the surf and sand",
       "right": "What you lean against in bed"
-    }
+    },
+    "title": "Beach Bedroom"
   },
   {
     "id": 46,
@@ -1055,7 +1100,8 @@
       "bottom": "Brush something aside",
       "left": "Dusk, in poetic terms",
       "right": "Hollywood script in scene format"
-    }
+    },
+    "title": "Hollywood Summer"
   },
   {
     "id": 47,
@@ -1078,7 +1124,8 @@
       "bottom": "Vacation condo split by owners",
       "left": "Extra hours at time-and-a-half",
       "right": "Uber or Lyft, generically"
-    }
+    },
+    "title": "Split the Fare"
   },
   {
     "id": 48,
@@ -1101,7 +1148,8 @@
       "bottom": "Slab to step on across a creek",
       "left": "A peppy ballroom dance",
       "right": "Sedimentary rock for buildings"
-    }
+    },
+    "title": "Careful Steps"
   },
   {
     "id": 49,
@@ -1124,7 +1172,8 @@
       "bottom": "Where the land meets the waves",
       "left": "Beachy edge of the ocean",
       "right": "Hull mark at the float level"
-    }
+    },
+    "title": "High Tide"
   },
   {
     "id": 50,
@@ -1147,7 +1196,8 @@
       "bottom": "When the owls come out",
       "left": "A workday evening",
       "right": "When the sun rules the sky"
-    }
+    },
+    "title": "School Night"
   },
   {
     "id": 51,
@@ -1170,7 +1220,8 @@
       "bottom": "Ottoman for tired toes",
       "left": "Front paws of a four-legged",
       "right": "Cushion behind your skull"
-    }
+    },
+    "title": "Head to Toe"
   },
   {
     "id": 52,
@@ -1193,7 +1244,8 @@
       "bottom": "Spare copy on the hard drive",
       "left": "Sweet revenge for a slight",
       "right": "Yearly visit to the doctor"
-    }
+    },
+    "title": "Direct Deposit"
   },
   {
     "id": 53,
@@ -1216,7 +1268,8 @@
       "bottom": "Wrestler's match-ending move",
       "left": "Mouthful of air or food",
       "right": "When the price drops to earth"
-    }
+    },
+    "title": "Tax Season"
   },
   {
     "id": 54,
@@ -1239,7 +1292,8 @@
       "bottom": "Trip from C+ to C-",
       "left": "Clearance-rack savings",
       "right": "Reward for a tougher job"
-    }
+    },
+    "title": "Price Check"
   },
   {
     "id": 55,
@@ -1262,7 +1316,8 @@
       "bottom": "Monday-to-Friday grind",
       "left": "Pile on the assignments",
       "right": "Friday's reward at the office"
-    }
+    },
+    "title": "Long Shift"
   },
   {
     "id": 56,
@@ -1285,7 +1340,8 @@
       "bottom": "Sun streaming through the window",
       "left": "Twelve sharp at lunchtime",
       "right": "Plug-in bulb in the hallway"
-    }
+    },
+    "title": "Around the Clock"
   },
   {
     "id": 57,
@@ -1308,7 +1364,8 @@
       "bottom": "Your steady fella",
       "left": "Lasso-twirling rodeo guy",
       "right": "Your steady gal"
-    }
+    },
+    "title": "Rodeo Romance"
   },
   {
     "id": 58,
@@ -1331,7 +1388,8 @@
       "bottom": "All you can hold in two hands",
       "left": "Elbow to wrist",
       "right": "Like a clown romping for laughs"
-    }
+    },
+    "title": "Arm in Arm"
   },
   {
     "id": 59,
@@ -1354,7 +1412,8 @@
       "bottom": "Balance one cost against another",
       "left": "What the bookie hands a winner",
       "right": "Start of a quest or adventure"
-    }
+    },
+    "title": "Cash Out"
   },
   {
     "id": 60,
@@ -1377,7 +1436,8 @@
       "bottom": "Pull a file from the internet",
       "left": "Stale and beat-looking",
       "right": "Drop the cargo at the dock"
-    }
+    },
+    "title": "Spring Thaw"
   },
   {
     "id": 61,
@@ -1400,7 +1460,8 @@
       "bottom": "Flat plain to the horizon",
       "left": "Carpenter's bench in the garage",
       "right": "A wide, sleepy frontier"
-    }
+    },
+    "title": "High Plains"
   },
   {
     "id": 62,
@@ -1423,7 +1484,8 @@
       "bottom": "Take it way too far",
       "left": "Lingering from the old regime",
       "right": "Beat them by a country mile"
-    }
+    },
+    "title": "Stubborn Streak"
   },
   {
     "id": 63,
@@ -1446,7 +1508,8 @@
       "bottom": "Silver lining in disguise",
       "left": "Stick the kids in for the night",
       "right": "Where the picnic happens"
-    }
+    },
+    "title": "Keys Inside"
   },
   {
     "id": 64,
@@ -1469,7 +1532,8 @@
       "bottom": "Loud crack from a pistol",
       "left": "Pea-shooter from a tribal jungle",
       "right": "Final outcome of it all"
-    }
+    },
+    "title": "Loud Noises"
   },
   {
     "id": 65,
@@ -1492,7 +1556,8 @@
       "bottom": "Disconnected from the net",
       "left": "Click the switch the other way",
       "right": "Sketch in bullet-point form"
-    }
+    },
+    "title": "Ballot Box"
   },
   {
     "id": 66,
@@ -1515,7 +1580,8 @@
       "bottom": "Buy now, pay it off later",
       "left": "Lose track of the keys briefly",
       "right": "Burrito to-go, please"
-    }
+    },
+    "title": "Lost Receipt"
   },
   {
     "id": 67,
@@ -1538,7 +1604,8 @@
       "bottom": "Sneak a candy from the store",
       "left": "Tool room with a sawdust floor",
       "right": "Sneakers with extra sole height"
-    }
+    },
+    "title": "Store Security"
   },
   {
     "id": 68,
@@ -1561,7 +1628,8 @@
       "bottom": "Strip where jets accelerate",
       "left": "Trample the competition",
       "right": "Lane for water traffic"
-    }
+    },
+    "title": "Crossing the Pond"
   },
   {
     "id": 69,
@@ -1584,7 +1652,8 @@
       "bottom": "Backyard burgers on the grill",
       "left": "Burn the casserole, oops",
       "right": "Free swag tossed to the crowd"
-    }
+    },
+    "title": "Burnt Burgers"
   },
   {
     "id": 70,
@@ -1607,7 +1676,8 @@
       "bottom": "Slap an expired stamp on it",
       "left": "Lonely watch in a guard tower",
       "right": "Kids' scheduled play meetup"
-    }
+    },
+    "title": "Frontier Fun"
   },
   {
     "id": 71,
@@ -1630,7 +1700,8 @@
       "bottom": "DJ's spinning vinyl platform",
       "left": "Reversal of a recent setback",
       "right": "Schedule for the trains"
-    }
+    },
+    "title": "DJ Schedule"
   },
   {
     "id": 72,
@@ -1653,7 +1724,8 @@
       "bottom": "A respected political elder",
       "left": "Out where the dairy cows are",
       "right": "Polite word for villager"
-    }
+    },
+    "title": "Capitol Steps"
   },
   {
     "id": 73,
@@ -1676,7 +1748,8 @@
       "bottom": "Rising breeze beneath a glider",
       "left": "An exercise on the floor",
       "right": "Bank account in the negative"
-    }
+    },
+    "title": "Feeling the Burn"
   },
   {
     "id": 74,
@@ -1699,7 +1772,8 @@
       "bottom": "Where students face a board",
       "left": "More polish than the rivals",
       "right": "Mop closet behind the kitchen"
-    }
+    },
+    "title": "Study Abroad"
   },
   {
     "id": 75,
@@ -1722,7 +1796,8 @@
       "bottom": "Where boats are built or fixed",
       "left": "Tough times to endure",
       "right": "Where the grill lives"
-    }
+    },
+    "title": "Dry Dock"
   },
   {
     "id": 76,
@@ -1745,7 +1820,8 @@
       "bottom": "Total widgets manufactured",
       "left": "Lacking; not having",
       "right": "Data fed into the machine"
-    }
+    },
+    "title": "Ins and Outs"
   },
   {
     "id": 77,
@@ -1768,7 +1844,8 @@
       "bottom": "Currently logged into the net",
       "left": "Resting; positioned atop",
       "right": "Hard-wired phone to your house"
-    }
+    },
+    "title": "Dial Tone"
   },
   {
     "id": 78,
@@ -1791,7 +1868,8 @@
       "bottom": "Pond where the herd drinks",
       "left": "Old slang for strong whiskey",
       "right": "Sleeve opening for your hand"
-    }
+    },
+    "title": "Wild West Saloon"
   },
   {
     "id": 79,
@@ -1814,7 +1892,8 @@
       "bottom": "In reverse, against the grain",
       "left": "Quietly retract a statement",
       "right": "Willfully off the proper path"
-    }
+    },
+    "title": "Retrace Your Steps"
   },
   {
     "id": 80,
@@ -1837,7 +1916,8 @@
       "bottom": "Slow tempo for a moody song",
       "left": "Sleep mode for the office",
       "right": "Quirky and a bit unconventional"
-    }
+    },
+    "title": "Power Chord"
   },
   {
     "id": 81,
@@ -1860,7 +1940,8 @@
       "bottom": "Post-season championship round",
       "left": "Brush off as no big deal",
       "right": "When the jet leaves the runway"
-    }
+    },
+    "title": "Game Seven"
   },
   {
     "id": 82,
@@ -1883,7 +1964,8 @@
       "bottom": "Famous statue in town",
       "left": "On solid ground, not at sea",
       "right": "Page-saving corner-fold"
-    }
+    },
+    "title": "Tourist Trap"
   },
   {
     "id": 83,
@@ -1906,7 +1988,8 @@
       "bottom": "Patch of hair down the cheek",
       "left": "The drawback of the deal",
       "right": "Chapped face after a winter ride"
-    }
+    },
+    "title": "Weathered Whiskers"
   },
   {
     "id": 84,
@@ -1929,7 +2012,8 @@
       "bottom": "Toward the river's source",
       "left": "The painful end of a couple",
       "right": "Toward the river's mouth"
-    }
+    },
+    "title": "Salmon Run"
   },
   {
     "id": 85,
@@ -1952,7 +2036,8 @@
       "bottom": "Floating home at the marina",
       "left": "Highway inn with food and beds",
       "right": "Glitzy revue on the water"
-    }
+    },
+    "title": "Traveling Act"
   },
   {
     "id": 86,
@@ -1975,7 +2060,8 @@
       "bottom": "Where the kids dump their LEGOs",
       "left": "Ham it up too much on stage",
       "right": "Closet where the jackets hang"
-    }
+    },
+    "title": "Winter Wardrobe"
   },
   {
     "id": 87,
@@ -1998,7 +2084,8 @@
       "bottom": "Tense pause between two sides",
       "left": "Get the gist of a tricky concept",
       "right": "Lull in the action"
-    }
+    },
+    "title": "Tense Negotiations"
   },
   {
     "id": 88,
@@ -2021,7 +2108,8 @@
       "bottom": "Where you flag down the bus",
       "left": "Where two highways meet",
       "right": "Glowing by the hearth and a tale"
-    }
+    },
+    "title": "Hearth and Highway"
   },
   {
     "id": 89,
@@ -2044,7 +2132,8 @@
       "bottom": "Steps leading to the basement",
       "left": "Hash it out face to face",
       "right": "Steps to the second floor"
-    }
+    },
+    "title": "House Shuffle"
   },
   {
     "id": 90,
@@ -2067,7 +2156,8 @@
       "bottom": "Round glass home for a goldfish",
       "left": "Cod or flounder on the menu",
       "right": "Big sink for sudsy hands"
-    }
+    },
+    "title": "Clean Catch"
   },
   {
     "id": 91,
@@ -2090,7 +2180,8 @@
       "bottom": "Old-time laundry shed out back",
       "left": "Foamy wake at the boat's stern",
       "right": "Lonely tower with sweeping beam"
-    }
+    },
+    "title": "Harbor Glow"
   },
   {
     "id": 92,
@@ -2113,7 +2204,8 @@
       "bottom": "Ambushed by bandits on the road",
       "left": "Dam channel for floodwater",
       "right": "Stretched out atop, in old usage"
-    }
+    },
+    "title": "Dam Burst"
   },
   {
     "id": 93,
@@ -2136,7 +2228,8 @@
       "bottom": "Trumpet's lip cup",
       "left": "Venomous southern swamp snake",
       "right": "Decorative end of a chapter"
-    }
+    },
+    "title": "Rabbit and Snake"
   },
   {
     "id": 94,
@@ -2159,7 +2252,8 @@
       "bottom": "Held up by a bandit's pistol",
       "left": "Concealed-carry sidearm",
       "right": "Bayonet tip; your view angle"
-    }
+    },
+    "title": "Stick 'Em Up"
   },
   {
     "id": 95,
@@ -2182,7 +2276,8 @@
       "bottom": "Above the recommended pounds",
       "left": "Quick layover on your road trip",
       "right": "Boxer's class above feather"
-    }
+    },
+    "title": "Layover Limits"
   },
   {
     "id": 96,
@@ -2205,7 +2300,8 @@
       "bottom": "Bank teller's savings ledger",
       "left": "Tunnel for cars or pedestrians",
       "right": "Recipe collection on the shelf"
-    }
+    },
+    "title": "Secret Recipes"
   },
   {
     "id": 97,
@@ -2228,7 +2324,8 @@
       "bottom": "A flash of deep understanding",
       "left": "In that place, archaically",
       "right": "Wise foreknowledge ahead"
-    }
+    },
+    "title": "Deep Thoughts"
   },
   {
     "id": 98,
@@ -2251,7 +2348,8 @@
       "bottom": "Standing tall and vertical",
       "left": "Tight portrait shot of a face",
       "right": "Plainly and unequivocally"
-    }
+    },
+    "title": "Final Frame"
   },
   {
     "id": 99,
@@ -2274,7 +2372,8 @@
       "bottom": "Fellow sailor on your vessel",
       "left": "Old-fashioned wooing",
       "right": "Roommate for the spare bedroom"
-    }
+    },
+    "title": "Love on Trial"
   },
   {
     "id": 100,
@@ -2297,7 +2396,8 @@
       "bottom": "A handy, capable laborer",
       "left": "Homework brought home from class",
       "right": "Hired hand on the lawn crew"
-    }
+    },
+    "title": "After the Bell"
   },
   {
     "id": 101,
@@ -2320,6 +2420,1207 @@
       "bottom": "The one who tidies the manor",
       "left": "One-room red building of yore",
       "right": "Accountant tracking the ledger"
+    },
+    "title": "Little Red Ledger"
+  },
+  {
+    "id": 102,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "City Limits",
+    "matrix": [
+      "LOCK",
+      "UP",
+      "DOWN",
+      "TOWN"
+    ],
+    "compounds": {
+      "top": "LOCKUP",
+      "bottom": "DOWNTOWN",
+      "left": "LOCKDOWN",
+      "right": "UPTOWN"
+    },
+    "clues": {
+      "top": "County jail, informally",
+      "bottom": "Where the skyscrapers cluster",
+      "left": "Nobody in, nobody out",
+      "right": "The ritzier end of the city"
+    }
+  },
+  {
+    "id": 103,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Open Water",
+    "matrix": [
+      "SEA",
+      "WATER",
+      "PORT",
+      "HOLE"
+    ],
+    "compounds": {
+      "top": "SEAWATER",
+      "bottom": "PORTHOLE",
+      "left": "SEAPORT",
+      "right": "WATERHOLE"
+    },
+    "clues": {
+      "top": "Salty stuff by the gallon",
+      "bottom": "Ship's little round window",
+      "left": "Harbor city's claim to fame",
+      "right": "Savanna sipping spot"
+    }
+  },
+  {
+    "id": 104,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Prime Time",
+    "matrix": [
+      "AIR",
+      "HEAD",
+      "TIME",
+      "PIECE"
+    ],
+    "compounds": {
+      "top": "AIRHEAD",
+      "bottom": "TIMEPIECE",
+      "left": "AIRTIME",
+      "right": "HEADPIECE"
+    },
+    "clues": {
+      "top": "Total space cadet",
+      "bottom": "Fancy word for a watch",
+      "left": "Minutes on the broadcast",
+      "right": "Crown or fascinator"
+    }
+  },
+  {
+    "id": 105,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "First Mates",
+    "matrix": [
+      "AIR",
+      "PLAY",
+      "SHIP",
+      "MATE"
+    ],
+    "compounds": {
+      "top": "AIRPLAY",
+      "bottom": "SHIPMATE",
+      "left": "AIRSHIP",
+      "right": "PLAYMATE"
+    },
+    "clues": {
+      "top": "Spins on the radio",
+      "bottom": "Fellow sailor",
+      "left": "Blimp's grander cousin",
+      "right": "Sandbox companion"
+    }
+  },
+  {
+    "id": 106,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Campfire Stories",
+    "matrix": [
+      "FIRE",
+      "WATER",
+      "WOOD",
+      "CRAFT"
+    ],
+    "compounds": {
+      "top": "FIREWATER",
+      "bottom": "WOODCRAFT",
+      "left": "FIREWOOD",
+      "right": "WATERCRAFT"
+    },
+    "clues": {
+      "top": "Frontier slang for whiskey",
+      "bottom": "Whittler's know-how",
+      "left": "Fuel for the hearth",
+      "right": "Kayaks and canoes"
+    }
+  },
+  {
+    "id": 107,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Front Porch",
+    "matrix": [
+      "OUT",
+      "SIDE",
+      "DOOR",
+      "STEP"
+    ],
+    "compounds": {
+      "top": "OUTSIDE",
+      "bottom": "DOORSTEP",
+      "left": "OUTDOOR",
+      "right": "SIDESTEP"
+    },
+    "clues": {
+      "top": "Where recess happens",
+      "bottom": "Where packages land",
+      "left": "Al fresco",
+      "right": "Dodge, as a question"
+    }
+  },
+  {
+    "id": 108,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Class Acts",
+    "matrix": [
+      "OUT",
+      "CLASS",
+      "HOUSE",
+      "MATE"
+    ],
+    "compounds": {
+      "top": "OUTCLASS",
+      "bottom": "HOUSEMATE",
+      "left": "OUTHOUSE",
+      "right": "CLASSMATE"
+    },
+    "clues": {
+      "top": "Beat with style to spare",
+      "bottom": "Shares your fridge",
+      "left": "Backwoods bathroom",
+      "right": "Peer from homeroom"
+    }
+  },
+  {
+    "id": 109,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Far-Flung Mail",
+    "matrix": [
+      "OUT",
+      "LAND",
+      "POST",
+      "MARK"
+    ],
+    "compounds": {
+      "top": "OUTLAND",
+      "bottom": "POSTMARK",
+      "left": "OUTPOST",
+      "right": "LANDMARK"
+    },
+    "clues": {
+      "top": "The remote beyond",
+      "bottom": "Ink stamp on an envelope",
+      "left": "Lonely frontier station",
+      "right": "The Eiffel Tower, for one"
+    }
+  },
+  {
+    "id": 110,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "With the Flow",
+    "matrix": [
+      "DOWN",
+      "STREAM",
+      "SIDE",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "DOWNSTREAM",
+      "bottom": "SIDELINE",
+      "left": "DOWNSIDE",
+      "right": "STREAMLINE"
+    },
+    "clues": {
+      "top": "The way the river runs",
+      "bottom": "Where benched players wait",
+      "left": "The catch",
+      "right": "Trim for less drag"
+    }
+  },
+  {
+    "id": 111,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Hard Hat Zone",
+    "matrix": [
+      "FORE",
+      "MAN",
+      "ARM",
+      "HOLE"
+    ],
+    "compounds": {
+      "top": "FOREMAN",
+      "bottom": "ARMHOLE",
+      "left": "FOREARM",
+      "right": "MANHOLE"
+    },
+    "clues": {
+      "top": "Boss of the job site",
+      "bottom": "Sleeve's opening",
+      "left": "Between wrist and elbow",
+      "right": "Steamy street portal"
+    }
+  },
+  {
+    "id": 112,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Clocking In",
+    "matrix": [
+      "WORK",
+      "UP",
+      "DAY",
+      "TIME"
+    ],
+    "compounds": {
+      "top": "WORKUP",
+      "bottom": "DAYTIME",
+      "left": "WORKDAY",
+      "right": "UPTIME"
+    },
+    "clues": {
+      "top": "Full battery of medical tests",
+      "bottom": "Soap opera hours",
+      "left": "Nine hours, give or take",
+      "right": "When the servers are humming"
+    }
+  },
+  {
+    "id": 113,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Saddle Up",
+    "matrix": [
+      "WORK",
+      "OUT",
+      "HORSE",
+      "BACK"
+    ],
+    "compounds": {
+      "top": "WORKOUT",
+      "bottom": "HORSEBACK",
+      "left": "WORKHORSE",
+      "right": "OUTBACK"
+    },
+    "clues": {
+      "top": "Sweat session",
+      "bottom": "How knights traveled",
+      "left": "The reliable grinder",
+      "right": "Australia's wild middle"
+    }
+  },
+  {
+    "id": 114,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Mind the Store",
+    "matrix": [
+      "WORK",
+      "SHOP",
+      "BOOK",
+      "KEEPER"
+    ],
+    "compounds": {
+      "top": "WORKSHOP",
+      "bottom": "BOOKKEEPER",
+      "left": "WORKBOOK",
+      "right": "SHOPKEEPER"
+    },
+    "clues": {
+      "top": "Tinkerer's garage haven",
+      "bottom": "Ledger-minding accountant",
+      "left": "Fill-in pages for class",
+      "right": "Owner behind the counter"
+    }
+  },
+  {
+    "id": 115,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "First Flurry",
+    "matrix": [
+      "SNOW",
+      "FALL",
+      "FLAKE",
+      "OUT"
+    ],
+    "compounds": {
+      "top": "SNOWFALL",
+      "bottom": "FLAKEOUT",
+      "left": "SNOWFLAKE",
+      "right": "FALLOUT"
+    },
+    "clues": {
+      "top": "Overnight white blanket",
+      "bottom": "Last-minute bail",
+      "left": "No two are alike",
+      "right": "The messy aftermath"
+    }
+  },
+  {
+    "id": 116,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Lucky Weather",
+    "matrix": [
+      "UP",
+      "LAND",
+      "WIND",
+      "FALL"
+    ],
+    "compounds": {
+      "top": "UPLAND",
+      "bottom": "WINDFALL",
+      "left": "UPWIND",
+      "right": "LANDFALL"
+    },
+    "clues": {
+      "top": "High ground",
+      "bottom": "Sudden pile of money",
+      "left": "Against the breeze",
+      "right": "Where the hurricane hits"
+    }
+  },
+  {
+    "id": 117,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Exit Ramp",
+    "matrix": [
+      "UP",
+      "TAKE",
+      "TURN",
+      "OFF"
+    ],
+    "compounds": {
+      "top": "UPTAKE",
+      "bottom": "TURNOFF",
+      "left": "UPTURN",
+      "right": "TAKEOFF"
+    },
+    "clues": {
+      "top": "Quickness to catch on",
+      "bottom": "Instant dealbreaker",
+      "left": "Swing for the better",
+      "right": "Wheels-up moment"
+    }
+  },
+  {
+    "id": 118,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Recess Patrol",
+    "matrix": [
+      "PLAY",
+      "HOUSE",
+      "TIME",
+      "KEEPER"
+    ],
+    "compounds": {
+      "top": "PLAYHOUSE",
+      "bottom": "TIMEKEEPER",
+      "left": "PLAYTIME",
+      "right": "HOUSEKEEPER"
+    },
+    "clues": {
+      "top": "Kid-sized theater",
+      "bottom": "Official with the stopwatch",
+      "left": "Recess, at home",
+      "right": "Tidier of the manor"
+    }
+  },
+  {
+    "id": 119,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Play Politics",
+    "matrix": [
+      "HARD",
+      "BALL",
+      "BACK",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "HARDBALL",
+      "bottom": "BACKROOM",
+      "left": "HARDBACK",
+      "right": "BALLROOM"
+    },
+    "clues": {
+      "top": "No-mercy negotiating",
+      "bottom": "Where deals get cut",
+      "left": "Sturdier book edition",
+      "right": "Waltzing headquarters"
+    }
+  },
+  {
+    "id": 120,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Lawn Launch",
+    "matrix": [
+      "BACK",
+      "SPACE",
+      "YARD",
+      "MAN"
+    ],
+    "compounds": {
+      "top": "BACKSPACE",
+      "bottom": "YARDMAN",
+      "left": "BACKYARD",
+      "right": "SPACEMAN"
+    },
+    "clues": {
+      "top": "Typo eraser key",
+      "bottom": "He edges the lawn",
+      "left": "Home of the grill",
+      "right": "Suited-up rocket rider"
+    }
+  },
+  {
+    "id": 121,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Lights Out",
+    "matrix": [
+      "OVER",
+      "HEAD",
+      "NIGHT",
+      "LIGHT"
+    ],
+    "compounds": {
+      "top": "OVERHEAD",
+      "bottom": "NIGHTLIGHT",
+      "left": "OVERNIGHT",
+      "right": "HEADLIGHT"
+    },
+    "clues": {
+      "top": "Directly above you",
+      "bottom": "Tiny glow against the dark",
+      "left": "While you slept",
+      "right": "Car's bright eye"
+    }
+  },
+  {
+    "id": 122,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Double Booked",
+    "matrix": [
+      "OVER",
+      "BOOK",
+      "TIME",
+      "KEEPER"
+    ],
+    "compounds": {
+      "top": "OVERBOOK",
+      "bottom": "TIMEKEEPER",
+      "left": "OVERTIME",
+      "right": "BOOKKEEPER"
+    },
+    "clues": {
+      "top": "Sell more seats than exist",
+      "bottom": "Race official with a stopwatch",
+      "left": "Extra innings at the office",
+      "right": "Debits-and-credits pro"
+    }
+  },
+  {
+    "id": 123,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Bedside Gymnastics",
+    "matrix": [
+      "OVER",
+      "HAND",
+      "NIGHT",
+      "STAND"
+    ],
+    "compounds": {
+      "top": "OVERHAND",
+      "bottom": "NIGHTSTAND",
+      "left": "OVERNIGHT",
+      "right": "HANDSTAND"
+    },
+    "clues": {
+      "top": "Serve thrown from above",
+      "bottom": "Lamp's bedside perch",
+      "left": "From dusk to breakfast",
+      "right": "Gymnast's inversion"
+    }
+  },
+  {
+    "id": 124,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Nine to Five",
+    "matrix": [
+      "OVER",
+      "TIME",
+      "WORK",
+      "TABLE"
+    ],
+    "compounds": {
+      "top": "OVERTIME",
+      "bottom": "WORKTABLE",
+      "left": "OVERWORK",
+      "right": "TIMETABLE"
+    },
+    "clues": {
+      "top": "Time-and-a-half hours",
+      "bottom": "Sturdy bench for projects",
+      "left": "Burnout's favorite cause",
+      "right": "The train station grid"
+    }
+  },
+  {
+    "id": 125,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Encore, Encore",
+    "matrix": [
+      "OVER",
+      "PLAY",
+      "COME",
+      "BACK"
+    ],
+    "compounds": {
+      "top": "OVERPLAY",
+      "bottom": "COMEBACK",
+      "left": "OVERCOME",
+      "right": "PLAYBACK"
+    },
+    "clues": {
+      "top": "Milk the moment too hard",
+      "bottom": "Return from rock bottom",
+      "left": "Triumph over trouble",
+      "right": "Replay of the recording"
+    }
+  },
+  {
+    "id": 126,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Something Fishy",
+    "matrix": [
+      "FISH",
+      "EYE",
+      "TAIL",
+      "PIECE"
+    ],
+    "compounds": {
+      "top": "FISHEYE",
+      "bottom": "TAILPIECE",
+      "left": "FISHTAIL",
+      "right": "EYEPIECE"
+    },
+    "clues": {
+      "top": "Ultra-wide lens effect",
+      "bottom": "The closing flourish",
+      "left": "Skid side to side",
+      "right": "Where you squint into a scope"
+    }
+  },
+  {
+    "id": 127,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Under Pressure",
+    "matrix": [
+      "STAND",
+      "OFF",
+      "PIPE",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "STANDOFF",
+      "bottom": "PIPELINE",
+      "left": "STANDPIPE",
+      "right": "OFFLINE"
+    },
+    "clues": {
+      "top": "Tense stalemate",
+      "bottom": "Oil's cross-country route",
+      "left": "Vertical water main",
+      "right": "Unplugged from the web"
+    }
+  },
+  {
+    "id": 128,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Rock, Paper",
+    "matrix": [
+      "SAND",
+      "STONE",
+      "PAPER",
+      "WORK"
+    ],
+    "compounds": {
+      "top": "SANDSTONE",
+      "bottom": "PAPERWORK",
+      "left": "SANDPAPER",
+      "right": "STONEWORK"
+    },
+    "clues": {
+      "top": "Red canyon rock",
+      "bottom": "Forms, forms, forms",
+      "left": "Gritty smoothing sheet",
+      "right": "A mason's handiwork"
+    }
+  },
+  {
+    "id": 129,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Sawdust Session",
+    "matrix": [
+      "WOOD",
+      "WORK",
+      "CUT",
+      "OUT"
+    ],
+    "compounds": {
+      "top": "WOODWORK",
+      "bottom": "CUTOUT",
+      "left": "WOODCUT",
+      "right": "WORKOUT"
+    },
+    "clues": {
+      "top": "Trim a carpenter installs",
+      "bottom": "Cardboard celebrity",
+      "left": "Old-school print block",
+      "right": "Reps and cardio"
+    }
+  },
+  {
+    "id": 130,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "The Fine Print",
+    "matrix": [
+      "UNDER",
+      "SIDE",
+      "FOOT",
+      "NOTE"
+    ],
+    "compounds": {
+      "top": "UNDERSIDE",
+      "bottom": "FOOTNOTE",
+      "left": "UNDERFOOT",
+      "right": "SIDENOTE"
+    },
+    "clues": {
+      "top": "The belly of the boat",
+      "bottom": "Tiny citation down below",
+      "left": "Where the cat always is",
+      "right": "By the way..."
+    }
+  },
+  {
+    "id": 131,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Back to School",
+    "matrix": [
+      "UNDER",
+      "CLASS",
+      "COAT",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "UNDERCLASS",
+      "bottom": "COATROOM",
+      "left": "UNDERCOAT",
+      "right": "CLASSROOM"
+    },
+    "clues": {
+      "top": "Freshmen and sophomores",
+      "bottom": "Where the jackets wait",
+      "left": "Primer layer of paint",
+      "right": "Desks, chalk, one teacher"
+    }
+  },
+  {
+    "id": 132,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Gym Class",
+    "matrix": [
+      "UNDER",
+      "HAND",
+      "FOOT",
+      "BALL"
+    ],
+    "compounds": {
+      "top": "UNDERHAND",
+      "bottom": "FOOTBALL",
+      "left": "UNDERFOOT",
+      "right": "HANDBALL"
+    },
+    "clues": {
+      "top": "Softball pitch style",
+      "bottom": "Gridiron game",
+      "left": "Right where you're stepping",
+      "right": "Court game with no racket"
+    }
+  },
+  {
+    "id": 133,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Border Crossing",
+    "matrix": [
+      "UNDER",
+      "PASS",
+      "SEA",
+      "PORT"
+    ],
+    "compounds": {
+      "top": "UNDERPASS",
+      "bottom": "SEAPORT",
+      "left": "UNDERSEA",
+      "right": "PASSPORT"
+    },
+    "clues": {
+      "top": "Road below the road",
+      "bottom": "Docks, cranes, cargo",
+      "left": "Where submarines roam",
+      "right": "Stamped at the border"
+    }
+  },
+  {
+    "id": 134,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Bad Dog",
+    "matrix": [
+      "UNDER",
+      "DOG",
+      "PLAY",
+      "HOUSE"
+    ],
+    "compounds": {
+      "top": "UNDERDOG",
+      "bottom": "PLAYHOUSE",
+      "left": "UNDERPLAY",
+      "right": "DOGHOUSE"
+    },
+    "clues": {
+      "top": "The longshot you root for",
+      "bottom": "Backyard fort with curtains",
+      "left": "Keep it low-key",
+      "right": "Where the disgraced sleep"
+    }
+  },
+  {
+    "id": 135,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Morning Music",
+    "matrix": [
+      "SUN",
+      "UP",
+      "DOWN",
+      "BEAT"
+    ],
+    "compounds": {
+      "top": "SUNUP",
+      "bottom": "DOWNBEAT",
+      "left": "SUNDOWN",
+      "right": "UPBEAT"
+    },
+    "clues": {
+      "top": "Crack of dawn",
+      "bottom": "Conductor's first stroke",
+      "left": "Dusk, cowboy style",
+      "right": "Relentlessly cheery"
+    }
+  },
+  {
+    "id": 136,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Cliff Hanger",
+    "matrix": [
+      "FOOT",
+      "WORK",
+      "HOLD",
+      "OUT"
+    ],
+    "compounds": {
+      "top": "FOOTWORK",
+      "bottom": "HOLDOUT",
+      "left": "FOOTHOLD",
+      "right": "WORKOUT"
+    },
+    "clues": {
+      "top": "A boxer's fancy steps",
+      "bottom": "Last one refusing to sign",
+      "left": "Climber's first grip",
+      "right": "Leg day, e.g."
+    }
+  },
+  {
+    "id": 137,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Chore Wheel",
+    "matrix": [
+      "WASH",
+      "ROOM",
+      "HOUSE",
+      "MATE"
+    ],
+    "compounds": {
+      "top": "WASHROOM",
+      "bottom": "HOUSEMATE",
+      "left": "WASHHOUSE",
+      "right": "ROOMMATE"
+    },
+    "clues": {
+      "top": "Polite word for the john",
+      "bottom": "Co-signer of the lease",
+      "left": "Old-timey laundry shed",
+      "right": "Splits the rent"
+    }
+  },
+  {
+    "id": 138,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Curtain Call",
+    "matrix": [
+      "COME",
+      "BACK",
+      "DOWN",
+      "STAGE"
+    ],
+    "compounds": {
+      "top": "COMEBACK",
+      "bottom": "DOWNSTAGE",
+      "left": "COMEDOWN",
+      "right": "BACKSTAGE"
+    },
+    "clues": {
+      "top": "Snappy retort",
+      "bottom": "Toward the footlights",
+      "left": "Sobering return to earth",
+      "right": "Where the crew scrambles"
+    }
+  },
+  {
+    "id": 139,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Papers, Please",
+    "matrix": [
+      "PASS",
+      "KEY",
+      "PORT",
+      "HOLE"
+    ],
+    "compounds": {
+      "top": "PASSKEY",
+      "bottom": "PORTHOLE",
+      "left": "PASSPORT",
+      "right": "KEYHOLE"
+    },
+    "clues": {
+      "top": "Opens every hotel room",
+      "bottom": "Round window below deck",
+      "left": "Little blue travel book",
+      "right": "Spy's peeping spot"
+    }
+  },
+  {
+    "id": 140,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Over the Edge",
+    "matrix": [
+      "BREAK",
+      "WATER",
+      "DOWN",
+      "FALL"
+    ],
+    "compounds": {
+      "top": "BREAKWATER",
+      "bottom": "DOWNFALL",
+      "left": "BREAKDOWN",
+      "right": "WATERFALL"
+    },
+    "clues": {
+      "top": "Harbor's wave shield",
+      "bottom": "What pride comes before",
+      "left": "Car trouble on the shoulder",
+      "right": "Niagara's main event"
+    }
+  },
+  {
+    "id": 141,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Cold Plunge",
+    "matrix": [
+      "ICE",
+      "MAN",
+      "WATER",
+      "HOLE"
+    ],
+    "compounds": {
+      "top": "ICEMAN",
+      "bottom": "WATERHOLE",
+      "left": "ICEWATER",
+      "right": "MANHOLE"
+    },
+    "clues": {
+      "top": "He delivered the cold, once",
+      "bottom": "Desert oasis for wildlife",
+      "left": "Coolest thing in the pitcher",
+      "right": "Round cover in the road"
+    }
+  },
+  {
+    "id": 142,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Highland Flip",
+    "matrix": [
+      "HAND",
+      "STAND",
+      "BAG",
+      "PIPE"
+    ],
+    "compounds": {
+      "top": "HANDSTAND",
+      "bottom": "BAGPIPE",
+      "left": "HANDBAG",
+      "right": "STANDPIPE"
+    },
+    "clues": {
+      "top": "Upside-down balancing act",
+      "bottom": "Droning Scottish staple",
+      "left": "Purse, more formally",
+      "right": "Hydrant's vertical cousin"
+    }
+  },
+  {
+    "id": 143,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "On Tour",
+    "matrix": [
+      "ROAD",
+      "WORK",
+      "SHOW",
+      "PLACE"
+    ],
+    "compounds": {
+      "top": "ROADWORK",
+      "bottom": "SHOWPLACE",
+      "left": "ROADSHOW",
+      "right": "WORKPLACE"
+    },
+    "clues": {
+      "top": "Orange-cone season",
+      "bottom": "House fit for a magazine",
+      "left": "Touring production",
+      "right": "Where the cubicles are"
+    }
+  },
+  {
+    "id": 144,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Phone a Friend",
+    "matrix": [
+      "LOW",
+      "LIFE",
+      "LAND",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "LOWLIFE",
+      "bottom": "LANDLINE",
+      "left": "LOWLAND",
+      "right": "LIFELINE"
+    },
+    "clues": {
+      "top": "No-good scoundrel",
+      "bottom": "Phone with a cord",
+      "left": "Valley country",
+      "right": "The rope they throw you"
+    }
+  },
+  {
+    "id": 145,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Sparks Fly",
+    "matrix": [
+      "CROSS",
+      "FIRE",
+      "OVER",
+      "WORK"
+    ],
+    "compounds": {
+      "top": "CROSSFIRE",
+      "bottom": "OVERWORK",
+      "left": "CROSSOVER",
+      "right": "FIREWORK"
+    },
+    "clues": {
+      "top": "Caught between arguments",
+      "bottom": "Run yourself ragged",
+      "left": "When two shows collide",
+      "right": "One rocket of the finale"
+    }
+  },
+  {
+    "id": 146,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Look Both Ways",
+    "matrix": [
+      "CROSS",
+      "WALK",
+      "ROAD",
+      "WAY"
+    ],
+    "compounds": {
+      "top": "CROSSWALK",
+      "bottom": "ROADWAY",
+      "left": "CROSSROAD",
+      "right": "WALKWAY"
+    },
+    "clues": {
+      "top": "Striped pedestrian zone",
+      "bottom": "Where the traffic flows",
+      "left": "Decision point, literally",
+      "right": "Paved path for strollers"
+    }
+  },
+  {
+    "id": 147,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Hard Copy",
+    "matrix": [
+      "PAPER",
+      "WORK",
+      "BACK",
+      "UP"
+    ],
+    "compounds": {
+      "top": "PAPERWORK",
+      "bottom": "BACKUP",
+      "left": "PAPERBACK",
+      "right": "WORKUP"
+    },
+    "clues": {
+      "top": "Red tape, in physical form",
+      "bottom": "Spare copy, just in case",
+      "left": "Beach-read format",
+      "right": "Battery of hospital tests"
+    }
+  },
+  {
+    "id": 148,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Knights Out West",
+    "matrix": [
+      "ROUND",
+      "UP",
+      "TABLE",
+      "LAND"
+    ],
+    "compounds": {
+      "top": "ROUNDUP",
+      "bottom": "TABLELAND",
+      "left": "ROUNDTABLE",
+      "right": "UPLAND"
+    },
+    "clues": {
+      "top": "Cattle-herding sweep",
+      "bottom": "Flat-topped mesa country",
+      "left": "Camelot's seating plan",
+      "right": "The higher country"
+    }
+  },
+  {
+    "id": 149,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Rough Landing",
+    "matrix": [
+      "TAKE",
+      "OFF",
+      "DOWN",
+      "SIDE"
+    ],
+    "compounds": {
+      "top": "TAKEOFF",
+      "bottom": "DOWNSIDE",
+      "left": "TAKEDOWN",
+      "right": "OFFSIDE"
+    },
+    "clues": {
+      "top": "Runway departure",
+      "bottom": "The drawback",
+      "left": "Wrestler's move to the mat",
+      "right": "Flag against the offense"
+    }
+  },
+  {
+    "id": 150,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "House Call",
+    "matrix": [
+      "IN",
+      "SIDE",
+      "LAND",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "INSIDE",
+      "bottom": "LANDLINE",
+      "left": "INLAND",
+      "right": "SIDELINE"
+    },
+    "clues": {
+      "top": "Where it's climate-controlled",
+      "bottom": "Grandma's kitchen phone",
+      "left": "Away from the coast",
+      "right": "Coach's pacing strip"
+    }
+  },
+  {
+    "id": 151,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Election Night",
+    "matrix": [
+      "RUN",
+      "OFF",
+      "TIME",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "RUNOFF",
+      "bottom": "TIMELINE",
+      "left": "RUNTIME",
+      "right": "OFFLINE"
+    },
+    "clues": {
+      "top": "Tiebreaker election",
+      "bottom": "Events, in order",
+      "left": "Movie's length",
+      "right": "Off the grid, digitally"
     }
   }
 ]

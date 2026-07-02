@@ -400,51 +400,37 @@ def pick_decoys(
                         if _triple_safe(triple):
                             return triple, "2-single-1-double"
 
-    # Fallback A: 3 singles covering 3 different solution words.
-    avail: list[tuple[str, dict]] = [
-        (s, t) for s in soln_word_order for t in singles_by_word[s]
-    ]
-    rng.shuffle(avail)
-    for i in range(len(avail)):
-        wi, ti = avail[i]
-        for j in range(i + 1, len(avail)):
-            wj, tj = avail[j]
-            if wj == wi:
-                continue
-            for k in range(j + 1, len(avail)):
-                wk, tk = avail[k]
-                if wk in (wi, wj):
-                    continue
-                triple = [ti, tj, tk]
-                if not _distinct(triple):
-                    continue
-                if _triple_safe(triple):
-                    return triple, "3-singles"
+    # THE OVERLAP RULE IS A HARD REQUIREMENT — no fallback shapes. Every level
+    # must ship 2 single-overlap + 1 double-overlap decoys so solution words
+    # visibly recur across the rail (tiles look like they could work in
+    # multiple places — core to the game's feel; see commit adb7df6 and
+    # verify_levels.verify_overlap_shape). A matrix that can't support the
+    # shape gets rejected here and reported; fix the matrix, don't relax the
+    # rule.
+    return None, "no-overlap-triple"
 
-    # Fallback B: legacy pool — neutral decoys with no required overlap.
-    legacy = [
-        d for d in decoys_pool
-        if d["top"] not in soln_set and d["bottom"] not in soln_set
-    ]
-    legacy = [d for d in legacy if decoy_is_safe(d, t1, t2, compounds, expected)]
-    rng.shuffle(legacy)
-    for i in range(len(legacy)):
-        for j in range(i + 1, len(legacy)):
-            if not pair_is_safe(legacy[i], legacy[j], compounds, expected):
-                continue
-            for k in range(j + 1, len(legacy)):
-                if not pair_is_safe(legacy[i], legacy[k], compounds, expected):
-                    continue
-                if not pair_is_safe(legacy[j], legacy[k], compounds, expected):
-                    continue
-                return [legacy[i], legacy[j], legacy[k]], "legacy-fallback"
-    return None, "no-valid-triple"
+
+def load_existing_levels() -> dict[int, dict]:
+    """Levels already shipped in levels_generated.json, keyed by id.
+
+    SHIPPED LEVELS ARE FROZEN. Players have played them and the daily archive
+    replays them, so a rebuild must reproduce them byte-for-byte rather than
+    re-rolling decoys with a drifted RNG stream. A matrix whose id already has
+    a shipped level (and whose solution still matches) is reused verbatim;
+    only genuinely new matrices generate fresh levels. To intentionally re-roll
+    a shipped level, delete it from levels_generated.json and rebuild.
+    """
+    if not OUTPUT_FILE.exists():
+        return {}
+    with OUTPUT_FILE.open() as f:
+        return {lvl["id"]: lvl for lvl in json.load(f)}
 
 
 def main() -> int:
     compounds = load_compounds()
     matrices = load_matrices()
     decoys = load_decoys()
+    existing = load_existing_levels()
 
     rng = random.Random(42)
 
@@ -453,6 +439,7 @@ def main() -> int:
 
     levels = []
     skipped = []
+    reused = 0
     shape_counts: dict[str, int] = {}
     for m in matrices:
         ok, err = validate_matrix(m, compounds)
@@ -463,6 +450,20 @@ def main() -> int:
         rotation = bool(m.get("requires_rotation", False))
         t1, t2 = build_solution_tiles(m["matrix"], rotation)
         expected = expected_edges(m["matrix"])
+
+        # Frozen path: reuse the shipped level for this matrix untouched.
+        prior = existing.get(int(m["id"]))
+        if prior is not None and prior["solution"] == expected_solution(m["matrix"], rotation):
+            frozen = dict(prior)
+            # Titles are display-only metadata — safe to add/refresh on frozen
+            # levels without changing gameplay content.
+            if m.get("title"):
+                frozen["title"] = m["title"]
+            elif "title" in frozen:
+                del frozen["title"]
+            levels.append(frozen)
+            reused += 1
+            continue
 
         chosen, shape = pick_decoys(rng, decoys, atomic_vocab, t1, t2, compounds, expected)
         shape_counts[shape] = shape_counts.get(shape, 0) + 1
@@ -488,25 +489,28 @@ def main() -> int:
         # drives the session picker's difficulty escalation. Default to 1 if
         # a matrix entry forgets to set it.
         tier = int(m.get("tier", 1))
-        levels.append(
-            {
-                "id": len(levels) + 1,
-                "tier": tier,
-                "requiresRotation": rotation,
-                "tiles": tiles,
-                "hints": {
-                    "topRow": clues["top"],
-                    "bottomRow": clues["bottom"],
-                    "leftCol": clues["left"],
-                    "rightCol": clues["right"],
-                },
-                "solution": soln,
-            }
-        )
+        level = {
+            "id": len(levels) + 1,
+            "tier": tier,
+            "requiresRotation": rotation,
+            "tiles": tiles,
+            "hints": {
+                "topRow": clues["top"],
+                "bottomRow": clues["bottom"],
+                "leftCol": clues["left"],
+                "rightCol": clues["right"],
+            },
+            "solution": soln,
+        }
+        # Punchy 2-4 word display title, curated per matrix. Optional for
+        # legacy matrices; every new matrix should carry one.
+        if m.get("title"):
+            level["title"] = m["title"]
+        levels.append(level)
 
     OUTPUT_FILE.write_text(json.dumps(levels, indent=2) + "\n")
 
-    print(f"Built {len(levels)} levels -> {OUTPUT_FILE}")
+    print(f"Built {len(levels)} levels ({reused} frozen/reused) -> {OUTPUT_FILE}")
     if shape_counts:
         print("Decoy shape breakdown:")
         for shape, n in sorted(shape_counts.items(), key=lambda kv: -kv[1]):
