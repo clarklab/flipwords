@@ -1,4 +1,4 @@
-import type { DailyStorage, SessionResult } from './types'
+import type { DailyStorage, RecordMode, SessionResult } from './types'
 import { shiftDate } from './date'
 
 export function tickStreak(s: DailyStorage, today: string): DailyStorage {
@@ -28,10 +28,13 @@ export function settleStreak(s: DailyStorage, today: string): DailyStorage {
 export function recordCompletion(
   s: DailyStorage,
   today: string,
-  result: SessionResult
+  result: SessionResult,
+  mode: RecordMode = 'daily'
 ): DailyStorage {
   if (s.sessions[today]) return s // idempotent
-  const ticked = tickStreak(s, today)
+  // Makeup completions never touch the streak — it only rewards playing on
+  // the actual day. Both modes count toward totals.
+  const ticked = mode === 'daily' ? tickStreak(s, today) : s
   return {
     ...ticked,
     sessions: {
@@ -41,7 +44,7 @@ export function recordCompletion(
         stars: result.stars,
         perPuzzle: result.perPuzzle,
         totalDurationMs: result.totalDurationMs,
-        mode: 'daily',
+        mode,
       },
     },
     totals: {
@@ -49,5 +52,7 @@ export function recordCompletion(
       perfectSessions:
         ticked.totals.perfectSessions + (result.stars === 3 ? 1 : 0),
     },
+    inProgress:
+      ticked.inProgress?.date === today ? null : ticked.inProgress,
   }
 }

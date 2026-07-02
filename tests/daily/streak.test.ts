@@ -101,3 +101,50 @@ describe('recordCompletion', () => {
     expect(s.totals.perfectSessions).toBe(0) // not bumped on replay
   })
 })
+
+describe('recordCompletion — makeup mode', () => {
+  it('records the session with mode makeup and bumps totals', () => {
+    const s = recordCompletion(freshStorage(), '2026-05-19', makeResult('2026-05-19', 3), 'makeup')
+    expect(s.sessions['2026-05-19'].mode).toBe('makeup')
+    expect(s.totals.sessionsPlayed).toBe(1)
+    expect(s.totals.perfectSessions).toBe(1)
+  })
+
+  it('NEVER ticks the streak', () => {
+    let s = tickStreak(freshStorage(), '2026-06-01') // current streak 1
+    s = recordCompletion(s, '2026-06-02', makeResult('2026-06-02', 2), 'makeup')
+    expect(s.streak).toEqual({ current: 1, best: 1, lastCompletedDate: '2026-06-01' })
+  })
+
+  it('daily mode is the default and still ticks streak', () => {
+    const s = recordCompletion(freshStorage(), '2026-05-19', makeResult('2026-05-19', 2))
+    expect(s.sessions['2026-05-19'].mode).toBe('daily')
+    expect(s.streak.current).toBe(1)
+  })
+
+  it('clears a matching inProgress record on completion', () => {
+    const base = freshStorage()
+    base.inProgress = {
+      date: '2026-05-19', mode: 'daily', puzzlesDone: [], currentIdx: 0,
+      elapsedMs: 100, startedAt: 1, updatedAt: 2,
+    }
+    const s = recordCompletion(base, '2026-05-19', makeResult('2026-05-19', 2))
+    expect(s.inProgress).toBeNull()
+  })
+
+  it('leaves an unrelated inProgress record alone', () => {
+    const base = freshStorage()
+    base.inProgress = {
+      date: '2026-05-10', mode: 'makeup', puzzlesDone: [], currentIdx: 0,
+      elapsedMs: 100, startedAt: 1, updatedAt: 2,
+    }
+    const s = recordCompletion(base, '2026-05-19', makeResult('2026-05-19', 2))
+    expect(s.inProgress?.date).toBe('2026-05-10')
+  })
+
+  it('is idempotent for makeup too', () => {
+    let s = recordCompletion(freshStorage(), '2026-05-19', makeResult('2026-05-19', 2), 'makeup')
+    s = recordCompletion(s, '2026-05-19', makeResult('2026-05-19', 3), 'makeup')
+    expect(s.totals.sessionsPlayed).toBe(1)
+  })
+})
