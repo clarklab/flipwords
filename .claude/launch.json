@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "flipwords",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "dev", "--port", "3457"],
+      "port": 3457
     }
   ]
 }

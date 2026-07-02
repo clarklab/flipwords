@@ -9,15 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as ArchiveRouteImport } from './routes/archive'
-import { Route as ArchiveDateRouteImport } from './routes/archive.$date'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlayRouteImport } from './routes/play'
+import { Route as ArchiveRouteImport } from './routes/archive'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArchiveDateRouteImport } from './routes/archive_.$date'
 
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const PlayRoute = PlayRouteImport.update({
+  id: '/play',
+  path: '/play',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArchiveRoute = ArchiveRouteImport.update({
@@ -25,19 +25,19 @@ const ArchiveRoute = ArchiveRouteImport.update({
   path: '/archive',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArchiveDateRoute = ArchiveDateRouteImport.update({
-  id: '/archive/$date',
-  path: '$date',
-  getParentRoute: () => ArchiveRoute,
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlayRoute = PlayRouteImport.update({
-  id: '/play',
-  path: '/play',
+const ArchiveDateRoute = ArchiveDateRouteImport.update({
+  id: '/archive_/$date',
+  path: '/archive/$date',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -45,49 +45,47 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
-  '/archive/$date': typeof ArchiveDateRoute
   '/play': typeof PlayRoute
+  '/archive/$date': typeof ArchiveDateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
-  '/archive/$date': typeof ArchiveDateRoute
   '/play': typeof PlayRoute
+  '/archive/$date': typeof ArchiveDateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
-  '/archive/$date': typeof ArchiveDateRoute
   '/play': typeof PlayRoute
+  '/archive_/$date': typeof ArchiveDateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/archive' | '/archive/$date' | '/play'
+  fullPaths: '/' | '/admin' | '/archive' | '/play' | '/archive/$date'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/archive' | '/archive/$date' | '/play'
-  id: '__root__' | '/' | '/admin' | '/archive' | '/archive/$date' | '/play'
+  to: '/' | '/admin' | '/archive' | '/play' | '/archive/$date'
+  id: '__root__' | '/' | '/admin' | '/archive' | '/play' | '/archive_/$date'
   fileRoutesById: FileRoutesById
-}
-export interface ArchiveRouteChildren {
-  ArchiveDateRoute: typeof ArchiveDateRoute
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   ArchiveRoute: typeof ArchiveRoute
   PlayRoute: typeof PlayRoute
+  ArchiveDateRoute: typeof ArchiveDateRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/play': {
+      id: '/play'
+      path: '/play'
+      fullPath: '/play'
+      preLoaderRoute: typeof PlayRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/archive': {
@@ -97,12 +95,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArchiveRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/archive/$date': {
-      id: '/archive/$date'
-      path: '$date'
-      fullPath: '/archive/$date'
-      preLoaderRoute: typeof ArchiveDateRouteImport
-      parentRoute: typeof ArchiveRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/': {
       id: '/'
@@ -111,26 +109,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/play': {
-      id: '/play'
-      path: '/play'
-      fullPath: '/play'
-      preLoaderRoute: typeof PlayRouteImport
+    '/archive_/$date': {
+      id: '/archive_/$date'
+      path: '/archive/$date'
+      fullPath: '/archive/$date'
+      preLoaderRoute: typeof ArchiveDateRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
-const archiveRouteChildren: ArchiveRouteChildren = {
-  ArchiveDateRoute: ArchiveDateRoute,
-}
-const ArchiveRouteWithChildren = ArchiveRoute._addFileChildren(archiveRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
-  ArchiveRoute: ArchiveRouteWithChildren,
+  ArchiveRoute: ArchiveRoute,
   PlayRoute: PlayRoute,
+  ArchiveDateRoute: ArchiveDateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
