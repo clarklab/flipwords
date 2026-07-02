@@ -10,7 +10,7 @@ import AnimatedWordmark, {
   type AnimatedWordmarkHandle,
 } from "./AnimatedWordmark";
 import type { Level, Slots, Tile as TileType } from "@/game/types";
-import type { SessionMode, SessionResult, EasternDate } from '@/daily/types'
+import type { SessionMode, SessionResult, EasternDate, PuzzleResult } from '@/daily/types'
 import { loadStorage } from '@/daily/storage'
 import {
   getExpectedEdges,
@@ -70,6 +70,21 @@ export type FlipWordsProps = {
    * component no longer auto-shows it based on localStorage.
    */
   showTutorial?: boolean
+  /**
+   * Resume seed: results for puzzles already completed this session plus the
+   * timer snapshot. The component starts at puzzle `puzzlesDone.length`.
+   */
+  initialProgress?: { puzzlesDone: PuzzleResult[]; elapsedMs: number }
+  /**
+   * Progress report for host persistence — fired after each puzzle solve and
+   * when the tab hides, always with currentIdx === puzzlesDone.length (capped
+   * at the final puzzle so a resumed session never starts past the end).
+   */
+  onProgress?: (progress: {
+    puzzlesDone: PuzzleResult[]
+    currentIdx: number
+    elapsedMs: number
+  }) => void
 }
 
 const SOLVE_HEADLINES = [
@@ -193,13 +208,63 @@ const fireConfetti = () => {
   }, 250);
 };
 
+/**
+ * Edge clue pill. Lives at module level — defining it inside FlipWords would
+ * mint a new component type every render, forcing React to unmount/remount
+ * all four pills on each state change. That both wastes frames and detaches
+ * the DOM nodes the win-sequence GSAP tweens are animating (the edge flash
+ * silently played against dead elements).
+ */
+function ScreenEdgePill({
+  edge,
+  clue,
+}: {
+  edge: "top" | "right" | "bottom" | "left";
+  clue: string;
+}) {
+  return (
+    <div
+      data-edge={edge}
+      className={cn(
+        // No backdrop-blur here: dragged tiles pass beneath the pills, and a
+        // persistent backdrop-filter would re-blur that region every frame.
+        "relative font-clue-strong text-ink-muted bg-tile-face/90 border border-tile-edge rounded-full px-3.5 py-1.5 md:px-4 md:py-2 shadow-tile transition-colors",
+        edge === "left" || edge === "right" ? "[writing-mode:vertical-rl]" : "",
+        edge === "left" ? "rotate-180" : ""
+      )}
+      style={{
+        // Fluid sizing — 12px floor on the smallest phones, scales up to
+        // ~15px on tablet/desktop. +2px from the previous 10/12 baseline.
+        fontSize: "clamp(0.75rem, 1.2vw + 0.62rem, 0.95rem)",
+        lineHeight: 1.15,
+      }}
+    >
+      {/* Pre-rendered win glow — revealed by opacity in runWinSequence so
+          the celebration never tweens a paint property. */}
+      <span
+        data-edge-glow
+        aria-hidden="true"
+        className="absolute inset-0 rounded-full opacity-0 pointer-events-none"
+        style={{
+          boxShadow:
+            "0 0 0 2px var(--color-accent), 0 0 24px rgba(31,156,147,0.4)",
+        }}
+      />
+      <span className="whitespace-nowrap">{clue}</span>
+    </div>
+  );
+}
+
 export default function FlipWords(props: FlipWordsProps) {
   const { session, mode, onComplete, date, dayNumber,
           scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary, onBack,
-          showTutorial: showTutorialProp } = props
+          showTutorial: showTutorialProp, initialProgress, onProgress } = props
   const [showTutorial, setShowTutorial] = useState(showTutorialProp ?? false);
   const [gameLevels, setGameLevels] = useState<Level[]>(session);
-  const [levelIdx, setLevelIdx] = useState(0);
+  const [levelIdx, setLevelIdx] = useState(() => {
+    const done = initialProgress?.puzzlesDone.length ?? 0;
+    return Math.max(0, Math.min(done, session.length - 1));
+  });
   const [bank, setBank] = useState<TileType[]>([]);
   const [slots, setSlots] = useState<Slots>([null, null]);
   const [boardRotation, setBoardRotation] = useState(0);
@@ -224,7 +289,8 @@ export default function FlipWords(props: FlipWordsProps) {
   // Wall-clock elapsed time for the active session, ticked every second.
   // Pauses when the browser tab is hidden and resumes on visibility, so the
   // displayed value matches "time spent actually looking at the puzzle."
-  const [elapsedMs, setElapsedMs] = useState(0);
+  // Seeded from initialProgress so a resumed session's clock carries on.
+  const [elapsedMs, setElapsedMs] = useState(initialProgress?.elapsedMs ?? 0);
   // Streak snapshot captured after the host's onComplete writes to storage.
   // Only populated in daily mode; passed to Scorecard for the streak chip.
   const [streakSnapshot, setStreakSnapshot] = useState<{
@@ -253,14 +319,39 @@ export default function FlipWords(props: FlipWordsProps) {
   const sessionEndRef = useRef<number | null>(null);
   const perPuzzleRef = useRef<
     Array<{ attempts: number; hints: number; durationMs: number }>
-  >([]);
+  >(initialProgress?.puzzlesDone.slice() ?? []);
   const puzzleStartRef = useRef<number | null>(null);
   // Timer bookkeeping. visibleStartRef is the wall-clock at which the current
   // "visible" segment began; elapsedAccumRef is the sum of all prior visible
   // segments. While the tab is hidden, visibleStartRef is null and the
   // accumulator holds the frozen total.
-  const elapsedAccumRef = useRef(0);
+  const elapsedAccumRef = useRef(initialProgress?.elapsedMs ?? 0);
   const visibleStartRef = useRef<number | null>(null);
+
+  // Progress reporting for host persistence (resume-after-refresh). Kept in a
+  // ref so stable callbacks (runWinSequence) always see the latest prop.
+  const onProgressRef = useRef(onProgress);
+  onProgressRef.current = onProgress;
+
+  const reportProgress = useCallback(() => {
+    if (!onProgressRef.current) return;
+    const elapsedNow =
+      elapsedAccumRef.current +
+      (visibleStartRef.current !== null ? Date.now() - visibleStartRef.current : 0);
+    // Cap at the final puzzle: a killed tab after the last solve resumes ON
+    // the last puzzle rather than in an unrepresentable "6 of 5" state.
+    const done = perPuzzleRef.current.slice(0, 4).map((p) => ({
+      attempts: p.attempts,
+      hints: p.hints,
+      durationMs: p.durationMs,
+      stars: computeStars(p.attempts, p.durationMs),
+    }));
+    onProgressRef.current({
+      puzzlesDone: done,
+      currentIdx: done.length,
+      elapsedMs: elapsedNow,
+    });
+  }, []);
 
   const level = gameLevels[levelIdx];
 
@@ -270,8 +361,15 @@ export default function FlipWords(props: FlipWordsProps) {
     window.setTimeout(() => wordmarkRef.current?.flip(), 240);
   }, []);
 
-  // Update if session prop changes (host starts a new run).
+  // Update if session prop changes (host starts a new run). Skipped on mount
+  // so it can't clobber the initialProgress seeding — the state initializers
+  // already put us in the right place.
+  const sessionEffectRanRef = useRef(false);
   useEffect(() => {
+    if (!sessionEffectRanRef.current) {
+      sessionEffectRanRef.current = true;
+      return;
+    }
     setGameLevels(session)
     setLevelIdx(0)
     setShowSessionSummary(false)
@@ -342,8 +440,10 @@ export default function FlipWords(props: FlipWordsProps) {
     setCheckState("idle");
     winSequenceFired.current = false;
     // Session-scoped state: start the clock on the first puzzle of a session.
+    // On resume, backdate the start so total duration ≈ prior elapsed + this
+    // run's wall time instead of counting the offline gap.
     if (sessionStartRef.current === null) {
-      sessionStartRef.current = Date.now();
+      sessionStartRef.current = Date.now() - elapsedAccumRef.current;
     }
     puzzleStartRef.current = Date.now();
   }, [levelIdx, level]);
@@ -388,15 +488,29 @@ export default function FlipWords(props: FlipWordsProps) {
           elapsedAccumRef.current += Date.now() - visibleStartRef.current;
           visibleStartRef.current = null;
         }
+        // Tab going dark may be the last thing we ever hear — persist the
+        // timer so an evicted session resumes with its clock intact.
+        reportProgress();
       } else {
         visibleStartRef.current = Date.now();
       }
     };
     document.addEventListener("visibilitychange", handleVisibility);
 
+    // pagehide fires on navigation/close where visibilitychange may not.
+    const handlePageHide = () => {
+      if (visibleStartRef.current !== null) {
+        elapsedAccumRef.current += Date.now() - visibleStartRef.current;
+        visibleStartRef.current = null;
+      }
+      reportProgress();
+    };
+    window.addEventListener("pagehide", handlePageHide);
+
     return () => {
       window.clearInterval(interval);
       document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("pagehide", handlePageHide);
       // Bank whatever was visible so resuming picks up where we left off
       // instead of replaying the gap.
       if (visibleStartRef.current !== null) {
@@ -404,7 +518,7 @@ export default function FlipWords(props: FlipWordsProps) {
         visibleStartRef.current = null;
       }
     };
-  }, [gameLevels.length, showSessionSummary, showTutorial]);
+  }, [gameLevels.length, showSessionSummary, showTutorial, reportProgress]);
 
   // Session scorecard arrives — fire the grand fanfare and pop a bell for each
   // star, timed against the star animation delays (0.2 + n * 0.15 seconds).
@@ -489,29 +603,34 @@ export default function FlipWords(props: FlipWordsProps) {
       hints: hintsThisPuzzleRef.current,
       durationMs: now - startedAt,
     });
+    // Persist the boundary — a refresh from here resumes at the next puzzle.
+    reportProgress();
     // Pick a fresh win headline so the celebration doesn't repeat itself.
     setWinHeadline(pickHeadline(SOLVE_HEADLINES));
     const edges = ["top", "right", "bottom", "left"];
     edges.forEach((edge, i) => {
       const el = boardFrameRef.current?.querySelector(`[data-edge="${edge}"]`);
       if (!el) return;
-      gsap.to(el, {
-        boxShadow:
-          "0 0 0 2px var(--color-accent), 0 0 24px rgba(31,156,147,0.4)",
-        scale: 1.04,
+      // Compositor-only celebration: the accent glow is pre-rendered on a
+      // child overlay and revealed via opacity, and the pop is a transform.
+      // Tweening box-shadow directly would force a paint on every frame.
+      const glow = el.querySelector("[data-edge-glow]");
+      const pulse = {
         duration: 0.22,
         delay: i * 0.18,
         yoyo: true,
         repeat: 1,
         ease: "power2.inOut",
-      });
+      } as const;
+      gsap.to(el, { scale: 1.04, ...pulse });
+      if (glow) gsap.to(glow, { opacity: 1, ...pulse });
     });
     setTimeout(() => {
       fireConfetti();
       playPuzzleComplete();
       setShowCelebration(true);
     }, 950);
-  }, []);
+  }, [reportProgress]);
 
   const handleCheckAnswer = useCallback(() => {
     if (!level) return;
@@ -904,33 +1023,6 @@ export default function FlipWords(props: FlipWordsProps) {
       ? 2
       : 1;
 
-  const ScreenEdgePill = ({
-    edge,
-    clue,
-  }: {
-    edge: "top" | "right" | "bottom" | "left";
-    clue: string;
-  }) => {
-    return (
-      <div
-        data-edge={edge}
-        className={cn(
-          "relative font-clue-strong text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge rounded-full px-3.5 py-1.5 md:px-4 md:py-2 shadow-tile transition-colors",
-          edge === "left" || edge === "right" ? "[writing-mode:vertical-rl]" : "",
-          edge === "left" ? "rotate-180" : ""
-        )}
-        style={{
-          // Fluid sizing — 12px floor on the smallest phones, scales up to
-          // ~15px on tablet/desktop. +2px from the previous 10/12 baseline.
-          fontSize: "clamp(0.75rem, 1.2vw + 0.62rem, 0.95rem)",
-          lineHeight: 1.15,
-        }}
-      >
-        <span className="whitespace-nowrap">{clue}</span>
-      </div>
-    );
-  };
-
   // Material Symbols clock_loader_* increments 20 → 40 → 60 → 80 → 90 across
   // the 5 puzzles of a session, so the icon visually fills as the player
   // progresses. The session is always 5 puzzles, so the lookup is
@@ -1301,7 +1393,8 @@ export default function FlipWords(props: FlipWordsProps) {
               <span className="material-icons text-[24px]">check</span>
             </div>
             <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.18em] mb-1.5">
-              Solved · {attempts} {attempts === 1 ? "check" : "checks"}
+              {level.title ? `${level.title} · ` : ""}Solved · {attempts}{" "}
+              {attempts === 1 ? "check" : "checks"}
               {hintsThisPuzzle > 0 && (
                 <>
                   {" · "}
