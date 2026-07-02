@@ -6,8 +6,10 @@ import { getSessionForDate } from '@/daily/schedule'
 import { easternDateString, dayNumber } from '@/daily/date'
 import { loadStorage, saveStorage } from '@/daily/storage'
 import { recordCompletion } from '@/daily/streak'
+import { readProgress, writeProgress } from '@/daily/progress'
+import { useEasternDate } from '@/daily/useEasternDate'
 import { formatShareString, shareSession } from '@/daily/share'
-import type { SessionResult, StoredSession } from '@/daily/types'
+import type { PuzzleResult, SessionResult, StoredSession } from '@/daily/types'
 
 export const Route = createFileRoute('/play')({
   component: PlayRoute,
@@ -53,8 +55,10 @@ function PlayRoute() {
   const { tutorial: tutorialFromSearch } = Route.useSearch()
 
   // Snapshot the start date so a cross-midnight session still resolves to its
-  // original day (per the design spec edge case).
-  const [startDate] = useState(() => easternDateString())
+  // original day (per the design spec edge case). Resettable so the done-state
+  // "new puzzle" CTA can roll the route onto the new day without a reload.
+  const [startDate, setStartDate] = useState(() => easternDateString())
+  const liveToday = useEasternDate()
   const session = useMemo(() => getSessionForDate(startDate), [startDate])
   const dn = dayNumber(startDate)
 
@@ -64,7 +68,23 @@ function PlayRoute() {
   const [practiceMode, setPracticeMode] = useState(false)
   const [shareFallbackText, setShareFallbackText] = useState<string | null>(null)
 
+  // Resume seed: a valid inProgress record for this date restores finished
+  // puzzles + the timer; the puzzle that was underway restarts fresh.
+  const resume = useMemo(() => {
+    const p = readProgress(loadStorage(), startDate, 'daily')
+    return p ? { puzzlesDone: p.puzzlesDone, elapsedMs: p.elapsedMs } : null
+  }, [startDate])
+
+  const handleProgress = (p: {
+    puzzlesDone: PuzzleResult[]
+    currentIdx: number
+    elapsedMs: number
+  }) => {
+    saveStorage(writeProgress(loadStorage(), startDate, 'daily', p))
+  }
+
   const handleComplete = (result: SessionResult) => {
+    // recordCompletion also clears the matching inProgress record.
     const next = recordCompletion(loadStorage(), startDate, result)
     saveStorage(next)
     setExistingResult(next.sessions[startDate] ?? null)
@@ -72,6 +92,13 @@ function PlayRoute() {
 
   const handlePractice = () => {
     setPracticeMode(true)
+  }
+
+  const handlePlayToday = () => {
+    const today = easternDateString()
+    setPracticeMode(false)
+    setStartDate(today)
+    setExistingResult(loadStorage().sessions[today] ?? null)
   }
 
   const handleShare = async (input: {
@@ -115,6 +142,8 @@ function PlayRoute() {
       <>
         <ScorecardLock
           result={existingResult}
+          newDayAvailable={liveToday !== startDate}
+          onPlayToday={handlePlayToday}
           onPractice={handlePractice}
           onArchive={() => navigate({ to: '/archive' })}
           onShare={() => {
@@ -139,10 +168,13 @@ function PlayRoute() {
     <>
       <div className="h-[100dvh] w-full overflow-hidden bg-paper relative">
         <FlipWords
+          key={`daily-${startDate}`}
           session={session}
           date={startDate}
           dayNumber={dn}
           mode="daily"
+          initialProgress={resume ?? undefined}
+          onProgress={handleProgress}
           showTutorial={tutorialFromSearch}
           scorecardPrimaryLabel="Share result"
           scorecardPrimaryIcon="ios_share"
@@ -171,11 +203,15 @@ function PlayRoute() {
 
 function ScorecardLock({
   result,
+  newDayAvailable,
+  onPlayToday,
   onPractice,
   onArchive,
   onShare,
 }: {
   result: StoredSession
+  newDayAvailable: boolean
+  onPlayToday: () => void
   onPractice: () => void
   onArchive: () => void
   onShare: () => void
@@ -215,6 +251,15 @@ function ScorecardLock({
         className="fixed bottom-0 inset-x-0 z-[60] flex flex-col items-center gap-2 px-6 pointer-events-none"
         style={{ paddingBottom: 'max(1.5rem, calc(env(safe-area-inset-bottom) + 0.5rem))' }}
       >
+        {newDayAvailable && (
+          <button
+            onClick={onPlayToday}
+            className="pointer-events-auto font-ui flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-full text-sm shadow-tile-lift active:scale-95"
+          >
+            <span className="material-icons text-[18px]">wb_sunny</span>
+            A new puzzle is ready — play now
+          </button>
+        )}
         <button
           onClick={onPractice}
           className="pointer-events-auto font-ui flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink py-2 px-3"
