@@ -172,6 +172,12 @@ export default function Archive() {
             />
             Missed
           </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="material-icons text-ink-soft" style={{ fontSize: 12 }}>
+              history
+            </span>
+            Late
+          </span>
         </div>
       </div>
 
@@ -226,7 +232,7 @@ function DayCell({
   const isPlayed = !!stored && !isThreeStar
   const isMissed = !stored && !isFuture && !isPreLaunch && !isToday
 
-  let cls = 'aspect-square rounded-[5px] flex flex-col items-center justify-center text-[12px] font-ui '
+  let cls = 'aspect-square rounded-[5px] relative flex flex-col items-center justify-center text-[12px] font-ui '
   if (isFuture) {
     cls += 'text-ink-soft/40 cursor-default'
   } else if (isPreLaunch) {
@@ -238,13 +244,15 @@ function DayCell({
   } else if (isPlayed) {
     cls += 'text-ink bg-tile-face border border-tile-edge cursor-pointer shadow-tile/40'
   } else if (isMissed) {
+    // Missed days are playable as makeups — tappable, with a hover invite.
     cls +=
-      'text-ink-soft cursor-default border border-dashed border-paper-line ' +
+      'text-ink-soft cursor-pointer border border-dashed border-paper-line ' +
+      'hover:border-accent hover:text-ink transition-colors ' +
       '[background:oklch(94%_0.012_85_/_0.45)]'
   }
   if (isToday) cls += ' ring-2 ring-accent'
 
-  const tappable = !isFuture && !isPreLaunch && !isMissed
+  const tappable = !isFuture && !isPreLaunch
   return (
     <button
       type="button"
@@ -272,6 +280,15 @@ function DayCell({
               star
             </span>
           ))}
+        </span>
+      )}
+      {stored?.mode === 'makeup' && (
+        <span
+          className="material-icons absolute top-0.5 right-0.5 text-ink-soft"
+          style={{ fontSize: 8 }}
+          aria-label="Played late"
+        >
+          history
         </span>
       )}
     </button>

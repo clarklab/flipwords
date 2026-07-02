@@ -1,18 +1,39 @@
+import { useEffect, useMemo } from 'react'
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
 import FlipWords from '@/components/FlipWords'
 import { getSessionForDate } from '@/daily/schedule'
 import { dayNumber, LAUNCH_DATE, easternDateString } from '@/daily/date'
+import { loadStorage, saveStorage } from '@/daily/storage'
+import { recordCompletion } from '@/daily/streak'
+import { readProgress, writeProgress } from '@/daily/progress'
+import type { PuzzleResult, SessionResult } from '@/daily/types'
 
-export const Route = createFileRoute('/archive/$date')({
+export const Route = createFileRoute('/archive_/$date')({
   component: ArchiveReplay,
 })
 
 function ArchiveReplay() {
   const navigate = useNavigate()
-  const { date } = useParams({ from: '/archive/$date' })
+  const { date } = useParams({ from: '/archive_/$date' })
+  const today = easternDateString()
+
+  // Today's puzzle belongs on /play where streaks and locking live.
+  useEffect(() => {
+    if (date === today) navigate({ to: '/play', replace: true })
+  }, [date, today, navigate])
+
+  // A missed day (no stored result) is a MAKEUP: it records a real result
+  // that counts toward totals but never the streak. An already-played day
+  // replays as practice — nothing is recorded.
+  const alreadyPlayed = !!loadStorage().sessions[date]
+
+  const resume = useMemo(() => {
+    if (alreadyPlayed) return null
+    const p = readProgress(loadStorage(), date, 'makeup')
+    return p ? { puzzlesDone: p.puzzlesDone, elapsedMs: p.elapsedMs } : null
+  }, [date, alreadyPlayed])
 
   // Guardrails: refuse pre-launch and future dates.
-  const today = easternDateString()
   if (date < LAUNCH_DATE || date > today) {
     return (
       <div className="h-[100dvh] w-full flex items-center justify-center bg-paper p-6">
@@ -28,17 +49,33 @@ function ArchiveReplay() {
       </div>
     )
   }
+  if (date === today) return null // redirecting
 
   const session = getSessionForDate(date)
   const dn = dayNumber(date)
 
+  const handleMakeupComplete = (result: SessionResult) => {
+    saveStorage(recordCompletion(loadStorage(), date, result, 'makeup'))
+  }
+  const handleMakeupProgress = (p: {
+    puzzlesDone: PuzzleResult[]
+    currentIdx: number
+    elapsedMs: number
+  }) => {
+    saveStorage(writeProgress(loadStorage(), date, 'makeup', p))
+  }
+
   return (
     <div className="h-[100dvh] w-full overflow-hidden bg-paper relative">
       <FlipWords
+        key={`archive-${date}-${alreadyPlayed ? 'practice' : 'makeup'}`}
         session={session}
         mode="archive"
         date={date}
         dayNumber={dn}
+        initialProgress={resume ?? undefined}
+        onProgress={alreadyPlayed ? undefined : handleMakeupProgress}
+        onComplete={alreadyPlayed ? undefined : handleMakeupComplete}
         scorecardPrimaryLabel="Back to archive"
         scorecardPrimaryIcon="history"
         onScorecardPrimary={() => navigate({ to: '/archive' })}
