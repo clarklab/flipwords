@@ -91,7 +91,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
     {
       title: 'Flip the tiles',
       description:
-        'Each tile has a word on top and a word on the bottom. Tap the flip handle to swap them.',
+        'Each tile has a word on top and a word on the bottom. Tap the tile to flip the words.',
       animation: (
         <div className="flex flex-col items-center justify-center gap-3 h-44">
           <AnimatedWordmark className="text-2xl text-ink" />
