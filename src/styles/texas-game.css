@@ -1,0 +1,488 @@
+/* ===========================================================================
+   THE TEXAS TWO-STEP — gameplay surfaces
+   ---------------------------------------------------------------------------
+   Board, tiles, clue rails, chin, win sequence and scorecard. Everything in
+   here is either
+     (a) an edition-agnostic token/utility that both editions read, or
+     (b) explicitly scoped to :root[data-edition="texas"].
+   Nothing may change the FlipWords rendering by accident — the FlipWords
+   defaults below are set to exactly the literals the components carried
+   before, so `?edition=flipwords` is unchanged.
+
+   Provenance for every Texas hex is docs/texas-monthly-brand.md. No colour is
+   written as a literal inside a Texas rule — everything resolves through a
+   token or a channel triplet, so nothing from the FlipWords palette can
+   survive the edition swap. (The two oklch literals below are the *FlipWords*
+   defaults, lifted verbatim out of Scorecard.tsx where they were hardcoded.)
+
+   Cascade: this file is unlayered, so it beats every Tailwind utility
+   (@layer utilities) regardless of specificity. Against the hand-written
+   classes in styles.css (.font-wide, .shadow-tile, …) — all (0,1,0) — the
+   `:root[data-edition="texas"] .x` form is (0,2,1) and wins on specificity,
+   never on import order.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Shared scale — FlipWords values are the current literals, Texas overrides
+   below. `:root[data-edition="texas"]` is (0,2,0) vs `:root` (0,1,0), so the
+   override wins even from inside a media query.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Play-surface corner. Not in styles.css's --r-* set because the surface
+     had a bespoke 28/36px radius rather than a scale step. */
+  --r-surface: 28px;
+
+  /* Outline weight for drawn chrome (clue rails, FABs, tiles).
+     art.png outlines every object at a constant weight regardless of shape
+     size — that consistency is the illustration's signature. */
+  --ink-stroke: 1px;
+  --tile-stroke: 1px;
+  /* Printed edge: the visible thickness of a domino, offset down-right.
+     Zero under FlipWords, where tiles are flat cards. */
+  --tile-edge-x: 0px;
+  --tile-edge-y: 0px;
+
+  /* Clue-rail type size. Was a literal in ScreenEdgePill's style attribute,
+     which outranks every author rule — a token is the only way the edition
+     layer can reach it at all. This value is the one the component shipped. */
+  --clue-size: clamp(0.75rem, 1.2vw + 0.62rem, 0.95rem);
+
+  /* Chin foreground. FlipWords: white on teal. */
+  --chin-ink: var(--color-surface);
+
+  /* Scorecard streak chip. These were hardcoded oklch literals in
+     Scorecard.tsx (flagged in docs §5.3) and survived the edition swap. */
+  --flame-fg: oklch(64% 0.16 38);
+  --flame-bg: oklch(94% 0.04 38);
+
+  /* Unearned star. FlipWords' --color-tile-edge is a pale warm grey and reads
+     correctly at full strength; Texas' is near-black and does not. */
+  --star-empty: var(--color-tile-edge);
+}
+
+@media (min-width: 48rem) {
+  :root { --r-surface: 36px; }
+}
+
+:root[data-edition="texas"] {
+  /* TM is squared and ruled. 3px keeps a printed-card hairline of rounding
+     without reading as an app chrome radius. */
+  --r-surface: 3px;
+
+  --ink-stroke: 2px;
+  /* Tile outline scales with the tile so the weight stays ~3.5% of the tile
+     width at every viewport — art.png's outline is ~4% of a domino's width. */
+  --tile-stroke: clamp(2px, calc(var(--tile-w) * 0.035), 4px);
+  --tile-edge-x: clamp(2px, calc(var(--tile-w) * 0.04), 5px);
+  --tile-edge-y: clamp(3px, calc(var(--tile-w) * 0.055), 7px);
+
+  /* Same growth curve and same ceiling as FlipWords — only the floor lifts,
+     and only below ~320px. The four clue boxes are laid out by an `auto` grid
+     around the tray and the longest clue in levels_texas.json is 31 characters;
+     at 375px that already runs the board close to the viewport edge, so the
+     serif takes the size it is given rather than asking for more. */
+  --clue-size: clamp(0.78rem, 1.2vw + 0.62rem, 0.95rem);
+
+  /* Ink on the orange field, exactly as art.png draws it. White on #f58537 is
+     ~2.4:1 and fails at this size; #2a2928 on #f58537 is ~7:1. */
+  --chin-ink: var(--color-art-ink);
+
+  /* Sunflower is TM Games' signature field colour — the strongest available
+     cue that this is a Texas Monthly game — so the streak chip wears it. */
+  --flame-bg: var(--color-sunflower);
+  --flame-fg: var(--color-art-ink);
+
+  --star-empty: color-mix(in oklab, var(--color-tile-edge) 26%, transparent);
+}
+
+.r-surface { border-radius: var(--r-surface); }
+
+/* ===========================================================================
+   THE PAGE
+   TM's masthead is a wordmark over a heavy black rule, on white. The play
+   surface is the page; the orange chin is the field it is printed on, which
+   restates art.png's own composition (cream/white subject on #f58537).
+   =========================================================================== */
+
+/* NOTE: `.play-surface` used to take a printed frame here — a rule box drawn
+   around the whole screen. That frame WAS the app shell: it is what turned the
+   page into a card floating in an orange bezel. texas-page.css now strips the
+   surface to nothing, and the only rule left on the page is the masthead's,
+   which is the one TM actually draws. `.game-masthead` likewise hands its rule
+   to `.tm-masthead` so it can run the full viewport width instead of stopping
+   at a 768px column edge. */
+:root[data-edition="texas"] .game-masthead {
+  padding-bottom: 0.8rem;
+}
+
+/* The wordmark is the one string in the edition registry that is entirely
+   inside Grifinito's 65-glyph trial charset ("TEXAS TWO STEP" — no hyphen),
+   so it can safely take the display face. Set here rather than by passing
+   `.font-display` through AnimatedWordmark's className: twMerge would treat
+   font-display and font-wide as the same family group and drop one of them,
+   which would strip Mona Sans's wdth/wght axes off the FlipWords wordmark.
+   (0,2,1) also beats .font-wide (0,1,0) outright.
+
+   Grifinito is very condensed — "TEXAS TWO STEP" measures 4.01em from its own
+   hmtx table — so it can run large without crowding the header. The floor is
+   set so the wordmark still clears the widest header state (back FAB + the
+   CHECK button) on a 320px phone. */
+:root[data-edition="texas"] .game-wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+  font-size: clamp(1.7rem, 7vw, 2.5rem);
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================================================================
+   THE TILES
+   art.png's dominoes are the game's tiles. Four things make them read as that
+   illustration rather than as app cards: a flat cream face, a heavy warm-black
+   outline, a full-width divider, and a printed edge offset down-right.
+   =========================================================================== */
+
+/* Face fill comes from the token in both editions. FlipWords' --color-tile-face
+   is oklch(99% 0.012 85) where the markup previously said `bg-white`; the
+   delta is ~1% luminance under a white/55 top sheen and is not visible. */
+.tile-face {
+  background-color: var(--color-tile-face);
+  border-width: var(--tile-stroke);
+}
+
+/* A tile in a slot keeps the ink outline under Texas. The coral hairline the
+   FlipWords build uses to mean "placed" would break the one rule the
+   illustration language actually has — constant outline weight and colour on
+   every object. Placement reads from the tray tint and the deeper edge. */
+:root[data-edition="texas"] .tile-face--slot {
+  border-color: var(--color-tile-edge);
+}
+
+/* Flat fills, no gradients. */
+:root[data-edition="texas"] .tile-sheen { display: none; }
+
+/* Face grain. The FlipWords value is the diagonal weave the tile carried
+   inline before; art.png's "solid" areas hold 1,371 distinct RGB values, so
+   under Texas the face takes --paper-tex, the two-layer halftone screen the
+   theme builds from that measurement. */
+.tile-grain {
+  background: repeating-linear-gradient(
+    135deg,
+    rgb(var(--texture-rgb) / 0.03) 0px,
+    rgb(var(--texture-rgb) / 0.03) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+}
+:root[data-edition="texas"] .tile-grain {
+  background: var(--tile-tex);
+  opacity: 0.7;
+}
+
+/* The dominoes are blank — one divider at the outline's own weight, running
+   the full width of the face. No pips, so no tactile centre divot. */
+:root[data-edition="texas"] .tile-divider {
+  left: 0;
+  right: 0;
+  height: var(--tile-stroke);
+  background-color: var(--color-tile-edge);
+}
+:root[data-edition="texas"] .tile-divot { display: none; }
+
+/* The printed edge. In art.png each domino shows its thickness as a cream band
+   along the down-right sides, wrapped in the same ink outline as the face. Two
+   hard box-shadow layers reproduce it: an offset cream slab, and an ink ring
+   spread around that slab. Zero blur — folk-art screen printing registers
+   hard, it does not cast ambient light. One soft layer underneath keeps the
+   tile anchored to the page.
+
+   The offset rotates with the tile, which is correct: in the illustration the
+   edge is always on the same side of the domino's own frame, at every angle.
+
+   No transitions declared here, so the hover state snaps rather than animating
+   a paint property — same as the FlipWords build. */
+:root[data-edition="texas"] .tile-shell {
+  box-shadow:
+    var(--tile-edge-x) var(--tile-edge-y) 0 0 var(--color-tile-face),
+    var(--tile-edge-x) var(--tile-edge-y) 0 var(--tile-stroke) var(--color-tile-edge),
+    0 10px 16px -10px rgb(var(--scrim-rgb) / 0.4);
+}
+:root[data-edition="texas"] .tile-shell:hover {
+  box-shadow:
+    calc(var(--tile-edge-x) * 1.4) calc(var(--tile-edge-y) * 1.4) 0 0 var(--color-tile-face),
+    calc(var(--tile-edge-x) * 1.4) calc(var(--tile-edge-y) * 1.4) 0 var(--tile-stroke) var(--color-tile-edge),
+    0 16px 22px -12px rgb(var(--scrim-rgb) / 0.42);
+}
+:root[data-edition="texas"] .tile-shell--slot,
+:root[data-edition="texas"] .tile-shell--slot:hover {
+  box-shadow:
+    calc(var(--tile-edge-x) * 1.8) calc(var(--tile-edge-y) * 1.8) 0 0 var(--color-tile-face),
+    calc(var(--tile-edge-x) * 1.8) calc(var(--tile-edge-y) * 1.8) 0 var(--tile-stroke) var(--color-tile-edge),
+    0 22px 30px -14px rgb(var(--scrim-rgb) / 0.42);
+}
+
+/* ===========================================================================
+   THE BOARD
+   =========================================================================== */
+
+/* Clue rails. TM's third voice — after the didone display and the caps sans
+   eyebrow — is an editorial serif for deck and body copy, and the four clues
+   are precisely a deck: short prose that describes the puzzle. Cream face and
+   ink outline tie them to the tiles, so the whole board reads as one drawn
+   set. Coral stays a punctuation colour and is not used here. */
+:root[data-edition="texas"] .clue-rail {
+  font-family: var(--font-serif-text);
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+  background-color: var(--color-tile-face);
+  border-width: var(--ink-stroke);
+  border-color: var(--color-tile-edge);
+  color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------------------------
+   THE BOARD AT DESKTOP WIDTHS
+   ---------------------------------------------------------------------------
+   Two problems, one composition.
+
+   1. THE BUG. The board sat inside `flex-1 min-h-0` in a `h-[100dvh]
+      overflow-hidden` shell. At 1366x700 and 800x760 its intrinsic height
+      exceeded the space the flex line could give it, so — being centred — it
+      overflowed BOTH ways: the top clue sliced through the masthead, and the
+      bottom clue rendered underneath the tile rail. `elementFromPoint()` at
+      the centre of the bottom clue returned a tile face. A player could not
+      read one of the four clues.
+
+      The fix is structural, not a nudge: the shell is gone (texas-page.css),
+      the board no longer competes for a fixed height, and the rail is pushed
+      by the board rather than overlapping it.
+
+   2. ROTATED TYPE. The two side clues were set with `writing-mode: vertical-rl`
+      — Texas Monthly has never set type sideways. Above 56rem there is room to
+      set all four horizontally in flanking columns, which keeps the one thing
+      the rotation was buying: the position of a clue tells you which edge it
+      describes, and that mapping has to survive a board rotation.
+
+   The clue stops being a cream pill and becomes what a magazine would set: a
+   heavy rule, a tracked-caps direction label, then the clue in the editorial
+   serif. Same information, same place, no sideways type, no card chrome.
+   --------------------------------------------------------------------------- */
+
+/* The direction label ("ACROSS, TOP") only exists under Texas at desktop. */
+.clue-edge-label { display: none; }
+
+/* 48rem is the width at which the two flanking columns are ~19 characters
+   wide. Below that they fall to ~7 characters, which is worse typography than
+   the rotated rail it would be replacing — so phones keep the rails. */
+@media (min-width: 48rem) {
+  :root[data-edition="texas"] .board-grid {
+    grid-template-columns:
+      minmax(9rem, 15rem) auto minmax(9rem, 15rem);
+    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+    row-gap: 1.5rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* The two side cells are the only ones that need to be told how to sit; the
+     grid's own `place-items-center` handles the top and bottom. */
+  :root[data-edition="texas"] .board-grid > .clue-cell--left { justify-self: end; }
+  :root[data-edition="texas"] .board-grid > .clue-cell--right { justify-self: start; }
+
+  :root[data-edition="texas"] .clue-rail {
+    /* Undo the rotation. `rotate` as well as `transform`, because Tailwind v4
+       emits `rotate-180` as the individual `rotate` property — resetting only
+       `transform` leaves the left-hand clue upside down. */
+    writing-mode: horizontal-tb;
+    rotate: none;
+    transform: none;
+    background-color: transparent;
+    border: 0;
+    border-top: var(--rule-weight) solid var(--color-ink);
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0.5rem 0 0;
+    max-width: 15rem;
+    font-size: 1.0625rem;
+    line-height: 1.32;
+  }
+  :root[data-edition="texas"] .board-grid > .clue-cell--top .clue-rail,
+  :root[data-edition="texas"] .board-grid > .clue-cell--bottom .clue-rail {
+    max-width: 22rem;
+  }
+  :root[data-edition="texas"] .clue-cell--left .clue-rail { text-align: right; }
+
+  /* `whitespace-nowrap` is what made a one-line pill; an editorial clue wraps. */
+  :root[data-edition="texas"] .clue-rail > .whitespace-nowrap {
+    white-space: normal;
+  }
+
+  :root[data-edition="texas"] .clue-edge-label {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--color-accent-ink);
+  }
+
+  /* The win flash rings the clue block rather than a pill. */
+  :root[data-edition="texas"] .clue-rail > [data-edge-glow] {
+    border-radius: 0;
+  }
+}
+
+/* Vertical breathing room, and a tile size that also answers to the viewport
+   HEIGHT. 1366x700 is a real laptop shape: without the dvh term the tray alone
+   is 264px and the composition needs ~830px of column. With it the whole board
+   plus rail lands inside a 700px viewport. Width behaviour below 56rem is
+   untouched, so phones keep the exact tile size they ship today. */
+@media (min-width: 56rem) {
+  :root[data-edition="texas"] {
+    --tile-w: clamp(3.5rem, min(calc((100vw - 2rem) / 4.64), 10dvh), 7rem);
+  }
+  :root[data-edition="texas"] .board-area {
+    margin-top: 1rem;
+  }
+  :root[data-edition="texas"] .tile-rail-area {
+    padding-top: 0.5rem;
+  }
+}
+
+/* TM's tinted panel, #f5f5f2, at full strength — it is a real surface on the
+   white page (newsletter promo, conversion bar), not a wash. Used by the slot
+   tray and the scorecard stat cells. */
+:root[data-edition="texas"] .tint-panel {
+  background-color: var(--color-surface-deep);
+}
+
+/* The empty-slot label ships as `text-ink-soft/50`, which against the darker
+   Texas ink-soft still lands near 2.2:1. Full strength here; FlipWords keeps
+   its 50% wash. */
+:root[data-edition="texas"] .slot-label {
+  color: var(--color-ink-soft);
+}
+
+/* A dashed rule is app furniture. TM rules are solid; the drop affordance
+   still reads from the ink outline and the slot eyebrow inside it. */
+:root[data-edition="texas"] .slot-empty {
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--color-tile-edge) 30%, transparent);
+  background-color: var(--color-surface);
+}
+
+/* Tile-rail section head: TM sets section labels as tracked caps flanked or
+   underscored by a rule ("THE TEXAS MONTHLY CROSSWORD"). Hidden entirely
+   under FlipWords so its centred label is unchanged. */
+.rail-rule { display: none; }
+:root[data-edition="texas"] .rail-rule {
+  display: block;
+  height: 1px;
+  flex: 1 1 auto;
+  max-width: 6rem;
+  background-color: var(--color-ink);
+}
+/* Coral is TM's eyebrow colour — GAMES, READ NEXT, POLITICS & POLICY are all
+   set in it. Small tracked caps is exactly the punctuation-scale use the
+   palette allows — but at 10-11px the sampled coral is 3.34:1 on white, so
+   coral TYPE takes the AA-compliant derivative. */
+:root[data-edition="texas"] .rail-label {
+  color: var(--color-accent-ink);
+}
+
+/* ===========================================================================
+   THE CHIN
+   =========================================================================== */
+.chin-row { color: var(--chin-ink); }
+.chin-dim { color: color-mix(in oklab, var(--chin-ink) 70%, transparent); }
+
+/* ===========================================================================
+   BUTTONS
+   TM's only filled button is SIGN UP: a squared coral block of tracked caps.
+   The black newsletter bar uses the same treatment inverted. Both of the
+   game's buttons already match that shape once .r-btn squares them, so the
+   only thing missing is the type.
+   =========================================================================== */
+:root[data-edition="texas"] .btn-check,
+:root[data-edition="texas"] .btn-primary {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variation-settings: "wdth" 100, "wght" 700;
+}
+
+/* Every coral fill that carries white type. The sampled coral gives 3.34:1
+   against white — TM's own SIGN UP button has the same problem. Marks keep the
+   sampled value; anything a word sits on top of takes the AA derivative.
+   `hover:bg-accent/90` is a layered utility and cannot reach past this, so the
+   hover state is restated rather than left dead. */
+:root[data-edition="texas"] .accent-fill,
+:root[data-edition="texas"] .btn-check {
+  background-color: var(--color-accent-ink);
+}
+:root[data-edition="texas"] .accent-fill:hover,
+:root[data-edition="texas"] .btn-check:hover {
+  background-color: color-mix(in oklab, var(--color-accent-ink) 88%, black);
+}
+
+/* Small coral type anywhere on the board (hint line, eyebrows). */
+:root[data-edition="texas"] .accent-type {
+  color: var(--color-accent-ink);
+}
+
+/* Icon FABs stay circular — they are genuinely circular objects — but pick up
+   the illustration's constant outline weight. */
+:root[data-edition="texas"] .fab-outline {
+  border-width: var(--ink-stroke);
+  border-color: var(--color-tile-edge);
+}
+
+/* ===========================================================================
+   TYPE — the celebration surfaces
+   The brand's defining move is the deck→headline jump of 3.4–3.8×. TM has
+   almost nothing in between; filling that gap is what makes a page read as a
+   blog instead of a magazine. These three headlines are the only display-size
+   type in the game, so they take the whole jump.
+
+   *** Every string routed through .display-headline must stay inside
+   Grifinito's trial charset: space , . 0-9 A-Z a-z. No hyphen, apostrophe,
+   colon, exclamation. SOLVE_HEADLINES and SESSION_HEADLINES in FlipWords.tsx
+   are audited for this — check any new line before adding it. ***
+   =========================================================================== */
+:root[data-edition="texas"] .display-headline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+  letter-spacing: -0.005em;
+  line-height: 1.03;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:root[data-edition="texas"] .win-headline { font-size: clamp(2rem, 9vw, 2.75rem); }
+:root[data-edition="texas"] .score-headline { font-size: clamp(2.1rem, 9.5vw, 3rem); }
+:root[data-edition="texas"] .judge-headline { font-size: clamp(2rem, 8.5vw, 2.5rem); }
+
+/* Deck copy under a display headline — TM sets this in a serif at ~1/3.5 the
+   headline size. Only used where the line is genuinely prose. */
+:root[data-edition="texas"] .deck-line {
+  font-family: var(--font-serif-text);
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+}
+
+/* ===========================================================================
+   SCORECARD
+   =========================================================================== */
+.flame-chip {
+  background-color: var(--flame-bg);
+  color: var(--flame-fg);
+}
+
+/* Per-puzzle timings ship as `text-ink-soft/60`. A 60% wash of the Texas grey
+   over the cream card is 2.30:1; at full strength it is 4.74:1. The hierarchy
+   it was buying is already carried by the middot separator. */
+:root[data-edition="texas"] .sc-row-time {
+  color: var(--color-ink-soft);
+}

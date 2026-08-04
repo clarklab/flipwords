@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedWordmark from './AnimatedWordmark';
+import { Icon } from './Icon';
+import { useEdition } from '@/edition';
 
 // Faithful miniature of a Tile face — same gradient bg, paper texture, top
 // highlight, and divider-with-divot the real Tile renders. Used in scenes 2
@@ -17,17 +19,17 @@ function MiniTileFace({
   const textSize = size === 'sm' ? 'text-[10px]' : 'text-[11px]';
   return (
     <div
-      className="absolute inset-0 flex flex-col rounded-xl overflow-hidden bg-tile-face border border-tile-edge"
+      className="absolute inset-0 flex flex-col r-tile overflow-hidden bg-tile-face border border-tile-edge"
       style={{ backfaceVisibility: 'hidden' }}
     >
       <div
         className="absolute inset-0 pointer-events-none opacity-60"
         style={{
           background:
-            'repeating-linear-gradient(135deg, rgba(120,90,40,0.03) 0px, rgba(120,90,40,0.03) 1px, transparent 1px, transparent 6px)',
+            'repeating-linear-gradient(135deg, rgb(var(--texture-rgb) / 0.03) 0px, rgb(var(--texture-rgb) / 0.03) 1px, transparent 1px, transparent 6px)',
         }}
       />
-      <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none rounded-t-xl bg-gradient-to-b from-white/55 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none r-tile-t bg-gradient-to-b from-white/55 to-transparent" />
       <div className={`flex-1 flex items-center justify-center font-normal-tile text-ink ${textSize}`}>
         {top}
       </div>
@@ -58,9 +60,9 @@ function CluePill({
         highlight
           ? {
               boxShadow: [
-                '0 0 0 0 rgba(31,156,147,0)',
+                '0 0 0 0 rgb(var(--accent-rgb) / 0)',
                 '0 0 0 3px var(--color-accent-soft)',
-                '0 0 0 0 rgba(31,156,147,0)',
+                '0 0 0 0 rgb(var(--accent-rgb) / 0)',
               ],
               borderColor: [
                 'var(--color-tile-edge)',
@@ -75,7 +77,7 @@ function CluePill({
           ? { duration: 1.6, repeat: Infinity, ease: 'easeInOut', delay: 1.8 }
           : undefined
       }
-      className={`font-clue-strong text-[9px] text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge rounded-full px-2.5 py-0.5 shadow-tile whitespace-nowrap ${
+      className={`font-clue-strong text-[9px] text-ink-muted bg-tile-face/85 backdrop-blur-sm border border-tile-edge r-pill px-2.5 py-0.5 shadow-tile whitespace-nowrap ${
         vertical ? '[writing-mode:vertical-rl]' : ''
       } ${edge === 'left' ? 'rotate-180' : ''}`}
     >
@@ -86,15 +88,22 @@ function CluePill({
 
 export default function TutorialModal({ onComplete }: { onComplete: () => void }) {
   const [step, setStep] = useState(0);
+  const { config } = useEdition();
 
   const steps = [
     {
+      // Short caps label for the step strip. Kept to one word so three of
+      // them plus "Skip" still fit the header on a 320px screen.
+      tab: 'Flip',
       title: 'Flip the tiles',
       description:
-        'Each tile has a word on top and a word on the bottom. Tap the tile to flip the words.',
+        'Each tile carries a word on top and a word underneath. Flip it to swap which one is showing.',
       animation: (
         <div className="flex flex-col items-center justify-center gap-3 h-44">
-          <AnimatedWordmark className="text-2xl text-ink" />
+          <AnimatedWordmark
+            text={config.wordmark}
+            className="tut-wordmark text-2xl text-ink"
+          />
           <div
             className="relative flex items-center justify-center"
             style={{ perspective: 1000 }}
@@ -108,21 +117,21 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                 times: [0, 0.15, 0.35, 0.65, 0.85, 1],
               }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="relative w-[68px] h-[112px] rounded-2xl gpu"
+              className="relative w-[68px] h-[112px] r-tile gpu"
             >
               {/* front face */}
               <div
-                className="absolute inset-0 flex flex-col rounded-2xl overflow-hidden bg-tile-face border border-tile-edge shadow-tile"
+                className="absolute inset-0 flex flex-col r-tile overflow-hidden bg-tile-face border border-tile-edge shadow-tile"
                 style={{ backfaceVisibility: 'hidden' }}
               >
                 <div
                   className="absolute inset-0 pointer-events-none opacity-60"
                   style={{
                     background:
-                      'repeating-linear-gradient(135deg, rgba(120,90,40,0.03) 0px, rgba(120,90,40,0.03) 1px, transparent 1px, transparent 6px)',
+                      'repeating-linear-gradient(135deg, rgb(var(--texture-rgb) / 0.03) 0px, rgb(var(--texture-rgb) / 0.03) 1px, transparent 1px, transparent 6px)',
                   }}
                 />
-                <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none rounded-t-2xl bg-gradient-to-b from-white/55 to-transparent" />
+                <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none r-tile-t bg-gradient-to-b from-white/55 to-transparent" />
                 <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-sm">
                   PAPER
                 </div>
@@ -137,7 +146,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
               {/* back face — same construction, just rotated so the front is
                   always upright when we see it */}
               <div
-                className="absolute inset-0 flex flex-col rounded-2xl overflow-hidden bg-tile-face border border-tile-edge shadow-tile"
+                className="absolute inset-0 flex flex-col r-tile overflow-hidden bg-tile-face border border-tile-edge shadow-tile"
                 style={{
                   backfaceVisibility: 'hidden',
                   transform: 'rotateX(180deg)',
@@ -147,10 +156,10 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                   className="absolute inset-0 pointer-events-none opacity-60"
                   style={{
                     background:
-                      'repeating-linear-gradient(135deg, rgba(120,90,40,0.03) 0px, rgba(120,90,40,0.03) 1px, transparent 1px, transparent 6px)',
+                      'repeating-linear-gradient(135deg, rgb(var(--texture-rgb) / 0.03) 0px, rgb(var(--texture-rgb) / 0.03) 1px, transparent 1px, transparent 6px)',
                   }}
                 />
-                <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none rounded-t-2xl bg-gradient-to-b from-white/55 to-transparent" />
+                <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none r-tile-t bg-gradient-to-b from-white/55 to-transparent" />
                 <div className="flex-1 flex items-center justify-center font-normal-tile text-ink text-sm">
                   CLIP
                 </div>
@@ -173,15 +182,16 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                 ease: 'easeInOut',
                 times: [0, 0.12, 0.18, 0.3, 1],
               }}
-              className="absolute w-9 h-9 rounded-full bg-accent text-white border border-accent/40 flex items-center justify-center shadow-tile-lift z-10"
+              className="accent-fill absolute w-9 h-9 rounded-full bg-accent text-white border border-accent/40 flex items-center justify-center shadow-tile-lift z-10"
             >
-              <span className="material-icons text-[18px]">swap_vert</span>
+              <Icon name="flip" size={18} />
             </motion.div>
           </div>
         </div>
       ),
     },
     {
+      tab: 'Clues',
       title: 'Read the clues',
       description:
         "Four clues frame the board. Place the right tiles in the slots so each clue's compound word appears along its edge.",
@@ -198,7 +208,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                 Plane's path
               </CluePill>
             </div>
-            <div className="col-start-2 row-start-2 flex gap-1.5 p-1.5 bg-surface-deep/40 rounded-xl shadow-slot-inset">
+            <div className="col-start-2 row-start-2 flex gap-1.5 p-1.5 bg-surface-deep/40 r-tile shadow-slot-inset">
               <motion.div
                 initial={{ y: 26, opacity: 0, scale: 0.92 }}
                 animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -241,6 +251,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
       ),
     },
     {
+      tab: 'Rotate',
       title: 'Rotate when stuck',
       description:
         'Some puzzles only click into place after a quarter turn. If the clues fight you, give the board a spin.',
@@ -264,7 +275,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                 times: [0, 0.18, 0.38, 0.6, 0.82, 1],
               }}
               style={{ transformOrigin: 'center center' }}
-              className="col-start-2 row-start-2 flex gap-1.5 p-1.5 bg-surface-deep/40 rounded-xl shadow-slot-inset gpu"
+              className="col-start-2 row-start-2 flex gap-1.5 p-1.5 bg-surface-deep/40 r-tile shadow-slot-inset gpu"
             >
               <div className="relative w-10 h-[72px]">
                 <MiniTileFace top="AIR" bottom="WAY" />
@@ -291,9 +302,9 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                 ease: 'easeInOut',
                 times: [0, 0.14, 0.2, 0.32, 0.56, 0.62, 0.74, 1],
               }}
-              className="absolute -bottom-2 -right-2 z-30 w-9 h-9 rounded-full flex items-center justify-center bg-accent text-white shadow-tile-lift"
+              className="accent-fill absolute -bottom-2 -right-2 z-30 w-9 h-9 rounded-full flex items-center justify-center bg-accent text-white shadow-tile-lift"
             >
-              <span className="material-icons text-[18px]">rotate_right</span>
+              <Icon name="rotate" size={18} />
             </motion.div>
           </div>
         </div>
@@ -312,12 +323,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden"
-        style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(50,30,5,0.45) 0%, rgba(20,15,5,0.7) 100%)',
-          backdropFilter: 'blur(8px)',
-        }}
+        className="tm-scrim fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden"
       >
         <motion.div
           key={step}
@@ -325,49 +331,54 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
           animate={{ y: 0, opacity: 1, scale: 1 }}
           exit={{ y: -10, opacity: 0, scale: 0.96 }}
           transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-          className="bg-tile-face rounded-3xl w-full max-w-md p-6 md:p-8 shadow-tile-lift flex flex-col relative overflow-hidden border border-tile-edge"
+          className="tut-sheet bg-tile-face r-card w-full max-w-md p-6 md:p-8 shadow-tile-lift flex flex-col relative overflow-hidden border border-tile-edge"
         >
           <div
             className="absolute inset-0 pointer-events-none opacity-60"
             style={{ background: 'var(--paper-tex)' }}
           />
-          <button
-            onClick={onComplete}
-            className="absolute top-4 right-4 z-10 font-ui text-xs text-ink-soft hover:text-ink bg-surface-deep/50 hover:bg-surface-deep px-3 py-1 rounded-full transition-colors"
-          >
-            Skip
-          </button>
 
-          <div className="relative flex gap-1.5 mb-6 mt-2 justify-center">
-            {steps.map((_, i) => (
-              <div
-                key={i}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === step ? 'w-8 bg-accent' : 'w-2 bg-paper-line/40'
-                }`}
-              />
-            ))}
+          {/* Header — the step strip over a section rule, Skip on the right.
+              Replaces the progress dots: same information, set as TM sets a
+              sub-nav. Display only; Next/Skip still drive the sequence. */}
+          <div className="relative flex items-end justify-between gap-3 rule-heavy pb-2 mb-5">
+            <ol className="flex items-end gap-3.5">
+              {steps.map((s, i) => (
+                <li
+                  key={s.tab}
+                  aria-current={i === step ? 'step' : undefined}
+                  className={`tut-step tm-eyebrow tm-eyebrow-sm ${
+                    i === step ? 'text-ink' : 'text-ink-soft'
+                  }`}
+                >
+                  {s.tab}
+                </li>
+              ))}
+            </ol>
+            <button
+              onClick={onComplete}
+              className="tm-eyebrow tm-eyebrow-sm pb-1.5 text-ink-soft hover:text-ink transition-colors"
+            >
+              Skip
+            </button>
           </div>
 
-          <div className="relative flex flex-col items-center text-center flex-1">
-            <div className="w-full mb-5">{steps[step].animation}</div>
-            <h2 className="font-wide-700 text-2xl md:text-3xl text-ink mb-3">
+          <div className="tut-body relative flex flex-col items-center text-center flex-1">
+            <div className="tut-figure w-full mb-5">{steps[step].animation}</div>
+            <h2 className="tut-title tm-display font-wide-700 text-2xl md:text-3xl text-ink mb-3">
               {steps[step].title}
             </h2>
-            <p className="font-clue text-ink-muted leading-relaxed mb-6 px-1">
+            <p className="tut-deck font-clue text-ink-muted leading-relaxed mb-6 px-1">
               {steps[step].description}
             </p>
           </div>
 
-          <div className="relative mt-auto w-full">
+          <div className="tut-foot relative mt-auto w-full">
             <button
               onClick={handleNext}
-              className="font-ui w-full bg-ink hover:bg-ink/85 text-surface py-3.5 rounded-full text-base md:text-lg shadow-tile transition-all active:scale-95 flex items-center justify-center gap-2"
+              className="tut-cta btn-primary font-ui w-full bg-ink hover:bg-ink/85 text-surface py-3.5 r-btn text-base md:text-lg shadow-tile transition-all active:scale-95 flex items-center justify-center gap-2"
             >
               {step === steps.length - 1 ? 'Start playing' : 'Next'}
-              {step !== steps.length - 1 && (
-                <span className="material-icons text-[20px]">arrow_forward</span>
-              )}
             </button>
           </div>
         </motion.div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Icon } from './Icon'
 
 /**
  * First-visit onboarding teaser on the title screen (shown in place of the
@@ -64,18 +65,17 @@ export default function WelcomeCarousel() {
   return (
     <div
       onClick={advance}
-      className="relative z-10 mt-4 px-4 pt-3 pb-4 rounded-[26px] border border-tile-edge bg-transparent overflow-hidden cursor-pointer select-none"
+      className="wc-panel relative z-10 mt-4 px-4 pt-3 pb-4 r-card border border-tile-edge bg-transparent overflow-hidden cursor-pointer select-none"
     >
-      {/* Eyebrow + progress dots */}
+      {/* Eyebrow + progress dots. The coral eyebrow is TM's most-repeated
+          device — GAMES, READ NEXT, POLITICS & POLICY are all this. */}
       <div className="flex items-center justify-between">
-        <p className="font-ui text-[10px] text-accent uppercase tracking-[0.2em]">
-          How to play
-        </p>
+        <p className="tm-eyebrow tm-eyebrow-sm accent-type text-accent">How to play</p>
         <div className="flex gap-1">
           {STEPS.map((_, i) => (
             <div
               key={i}
-              className={`h-[4px] rounded-full transition-all duration-300 ${
+              className={`h-[4px] r-pill transition-all duration-300 ${
                 i === step ? 'w-5 bg-accent' : 'w-1.5 bg-paper-line/60'
               }`}
             />
@@ -100,10 +100,10 @@ export default function WelcomeCarousel() {
               initial={{ opacity: 0, y: 4, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ ...SPRING, delay: reduce ? 0 : 2.15 }}
-              className="font-ui inline-flex items-center gap-1 rounded-full bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1"
+              className="accent-fill font-ui inline-flex items-center gap-1 r-pill bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1"
             >
               ↓ MANHOLE
-              <span className="material-icons text-[11px]">check</span>
+              <Icon name="check" size={11} />
             </motion.span>
           )}
         </div>
@@ -122,16 +122,16 @@ export default function WelcomeCarousel() {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: [0, 1.25, 1], opacity: 1 }}
               transition={{ duration: 0.5, times: [0, 0.7, 1] }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 size-6 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 accent-fill z-20 size-6 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
             >
-              <span className="material-icons text-[14px]">rotate_right</span>
+              <Icon name="rotate" size={14} />
             </motion.div>
           )}
 
           <motion.div
             animate={{ rotate: boardRotation }}
             transition={rotateTransition}
-            className="relative flex gap-1 rounded-xl bg-surface-deep/40 p-1.5 shadow-slot-inset"
+            className="wc-board relative flex gap-1 r-tile bg-surface-deep/40 p-1.5 shadow-slot-inset"
           >
             {/* Row/column highlights for the four-words step */}
             {step === 0 && !reduce && (
@@ -149,7 +149,7 @@ export default function WelcomeCarousel() {
               </>
             )}
             {step === 0 && reduce && (
-              <div className="absolute left-1.5 right-1.5 top-1.5 h-[30px] rounded-md bg-accent/15 ring-2 ring-accent/70 z-10" />
+              <div className="absolute left-1.5 right-1.5 top-1.5 h-[30px] r-mark bg-accent/15 ring-2 ring-accent/70 z-10" />
             )}
 
             <MiniTile top="AIR" bottom="PORT" counter={counter} counterTransition={rotateTransition} />
@@ -168,7 +168,7 @@ export default function WelcomeCarousel() {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.22 }}
           >
-            <p className="font-wide-700 text-[16px] text-ink leading-tight">
+            <p className="wc-title tm-serif font-wide-700 text-[16px] text-ink leading-tight">
               {STEPS[step].title}
             </p>
             <p className="font-clue text-[12px] text-ink-muted mt-0.5">
@@ -203,7 +203,7 @@ function CompoundChip({
         times: [0, t0, t1, t2, t3, 1],
         repeat: Infinity,
       }}
-      className="absolute font-ui inline-flex items-center gap-1 rounded-full bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1"
+      className="accent-fill absolute font-ui inline-flex items-center gap-1 r-pill bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1"
     >
       {arrow} {label}
     </motion.span>
@@ -212,7 +212,7 @@ function CompoundChip({
 
 function StaticChip({ label, arrow }: { label: string; arrow: string }) {
   return (
-    <span className="font-ui inline-flex items-center rounded-full bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1">
+    <span className="accent-fill font-ui inline-flex items-center r-pill bg-accent text-white text-[10px] tracking-[0.08em] px-2.5 py-1">
       {arrow} {label}
     </span>
   )
@@ -235,7 +235,7 @@ function HighlightRect({
         times: [0, t0, t1, t2, t3, 1],
         repeat: Infinity,
       }}
-      className={`absolute rounded-md bg-accent/15 ring-2 ring-accent/70 z-10 pointer-events-none ${className}`}
+      className={`absolute r-mark bg-accent/15 ring-2 ring-accent/70 z-10 pointer-events-none ${className}`}
     />
   )
 }
@@ -266,7 +266,7 @@ function CluePill({
           animate={{ opacity: [0.35, 1, 0.35] }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.6, repeat: Infinity, delay: order * 0.4 }}
-          className={`absolute rounded-full bg-accent ${pos}`}
+          className={`absolute r-pill bg-accent ${pos}`}
         />
       )}
     </AnimatePresence>
@@ -334,9 +334,9 @@ function FlippableTile({
             animate={{ scale: [0, 1.25, 1], opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.45, times: [0, 0.7, 1], delay: 0.5 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 size-5 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 accent-fill z-20 size-5 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
           >
-            <span className="material-icons text-[12px]">swap_vert</span>
+            <Icon name="flip" size={12} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -359,7 +359,7 @@ function TileFace({
 }) {
   return (
     <div
-      className="absolute inset-0 flex flex-col rounded-md overflow-hidden bg-tile-face border border-tile-edge shadow-tile"
+      className="absolute inset-0 flex flex-col r-mark overflow-hidden bg-tile-face border border-tile-edge shadow-tile"
       style={{
         backfaceVisibility: 'hidden',
         transform: back ? 'rotateX(180deg)' : undefined,

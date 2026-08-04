@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
+import { Icon } from "./Icon";
 import type { Tile as TileType } from "@/game/types";
 
 type Props = {
@@ -130,9 +131,15 @@ export default function Tile({
       onDragEnd={onDragEnd}
       transition={{ type: "spring", stiffness: 380, damping: 28 }}
       className={cn(
-        "relative cursor-pointer select-none touch-none flex-shrink-0 group gpu rounded-2xl",
+        // .r-tile / .tile-shell instead of rounded-2xl + a literal shadow so
+        // the corner language and the drop register are edition-switchable.
+        // Under Texas .tile-shell redraws the shadow as art.png's printed
+        // domino edge (a cream slab, ink-ringed, offset down-right).
+        "relative cursor-pointer select-none touch-none flex-shrink-0 group gpu r-tile tile-shell",
         dimensions,
-        inSlot ? "shadow-tile-lift" : "shadow-tile hover:shadow-tile-hover"
+        inSlot
+          ? "tile-shell--slot shadow-tile-lift"
+          : "shadow-tile hover:shadow-tile-hover"
       )}
       style={
         draggable
@@ -148,7 +155,7 @@ export default function Tile({
     >
       <div
         ref={innerRef}
-        className="preserve-3d absolute inset-0 rounded-2xl"
+        className="preserve-3d absolute inset-0 r-tile"
       >
         {/* Front face */}
         <TileFace
@@ -180,14 +187,17 @@ export default function Tile({
           }}
           aria-label="Flip tile"
           className={cn(
-            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-md transition-opacity duration-200 z-10",
+            // Genuinely circular icon control — stays rounded-full in both
+            // editions. shadow-tile rather than Tailwind's grey shadow-md so
+            // it picks up the hard folk-art register under Texas.
+            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-tile transition-opacity duration-200 z-10",
             "opacity-0 group-hover:opacity-100 focus:opacity-100",
             inSlot
-              ? "bg-accent text-white"
-              : "bg-tile-face text-ink border border-tile-edge"
+              ? "accent-fill bg-accent text-white"
+              : "bg-tile-face text-ink border border-tile-edge fab-outline"
           )}
         >
-          <span className="material-icons text-[18px]">swap_vert</span>
+          <Icon name="flip" size={18} />
         </button>
       )}
     </motion.div>
@@ -209,21 +219,26 @@ function TileFace({
   return (
     <div
       className={cn(
-        "absolute inset-0 flex flex-col rounded-2xl overflow-hidden bg-white border",
-        inSlot ? "border-accent/40" : "border-tile-edge"
+        // .tile-face carries the face fill (--color-tile-face) and the outline
+        // weight (--tile-stroke). Under Texas that resolves to art.png's cream
+        // domino face inside a heavy warm-black outline; under FlipWords it is
+        // the same near-white 1px card it always was.
+        "absolute inset-0 flex flex-col r-tile overflow-hidden border tile-face",
+        inSlot ? "tile-face--slot border-accent/40" : "border-tile-edge"
       )}
       style={{ backfaceVisibility: "hidden" }}
     >
-      {/* paper texture overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{
-          background:
-            "repeating-linear-gradient(135deg, rgba(120,90,40,0.03) 0px, rgba(120,90,40,0.03) 1px, transparent 1px, transparent 6px)",
-        }}
-      />
-      {/* soft top highlight */}
-      <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none rounded-t-2xl bg-gradient-to-b from-white/55 to-transparent" />
+      {/* Printed grain. art.png's flat areas are not flat — the halftone is
+          baked into the artwork — so the face has to carry it or the tile
+          looks cleaner than the illustration it is quoting. The weave moved
+          out of a style attribute and into .tile-grain because an inline
+          background outranks every author rule, so the Texas layer could not
+          otherwise swap it for the halftone screen. Static background on a
+          composited layer: rasterized once, free to transform. */}
+      <div className="absolute inset-0 pointer-events-none opacity-60 tile-grain" />
+      {/* Soft top highlight. Hidden under Texas — the illustration language is
+          flat fills only, no gradients. Radius omitted: the parent clips. */}
+      <div className="absolute inset-x-0 top-0 h-1/2 pointer-events-none tile-sheen bg-gradient-to-b from-white/55 to-transparent" />
       <div
         className="flex-1 flex items-center justify-center px-2 text-center font-normal-tile text-ink select-none"
         style={{ transform: `rotate(${counter}deg)` }}
@@ -233,9 +248,13 @@ function TileFace({
         </span>
       </div>
       <div className="relative h-px w-full">
-        <div className="absolute inset-x-2 h-px bg-paper-line/60" />
-        {/* tactile center divots */}
-        <div className="absolute left-1/2 -translate-x-1/2 -top-[3px] h-[7px] w-[7px] rounded-full bg-tile-edge shadow-inner" />
+        {/* Divider. Under Texas this goes full-bleed at the outline's own
+            weight and colour — art.png's dominoes are blank, split by one
+            heavy rule. */}
+        <div className="absolute inset-x-2 h-px bg-paper-line/60 tile-divider" />
+        {/* tactile center divot — dropped under Texas, the drawn dominoes
+            carry no pips */}
+        <div className="absolute left-1/2 -translate-x-1/2 -top-[3px] h-[7px] w-[7px] rounded-full bg-tile-edge shadow-inner tile-divot" />
       </div>
       <div
         className="flex-1 flex items-center justify-center px-2 text-center font-normal-tile text-ink select-none"

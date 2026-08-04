@@ -1,11 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import {
-  loadStorage,
-  saveStorage,
-  freshStorage,
-  STORAGE_KEY,
-  BACKUP_KEY,
-} from '@/daily/storage'
+import { loadStorage, saveStorage, freshStorage } from '@/daily/storage'
+import { EDITIONS } from '@/edition'
+
+const ED = EDITIONS.flipwords
+const STORAGE_KEY = ED.storageKey
+const BACKUP_KEY = ED.backupKey
 
 describe('storage v2', () => {
   beforeEach(() => {
@@ -22,7 +21,7 @@ describe('storage v2', () => {
   })
 
   it('loadStorage returns fresh state when no key set', () => {
-    expect(loadStorage()).toEqual(freshStorage())
+    expect(loadStorage(ED)).toEqual(freshStorage())
   })
 
   it('saveStorage + loadStorage round-trip', () => {
@@ -39,8 +38,8 @@ describe('storage v2', () => {
       startedAt: 1,
       updatedAt: 2,
     }
-    saveStorage(s)
-    expect(loadStorage()).toEqual(s)
+    saveStorage(ED, s)
+    expect(loadStorage(ED)).toEqual(s)
   })
 
   it('migrates v1 data: isDailyResult becomes mode "daily", inProgress added', () => {
@@ -61,7 +60,7 @@ describe('storage v2', () => {
         totals: { sessionsPlayed: 12, perfectSessions: 4 },
       })
     )
-    const s = loadStorage()
+    const s = loadStorage(ED)
     expect(s.schemaVersion).toBe(2)
     expect(s.streak).toEqual({ current: 4, best: 9, lastCompletedDate: '2026-06-30' })
     expect(s.sessions['2026-06-30'].mode).toBe('daily')
@@ -75,13 +74,13 @@ describe('storage v2', () => {
   it('backs up and starts fresh on unknown future schemaVersion', () => {
     const blob = JSON.stringify({ schemaVersion: 99, something: 'precious' })
     window.localStorage.setItem(STORAGE_KEY, blob)
-    expect(loadStorage()).toEqual(freshStorage())
+    expect(loadStorage(ED)).toEqual(freshStorage())
     expect(window.localStorage.getItem(BACKUP_KEY)).toBe(blob)
   })
 
   it('backs up and starts fresh on corrupt JSON', () => {
     window.localStorage.setItem(STORAGE_KEY, 'not-json{')
-    expect(loadStorage()).toEqual(freshStorage())
+    expect(loadStorage(ED)).toEqual(freshStorage())
     expect(window.localStorage.getItem(BACKUP_KEY)).toBe('not-json{')
   })
 })

@@ -1,16 +1,30 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
-
 import '../styles.css'
+import {
+  DEFAULT_EDITION,
+  EDITIONS,
+  EditionProvider,
+  editionBootScript,
+} from '@/edition'
 
-// Canonical production URL. Used as the basis for og:url, twitter URLs,
-// and the absolute paths required by social scrapers (Facebook, Slack,
-// iMessage, etc. don't always resolve relative /unfurl.webp correctly).
+// SSR head content describes the DEFAULT edition. The client may resolve to
+// the other edition (URL param or remembered choice); the boot script below
+// repaints the palette before first paint, and EditionProvider syncs
+// theme-color afterwards. Crawlers see the default edition, which is what we
+// want indexed.
+const DEFAULT = EDITIONS[DEFAULT_EDITION]
+
+// The ORIGIN THIS BUILD IS SERVED FROM — not the edition's brand address.
+// `share.siteUrl` is display text for the share sheet ("texasmonthly.com/games")
+// and must never be used here: deriving the origin from it made every page
+// declare `canonical: https://texasmonthly.com` and point `og:image` at a file
+// only this build has, so shared links rendered a blank card and told search
+// engines the whole app duplicates someone else's homepage.
 const SITE_URL = 'https://flipwords.superfun.games'
-const SITE_TITLE = 'FlipWords'
-const SITE_DESCRIPTION =
-  'A word puzzle that flips, rotates, and clicks into place.'
-const UNFURL_IMAGE = `${SITE_URL}/unfurl.webp`
+const SITE_TITLE = DEFAULT.name
+const SITE_DESCRIPTION = DEFAULT.description
+const UNFURL_IMAGE = `${SITE_URL}${DEFAULT.unfurl.src}`
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,7 +34,7 @@ export const Route = createRootRoute({
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, viewport-fit=cover',
       },
-      { name: 'theme-color', content: '#1f9c93' },
+      { name: 'theme-color', content: DEFAULT.themeColor },
       { title: SITE_TITLE },
       { name: 'description', content: SITE_DESCRIPTION },
 
@@ -31,8 +45,8 @@ export const Route = createRootRoute({
       { property: 'og:title', content: SITE_TITLE },
       { property: 'og:description', content: SITE_DESCRIPTION },
       { property: 'og:image', content: UNFURL_IMAGE },
-      { property: 'og:image:width', content: '1731' },
-      { property: 'og:image:height', content: '909' },
+      { property: 'og:image:width', content: String(DEFAULT.unfurl.width) },
+      { property: 'og:image:height', content: String(DEFAULT.unfurl.height) },
       { property: 'og:image:alt', content: SITE_DESCRIPTION },
 
       // Twitter / X — needs its own image + summary even though it largely
@@ -59,10 +73,6 @@ export const Route = createRootRoute({
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap',
       },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..600,0..1,-25..0&display=swap',
-      },
     ],
   }),
   shellComponent: RootDocument,
@@ -70,12 +80,18 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // data-edition is owned by the boot script below, which runs before
+    // hydration. Rendering it here too produced a genuine hydration mismatch
+    // on every load where the resolved edition differed from the default.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        {/* Sets data-edition from URL/localStorage before first paint so the
+            remembered edition never flashes the default palette. */}
+        <script dangerouslySetInnerHTML={{ __html: editionBootScript() }} />
       </head>
       <body>
-        {children}
+        <EditionProvider>{children}</EditionProvider>
         <Scripts />
       </body>
     </html>

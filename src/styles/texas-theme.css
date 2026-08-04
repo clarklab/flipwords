@@ -1,0 +1,338 @@
+/* ===========================================================================
+   THE TEXAS TWO-STEP — Texas Monthly edition theme layer
+   ---------------------------------------------------------------------------
+   Every hex below was sampled programmatically (PIL) from Texas Monthly's own
+   screenshots or from the commissioned art.png. Provenance for each value is
+   in docs/texas-monthly-brand.md. Values marked DERIVED are computed from a
+   sampled anchor because the source material had no equivalent swatch.
+
+   HOW THIS FILE WINS THE CASCADE (verified against tailwindcss 4.2.2 by
+   compiling the real stylesheet — see docs for the method):
+
+     1. `@theme` tokens compile to `@layer theme { :root, :host { --color-*: … } }`
+        and utilities emit `var(--color-*)`, e.g. `.bg-accent { background-color:
+        var(--color-accent) }`. Because the theme block lives inside a cascade
+        LAYER and this file is UNLAYERED, every rule here beats it outright —
+        unlayered styles always win over layered ones regardless of specificity.
+
+     2. The plain `:root { --shadow-tile; --paper-tex; … }` block in styles.css
+        is also unlayered, so layers don't help there. `:root[data-edition="texas"]`
+        has specificity (0,2,0) vs `:root` (0,1,0), so it wins on specificity.
+
+     3. The hand-written classes in styles.css (`.bg-chin`, `.bg-tile-face`,
+        `.shadow-play-lift`) are (0,1,0); the descendant forms below are (0,2,1).
+
+   All three win on layer-or-specificity, never on source order — so it does not
+   matter where this file is imported relative to styles.css.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Display face — self-hosted, no network dependency.
+
+   Family name is taken verbatim from the file's own `name` table (nameID 1 =
+   "Grifinito Test L", nameID 16 typographic family = "Grifinito Test L"). Do not
+   rename it; the OS may already have it installed under this name.
+
+   *** TRIAL FONT — TWO HARD CONSTRAINTS ***
+   (a) LICENSE: nameID 13 reads "For testing purposes only. Commercial use
+       requires licensing from r-typography.com." This must be licensed from
+       Rui Abreu / R-Typography before the pitch ships anywhere public.
+   (b) CHARSET: the trial contains exactly 65 glyphs — space, comma, period,
+       0-9, A-Z, a-z. NOTHING ELSE. No hyphen, apostrophe, colon, question
+       mark, exclamation, ampersand, or dashes.
+       The `unicode-range` below is that exact coverage, declared explicitly so
+       the browser falls back predictably (per-character) instead of silently
+       dropping the whole run. Any unsupported character renders from the next
+       family in `--font-display`.
+       >>> "TWO-STEP" and "Play Today’s Puzzle" both contain characters this
+           file cannot draw. See docs for the three ways out.
+   --------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Grifinito Test L";
+  src: url("/fonts/GrifinitoTestL-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020, U+002C, U+002E, U+0030-0039, U+0041-005A, U+0061-007A;
+}
+
+/* ---------------------------------------------------------------------------
+   Font stacks. Defined on :root so BOTH editions get a sane `--font-display`
+   and components can use `.font-display` unconditionally.
+
+   Mona Sans is deliberately KEPT as the UI face for the Texas edition:
+     • It is a neutral grotesque — the same register as TM's nav/eyebrow sans.
+     • The app's seven `.font-*` classes drive Mona Sans's `wdth`/`wght`
+       variable axes across 110 call sites. Any static replacement silently
+       collapses that hierarchy, because `font-variation-settings` is ignored
+       on a non-variable font.
+     • Keeping it means zero changes to __root.tsx's Google Fonts <link>.
+   --------------------------------------------------------------------------- */
+:root {
+  --font-ui: "Mona Sans", "Inter", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  /* FlipWords keeps its rotating FLIP/FLOP/SWAP kicker; the Texas block turns
+     it off. Expressed as a token so no component reads an edition name. */
+  --kicker-animate: 1;
+  /* FlipWords draws its tile grain with the same diagonal weave it always had;
+     under Texas this becomes the halftone screen and --paper-tex goes to none.
+     Defined here so `.tile-grain` can read one name in both editions. */
+  --tile-tex: none;
+  /* flipwords edition: display type is just the UI face, wide + heavy */
+  --font-display: var(--font-ui);
+  /* Optional editorial serif for deck/prose. System stack — no extra network
+     request. Swap for Source Serif 4 / Spectral if a <link> is acceptable. */
+  --font-serif-text: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+}
+
+/* ===========================================================================
+   TEXAS EDITION
+   =========================================================================== */
+:root[data-edition="texas"] {
+  /* --- display type ------------------------------------------------------ */
+  /* Grifinito first; a didone-ish serif catches the characters it lacks. */
+  --font-display: "Grifinito Test L", "Playfair Display", "Bodoni 72", Didot,
+    "Times New Roman", Georgia, serif;
+
+  /* --- @theme colour tokens (overriding the SAME names styles.css defines) - */
+
+  /* TM's own page is pure white; the cream lives in the artwork, not the page.
+     Keeping the page white is what makes the cream tiles read as illustration. */
+  --color-surface: #ffffff;        /* SAMPLED  TM page background (all 3 shots) */
+  --color-surface-deep: #f5f5f2;   /* SAMPLED  TM newsletter panel + conversion bar */
+
+  --color-ink: #000000;            /* SAMPLED  TM wordmark, headlines, body, rules */
+  --color-ink-muted: #55524e;      /* DERIVED  warm midpoint, ink -> ink-soft */
+  /* DERIVED from the sampled #a0a0a0. TM's own byline grey is 2.61:1 on white
+     and fails WCAG AA at every size; copying their accessibility bug is not
+     the same as matching their brand. Same warm neutral hue, three steps
+     darker: 5.31:1 on white, 4.86:1 on the #f5f5f2 panel. */
+  --color-ink-soft: #6e6b66;       /* DERIVED  AA-compliant TM byline grey */
+
+  /* Tiles are the folk-art object: cream face, heavy warm-black outline,
+     sage-teal back. `border-tile-edge` (28 call sites) turning near-black is
+     what does most of the reskin's visual work, for free. */
+  --color-tile-face: #f8f2df;      /* SAMPLED  TM Games illustration cream */
+  --color-tile-edge: #292927;      /* SAMPLED  TM illustration line ink */
+  --color-tile-back: #a6cbd7;      /* SAMPLED  TM illustration sage-teal */
+
+  --color-accent: #e56545;         /* SAMPLED  TM SUBSCRIBE / hero headline /
+                                               READ NEXT / GAMES / SIGN UP fill */
+  /* DERIVED. The sampled coral is 3.34:1 on white — fine as a mark (rings,
+     rules, star fills, 3:1 non-text), a failure as type. This is the same hue
+     darkened until it passes AA both ways: 5.10:1 on white, 4.67:1 on the
+     tinted panel, and 5.10:1 for white knocked out of it. Everything set in
+     coral TYPE, and every coral fill carrying white type, uses this; the
+     sampled value stays for marks. See texas-theme's `.tm-eyebrow`. */
+  --color-accent-ink: #c14425;     /* DERIVED  AA coral, for type + filled UI */
+  --color-accent-soft: #fbe3dc;    /* DERIVED  coral tint, for washes + ::selection */
+  --color-warn: #e25934;           /* SAMPLED  art.png cowboy-hat red */
+  --color-paper-line: #d7d7d7;     /* SAMPLED  TM 1px divider hairline */
+
+  /* --- the chin ----------------------------------------------------------
+     THERE IS NO CHIN UNDER TEXAS ANY MORE. The orange strip welded to the
+     viewport bottom was half of the app-shell silhouette; texas-page.css
+     deletes it and re-sets its contents as a ruled metadata line inside the
+     content column. `--chin` survives only because `.bg-chin` in styles.css
+     still resolves it; nothing paints with it here.
+     Contract with src/edition/editions.ts: `themeColor` must equal whatever
+     the browser chrome abuts, because Chrome treats theme-color as a literal
+     fill rather than a hint. That is now the page white, so `themeColor` is
+     '#ffffff' — changed together with this comment. */
+  /* Channel triplets for alpha-varying component colors. These mirror the
+     ones in styles.css :root and MUST exist here, or teal/gold from the
+     FlipWords palette survives the edition swap. */
+  --accent-rgb: 229 101 69;    /* #e56545 coral */
+  --star-rgb: 249 226 97;      /* #f9e261 sunflower — earned stars */
+  --scrim-rgb: 41 41 39;       /* #292927 illustration ink — modal backdrops */
+  --texture-rgb: 41 41 39;     /* neutral grain over TM's white page */
+
+  /* Shape: TM is squared and ruled. Near-zero radii read editorial;
+     the pill geometry is what makes the FlipWords build read as an app. */
+  --r-card: 2px;
+  --r-panel: 2px;
+  /* Tiles are the hero object and must read as art.png's dominoes, whose
+     corners are ~8-10% of the short side — noticeably rounder than the rest
+     of the squared system. Deliberately not 2px like everything else. */
+  --r-tile: 7px;
+  --r-pill: 2px;
+  --r-btn: 2px;
+  --rule-weight: 3px;
+
+  --chin: #f58537;                 /* SAMPLED  art.png background field */
+
+  /* --- extended folk-art palette -----------------------------------------
+     NOTE: these are plain custom properties, NOT Tailwind theme tokens. They
+     are usable as `var(--color-sunflower)` in CSS or inline styles. They will
+     NOT generate `bg-sunflower` / `text-sunflower` utilities — utility
+     generation is compile-time and only `@theme` can do it. See docs for the
+     exact `@theme` block to add to styles.css if utilities are wanted. */
+  --color-sunflower: #f9e261;      /* SAMPLED  TM Games illustration field */
+  --color-terracotta: #e57448;     /* SAMPLED  TM illustration rock/accent */
+  --color-card-orange: #dd8852;    /* SAMPLED  TM crossword card field */
+  --color-cactus: #5da05e;         /* SAMPLED  TM illustration green */
+  --color-art-orange: #f58537;     /* SAMPLED  art.png field */
+  --color-art-teal: #93c6c7;       /* SAMPLED  art.png tornado */
+  --color-art-teal-deep: #4c6060;  /* SAMPLED  art.png funnel shadow */
+  --color-art-cream: #f9f0dd;      /* SAMPLED  art.png domino faces */
+  --color-art-ink: #2a2928;        /* SAMPLED  art.png outline stroke */
+  --color-dust: #efca90;           /* SAMPLED  art.png dust cloud */
+  --color-ochre: #e89c37;          /* SAMPLED  art.png desert ground */
+  --color-rock: #b06e37;           /* SAMPLED  art.png rocks */
+
+  /* --- shadows -----------------------------------------------------------
+     Folk-art screen printing has hard offsets, not soft ambient blur. These
+     trade the app's diffuse brown haze for a tight, mostly-opaque drop in the
+     illustration's own ink colour — the tile reads as a printed object sitting
+     on paper rather than a floating card. */
+  --shadow-tile:
+    0 2px 0 rgba(41, 41, 39, 0.9),
+    0 3px 0 rgba(41, 41, 39, 0.18),
+    0 8px 14px -8px rgba(41, 41, 39, 0.3);
+  --shadow-tile-hover:
+    0 3px 0 rgba(41, 41, 39, 0.9),
+    0 5px 0 rgba(41, 41, 39, 0.18),
+    0 14px 22px -10px rgba(41, 41, 39, 0.34);
+  --shadow-tile-lift:
+    0 6px 0 rgba(41, 41, 39, 0.9),
+    0 9px 0 rgba(41, 41, 39, 0.2),
+    0 26px 40px -14px rgba(41, 41, 39, 0.38);
+  --inset-slot:
+    inset 0 0 0 2px rgba(41, 41, 39, 0.18),
+    inset 0 3px 8px -2px rgba(41, 41, 39, 0.24);
+
+  /* --- texture -----------------------------------------------------------
+     art.png is not flat: a "solid" 1448x40 strip of its orange field holds
+     1,371 distinct RGB values with a p5-p95 luminance spread of 10.5/255. But
+     that grain is printed into the ARTWORK. TM's own site is flat white — no
+     tint, no weave, no wash — so the page must not carry it or the chrome
+     stops reading as a magazine page and starts reading as a texture study.
+
+     Hence the split: --paper-tex (page chrome: body backdrop, .bg-paper, modal
+     sheets) goes to nothing, and the halftone moves to --tile-tex, which only
+     the drawn objects use. Two offset dot grids make a real screen; the
+     diagonal weave sits underneath at low strength. */
+  --paper-tex: none;
+  --tile-tex:
+    radial-gradient(circle at 50% 50%, rgba(41, 41, 39, 0.055) 0 18%, transparent 19%)
+      0 0 / 5px 5px,
+    radial-gradient(circle at 50% 50%, rgba(41, 41, 39, 0.032) 0 15%, transparent 16%)
+      2.5px 2.5px / 5px 5px,
+    repeating-linear-gradient(
+      135deg,
+      rgba(120, 74, 30, 0.022) 0 1px,
+      transparent 1px 7px
+    );
+
+  /* Read once on mount by TitleScreen's kicker so it can stop its 2s interval
+     without any component having to know an edition name — the same way every
+     other difference between the editions is expressed. */
+  --kicker-animate: 0;
+}
+
+/* ===========================================================================
+   RULE-LEVEL OVERRIDES
+   styles.css hardcodes literal colours in these five places, so a custom-
+   property override cannot reach them. Each selector below is strictly more
+   specific than its counterpart, so ordering is irrelevant.
+   =========================================================================== */
+
+/* NOTE: styles.css's `body::before` warm wash is killed in texas-page.css,
+   which owns everything about the page surface. */
+
+/* styles.css: `.bg-chin { background: #1f9c93 }` — a literal.
+   Written as `var(--chin)` so this keeps working unchanged if/when styles.css
+   is refactored to `background: var(--chin)` per the editions.ts contract. */
+:root[data-edition="texas"] .bg-chin {
+  background: var(--chin);
+}
+
+/* styles.css: `.bg-tile-face` gradient stops are literal oklch values.
+   Rebuilt from the token via color-mix so there are no magic numbers — the
+   highlight is always derived from whatever --color-tile-face currently is. */
+:root[data-edition="texas"] .bg-tile-face {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-tile-face) 82%, white) 0%,
+      var(--color-tile-face) 100%
+    ),
+    var(--color-tile-face);
+}
+
+/* styles.css: `.shadow-play-lift` is built from `rgba(15, 50, 45, …)` — a dark
+   teal tuned to sit against the teal chin. Retuned to a burnt sienna derived
+   from the orange chin, keeping the identical multi-stop falloff so the fade
+   still clears the iOS home-indicator safe area with no hard cutoff. */
+:root[data-edition="texas"] .shadow-play-lift {
+  box-shadow:
+    0 4px 8px -2px rgba(108, 46, 8, 0.34),
+    0 14px 18px -2px rgba(108, 46, 8, 0.5),
+    0 28px 36px -8px rgba(108, 46, 8, 0.42),
+    0 52px 68px -16px rgba(108, 46, 8, 0.32),
+    0 80px 100px -32px rgba(108, 46, 8, 0.22),
+    0 2px 0 rgba(255, 255, 255, 0.45) inset;
+}
+
+/* ===========================================================================
+   TYPOGRAPHIC UTILITIES
+   Both are edition-agnostic: they resolve through --font-display, so a
+   component can use them unconditionally and get Mona Sans under flipwords and
+   Grifinito under texas.
+   =========================================================================== */
+
+/* Display / wordmark / big numerals.
+   `font-variation-settings` and `font-feature-settings` are reset because body
+   sets Mona Sans axes that inherit into every element; Grifinito is a static
+   CFF font with none of them. */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+  letter-spacing: -0.005em;
+}
+
+/* TM's single most characteristic typographic device: tiny uppercase sans on a
+   very wide track, used for eyebrows, section heads and nav.
+   Measured from the screenshots: ink-gap between uppercase glyphs runs
+   0.22-0.31em, which nets out to roughly 0.14-0.20em of applied letter-spacing
+   once the face's own sidebearings are subtracted. 0.18em sits mid-range.
+
+   This shipped with `font-weight` left at the inherited 400 and only the
+   variable axis raised — so the moment Mona Sans resolves to a static instance
+   or the axis is ignored, the eyebrow renders thin, and thin tracked caps are
+   the one thing that instantly separates a startup from a masthead. The base
+   now states the same weight its own axis asks for (600), which is a fix, not
+   a change: FlipWords renders identically. */
+.tm-eyebrow {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-variation-settings: "wdth" 100, "wght" 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  line-height: 1.2;
+}
+
+/* TM's eyebrows are genuinely bold — GAMES, READ NEXT, TRENDING, POLITICS &
+   POLICY all sit a clear step above their surroundings. */
+:root[data-edition="texas"] .tm-eyebrow {
+  font-weight: 700;
+  font-variation-settings: "wdth" 100, "wght" 700;
+}
+
+/* Optional editorial serif for deck/prose blocks. */
+.font-serif-text {
+  font-family: var(--font-serif-text);
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+}
+
+/* Grifinito is a high-contrast didone: its hairlines disappear under macOS
+   subpixel smoothing at display sizes. Let it render with full weight. */
+:root[data-edition="texas"] .font-display {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

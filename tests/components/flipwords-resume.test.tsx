@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import FlipWords from '@/components/FlipWords'
-import { allLevels } from '@/game/levels'
+import { EDITIONS, EditionProvider } from '@/edition'
 import type { PuzzleResult } from '@/daily/types'
 
 const doneResult = (): PuzzleResult => ({
@@ -30,8 +30,9 @@ beforeAll(() => {
 
 describe('FlipWords resume', () => {
   it('starts at the puzzle after the last completed one', () => {
-    const session = allLevels.slice(0, 5)
+    const session = EDITIONS.flipwords.levels.slice(0, 5)
     render(
+      <EditionProvider value="flipwords">
       <FlipWords
         session={session}
         mode="daily"
@@ -42,6 +43,7 @@ describe('FlipWords resume', () => {
           elapsedMs: 200_000,
         }}
       />
+      </EditionProvider>
     )
     // Chin shows "4 of 5" — puzzle index resumed at 3 (0-based).
     expect(screen.getByText('4')).toBeDefined()
@@ -49,9 +51,11 @@ describe('FlipWords resume', () => {
   })
 
   it('starts at puzzle 1 without initialProgress', () => {
-    const session = allLevels.slice(0, 5)
+    const session = EDITIONS.flipwords.levels.slice(0, 5)
     render(
-      <FlipWords session={session} mode="daily" date="2026-07-02" dayNumber={46} />
+      <EditionProvider value="flipwords">
+        <FlipWords session={session} mode="daily" date="2026-07-02" dayNumber={46} />
+      </EditionProvider>
     )
     expect(screen.getByText('1')).toBeDefined()
     expect(screen.getByText('of 5')).toBeDefined()

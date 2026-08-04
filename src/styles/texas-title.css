@@ -1,0 +1,443 @@
+/* ===========================================================================
+   TITLE SCREEN — the front door, in both editions
+   ---------------------------------------------------------------------------
+   Colour provenance: docs/texas-monthly-brand.md. Nothing here invents a hex;
+   every value resolves through a token that texas-theme.css already sampled.
+
+   TitleScreen.tsx renders ONE markup tree for both editions. Everything that
+   differs is here, so:
+
+     • FlipWords keeps the framed, pill-shaped, centred screen it ships today.
+       Rules render as 1px hairlines (`--rule-weight: 1px`) and radii stay soft
+       (`--r-card: 26px`) — the same values the hardcoded classes used before.
+     • Texas reads as a Texas Monthly Games page: didone masthead over a heavy
+       black rule, letterspaced sub-nav on a hairline, a flat colour field
+       carrying the commissioned illustration, and eyebrow / headline / deck /
+       byline set flush left with no container chrome.
+
+   CASCADE NOTES (the same three mechanisms texas-theme.css documents):
+     • Tailwind utilities compile into `@layer utilities`. This file is
+       UNLAYERED, so any rule here beats a Tailwind utility outright,
+       regardless of specificity. That is how `background: none` defeats
+       `bg-white`, and why `.tm-eyebrow`'s font-size defeats `text-[10px]`.
+     • styles.css's hand-written classes (`.r-*`, `.rule-*`, `.shadow-tile*`)
+       are ALSO unlayered and, because @import is hoisted, they land AFTER this
+       file. Anything competing with those needs specificity ≥ (0,2,0).
+     • `:root[data-edition="texas"] .x` is (0,2,1) and wins on specificity, not
+       source order — so import position never matters.
+   =========================================================================== */
+
+/* ===========================================================================
+   1. EDITION-AGNOSTIC — resolves correctly in both editions
+   =========================================================================== */
+
+/* NOTE: the page sheet takes the shared `.play-surface` marker and `.r-surface`
+   radius defined in texas-game.css, so the title screen and the game are
+   literally the same sheet — same 28/36px corner, same Texas hairline frame.
+   Nothing to define here. */
+
+/* --- display type -------------------------------------------------------
+   `.font-display` (texas-theme.css) resolves to Mona Sans under FlipWords and
+   Grifinito under Texas, and deliberately resets `font-variation-settings`
+   because Grifinito is a static CFF with no axes. These two put the axes back
+   for the places that were previously `.font-wide`, so FlipWords' wide/heavy
+   display type is unchanged. Safe to apply unconditionally: a non-variable
+   font ignores `font-variation-settings` entirely.
+   ------------------------------------------------------------------------ */
+.font-display.display-wide {
+  font-variation-settings: "wdth" 125, "wght" 800;
+  /* body's stylistic sets, likewise reset by `.font-display`. Grifinito has no
+     feature tables, so asking for them there is a no-op. */
+  font-feature-settings: "ss01", "ss02", "cv01", "cv11";
+}
+
+/* AnimatedWordmark. It used to carry Tailwind's `tracking-wide` (0.025em);
+   `.font-display` sets a tighter track for mixed-case display type, so the
+   wordmark — which is always caps — restates it. */
+.wordmark.font-display {
+  letter-spacing: 0.025em;
+}
+
+/* --- the puzzle card ---------------------------------------------------- */
+/* Chrome lives here rather than on Tailwind classes so the Texas override can
+   strip it with one (0,2,0) rule. The gradient is `.bg-tile-face`'s, rebuilt
+   from the token via color-mix so there are no literal oklch values left. */
+.tm-card {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-tile-face) 88%, white) 0%,
+      var(--color-tile-face) 100%
+    ),
+    var(--color-tile-face);
+  border: 1px solid var(--color-tile-edge);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-tile-lift);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.tm-kicker {
+  margin-bottom: 0.5rem;
+}
+
+/* Compound selector so the track beats `.font-display`'s on specificity rather
+   than on which file @import happened to hoist first. */
+.tm-puzzle-no.font-display {
+  font-size: 44px;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .tm-puzzle-no.font-display {
+    font-size: 46px;
+  }
+}
+
+.tm-credits {
+  margin-top: 0.75rem;
+}
+
+/* --- stat row ----------------------------------------------------------- */
+.tm-stats {
+  background: var(--color-tile-face);
+  border: 1px solid var(--color-tile-edge);
+  border-radius: var(--r-tile);
+  box-shadow: var(--shadow-tile);
+  overflow: hidden;
+}
+
+.tm-stat-cell + .tm-stat-cell {
+  border-left: 1px solid var(--color-tile-edge);
+}
+
+/* Stat chips. These were three hardcoded `oklch()` literals in TitleScreen —
+   flagged in docs/texas-monthly-brand.md §5.3 — which survived the edition
+   swap and dragged FlipWords' teal and gold onto the Texas palette. Each is
+   now derived from a token that both editions define. The streak chip reuses
+   `--flame-*` (texas-game.css), which is the same object on the Scorecard and
+   carries the identical FlipWords values it had as a literal here. */
+.stat-chip-warm {
+  background: var(--flame-bg);
+  color: var(--flame-fg);
+}
+.stat-chip-gold {
+  background: rgb(var(--star-rgb) / 0.28);
+  color: color-mix(in oklab, rgb(var(--star-rgb)) 72%, black);
+}
+.stat-chip-accent {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+/* --- edition-supplied furniture ----------------------------------------- */
+/* Hidden by default; an edition's block below opts in. Keeping the markup
+   identical across editions is what lets TitleScreen stay free of edition
+   conditionals — the rule in docs/edition-architecture.md. */
+.tm-hero-field,
+.tm-deck {
+  display: none;
+}
+
+/* ===========================================================================
+   2. TEXAS MONTHLY EDITION
+   =========================================================================== */
+
+/* --- masthead ------------------------------------------------------------
+   TM's masthead is the brand. Grifinito is a high-contrast condensed didone in
+   the same register; set large, in caps, on a small positive track (their
+   house treatment for capitalised display), over the heavy rule.
+   Sized against the viewport so it always clears the two 44px icon buttons:
+   "TEXAS TWO STEP" measures ~4.0em in this face, ~4.5em with the track, so at
+   the 375px floor it occupies 142px of the ~255px of free centre.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .tm-wordmark {
+  font-size: clamp(26px, 8.4vw, 42px);
+  letter-spacing: 0.035em;
+  /* The caller's `text-xl` also carries a line-height, and twMerge strips the
+     component's own `leading-none` because of it — so at 42px the line box
+     would still be 28px. Restate it here; unlayered beats the utility. */
+  line-height: 1;
+}
+
+/* TM's games sub-nav is black caps on a hairline, not grey. */
+:root[data-edition="texas"] .tm-subnav {
+  color: var(--color-ink);
+}
+
+/* --- the illustration field ---------------------------------------------
+   TM runs artwork as a flat colour field with the drawing sitting inside it,
+   never as a floating decoration — see the Games page cards.
+
+   The height used to be `clamp(72px, 16dvh, 168px)` with the art scaled to fit
+   INSIDE that — a shock absorber for a layout trapped in a 100dvh cage, which
+   rendered the commissioned illustration at 120x136 px and left the rest of the
+   band as flat #f58537. TM's own Games cards run their art at roughly 745x432
+   with the subject filling the frame. Nothing is trapped now, so the field gets
+   a real aspect ratio and the art fills it.
+
+   `background-size: auto 100%` — not `cover` — because hero-tornado.webp is
+   900x1020 and already carries its own #f58537 margin, sampled identical to
+   `--color-art-orange`. Filling by HEIGHT means the drawing is always as large
+   as the band allows and the field bleeds seamlessly out to the sides; filling
+   by width would crop the top of the funnel or the ground under it.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .tm-hero-field {
+  display: block;
+  width: 100%;
+  aspect-ratio: 6 / 5;
+  border-radius: 0;
+  background-color: var(--color-art-orange);
+  background-image: url("/texas/hero-tornado-sm.webp");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: 50% 50%;
+}
+/* Art direction: phones are served the 520px file only. `image-set()` fetches
+   just the candidate it picks, so they never pull the master; the 2x candidate
+   is offered where the field is genuinely wide enough to want it. */
+@media (min-width: 768px) {
+  :root[data-edition="texas"] .tm-hero-field {
+    background-image: image-set(
+      url("/texas/hero-tornado-sm.webp") 1x,
+      url("/texas/hero-tornado.webp") 2x
+    );
+  }
+}
+
+/* No container chrome: TM's cards are the art field plus type on the page.
+   Flex column rather than block flow so the card can pass shrinkage down to
+   the illustration; every text child keeps its automatic min-content floor, so
+   nothing but the field ever gives. Each child already carries an explicit top
+   margin, so no collapsing behaviour is lost. */
+:root[data-edition="texas"] .tm-card {
+  display: flex;
+  flex-direction: column;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  text-align: left;
+}
+
+/* The coral eyebrow — TM's most-used piece of punctuation, and the one place
+   the accent is allowed to appear (§1.5: coral is punctuation, never a field). */
+/* Coral TYPE takes the AA-compliant derivative; the sampled coral stays for
+   marks. At 11px on white the sampled value is 3.34:1. */
+:root[data-edition="texas"] .tm-kicker {
+  color: var(--color-accent-ink);
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+/* The scale jump that defines the brand is deck -> headline at 3.4-3.8x, with
+   almost nothing in between (§2.2). Bounded by dvh as well as vw so the
+   headline shrinks with the viewport instead of eating the fold. */
+:root[data-edition="texas"] .tm-puzzle-no {
+  font-size: clamp(40px, min(15vw, 9dvh), 78px);
+  letter-spacing: 0;
+  margin-top: 0.25rem;
+}
+
+:root[data-edition="texas"] .tm-deck {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: clamp(13px, 1.9dvh, 16px);
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+/* Byline then metadata on one line, separated by a hairline — TM's own
+   "READ NEXT | ... | ..." divider. */
+:root[data-edition="texas"] .tm-credits {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+:root[data-edition="texas"] .tm-meta {
+  border-left: 1px solid var(--color-paper-line);
+  padding-left: 0.5rem;
+  font-size: 12px;
+}
+/* --- stat row ------------------------------------------------------------
+   A ruled band on the page rather than a floating card: heavy rule above,
+   hairline below, hairline columns. No icons — TM's pages carry almost none,
+   and the numerals read better without a colour chip competing.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .tm-stats {
+  background: none;
+  border: 0;
+  border-top: var(--rule-weight) solid var(--color-ink);
+  border-bottom: 1px solid var(--color-paper-line);
+  border-radius: 0;
+  box-shadow: none;
+}
+:root[data-edition="texas"] .tm-stat-cell + .tm-stat-cell {
+  border-left-color: var(--color-paper-line);
+}
+:root[data-edition="texas"] .tm-stat-chip {
+  display: none;
+}
+:root[data-edition="texas"] .tm-stat-value {
+  margin-top: 0;
+}
+
+/* --- calls to action -----------------------------------------------------
+   The primary CTA takes `.btn-primary` from texas-game.css, so the title
+   screen's button and the game's are one treatment: TM's only filled button
+   is the newsletter SIGN UP, a square slab of tracked caps with no icon.
+   Everything secondary becomes a small underlined uppercase link — their
+   "ALL NEWSLETTERS  PRIVACY POLICY" pair — which is also how the two stacked
+   buttons collapse onto one line and buy back the height the illustration
+   spends.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .tm-cta {
+  padding: 1.0625rem 1.5rem;
+}
+:root[data-edition="texas"] .tm-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  margin-top: 0.875rem;
+}
+:root[data-edition="texas"] .tm-learn,
+:root[data-edition="texas"] .tm-archive {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--color-ink);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+:root[data-edition="texas"] .tm-archive-row {
+  margin-top: 0;
+}
+/* NOTE: the chin's foreground comes from `.chin-row` / `.chin-dim` and the
+   `--chin-ink` token in texas-game.css — white on teal for FlipWords, the
+   illustration's own #2a2928 on the orange field for Texas (white on #f58537
+   is only ~2.4:1). Same classes the game chin uses. */
+
+/* --- edition toggle ------------------------------------------------------
+   `--r-pill` already squares this off; all that's left is trading the app's
+   translucent capsule for a ruled segmented strip.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .tm-edition-toggle {
+  background: none;
+  border-color: var(--color-paper-line);
+  padding: 0;
+}
+
+/* ===========================================================================
+   3. THE MASTHEAD MENU
+   The hamburger shipped with no onClick. Rather than delete the one control
+   TM's own masthead definitely has, it now opens the two destinations this app
+   actually owns. Edition-agnostic base, because a dead button was a bug in
+   both editions.
+   =========================================================================== */
+.tm-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-block: 0.5rem 0.75rem;
+}
+.tm-menu-item {
+  display: block;
+  width: 100%;
+  padding-block: 0.7rem;
+  text-align: left;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-paper-line);
+}
+.tm-menu-item:hover { color: var(--color-accent); }
+:root[data-edition="texas"] .tm-menu-item:hover { color: var(--color-accent-ink); }
+
+/* ===========================================================================
+   4. THE FRONT DOOR AT DESKTOP WIDTHS
+   Above 56rem the page stops being a 375px column stretched across a 1400px
+   browser. TM's Games cards are art beside (or above) a standfirst; at this
+   width there is room to set them side by side, which is also what finally
+   gives the commissioned illustration and the didone puzzle number room to be
+   the two things on the page you see first.
+   =========================================================================== */
+@media (min-width: 56rem) {
+  /* The content column stops being `max-w-md` (448px). */
+  /* The whole front door is one two-column spread: illustration left, the
+     entire editorial stack right (standfirst, stats, CTA, links). `.tm-card`
+     goes to `display: contents` so its two halves can be placed in different
+     columns without the markup having to know about the grid. `row-gap: 0`
+     because the hero spans the full stack and every right-hand item already
+     carries its own top margin. */
+  :root[data-edition="texas"] .tm-lead {
+    display: grid;
+    grid-template-columns: minmax(0, 27rem) minmax(0, 1fr);
+    column-gap: clamp(2rem, 5vw, 4rem);
+    row-gap: 0;
+    align-items: start;
+    max-width: var(--tm-measure);
+    margin-top: 2.25rem;
+  }
+  :root[data-edition="texas"] .tm-lead > *,
+  :root[data-edition="texas"] .tm-lede {
+    grid-column: 2;
+  }
+  :root[data-edition="texas"] .tm-card {
+    display: contents;
+  }
+
+  /* Beside a column of type rather than above it, so the field can take the
+     art's own proportion instead of a letterbox. Capped: TM's Games cards run
+     about 500px of art inside an 1160px grid, and a 560px square would stop
+     being a card and start being a poster. The span is deliberately larger
+     than the row count so the field always clears the stack beside it; the
+     surplus rows are zero-height with no gap between them. */
+  :root[data-edition="texas"] .tm-hero-field {
+    grid-column: 1;
+    grid-row: 1 / span 20;
+    align-self: start;
+    /* Flush with the masthead's own left edge — the page has one left margin,
+       not two. */
+    justify-self: start;
+    aspect-ratio: 1 / 1;
+    max-width: 27rem;
+  }
+
+  :root[data-edition="texas"] .tm-puzzle-no {
+    font-size: clamp(4.5rem, 6.4vw, 6.5rem);
+  }
+
+  :root[data-edition="texas"] .tm-deck {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    margin-top: 0.75rem;
+    max-width: 30ch;
+  }
+
+  /* The stat band, CTA and secondary links belong to the text column, not to
+     the full width of the page — TM never runs a button across a spread. */
+  :root[data-edition="texas"] .tm-stats,
+  :root[data-edition="texas"] .wc-panel {
+    max-width: 34rem;
+    margin-inline: 0;
+  }
+  :root[data-edition="texas"] .tm-actions {
+    justify-content: flex-start;
+    margin-inline: 0;
+  }
+  /* TM's one filled button (newsletter SIGN UP) is a compact slab, not a
+     full-bleed app CTA. */
+  :root[data-edition="texas"] .tm-cta {
+    justify-self: start;
+    width: auto;
+    min-width: 18rem;
+    margin-top: 2.25rem;
+  }
+}
