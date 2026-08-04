@@ -1,0 +1,2072 @@
+[
+  {
+    "id": 1001,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BOARD",
+        "bottom": "DOG"
+      },
+      {
+        "id": "t2",
+        "top": "CORN",
+        "bottom": "FIELD"
+      },
+      {
+        "id": "t3",
+        "top": "CORN",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t4",
+        "top": "DOG",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t5",
+        "top": "SHAKE",
+        "bottom": "CORN"
+      }
+    ],
+    "hints": {
+      "topRow": "Batter on a stick, at the fair",
+      "bottomRow": "Gym big enough for a track",
+      "leftCol": "Panhandle acreage, in rows",
+      "rightCol": "Figurative spot after a spat"
+    },
+    "solution": {
+      "slot0Top": "CORN",
+      "slot0Bottom": "FIELD",
+      "slot1Top": "DOG",
+      "slot1Bottom": "HOUSE"
+    },
+    "title": "Fried, Then Judged"
+  },
+  {
+    "id": 1002,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SIDE",
+        "bottom": "BLACK"
+      },
+      {
+        "id": "t2",
+        "top": "SIDE",
+        "bottom": "LIME"
+      },
+      {
+        "id": "t3",
+        "top": "BLACK",
+        "bottom": "TOP"
+      },
+      {
+        "id": "t4",
+        "top": "DAY",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t5",
+        "top": "OUT",
+        "bottom": "SIDE"
+      }
+    ],
+    "hints": {
+      "topRow": "February 2021, for millions",
+      "bottomRow": "Above deck",
+      "leftCol": "What shimmers on I-10 in July",
+      "rightCol": "Not in the air conditioning"
+    },
+    "solution": {
+      "slot0Top": "BLACK",
+      "slot0Bottom": "TOP",
+      "slot1Top": "OUT",
+      "slot1Bottom": "SIDE"
+    },
+    "title": "Asphalt and Ice"
+  },
+  {
+    "id": 1003,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOWN",
+        "bottom": "STREAM"
+      },
+      {
+        "id": "t2",
+        "top": "COTTON",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t3",
+        "top": "SUN",
+        "bottom": "UP"
+      },
+      {
+        "id": "t4",
+        "top": "SUN",
+        "bottom": "STREAM"
+      },
+      {
+        "id": "t5",
+        "top": "EAR",
+        "bottom": "STREAM"
+      }
+    ],
+    "hints": {
+      "topRow": "Last light",
+      "bottomRow": "Against the current",
+      "leftCol": "When the cattle get moving",
+      "rightCol": "Toward the Gulf, on the Brazos"
+    },
+    "solution": {
+      "slot0Top": "SUN",
+      "slot0Bottom": "UP",
+      "slot1Top": "DOWN",
+      "slot1Bottom": "STREAM"
+    },
+    "title": "Cattle Hours"
+  },
+  {
+    "id": 1004,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "TIME",
+        "bottom": "BALL"
+      },
+      {
+        "id": "t2",
+        "top": "MID",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t3",
+        "top": "DAY",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t4",
+        "top": "MID",
+        "bottom": "SUMMER"
+      },
+      {
+        "id": "t5",
+        "top": "SUMMER",
+        "bottom": "SHUT"
+      }
+    ],
+    "hints": {
+      "topRow": "Noon, roughly",
+      "bottomRow": "Janis Joplin's Gershwin cover",
+      "leftCol": "Shakespeare's night's dream",
+      "rightCol": "When the soaps used to air"
+    },
+    "solution": {
+      "slot0Top": "MID",
+      "slot0Bottom": "SUMMER",
+      "slot1Top": "DAY",
+      "slot1Bottom": "TIME"
+    },
+    "title": "Ninety in the Shade"
+  },
+  {
+    "id": 1005,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BALL",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t2",
+        "top": "WORK",
+        "bottom": "DRAGON"
+      },
+      {
+        "id": "t3",
+        "top": "FOOT",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t4",
+        "top": "LIFT",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t5",
+        "top": "FOOT",
+        "bottom": "ROOM"
+      }
+    ],
+    "hints": {
+      "topRow": "The reason for Friday",
+      "bottomRow": "Sewing machine, cutting table",
+      "leftCol": "The boxer's first lesson",
+      "rightCol": "Sprung floor, chandeliers"
+    },
+    "solution": {
+      "slot0Top": "FOOT",
+      "slot0Bottom": "WORK",
+      "slot1Top": "BALL",
+      "slot1Bottom": "ROOM"
+    },
+    "title": "Two Kinds of Floor"
+  },
+  {
+    "id": 1006,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "WEEK",
+        "bottom": "BOOK"
+      },
+      {
+        "id": "t2",
+        "top": "BOOK",
+        "bottom": "END"
+      },
+      {
+        "id": "t3",
+        "top": "WORK",
+        "bottom": "LIFE"
+      },
+      {
+        "id": "t4",
+        "top": "WORK",
+        "bottom": "WEEK"
+      },
+      {
+        "id": "t5",
+        "top": "END",
+        "bottom": "BAR"
+      }
+    ],
+    "hints": {
+      "topRow": "Fill-in-the-blank pages",
+      "bottomRow": "Two days on Lake Travis",
+      "leftCol": "Monday through Friday",
+      "rightCol": "It keeps the row upright"
+    },
+    "solution": {
+      "slot0Top": "WORK",
+      "slot0Bottom": "WEEK",
+      "slot1Top": "BOOK",
+      "slot1Bottom": "END"
+    },
+    "title": "Five On, Two Off"
+  },
+  {
+    "id": 1007,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOG",
+        "bottom": "COAST"
+      },
+      {
+        "id": "t2",
+        "top": "COAST",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t3",
+        "top": "COTTON",
+        "bottom": "SEA"
+      },
+      {
+        "id": "t4",
+        "top": "COAST",
+        "bottom": "WATER"
+      },
+      {
+        "id": "t5",
+        "top": "SEA",
+        "bottom": "WATER"
+      }
+    ],
+    "hints": {
+      "topRow": "Bohemia's, in Shakespeare",
+      "bottomRow": "The mark a hull sits at",
+      "leftCol": "Salty by definition",
+      "rightCol": "367 miles, NOAA's count"
+    },
+    "solution": {
+      "slot0Top": "SEA",
+      "slot0Bottom": "WATER",
+      "slot1Top": "COAST",
+      "slot1Bottom": "LINE"
+    },
+    "title": "The Salt Edge"
+  },
+  {
+    "id": 1008,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "YARD",
+        "bottom": "SEA"
+      },
+      {
+        "id": "t2",
+        "top": "LINE",
+        "bottom": "CORN"
+      },
+      {
+        "id": "t3",
+        "top": "SEA",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t4",
+        "top": "SHORE",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t5",
+        "top": "SIDE",
+        "bottom": "SHORE"
+      }
+    ],
+    "hints": {
+      "topRow": "Padre, for seventy miles",
+      "bottomRow": "Moonlighting income",
+      "leftCol": "By the surf",
+      "rightCol": "What a hurricane rewrites"
+    },
+    "solution": {
+      "slot0Top": "SEA",
+      "slot0Bottom": "SIDE",
+      "slot1Top": "SHORE",
+      "slot1Bottom": "LINE"
+    },
+    "title": "Longest in the World"
+  },
+  {
+    "id": 1009,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "HOUSE",
+        "bottom": "MATE"
+      },
+      {
+        "id": "t2",
+        "top": "HOUSE",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t3",
+        "top": "COURT",
+        "bottom": "ROOM"
+      },
+      {
+        "id": "t4",
+        "top": "COURT",
+        "bottom": "JELLY"
+      },
+      {
+        "id": "t5",
+        "top": "MATE",
+        "bottom": "COURT"
+      }
+    ],
+    "hints": {
+      "topRow": "The building on the square",
+      "bottomRow": "Dorm-issue companion",
+      "leftCol": "Roy Bean's was a saloon",
+      "rightCol": "One of four on the lease"
+    },
+    "solution": {
+      "slot0Top": "COURT",
+      "slot0Bottom": "ROOM",
+      "slot1Top": "HOUSE",
+      "slot1Bottom": "MATE"
+    },
+    "title": "Two Hundred Fifty-Four"
+  },
+  {
+    "id": 1010,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OUT",
+        "bottom": "COW"
+      },
+      {
+        "id": "t2",
+        "top": "RUN",
+        "bottom": "DOOR"
+      },
+      {
+        "id": "t3",
+        "top": "BITE",
+        "bottom": "DOOR"
+      },
+      {
+        "id": "t4",
+        "top": "OUT",
+        "bottom": "RUN"
+      },
+      {
+        "id": "t5",
+        "top": "DOOR",
+        "bottom": "WAY"
+      }
+    ],
+    "hints": {
+      "topRow": "Held in the open air",
+      "bottomRow": "Strip at Love Field",
+      "leftCol": "Beat on foot",
+      "rightCol": "The frame you stand in"
+    },
+    "solution": {
+      "slot0Top": "OUT",
+      "slot0Bottom": "RUN",
+      "slot1Top": "DOOR",
+      "slot1Bottom": "WAY"
+    },
+    "title": "The Wright Amendment"
+  },
+  {
+    "id": 1011,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DAY",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t2",
+        "top": "WEEK",
+        "bottom": "NIGHT"
+      },
+      {
+        "id": "t3",
+        "top": "NIGHT",
+        "bottom": "DAY"
+      },
+      {
+        "id": "t4",
+        "top": "NIGHT",
+        "bottom": "PEA"
+      },
+      {
+        "id": "t5",
+        "top": "ROOM",
+        "bottom": "LIGHT"
+      }
+    ],
+    "hints": {
+      "topRow": "When the DPS office is open",
+      "bottomRow": "Small glow in the hallway",
+      "leftCol": "School the next morning",
+      "rightCol": "What we save in March"
+    },
+    "solution": {
+      "slot0Top": "WEEK",
+      "slot0Bottom": "NIGHT",
+      "slot1Top": "DAY",
+      "slot1Bottom": "LIGHT"
+    },
+    "title": "Lights Out at Ten"
+  },
+  {
+    "id": 1012,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "MARK",
+        "bottom": "UP"
+      },
+      {
+        "id": "t2",
+        "top": "UP",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t3",
+        "top": "UP",
+        "bottom": "KEY"
+      },
+      {
+        "id": "t4",
+        "top": "CUT",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t5",
+        "top": "DOWN",
+        "bottom": "BEAT"
+      }
+    ],
+    "hints": {
+      "topRow": "Red tag at Neiman's",
+      "bottomRow": "Sunny in disposition",
+      "leftCol": "The retailer's cut",
+      "rightCol": "Beat one, in the measure"
+    },
+    "solution": {
+      "slot0Top": "MARK",
+      "slot0Bottom": "UP",
+      "slot1Top": "DOWN",
+      "slot1Bottom": "BEAT"
+    },
+    "title": "Last Call"
+  },
+  {
+    "id": 1013,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOWN",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t2",
+        "top": "RUN",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t3",
+        "top": "DOWN",
+        "bottom": "LACE"
+      },
+      {
+        "id": "t4",
+        "top": "MOUTH",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t5",
+        "top": "SIDE",
+        "bottom": "RUN"
+      }
+    ],
+    "hints": {
+      "topRow": "The quick summary",
+      "bottomRow": "Past the last defender",
+      "leftCol": "May in Texas politics",
+      "rightCol": "The catch, in other words"
+    },
+    "solution": {
+      "slot0Top": "RUN",
+      "slot0Bottom": "OFF",
+      "slot1Top": "DOWN",
+      "slot1Bottom": "SIDE"
+    },
+    "title": "The Second Ballot"
+  },
+  {
+    "id": 1014,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "UP",
+        "bottom": "WIND"
+      },
+      {
+        "id": "t2",
+        "top": "BURN",
+        "bottom": "UP"
+      },
+      {
+        "id": "t3",
+        "top": "CASTLE",
+        "bottom": "WIND"
+      },
+      {
+        "id": "t4",
+        "top": "SIDE",
+        "bottom": "BURN"
+      },
+      {
+        "id": "t5",
+        "top": "WEEK",
+        "bottom": "SIDE"
+      }
+    ],
+    "hints": {
+      "topRow": "The good news, at least",
+      "bottomRow": "What a norther leaves on you",
+      "leftCol": "The clean-air side",
+      "rightCol": "Whisker patch by the ear"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "WIND",
+      "slot1Top": "SIDE",
+      "slot1Bottom": "BURN"
+    },
+    "title": "Blue Norther"
+  },
+  {
+    "id": 1015,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "CAST",
+        "bottom": "HOLD"
+      },
+      {
+        "id": "t2",
+        "top": "HOLD",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t3",
+        "top": "OVER",
+        "bottom": "FLY"
+      },
+      {
+        "id": "t4",
+        "top": "CAST",
+        "bottom": "SHORT"
+      },
+      {
+        "id": "t5",
+        "top": "OUT",
+        "bottom": "CAST"
+      }
+    ],
+    "hints": {
+      "topRow": "The last ranch that won't sell",
+      "bottomRow": "Gray, edge to edge",
+      "leftCol": "Kept on from before",
+      "rightCol": "Nobody's welcome guest"
+    },
+    "solution": {
+      "slot0Top": "HOLD",
+      "slot0Bottom": "OVER",
+      "slot1Top": "OUT",
+      "slot1Bottom": "CAST"
+    },
+    "title": "No Shadows Today"
+  },
+  {
+    "id": 1016,
+    "tier": 1,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "MAIN",
+        "bottom": "STREAM"
+      },
+      {
+        "id": "t2",
+        "top": "LAND",
+        "bottom": "STREAM"
+      },
+      {
+        "id": "t3",
+        "top": "LAND",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t4",
+        "top": "SPACE",
+        "bottom": "MAIN"
+      },
+      {
+        "id": "t5",
+        "top": "GIRL",
+        "bottom": "LAND"
+      }
+    ],
+    "hints": {
+      "topRow": "What Galveston isn't",
+      "bottomRow": "Trim the process",
+      "leftCol": "The broad middle of taste",
+      "rightCol": "The phone on the wall"
+    },
+    "solution": {
+      "slot0Top": "MAIN",
+      "slot0Bottom": "STREAM",
+      "slot1Top": "LAND",
+      "slot1Bottom": "LINE"
+    },
+    "title": "Off the Island"
+  },
+  {
+    "id": 1017,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OUT",
+        "bottom": "LIVE"
+      },
+      {
+        "id": "t2",
+        "top": "LIVE",
+        "bottom": "POST"
+      },
+      {
+        "id": "t3",
+        "top": "POST",
+        "bottom": "OAK"
+      },
+      {
+        "id": "t4",
+        "top": "LIVE",
+        "bottom": "SHAKE"
+      },
+      {
+        "id": "t5",
+        "top": "OUT",
+        "bottom": "HEAD"
+      }
+    ],
+    "hints": {
+      "topRow": "Fort Davis, once",
+      "bottomRow": "The Treaty Oak, for one",
+      "leftCol": "Last longer than",
+      "rightCol": "Franklin's wood of choice"
+    },
+    "solution": {
+      "slot0Top": "OUT",
+      "slot0Bottom": "LIVE",
+      "slot1Top": "POST",
+      "slot1Bottom": "OAK"
+    },
+    "title": "Smoke and Timber"
+  },
+  {
+    "id": 1018,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LIFT",
+        "bottom": "COOK"
+      },
+      {
+        "id": "t2",
+        "top": "MUSH",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t3",
+        "top": "COOK",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t4",
+        "top": "OVER",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t5",
+        "top": "OVER",
+        "bottom": "SHOOT"
+      }
+    ],
+    "hints": {
+      "topRow": "What ruins a brisket",
+      "bottomRow": "How a tied final ends",
+      "leftCol": "Go well past the mark",
+      "rightCol": "Folding chairs and a grill"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "SHOOT",
+      "slot1Top": "COOK",
+      "slot1Bottom": "OUT"
+    },
+    "title": "Low and Slow"
+  },
+  {
+    "id": 1019,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OFF",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t2",
+        "top": "KICK",
+        "bottom": "HOLD"
+      },
+      {
+        "id": "t3",
+        "top": "KICK",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t4",
+        "top": "MILL",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t5",
+        "top": "OFF",
+        "bottom": "BEAT"
+      }
+    ],
+    "hints": {
+      "topRow": "7:30 on a Friday in Odessa",
+      "bottomRow": "The two and the four",
+      "leftCol": "Under-the-table cut",
+      "rightCol": "Not quite Nashville"
+    },
+    "solution": {
+      "slot0Top": "KICK",
+      "slot0Bottom": "BACK",
+      "slot1Top": "OFF",
+      "slot1Bottom": "BEAT"
+    },
+    "title": "Rhythm and Graft"
+  },
+  {
+    "id": 1020,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "WATER",
+        "bottom": "NOTE"
+      },
+      {
+        "id": "t2",
+        "top": "BACK",
+        "bottom": "WATER"
+      },
+      {
+        "id": "t3",
+        "top": "NUT",
+        "bottom": "WAY"
+      },
+      {
+        "id": "t4",
+        "top": "WATER",
+        "bottom": "ROAD"
+      },
+      {
+        "id": "t5",
+        "top": "ROAD",
+        "bottom": "WAY"
+      }
+    ],
+    "hints": {
+      "topRow": "Farm-to-Market, generally",
+      "bottomRow": "The Intracoastal, for one",
+      "leftCol": "Still water off the channel",
+      "rightCol": "The paved part"
+    },
+    "solution": {
+      "slot0Top": "BACK",
+      "slot0Bottom": "WATER",
+      "slot1Top": "ROAD",
+      "slot1Bottom": "WAY"
+    },
+    "title": "Two Lanes, No Stripe"
+  },
+  {
+    "id": 1021,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "PLANE",
+        "bottom": "FIRE"
+      },
+      {
+        "id": "t2",
+        "top": "ROAD",
+        "bottom": "CASTLE"
+      },
+      {
+        "id": "t3",
+        "top": "FIRE",
+        "bottom": "ROAD"
+      },
+      {
+        "id": "t4",
+        "top": "FIRE",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t5",
+        "top": "CROSS",
+        "bottom": "ROAD"
+      }
+    ],
+    "hints": {
+      "topRow": "Caught between two guns",
+      "bottomRow": "Beer, gravel lot, dance floor",
+      "leftCol": "An intersection, poetically",
+      "rightCol": "Volunteer department's base"
+    },
+    "solution": {
+      "slot0Top": "CROSS",
+      "slot0Bottom": "ROAD",
+      "slot1Top": "FIRE",
+      "slot1Bottom": "HOUSE"
+    },
+    "title": "Out Past the City Limits"
+  },
+  {
+    "id": 1022,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "YARD",
+        "bottom": "FISH"
+      },
+      {
+        "id": "t2",
+        "top": "BOWL",
+        "bottom": "DAY"
+      },
+      {
+        "id": "t3",
+        "top": "FISH",
+        "bottom": "BOWL"
+      },
+      {
+        "id": "t4",
+        "top": "STAR",
+        "bottom": "DUST"
+      },
+      {
+        "id": "t5",
+        "top": "FISH",
+        "bottom": "DUST"
+      }
+    ],
+    "hints": {
+      "topRow": "Sea star, less precisely",
+      "bottomRow": "The Panhandle, 1935",
+      "leftCol": "Hoagy Carmichael standard",
+      "rightCol": "Life with no privacy"
+    },
+    "solution": {
+      "slot0Top": "STAR",
+      "slot0Bottom": "DUST",
+      "slot1Top": "FISH",
+      "slot1Bottom": "BOWL"
+    },
+    "title": "Black Sunday"
+  },
+  {
+    "id": 1023,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "COW",
+        "bottom": "GIRL"
+      },
+      {
+        "id": "t2",
+        "top": "GIRL",
+        "bottom": "BOY"
+      },
+      {
+        "id": "t3",
+        "top": "SHOW",
+        "bottom": "HOOD"
+      },
+      {
+        "id": "t4",
+        "top": "COW",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t5",
+        "top": "BOY",
+        "bottom": "HOOD"
+      }
+    ],
+    "hints": {
+      "topRow": "Gus and Call, in the novel",
+      "bottomRow": "Sissy Spacek's, in Quitman",
+      "leftCol": "Dale Evans, professionally",
+      "rightCol": "Linklater's twelve-year film"
+    },
+    "solution": {
+      "slot0Top": "COW",
+      "slot0Bottom": "GIRL",
+      "slot1Top": "BOY",
+      "slot1Bottom": "HOOD"
+    },
+    "title": "Both Halls, Fort Worth"
+  },
+  {
+    "id": 1024,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SHOW",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t2",
+        "top": "DOWN",
+        "bottom": "AIR"
+      },
+      {
+        "id": "t3",
+        "top": "GIRL",
+        "bottom": "LOCK"
+      },
+      {
+        "id": "t4",
+        "top": "AIR",
+        "bottom": "LOCK"
+      },
+      {
+        "id": "t5",
+        "top": "DOWN",
+        "bottom": "BIRTH"
+      }
+    ],
+    "hints": {
+      "topRow": "Wings Over Houston, e.g.",
+      "bottomRow": "Nobody in, nobody out",
+      "leftCol": "The door between pressures",
+      "rightCol": "The final confrontation"
+    },
+    "solution": {
+      "slot0Top": "AIR",
+      "slot0Bottom": "LOCK",
+      "slot1Top": "SHOW",
+      "slot1Bottom": "DOWN"
+    },
+    "title": "The Clock on the Wall"
+  },
+  {
+    "id": 1025,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "LIFT",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t2",
+        "top": "AIR",
+        "bottom": "DROP"
+      },
+      {
+        "id": "t3",
+        "top": "DROP",
+        "bottom": "WEEK"
+      },
+      {
+        "id": "t4",
+        "top": "LIFT",
+        "bottom": "DROP"
+      },
+      {
+        "id": "t5",
+        "top": "OFF",
+        "bottom": "MINT"
+      }
+    ],
+    "hints": {
+      "topRow": "Rescue by helicopter",
+      "bottomRow": "Steep edge, or the school lane",
+      "leftCol": "Supplies by parachute",
+      "rightCol": "What Houston hears at T-zero"
+    },
+    "solution": {
+      "slot0Top": "AIR",
+      "slot0Bottom": "DROP",
+      "slot1Top": "LIFT",
+      "slot1Bottom": "OFF"
+    },
+    "title": "Then Houston Has It"
+  },
+  {
+    "id": 1026,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "DOWN",
+        "bottom": "WORM"
+      },
+      {
+        "id": "t2",
+        "top": "PAPER",
+        "bottom": "IN"
+      },
+      {
+        "id": "t3",
+        "top": "DOWN",
+        "bottom": "IN"
+      },
+      {
+        "id": "t4",
+        "top": "COME",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t5",
+        "top": "IN",
+        "bottom": "TAKE"
+      }
+    ],
+    "hints": {
+      "topRow": "The tax Texas doesn't have",
+      "bottomRow": "Wrestling's opening move",
+      "leftCol": "The form before the exam",
+      "rightCol": "The morning after, roughly"
+    },
+    "solution": {
+      "slot0Top": "IN",
+      "slot0Bottom": "TAKE",
+      "slot1Top": "COME",
+      "slot1Bottom": "DOWN"
+    },
+    "title": "No State Return"
+  },
+  {
+    "id": 1027,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BAR",
+        "bottom": "BOARD"
+      },
+      {
+        "id": "t2",
+        "top": "ROOM",
+        "bottom": "EYE"
+      },
+      {
+        "id": "t3",
+        "top": "BOARD",
+        "bottom": "POWER"
+      },
+      {
+        "id": "t4",
+        "top": "SIDE",
+        "bottom": "BAR"
+      },
+      {
+        "id": "t5",
+        "top": "BOARD",
+        "bottom": "ROOM"
+      }
+    ],
+    "hints": {
+      "topRow": "Dining piece for platters",
+      "bottomRow": "Lone Star longnecks, cold",
+      "leftCol": "Conference at the bench",
+      "rightCol": "Twelve chairs and a carafe"
+    },
+    "solution": {
+      "slot0Top": "SIDE",
+      "slot0Bottom": "BAR",
+      "slot1Top": "BOARD",
+      "slot1Bottom": "ROOM"
+    },
+    "title": "Nickel a Play"
+  },
+  {
+    "id": 1028,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "POST",
+        "bottom": "WEEK"
+      },
+      {
+        "id": "t2",
+        "top": "POST",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t3",
+        "top": "POST",
+        "bottom": "MAN"
+      },
+      {
+        "id": "t4",
+        "top": "BED",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t5",
+        "top": "DOG",
+        "bottom": "BED"
+      }
+    ],
+    "hints": {
+      "topRow": "Corner of an iron frame",
+      "bottomRow": "A Texas Playboy, not Bob Wills",
+      "leftCol": "Table for the water glass",
+      "rightCol": "He rings twice, in the title"
+    },
+    "solution": {
+      "slot0Top": "BED",
+      "slot0Bottom": "SIDE",
+      "slot1Top": "POST",
+      "slot1Bottom": "MAN"
+    },
+    "title": "Never Billed"
+  },
+  {
+    "id": 1029,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FALL",
+        "bottom": "HAND"
+      },
+      {
+        "id": "t2",
+        "top": "HILL",
+        "bottom": "SHORT"
+      },
+      {
+        "id": "t3",
+        "top": "SHORT",
+        "bottom": "HAND"
+      },
+      {
+        "id": "t4",
+        "top": "FALL",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t5",
+        "top": "SCAPE",
+        "bottom": "HAND"
+      }
+    ],
+    "hints": {
+      "topRow": "Budget gap, to the Lege",
+      "bottomRow": "The flyer they give you",
+      "leftCol": "Stenographer's squiggles",
+      "rightCol": "What drifts after the blast"
+    },
+    "solution": {
+      "slot0Top": "SHORT",
+      "slot0Bottom": "HAND",
+      "slot1Top": "FALL",
+      "slot1Bottom": "OUT"
+    },
+    "title": "Ask the Comptroller"
+  },
+  {
+    "id": 1030,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OVER",
+        "bottom": "NIGHT"
+      },
+      {
+        "id": "t2",
+        "top": "LAND",
+        "bottom": "FALL"
+      },
+      {
+        "id": "t3",
+        "top": "BARE",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t4",
+        "top": "FALL",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t5",
+        "top": "LAND",
+        "bottom": "DRIFT"
+      }
+    ],
+    "hints": {
+      "topRow": "By wagon, not by sea",
+      "bottomRow": "When the porch light matters",
+      "leftCol": "One stop on the drive west",
+      "rightCol": "What Harvey made near Rockport"
+    },
+    "solution": {
+      "slot0Top": "OVER",
+      "slot0Bottom": "NIGHT",
+      "slot1Top": "LAND",
+      "slot1Bottom": "FALL"
+    },
+    "title": "San Jos\u00e9 Island, 2017"
+  },
+  {
+    "id": 1031,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BACK",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t2",
+        "top": "BACK",
+        "bottom": "FIRE"
+      },
+      {
+        "id": "t3",
+        "top": "FIELD",
+        "bottom": "WORK"
+      },
+      {
+        "id": "t4",
+        "top": "SUMMER",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t5",
+        "top": "DRAGON",
+        "bottom": "FIRE"
+      }
+    ],
+    "hints": {
+      "topRow": "Behind the line of scrimmage",
+      "bottomRow": "One shell over Lady Bird Lake",
+      "leftCol": "Go wrong in the opposite way",
+      "rightCol": "Research done outdoors"
+    },
+    "solution": {
+      "slot0Top": "BACK",
+      "slot0Bottom": "FIRE",
+      "slot1Top": "FIELD",
+      "slot1Bottom": "WORK"
+    },
+    "title": "Friday Sky"
+  },
+  {
+    "id": 1032,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OFF",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t2",
+        "top": "SHUT",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t3",
+        "top": "CRAFT",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t4",
+        "top": "BIRTH",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t5",
+        "top": "OUT",
+        "bottom": "OFF"
+      }
+    ],
+    "hints": {
+      "topRow": "The valve you turn in a freeze",
+      "bottomRow": "The shape, roughly",
+      "leftCol": "Nine innings, no runs",
+      "rightCol": "No bars out past Marfa"
+    },
+    "solution": {
+      "slot0Top": "SHUT",
+      "slot0Bottom": "OUT",
+      "slot1Top": "OFF",
+      "slot1Bottom": "LINE"
+    },
+    "title": "Past the Last Tower"
+  },
+  {
+    "id": 1033,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "COOK",
+        "bottom": "HILL"
+      },
+      {
+        "id": "t2",
+        "top": "DOWN",
+        "bottom": "HILL"
+      },
+      {
+        "id": "t3",
+        "top": "HILL",
+        "bottom": "SHAKE"
+      },
+      {
+        "id": "t4",
+        "top": "SHAKE",
+        "bottom": "UP"
+      },
+      {
+        "id": "t5",
+        "top": "SHAKE",
+        "bottom": "COMB"
+      }
+    ],
+    "hints": {
+      "topRow": "The extortionist's visit",
+      "bottomRow": "Mostly, up Guadalupe Peak",
+      "leftCol": "New names on the org chart",
+      "rightCol": "How it went after that"
+    },
+    "solution": {
+      "slot0Top": "SHAKE",
+      "slot0Bottom": "UP",
+      "slot1Top": "DOWN",
+      "slot1Bottom": "HILL"
+    },
+    "title": "The High Point of Texas"
+  },
+  {
+    "id": 1034,
+    "tier": 2,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "SIDE",
+        "bottom": "POST"
+      },
+      {
+        "id": "t2",
+        "top": "FOOT",
+        "bottom": "STEP"
+      },
+      {
+        "id": "t3",
+        "top": "FOOT",
+        "bottom": "HONEY"
+      },
+      {
+        "id": "t4",
+        "top": "UNDER",
+        "bottom": "SIDE"
+      },
+      {
+        "id": "t5",
+        "top": "STEP",
+        "bottom": "UNDER"
+      }
+    ],
+    "hints": {
+      "topRow": "In the way, and low down",
+      "bottomRow": "Dodge the question",
+      "leftCol": "A Big Bend ledge's shaded face",
+      "rightCol": "Boot on the porch boards"
+    },
+    "solution": {
+      "slot0Top": "UNDER",
+      "slot0Bottom": "SIDE",
+      "slot1Top": "FOOT",
+      "slot1Bottom": "STEP"
+    },
+    "title": "Ground Level"
+  },
+  {
+    "id": 1035,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "TAIL",
+        "bottom": "PIECE"
+      },
+      {
+        "id": "t2",
+        "top": "PRINT",
+        "bottom": "MOUTH"
+      },
+      {
+        "id": "t3",
+        "top": "TAIL",
+        "bottom": "MOUTH"
+      },
+      {
+        "id": "t4",
+        "top": "COTTON",
+        "bottom": "MOUTH"
+      },
+      {
+        "id": "t5",
+        "top": "PIECE",
+        "bottom": "CUP"
+      }
+    ],
+    "hints": {
+      "topRow": "Water moccasin, another way",
+      "bottomRow": "It anchors a violin's strings",
+      "leftCol": "Rabbit of the brush country",
+      "rightCol": "A lawyer, in old slang"
+    },
+    "solution": {
+      "slot0Top": "MOUTH",
+      "slot0Bottom": "COTTON",
+      "slot1Top": "PIECE",
+      "slot1Bottom": "TAIL"
+    },
+    "title": "Fiddle and Fang"
+  },
+  {
+    "id": 1036,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "KEY",
+        "bottom": "SPACE"
+      },
+      {
+        "id": "t2",
+        "top": "CRAFT",
+        "bottom": "BACK"
+      },
+      {
+        "id": "t3",
+        "top": "BACK",
+        "bottom": "HAND"
+      },
+      {
+        "id": "t4",
+        "top": "CRAFT",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t5",
+        "top": "SPACE",
+        "bottom": "CRAFT"
+      }
+    ],
+    "hints": {
+      "topRow": "Stroke across the body",
+      "bottomRow": "Flown from a Clear Lake console",
+      "leftCol": "The key that undoes a typo",
+      "rightCol": "Make it without a machine"
+    },
+    "solution": {
+      "slot0Top": "HAND",
+      "slot0Bottom": "BACK",
+      "slot1Top": "CRAFT",
+      "slot1Bottom": "SPACE"
+    },
+    "title": "Flight, Not Fabrication"
+  },
+  {
+    "id": 1037,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "TABLE",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t2",
+        "top": "ROUND",
+        "bottom": "WILD"
+      },
+      {
+        "id": "t3",
+        "top": "TABLE",
+        "bottom": "LAND"
+      },
+      {
+        "id": "t4",
+        "top": "ROUND",
+        "bottom": "UP"
+      },
+      {
+        "id": "t5",
+        "top": "ROUND",
+        "bottom": "LAND"
+      }
+    ],
+    "hints": {
+      "topRow": "Spring work on a ranch",
+      "bottomRow": "The Llano Estacado, flatly",
+      "leftCol": "Arthur's furniture",
+      "rightCol": "Quail country, to hunters"
+    },
+    "solution": {
+      "slot0Top": "UP",
+      "slot0Bottom": "ROUND",
+      "slot1Top": "LAND",
+      "slot1Bottom": "TABLE"
+    },
+    "title": "Staked Plains"
+  },
+  {
+    "id": 1038,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OUT",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t2",
+        "top": "PICK",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t3",
+        "top": "MAKER",
+        "bottom": "VINE"
+      },
+      {
+        "id": "t4",
+        "top": "LAW",
+        "bottom": "MAKER"
+      },
+      {
+        "id": "t5",
+        "top": "MAKER",
+        "bottom": "OUT"
+      }
+    ],
+    "hints": {
+      "topRow": "Best them at their own game",
+      "bottomRow": "One of the 181 in Austin",
+      "leftCol": "Willie and Waylon's genre",
+      "rightCol": "The one who sets it up"
+    },
+    "solution": {
+      "slot0Top": "PLAY",
+      "slot0Bottom": "OUT",
+      "slot1Top": "MAKER",
+      "slot1Bottom": "LAW"
+    },
+    "title": "Nashville, Actually"
+  },
+  {
+    "id": 1039,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "BREAK",
+        "bottom": "FALL"
+      },
+      {
+        "id": "t2",
+        "top": "BREAK",
+        "bottom": "DOWN"
+      },
+      {
+        "id": "t3",
+        "top": "WATER",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t4",
+        "top": "WATER",
+        "bottom": "FALL"
+      },
+      {
+        "id": "t5",
+        "top": "EARTH",
+        "bottom": "FALL"
+      }
+    ],
+    "hints": {
+      "topRow": "A fiddle tune, or a collapse",
+      "bottomRow": "Gorman, in the Hill Country",
+      "leftCol": "Rock arm that calms a harbor",
+      "rightCol": "The undoing, in the end"
+    },
+    "solution": {
+      "slot0Top": "DOWN",
+      "slot0Bottom": "BREAK",
+      "slot1Top": "FALL",
+      "slot1Bottom": "WATER"
+    },
+    "title": "Colorado Bend"
+  },
+  {
+    "id": 1040,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OVER",
+        "bottom": "HEAD"
+      },
+      {
+        "id": "t2",
+        "top": "MID",
+        "bottom": "TIME"
+      },
+      {
+        "id": "t3",
+        "top": "LINE",
+        "bottom": "SAND"
+      },
+      {
+        "id": "t4",
+        "top": "TIME",
+        "bottom": "LINE"
+      },
+      {
+        "id": "t5",
+        "top": "HEAD",
+        "bottom": "TIME"
+      }
+    ],
+    "hints": {
+      "topRow": "Rent, power, and the rest",
+      "bottomRow": "1836, 1845, 1861, in a row",
+      "leftCol": "Time and a half",
+      "rightCol": "Above the fold"
+    },
+    "solution": {
+      "slot0Top": "HEAD",
+      "slot0Bottom": "OVER",
+      "slot1Top": "LINE",
+      "slot1Bottom": "TIME"
+    },
+    "title": "Independence to Secession"
+  },
+  {
+    "id": 1041,
+    "tier": 3,
+    "requiresRotation": true,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "OVER",
+        "bottom": "PLAY"
+      },
+      {
+        "id": "t2",
+        "top": "POWER",
+        "bottom": "HOUSE"
+      },
+      {
+        "id": "t3",
+        "top": "HOUSE",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t4",
+        "top": "FALL",
+        "bottom": "OVER"
+      },
+      {
+        "id": "t5",
+        "top": "CROW",
+        "bottom": "PLAY"
+      }
+    ],
+    "hints": {
+      "topRow": "Push the bluff too far",
+      "bottomRow": "Buchanan Dam has one",
+      "leftCol": "Win by sheer force",
+      "rightCol": "Small theater, or a kid's fort"
+    },
+    "solution": {
+      "slot0Top": "PLAY",
+      "slot0Bottom": "OVER",
+      "slot1Top": "HOUSE",
+      "slot1Bottom": "POWER"
+    },
+    "title": "Show of Force"
+  },
+  {
+    "id": 1042,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "UNDER",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t2",
+        "top": "APPLE",
+        "bottom": "OFF"
+      },
+      {
+        "id": "t3",
+        "top": "UNDER",
+        "bottom": "TAKE"
+      },
+      {
+        "id": "t4",
+        "top": "BOY",
+        "bottom": "STAND"
+      },
+      {
+        "id": "t5",
+        "top": "STAND",
+        "bottom": "OFF"
+      }
+    ],
+    "hints": {
+      "topRow": "Follow the drift",
+      "bottomRow": "Wheels up at Hobby",
+      "leftCol": "Set about it",
+      "rightCol": "Neither side blinking"
+    },
+    "solution": {
+      "slot0Top": "UNDER",
+      "slot0Bottom": "TAKE",
+      "slot1Top": "STAND",
+      "slot1Bottom": "OFF"
+    },
+    "title": "The Older Airport"
+  },
+  {
+    "id": 1043,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FIRE",
+        "bottom": "BOAT"
+      },
+      {
+        "id": "t2",
+        "top": "WILD",
+        "bottom": "BEAT"
+      },
+      {
+        "id": "t3",
+        "top": "WILD",
+        "bottom": "BOAT"
+      },
+      {
+        "id": "t4",
+        "top": "WILD",
+        "bottom": "LIFE"
+      },
+      {
+        "id": "t5",
+        "top": "LIFE",
+        "bottom": "DRAGON"
+      }
+    ],
+    "hints": {
+      "topRow": "A million acres, 2024",
+      "bottomRow": "Davits swing it out",
+      "leftCol": "Deer, dove, and everything",
+      "rightCol": "It fights a ship-channel blaze"
+    },
+    "solution": {
+      "slot0Top": "WILD",
+      "slot0Bottom": "LIFE",
+      "slot1Top": "FIRE",
+      "slot1Bottom": "BOAT"
+    },
+    "title": "Smokehouse Creek"
+  },
+  {
+    "id": 1044,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "FISH",
+        "bottom": "SPOT"
+      },
+      {
+        "id": "t2",
+        "top": "SPOT",
+        "bottom": "LIGHT"
+      },
+      {
+        "id": "t3",
+        "top": "HOT",
+        "bottom": "SPACE"
+      },
+      {
+        "id": "t4",
+        "top": "HEAD",
+        "bottom": "SPOT"
+      },
+      {
+        "id": "t5",
+        "top": "HOT",
+        "bottom": "HEAD"
+      }
+    ],
+    "hints": {
+      "topRow": "Marfa, to the art world",
+      "bottomRow": "What the deer stares into",
+      "leftCol": "The one who swings first",
+      "rightCol": "One circle on a dark stage"
+    },
+    "solution": {
+      "slot0Top": "HOT",
+      "slot0Bottom": "HEAD",
+      "slot1Top": "SPOT",
+      "slot1Bottom": "LIGHT"
+    },
+    "title": "Donald Judd's Doing"
+  },
+  {
+    "id": 1045,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "CUT",
+        "bottom": "OUT"
+      },
+      {
+        "id": "t2",
+        "top": "OUT",
+        "bottom": "CROSS"
+      },
+      {
+        "id": "t3",
+        "top": "CLIP",
+        "bottom": "WALK"
+      },
+      {
+        "id": "t4",
+        "top": "CROSS",
+        "bottom": "WALK"
+      },
+      {
+        "id": "t5",
+        "top": "SHORE",
+        "bottom": "CROSS"
+      }
+    ],
+    "hints": {
+      "topRow": "Saw that cuts across grain",
+      "bottomRow": "Ardmore, Oklahoma, 2003",
+      "leftCol": "Painted stripes at the corner",
+      "rightCol": "Cardboard likeness at the door"
+    },
+    "solution": {
+      "slot0Top": "CROSS",
+      "slot0Bottom": "WALK",
+      "slot1Top": "CUT",
+      "slot1Bottom": "OUT"
+    },
+    "title": "The Killer Ds"
+  },
+  {
+    "id": 1046,
+    "tier": 3,
+    "requiresRotation": false,
+    "tiles": [
+      {
+        "id": "t1",
+        "top": "YARD",
+        "bottom": "GIRL"
+      },
+      {
+        "id": "t2",
+        "top": "BACK",
+        "bottom": "SHIP"
+      },
+      {
+        "id": "t3",
+        "top": "BACK",
+        "bottom": "YARD"
+      },
+      {
+        "id": "t4",
+        "top": "HARD",
+        "bottom": "SHIP"
+      },
+      {
+        "id": "t5",
+        "top": "ROUND",
+        "bottom": "HARD"
+      }
+    ],
+    "hints": {
+      "topRow": "The edition with a dust jacket",
+      "bottomRow": "Orange built destroyers in one",
+      "leftCol": "Grounds for a discharge",
+      "rightCol": "The fence, the grass, the pit"
+    },
+    "solution": {
+      "slot0Top": "HARD",
+      "slot0Bottom": "SHIP",
+      "slot1Top": "BACK",
+      "slot1Bottom": "YARD"
+    },
+    "title": "Boomtown on the Sabine"
+  }
+]

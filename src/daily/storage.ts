@@ -1,7 +1,11 @@
+import type { EditionConfig } from '@/edition/types'
 import type { DailyStorage, StoredSession } from './types'
 
-export const STORAGE_KEY = 'flipwords_daily_v1' // key is stable; schemaVersion governs shape
-export const BACKUP_KEY = 'flipwords_daily_backup'
+/**
+ * Storage is namespaced per edition — see `EditionConfig.storageKey`. The
+ * config is threaded in explicitly rather than defaulted, because a default
+ * would let a caller silently read or write another edition's streak.
+ */
 
 export function freshStorage(): DailyStorage {
   return {
@@ -37,18 +41,18 @@ function migrateV1(parsed: V1Storage): DailyStorage {
 }
 
 /** Copy the raw blob aside before abandoning it — never silently destroy data. */
-function backupAndStartFresh(raw: string): DailyStorage {
+function backupAndStartFresh(edition: EditionConfig, raw: string): DailyStorage {
   try {
-    window.localStorage.setItem(BACKUP_KEY, raw)
+    window.localStorage.setItem(edition.backupKey, raw)
   } catch {
     // Quota/private-mode failures shouldn't block the game from loading.
   }
   return freshStorage()
 }
 
-export function loadStorage(): DailyStorage {
+export function loadStorage(edition: EditionConfig): DailyStorage {
   if (typeof window === 'undefined') return freshStorage()
-  const raw = window.localStorage.getItem(STORAGE_KEY)
+  const raw = window.localStorage.getItem(edition.storageKey)
   if (!raw) return freshStorage()
   try {
     const parsed = JSON.parse(raw) as { schemaVersion?: unknown }
@@ -63,13 +67,13 @@ export function loadStorage(): DailyStorage {
         inProgress: p.inProgress ?? null,
       }
     }
-    return backupAndStartFresh(raw)
+    return backupAndStartFresh(edition, raw)
   } catch {
-    return backupAndStartFresh(raw)
+    return backupAndStartFresh(edition, raw)
   }
 }
 
-export function saveStorage(s: DailyStorage): void {
+export function saveStorage(edition: EditionConfig, s: DailyStorage): void {
   if (typeof window === 'undefined') return
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(s))
+  window.localStorage.setItem(edition.storageKey, JSON.stringify(s))
 }

@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { easternDateString, dayNumber, shiftDate, msUntilNextRollover, LAUNCH_DATE } from '@/daily/date'
+import { easternDateString, dayNumber, shiftDate, msUntilNextRollover } from '@/daily/date'
+import { EDITIONS } from '@/edition'
+
+const LAUNCH_DATE = EDITIONS.flipwords.launchDate
 
 describe('easternDateString', () => {
   it('returns YYYY-MM-DD format', () => {
@@ -24,22 +27,22 @@ describe('easternDateString', () => {
 
 describe('dayNumber', () => {
   it('launch date is day 1', () => {
-    expect(dayNumber(LAUNCH_DATE)).toBe(1)
+    expect(dayNumber(LAUNCH_DATE, LAUNCH_DATE)).toBe(1)
   })
 
   it('one day after launch is day 2', () => {
     // LAUNCH_DATE is '2026-05-18' — day 2 is '2026-05-19'
-    expect(dayNumber('2026-05-19')).toBe(2)
+    expect(dayNumber('2026-05-19', LAUNCH_DATE)).toBe(2)
   })
 
   it('returns 0 or negative for pre-launch dates', () => {
-    expect(dayNumber('2026-05-17')).toBe(0)
-    expect(dayNumber('2026-05-16')).toBe(-1)
+    expect(dayNumber('2026-05-17', LAUNCH_DATE)).toBe(0)
+    expect(dayNumber('2026-05-16', LAUNCH_DATE)).toBe(-1)
   })
 
   it('handles month and year boundaries', () => {
     // 14 days after May 18 = June 1 → day 15
-    expect(dayNumber('2026-06-01')).toBe(15)
+    expect(dayNumber('2026-06-01', LAUNCH_DATE)).toBe(15)
   })
 })
 

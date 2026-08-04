@@ -4,6 +4,7 @@ import gsap from "gsap";
 import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils";
 import TutorialModal from "./TutorialModal";
+import { Icon } from "./Icon";
 import Scorecard from "./Scorecard";
 import Tile from "./Tile";
 import AnimatedWordmark, {
@@ -12,13 +13,13 @@ import AnimatedWordmark, {
 import type { Level, Slots, Tile as TileType } from "@/game/types";
 import type { SessionMode, SessionResult, EasternDate, PuzzleResult } from '@/daily/types'
 import { loadStorage } from '@/daily/storage'
+import { useEdition } from '@/edition'
 import {
   getExpectedEdges,
   isLevelSolved,
   sanitizeState,
 } from "@/game/transforms";
 import { getNextHintAction, getLevelHintPattern } from "@/game/hint";
-import { allLevels } from "@/game/levels";
 import {
   playBoardRotate,
   playCorrect,
@@ -34,7 +35,7 @@ import {
 } from "@/lib/sound";
 
 // Re-export for the admin route
-export { allLevels, getLevelHintPattern };
+export { getLevelHintPattern };
 export type { Level };
 export const getSolvedEdgeAnswers = (level: Level) => {
   const e = getExpectedEdges(level);
@@ -61,7 +62,6 @@ export type FlipWordsProps = {
   dayNumber: number
   /** Override the scorecard's primary CTA. */
   scorecardPrimaryLabel?: string
-  scorecardPrimaryIcon?: string
   onScorecardPrimary?: () => void
   /** Override the header's left FAB behavior (defaults to opening the tutorial). */
   onBack?: () => void
@@ -87,9 +87,17 @@ export type FlipWordsProps = {
   }) => void
 }
 
+/**
+ * Win headlines are set in the display face under the Texas edition, and the
+ * Grifinito trial ships exactly 65 glyphs: space , . 0-9 A-Z a-z. Every line
+ * below is inside that set — no apostrophe, exclamation, colon or hyphen —
+ * so nothing falls back to a mismatched fallback glyph mid-headline.
+ * Four lines were adjusted for this ("Oh yeah!", "That'll do.", "Yes!",
+ * "Slot-perfect."); keep new additions punctuation-clean.
+ */
 const SOLVE_HEADLINES = [
   "Click. Click. Click.",
-  "Oh yeah!",
+  "Oh yeah.",
   "Bingo.",
   "Locked in.",
   "Beautiful.",
@@ -99,7 +107,7 @@ const SOLVE_HEADLINES = [
   "All four.",
   "Crystal clear.",
   "Dead on.",
-  "That'll do.",
+  "That will do.",
   "Snug fit.",
   "Bullseye.",
   "Smooth.",
@@ -122,7 +130,7 @@ const SOLVE_HEADLINES = [
   "Sweet.",
   "Stuck the landing.",
   "Threaded the needle.",
-  "Yes!",
+  "Yes indeed.",
   "Sealed.",
   "Flipped, fitted, finished.",
   "Effortless.",
@@ -137,7 +145,7 @@ const SOLVE_HEADLINES = [
   "Done deal.",
   "Wordsmith.",
   "Spelled out.",
-  "Slot-perfect.",
+  "Slot perfect.",
 ];
 
 const SESSION_HEADLINES = [
@@ -174,12 +182,11 @@ const formatDuration = (ms: number): string => {
   return `${m}:${s.toString().padStart(2, "0")}`;
 };
 
-const fireConfetti = () => {
+const fireConfetti = (palette: string[]) => {
   const reduceMotion =
     typeof window !== "undefined" &&
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
-  const palette = ["#1f9c93", "#f7c454", "#e07a5f", "#3d405b", "#f4f1de"];
   confetti({
     particleCount: 70,
     spread: 70,
@@ -215,6 +222,13 @@ const fireConfetti = () => {
  * the DOM nodes the win-sequence GSAP tweens are animating (the edge flash
  * silently played against dead elements).
  */
+const EDGE_LABEL = {
+  top: "Across, top",
+  bottom: "Across, bottom",
+  left: "Down, left",
+  right: "Down, right",
+} as const;
+
 function ScreenEdgePill({
   edge,
   clue,
@@ -228,14 +242,19 @@ function ScreenEdgePill({
       className={cn(
         // No backdrop-blur here: dragged tiles pass beneath the pills, and a
         // persistent backdrop-filter would re-blur that region every frame.
-        "relative font-clue-strong text-ink-muted bg-tile-face/90 border border-tile-edge rounded-full px-3.5 py-1.5 md:px-4 md:py-2 shadow-tile transition-colors",
+        // .r-pill instead of rounded-full so the four clues square off with
+        // the rest of the board under Texas; .clue-rail then re-voices them
+        // as an editorial deck (serif, cream face, ink outline), and above
+        // 56rem un-rotates the two side clues entirely.
+        "relative font-clue-strong text-ink-muted bg-tile-face/90 border border-tile-edge r-pill clue-rail px-3.5 py-1.5 md:px-4 md:py-2 shadow-tile transition-colors",
         edge === "left" || edge === "right" ? "[writing-mode:vertical-rl]" : "",
         edge === "left" ? "rotate-180" : ""
       )}
       style={{
-        // Fluid sizing — 12px floor on the smallest phones, scales up to
-        // ~15px on tablet/desktop. +2px from the previous 10/12 baseline.
-        fontSize: "clamp(0.75rem, 1.2vw + 0.62rem, 0.95rem)",
+        // Fluid sizing via a token rather than a literal — an inline style
+        // outranks every author rule, so the Texas layer could not otherwise
+        // set the serif a hair larger to match the sans's x-height.
+        fontSize: "var(--clue-size)",
         lineHeight: 1.15,
       }}
     >
@@ -244,12 +263,19 @@ function ScreenEdgePill({
       <span
         data-edge-glow
         aria-hidden="true"
-        className="absolute inset-0 rounded-full opacity-0 pointer-events-none"
+        className="absolute inset-0 r-pill opacity-0 pointer-events-none"
         style={{
           boxShadow:
-            "0 0 0 2px var(--color-accent), 0 0 24px rgba(31,156,147,0.4)",
+            "0 0 0 2px var(--color-accent), 0 0 24px rgb(var(--accent-rgb) / 0.4)",
         }}
       />
+      {/* Which edge this clue reads along. `display: none` everywhere except
+          the Texas desktop composition, where the four clues are set flat and
+          the crossword-style direction label does the work the rotation used
+          to do. Rendered for every edition so the markup stays edition-free. */}
+      <span aria-hidden="true" className="clue-edge-label tm-eyebrow">
+        {EDGE_LABEL[edge]}
+      </span>
       <span className="whitespace-nowrap">{clue}</span>
     </div>
   );
@@ -257,8 +283,9 @@ function ScreenEdgePill({
 
 export default function FlipWords(props: FlipWordsProps) {
   const { session, mode, onComplete, date, dayNumber,
-          scorecardPrimaryLabel, scorecardPrimaryIcon, onScorecardPrimary, onBack,
+          scorecardPrimaryLabel, onScorecardPrimary, onBack,
           showTutorial: showTutorialProp, initialProgress, onProgress } = props
+  const { config } = useEdition();
   const [showTutorial, setShowTutorial] = useState(showTutorialProp ?? false);
   const [gameLevels, setGameLevels] = useState<Level[]>(session);
   const [levelIdx, setLevelIdx] = useState(() => {
@@ -563,7 +590,7 @@ export default function FlipWords(props: FlipWordsProps) {
     // We read it back from storage on the next tick.
     if (mode === 'daily') {
       window.setTimeout(() => {
-        const s = loadStorage()
+        const s = loadStorage(config)
         setStreakSnapshot({
           current: s.streak.current,
           best: s.streak.best,
@@ -626,7 +653,7 @@ export default function FlipWords(props: FlipWordsProps) {
       if (glow) gsap.to(glow, { opacity: 1, ...pulse });
     });
     setTimeout(() => {
-      fireConfetti();
+      fireConfetti(config.confetti);
       playPuzzleComplete();
       setShowCelebration(true);
     }, 950);
@@ -1023,21 +1050,8 @@ export default function FlipWords(props: FlipWordsProps) {
       ? 2
       : 1;
 
-  // Material Symbols clock_loader_* increments 20 → 40 → 60 → 80 → 90 across
-  // the 5 puzzles of a session, so the icon visually fills as the player
-  // progresses. The session is always 5 puzzles, so the lookup is
-  // straightforward; fall back to the most-full symbol if the index ever
-  // overshoots (it shouldn't, but it keeps a bad state from rendering blank).
-  const puzzleProgressIcon = [
-    "clock_loader_20",
-    "clock_loader_40",
-    "clock_loader_60",
-    "clock_loader_80",
-    "clock_loader_90",
-  ][levelIdx] ?? "clock_loader_90";
-
   return (
-    <div className="h-[100dvh] w-full flex flex-col bg-chin overflow-hidden">
+    <div className="app-shell h-[100dvh] w-full flex flex-col bg-chin overflow-hidden">
       {showTutorial && <TutorialModal onComplete={handleTutorialComplete} />}
 
       {/* Play surface — the cream paper card that holds the puzzle. Rounded
@@ -1049,9 +1063,15 @@ export default function FlipWords(props: FlipWordsProps) {
           behind the curved edge. Everything that was previously at the
           root (header / hint banner / board / tile rail) now lives inside
           this surface. */}
-      <div className="flex-1 min-h-0 mt-1.5 md:mt-2 flex flex-col bg-paper rounded-[28px] md:rounded-[36px] shadow-play-lift relative z-10 overflow-hidden">
+      <div className="play-surface flex-1 min-h-0 mt-1.5 md:mt-2 flex flex-col bg-paper r-surface shadow-play-lift relative z-10 overflow-hidden">
 
-      <header className="relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6 flex-shrink-0">
+      {/* Masthead. Under Texas this wrapper carries TM's signature heavy black
+          rule beneath the wordmark; under FlipWords it is an unstyled div, so
+          the header spacing is byte-identical to before. It sits outside the
+          max-w-3xl <header> so the rule runs the full width of the page the
+          way a masthead rule does. */}
+      <div className="game-masthead tm-masthead flex-shrink-0">
+      <header className="tm-container relative w-full max-w-3xl mx-auto px-4 pt-4 md:pt-6">
         <div className="flex items-center justify-between">
           {/* Left — Back FAB. If the host provides onBack (e.g., archive
               replay), navigate back to the archive list. Otherwise surface
@@ -1062,11 +1082,11 @@ export default function FlipWords(props: FlipWordsProps) {
                 if (onBack) onBack()
                 else setShowTutorial(true)
               }}
-              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
               title="Back"
               aria-label="Back"
             >
-              <span className="material-icons text-[22px]">chevron_left</span>
+              <Icon name="chevron" size={22} />
             </button>
           </div>
 
@@ -1083,10 +1103,9 @@ export default function FlipWords(props: FlipWordsProps) {
                   exit={{ opacity: 0, scale: 0.85, x: 8 }}
                   transition={{ type: "spring", stiffness: 420, damping: 26 }}
                   onClick={handleCheckAnswer}
-                  className="font-ui flex items-center gap-1.5 text-sm bg-accent text-white h-11 px-4 md:px-5 rounded-full hover:bg-accent/90 transition-colors active:scale-95 shadow-tile"
+                  className="btn-check accent-fill font-ui flex items-center gap-1.5 text-sm bg-accent text-white h-11 px-4 md:px-5 r-btn hover:bg-accent/90 transition-colors active:scale-95 shadow-tile"
                   title="Call the judge"
                 >
-                  <span className="material-icons text-[18px]">gavel</span>
                   <span>Check</span>
                 </motion.button>
               ) : (
@@ -1097,11 +1116,11 @@ export default function FlipWords(props: FlipWordsProps) {
                   exit={{ opacity: 0, scale: 0.85, x: 8 }}
                   transition={{ type: "spring", stiffness: 420, damping: 26 }}
                   onClick={() => setShowTutorial(true)}
-                  className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+                  className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
                   title="How to play"
                   aria-label="How to play"
                 >
-                  <span className="material-icons text-[20px]">help_outline</span>
+                  <Icon name="help" size={20} />
                 </motion.button>
               )}
             </AnimatePresence>
@@ -1110,16 +1129,23 @@ export default function FlipWords(props: FlipWordsProps) {
 
         {/* Centered wordmark — no puzzle counter; that info lives in the chin
             now. pointer-events-none so taps pass through to the FABs. */}
-        <div className="absolute inset-x-0 top-4 md:top-6 h-11 flex items-center justify-center pointer-events-none">
+        <div className="tm-wordmark-slot absolute inset-x-0 top-4 md:top-6 h-11 flex items-center justify-center pointer-events-none">
+          {/* .game-wordmark is styled from CSS rather than by passing
+              `font-display` in here: twMerge would treat font-display and the
+              component's own font-wide as one family group and drop one of
+              them, which would strip Mona Sans's wdth/wght axes off the
+              FlipWords wordmark. */}
           <AnimatedWordmark
             ref={wordmarkRef}
-            className="text-xl md:text-2xl text-ink"
+            text={config.wordmark}
+            className="game-wordmark text-xl md:text-2xl text-ink"
           />
         </div>
       </header>
+      </div>
 
       {/* Hint banner */}
-      <div className="w-full max-w-3xl mx-auto px-4 md:px-6 mt-3 min-h-[1.5rem] flex-shrink-0">
+      <div className="tm-container w-full max-w-3xl mx-auto px-4 md:px-6 mt-3 min-h-[1.5rem] flex-shrink-0">
         <AnimatePresence mode="wait">
           {hintMessage ? (
             <motion.p
@@ -1127,11 +1153,8 @@ export default function FlipWords(props: FlipWordsProps) {
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              className="font-clue text-xs md:text-sm text-accent"
+              className="accent-type font-clue text-xs md:text-sm text-accent"
             >
-              <span className="material-icons align-text-bottom text-[14px] mr-1">
-                lightbulb
-              </span>
               {hintMessage}
             </motion.p>
           ) : null}
@@ -1139,22 +1162,23 @@ export default function FlipWords(props: FlipWordsProps) {
       </div>
 
       {/* Game board — sits directly on the paper surface, no container chrome */}
-      <div className="flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-4 md:mt-6 flex items-center justify-center z-10">
+      <div className="board-area tm-container flex-1 min-h-0 w-full max-w-3xl mx-auto px-4 md:px-6 mt-4 md:mt-6 flex items-center justify-center z-10">
         {/* Wrapper is content-sized (no w-full) so the clue pills hug the
             slots even on wide viewports. The parent flex centers the
-            whole play area horizontally. */}
-        <div className="relative">
+            whole play area horizontally. Under Texas above 56rem .board-grid
+            widens the two outer tracks so the side clues can be set flat. */}
+        <div className="relative w-full flex justify-center">
           <div
             ref={boardFrameRef}
-            className="grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] gap-x-2 md:gap-x-4 gap-y-5 md:gap-y-10 place-items-center"
+            className="board-grid grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto_auto] gap-x-2 md:gap-x-4 gap-y-5 md:gap-y-10 place-items-center"
           >
             {/* Top edge */}
-            <div className="col-start-2 row-start-1">
+            <div className="clue-cell clue-cell--top col-start-2 row-start-1">
               <ScreenEdgePill edge="top" clue={level.hints.topRow} />
             </div>
 
             {/* Left edge */}
-            <div className="col-start-1 row-start-2">
+            <div className="clue-cell clue-cell--left col-start-1 row-start-2">
               <ScreenEdgePill edge="left" clue={level.hints.leftCol} />
             </div>
 
@@ -1183,14 +1207,14 @@ export default function FlipWords(props: FlipWordsProps) {
                     slot area. */}
                 <span
                   aria-hidden="true"
-                  className="w-full h-full rounded-full bg-accent text-white group-hover:bg-accent/90 transition-colors flex items-center justify-center shadow-tile-lift"
+                  className="accent-fill w-full h-full rounded-full bg-accent text-white group-hover:bg-accent/90 transition-colors flex items-center justify-center shadow-tile-lift"
                 >
-                  <span className="material-icons text-[18px] md:text-[20px]">rotate_right</span>
+                  <Icon name="rotate" size={18} className="md:size-[20px]" />
                 </span>
               </button>
               <div
                 ref={slotAreaRef}
-                className="flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 rounded-2xl shadow-slot-inset gpu"
+                className="tint-panel flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 r-panel shadow-slot-inset gpu"
                 style={{ transformOrigin: "center center" }}
               >
               {[0, 1].map((idx) => {
@@ -1205,17 +1229,19 @@ export default function FlipWords(props: FlipWordsProps) {
                       slotRefs.current[idx] = el;
                     }}
                     className={cn(
-                      "w-[var(--tile-w)] h-[var(--tile-h)] rounded-2xl flex items-center justify-center relative cursor-pointer transition-[border-color,background-color,box-shadow,transform] duration-150",
+                      "w-[var(--tile-w)] h-[var(--tile-h)] r-tile flex items-center justify-center relative cursor-pointer transition-[border-color,background-color,box-shadow,transform] duration-150",
                       // Drop-target highlight wins over every other state. Solid
                       // accent ring, soft glow, faint scale-up so the slot
                       // reads as "I'll catch the tile if you let go now."
                       isHovered
-                        ? "border-2 border-accent bg-accent-soft scale-[1.03] shadow-[0_0_0_4px_var(--color-accent-soft),0_12px_28px_-12px_rgba(31,156,147,0.45)]"
+                        ? "border-2 border-accent bg-accent-soft scale-[1.03] shadow-[0_0_0_4px_var(--color-accent-soft),0_12px_28px_-12px_rgb(var(--accent-rgb) / 0.45)]"
                         : tile
                         ? "border-0"
                         : isActive
                         ? "border-2 border-accent bg-accent-soft/50"
-                        : "border-2 border-dashed border-paper-line/60 bg-surface/40"
+                        // .slot-empty swaps the dashed app rule for a solid
+                        // ink hairline under Texas.
+                        : "slot-empty border-2 border-dashed border-paper-line/60 bg-surface/40"
                     )}
                   >
                     {tile ? (
@@ -1242,12 +1268,23 @@ export default function FlipWords(props: FlipWordsProps) {
                     ) : (
                       <span
                         className={cn(
-                          "font-ui text-sm select-none transition-colors",
-                          isActive ? "text-accent" : "text-ink-soft/50"
+                          // tm-eyebrow: tiny caps on an 0.18em track — TM's
+                          // most characteristic typographic device, and the
+                          // right register for a placeholder label. "Slot 1 /
+                          // Slot 2" was internal jargon on the surface; the
+                          // ordinal says the same thing in plain English.
+                          "slot-label tm-eyebrow select-none transition-colors",
+                          isActive ? "accent-type text-accent" : "text-ink-soft/50"
                         )}
-                        style={{ transform: `rotate(${-boardRotation}deg)` }}
+                        // translateY is composed AFTER the rotation, so it
+                        // always shifts the label "up" in its own reading
+                        // frame — clearing the centred rotate control at every
+                        // board orientation.
+                        style={{
+                          transform: `rotate(${-boardRotation}deg) translateY(-2.25rem)`,
+                        }}
                       >
-                        Slot {idx + 1}
+                        {idx === 0 ? "First" : "Second"}
                       </span>
                     )}
                   </div>
@@ -1257,12 +1294,12 @@ export default function FlipWords(props: FlipWordsProps) {
             </div>
 
             {/* Right edge */}
-            <div className="col-start-3 row-start-2">
+            <div className="clue-cell clue-cell--right col-start-3 row-start-2">
               <ScreenEdgePill edge="right" clue={level.hints.rightCol} />
             </div>
 
             {/* Bottom edge */}
-            <div className="col-start-2 row-start-3">
+            <div className="clue-cell clue-cell--bottom col-start-2 row-start-3">
               <ScreenEdgePill edge="bottom" clue={level.hints.bottomRow} />
             </div>
           </div>
@@ -1275,11 +1312,15 @@ export default function FlipWords(props: FlipWordsProps) {
           and its bottom hangs past the viewport bottom by --tile-bleed; the
           root's overflow-hidden clips both. No horizontal scroll: with 5
           tiles fitting by design, scroll would just steal drag gestures. */}
-      <div className="w-full flex-shrink-0 relative z-10 pt-3 md:pt-5 pb-10 md:pb-8">
-        <div className="text-center mb-2">
-          <p className="font-ui text-[10px] md:text-xs text-ink-soft uppercase tracking-[0.2em]">
-            Tile rail
-          </p>
+      <div className="tile-rail-area w-full flex-shrink-0 relative z-10 pt-3 md:pt-5 pb-10 md:pb-8">
+        {/* Section head. TM sets these as tracked caps against a rule
+            ("THE TEXAS MONTHLY CROSSWORD"); .rail-rule is display:none under
+            FlipWords, so that edition still just shows the centred label.
+            "Tile rail" was the internal name for this row. */}
+        <div className="rail-head tm-container flex items-center justify-center gap-3 px-6 mb-2">
+          <span aria-hidden="true" className="rail-rule" />
+          <p className="tm-eyebrow rail-label text-ink-soft">Tiles in hand</p>
+          <span aria-hidden="true" className="rail-rule" />
         </div>
         <div
           className="relative w-full"
@@ -1313,7 +1354,7 @@ export default function FlipWords(props: FlipWordsProps) {
 
           {bank.length === 0 && !isSolved && (
             <div className="absolute inset-x-0 top-0 flex items-center justify-center text-ink-soft font-ui text-sm">
-              Rail is empty.
+              Every tile is on the board.
             </div>
           )}
         </div>
@@ -1325,31 +1366,33 @@ export default function FlipWords(props: FlipWordsProps) {
       {/* Chin — deep accent strip beneath the play surface. Two-up row of
           status pills: stopwatch on the left, puzzle progress on the right.
           The bottom padding includes the iOS home-indicator safe area so
-          the row never gets covered by the system handle. */}
-      <div
-        className="flex-shrink-0 bg-chin text-surface relative"
-        style={{
-          paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))",
-        }}
-      >
+          the row never gets covered by the system handle.
+
+          Under Texas none of that survives: `.page-meta` strips the fill and
+          the safe-area padding, and `--lead` reorders this block above the
+          board so the timer and the puzzle count read as an article's date
+          line under the masthead rather than as a status bar welded to the
+          viewport. The safe-area value moved out of an inline style and into
+          `.chin-safe` for exactly one reason — an inline style outranks every
+          author rule, so the edition layer could not otherwise reach it. */}
+      <div className="page-meta page-meta--lead chin-safe flex-shrink-0 bg-chin text-surface relative">
         {/* Inner row lifted above the play-surface shadow (z-20 > z-10) so
             the timer + counter render at full opacity instead of being
             dimmed by the cushion that's falling onto the chin behind. */}
-        <div className="relative z-20 w-full max-w-3xl mx-auto px-5 md:px-7 pt-3 md:pt-4 pb-1 flex items-center justify-between gap-4">
-          {/* Left — session stopwatch */}
+        {/* .chin-row drives the foreground through --chin-ink: white on the
+            FlipWords teal, illustration ink on the Texas orange. White on
+            #f58537 is ~2.4:1 and fails even as large text; #2a2928 on it is
+            ~7:1, and dark-on-orange is how art.png draws everything anyway. */}
+        <div className="chin-row relative z-20 w-full max-w-3xl mx-auto px-5 md:px-7 pt-3 md:pt-4 pb-1 flex items-center justify-between gap-4">
+          {/* Left — session stopwatch. Stays in Mona Sans: the display face's
+              trial has no colon and proportional figures (advances run
+              196–312/1000), so a per-second ticker would jitter. */}
+          {/* Was a speedometer glyph. "Elapsed 1:24" is already a stopwatch. */}
           <div className="flex items-center gap-2">
-            <span
-              className="material-icons text-black/60"
-              style={{
-                fontSize: 26,
-                fontVariationSettings:
-                  '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24',
-              }}
-              aria-hidden="true"
-            >
-              avg_pace
-            </span>
-            <span className="font-expand text-[22px] md:text-2xl leading-none tabular-nums tracking-[-0.01em] text-surface">
+            <span className="meta-figure font-expand text-[22px] md:text-2xl leading-none tabular-nums tracking-[-0.01em]">
+              {/* The word only appears where the line is set as editorial
+                  metadata rather than as a status bar; see .meta-label. */}
+              <span className="meta-label">Elapsed</span>
               {formatDuration(elapsedMs)}
             </span>
           </div>
@@ -1357,21 +1400,13 @@ export default function FlipWords(props: FlipWordsProps) {
           {/* Right — puzzle of total. "of N" inherits font/size from the
               parent so it visually matches the timer; only the opacity
               dims it so the current puzzle number reads first. */}
+          {/* Was a five-step `clock_loader_*` pie that filled with progress —
+              five glyphs to say what "Puzzle 3 of 5" says exactly. */}
           <div className="flex items-center gap-2">
-            <span
-              className="material-icons text-black/60"
-              style={{
-                fontSize: 26,
-                fontVariationSettings:
-                  '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24',
-              }}
-              aria-hidden="true"
-            >
-              {puzzleProgressIcon}
-            </span>
-            <p className="font-expand text-[22px] md:text-2xl leading-none text-surface flex items-baseline gap-1.5">
+            <p className="meta-figure font-expand text-[22px] md:text-2xl leading-none flex items-baseline gap-1.5">
+              <span className="meta-label">Puzzle</span>
               <span>{levelIdx + 1}</span>
-              <span className="text-surface/70">of {gameLevels.length}</span>
+              <span className="chin-dim">of {gameLevels.length}</span>
             </p>
           </div>
         </div>
@@ -1387,12 +1422,12 @@ export default function FlipWords(props: FlipWordsProps) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 30, stiffness: 280 }}
-            className="fixed z-40 inset-x-0 bottom-0 md:left-1/2 md:right-auto md:-translate-x-1/2 md:bottom-6 md:w-[calc(100%-2rem)] md:max-w-md flex flex-col items-center bg-tile-face rounded-t-3xl md:rounded-3xl shadow-tile-lift px-6 pt-6 pb-[calc(env(safe-area-inset-bottom,0px)+1.5rem)] md:p-7"
+            className="fixed z-40 inset-x-0 bottom-0 md:left-1/2 md:right-auto md:-translate-x-1/2 md:bottom-6 md:w-[calc(100%-2rem)] md:max-w-md flex flex-col items-center bg-tile-face r-card shadow-tile-lift px-6 pt-6 pb-[calc(env(safe-area-inset-bottom,0px)+1.5rem)] md:p-7"
           >
-            <div className="w-11 h-11 rounded-full bg-accent-soft text-accent flex items-center justify-center mb-3">
-              <span className="material-icons text-[24px]">check</span>
+            <div className="accent-type w-11 h-11 rounded-full bg-accent-soft text-accent flex items-center justify-center mb-3">
+              <Icon name="check" size={24} />
             </div>
-            <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.18em] mb-1.5">
+            <p className="tm-eyebrow text-ink-soft mb-1.5">
               {level.title ? `${level.title} · ` : ""}Solved · {attempts}{" "}
               {attempts === 1 ? "check" : "checks"}
               {hintsThisPuzzle > 0 && (
@@ -1402,10 +1437,14 @@ export default function FlipWords(props: FlipWordsProps) {
                 </>
               )}
             </p>
-            <h2 className="font-wide text-2xl md:text-3xl text-ink mb-1 text-center leading-tight">
+            {/* The deck→headline jump is the brand's defining move (TM runs
+                3.4–3.8× and has almost nothing in between). Under Texas
+                .display-headline puts this in the didone at up to 44px over a
+                serif deck; under FlipWords both classes are inert. */}
+            <h2 className="display-headline win-headline font-wide text-2xl md:text-3xl text-ink mb-1 text-center leading-tight">
               {winHeadline}
             </h2>
-            <p className="font-clue text-[13px] text-ink-muted mb-5 text-center px-2">
+            <p className="deck-line font-clue text-[13px] text-ink-muted mb-5 text-center px-2">
               {expectedEdges.top.toLowerCase()} ·{" "}
               {expectedEdges.bottom.toLowerCase()} ·{" "}
               {expectedEdges.left.toLowerCase()} ·{" "}
@@ -1413,12 +1452,9 @@ export default function FlipWords(props: FlipWordsProps) {
             </p>
             <button
               onClick={nextLevel}
-              className="font-ui flex items-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-3 rounded-full text-base shadow-tile transition-all active:scale-95"
+              className="btn-primary font-ui flex items-center gap-2 bg-ink hover:bg-ink/85 text-surface px-7 py-3 r-btn text-base shadow-tile transition-all active:scale-95"
             >
               {isLastPuzzle ? "See scorecard" : "Next puzzle"}
-              <span className="material-icons text-[20px]">
-                {isLastPuzzle ? "emoji_events" : "arrow_forward"}
-              </span>
             </button>
           </motion.div>
         )}
@@ -1441,7 +1477,6 @@ export default function FlipWords(props: FlipWordsProps) {
           stars: perPuzzleStars[i],
         }))}
         primaryLabel={scorecardPrimaryLabel ?? 'Play another session'}
-        primaryIcon={scorecardPrimaryIcon ?? 'refresh'}
         onPrimary={onScorecardPrimary ?? startNewSession}
         streak={streakSnapshot}
       />
@@ -1463,10 +1498,10 @@ export default function FlipWords(props: FlipWordsProps) {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ type: "spring", stiffness: 280, damping: 22 }}
-              className="relative bg-tile-face border border-tile-edge rounded-3xl px-10 py-8 shadow-[0_20px_60px_rgba(60,40,10,0.25)] flex flex-col items-center gap-3 min-w-[16rem]"
+              className="relative bg-tile-face border border-tile-edge fab-outline r-card px-10 py-8 shadow-[0_20px_60px_rgb(var(--scrim-rgb)/0.25)] flex flex-col items-center gap-3 min-w-[16rem]"
             >
               <div
-                className="absolute inset-0 rounded-3xl pointer-events-none opacity-50"
+                className="absolute inset-0 r-card pointer-events-none opacity-50"
                 style={{ background: "var(--paper-tex)" }}
               />
               {checkState === "judging" && (
@@ -1478,13 +1513,11 @@ export default function FlipWords(props: FlipWordsProps) {
                       repeat: Infinity,
                       ease: "linear",
                     }}
-                    className="w-14 h-14 rounded-full bg-accent-soft text-accent flex items-center justify-center shadow-tile"
+                    className="accent-type w-14 h-14 rounded-full bg-accent-soft text-accent flex items-center justify-center shadow-tile"
                   >
-                    <span className="material-icons text-[30px]">search</span>
+                    <Icon name="search" size={30} />
                   </motion.div>
-                  <p className="font-ui text-sm text-ink-muted uppercase tracking-[0.2em]">
-                    Judging…
-                  </p>
+                  <p className="tm-eyebrow text-ink-muted">Judging…</p>
                 </div>
               )}
               {checkState === "incorrect" && (
@@ -1503,10 +1536,13 @@ export default function FlipWords(props: FlipWordsProps) {
                   className="relative flex flex-col items-center gap-2"
                 >
                   <div className="w-14 h-14 rounded-full bg-warn/15 text-warn flex items-center justify-center shadow-tile-lift">
-                    <span className="material-icons text-[34px]">close</span>
+                    <Icon name="close" size={34} />
                   </div>
-                  <p className="font-wide text-2xl text-ink">Not yet</p>
-                  <p className="font-ui text-xs text-ink-soft">
+                  {/* "Not yet" is inside the display face's charset. */}
+                  <p className="display-headline judge-headline font-wide text-2xl text-ink">
+                    Not yet
+                  </p>
+                  <p className="deck-line font-ui text-xs text-ink-soft">
                     Have another look.
                   </p>
                 </motion.div>

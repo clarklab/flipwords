@@ -1,5 +1,14 @@
 @import "tailwindcss" source("../");
 
+/* Texas Monthly edition token layer. Deliberately unlayered and scoped to
+   :root[data-edition="texas"] so it outranks Tailwind's @layer theme tokens.
+   See the file header for the full cascade rationale. */
+@import "./styles/texas-theme.css";
+@import "./styles/texas-page.css";
+@import "./styles/texas-title.css";
+@import "./styles/texas-game.css";
+@import "./styles/texas-modals.css";
+
 @theme {
   --color-surface: oklch(96% 0.018 85);
   --color-surface-deep: oklch(92% 0.022 85);
@@ -16,6 +25,26 @@
 }
 
 :root {
+  /* Channel triplets for colors that need to be used at varying alpha.
+     Components must build translucent values as `rgb(var(--accent-rgb) / .4)`
+     rather than hardcoding an rgba() literal — otherwise the color survives
+     an edition swap and the old palette bleeds through. */
+  --accent-rgb: 31 156 147;   /* matches --color-accent */
+  --star-rgb: 247 196 84;     /* earned-star gold */
+  --scrim-rgb: 20 15 5;       /* modal backdrops */
+  --texture-rgb: 120 90 40;   /* paper grain */
+
+  /* Shape scale. Components use the semantic .r-* utilities instead of
+     Tailwind's rounded-* so the corner language is edition-switchable.
+     FlipWords keeps its soft, pill-heavy geometry; Texas Monthly is squared
+     and ruled, which is most of what separates "magazine" from "app". */
+  --r-card: 26px;
+  --r-panel: 20px;
+  --r-tile: 14px;
+  --r-pill: 9999px;
+  --r-btn: 9999px;
+  --rule-weight: 1px;
+
   --shadow-tile: 0 1px 0 rgba(70, 50, 20, 0.04), 0 6px 14px -6px rgba(60, 40, 10, 0.18), 0 14px 30px -12px rgba(60, 40, 10, 0.14);
   --shadow-tile-hover: 0 2px 0 rgba(70, 50, 20, 0.05), 0 10px 22px -8px rgba(60, 40, 10, 0.22), 0 24px 48px -18px rgba(60, 40, 10, 0.18);
   --shadow-tile-lift: 0 4px 0 rgba(70, 50, 20, 0.06), 0 18px 36px -10px rgba(60, 40, 10, 0.3), 0 36px 70px -22px rgba(60, 40, 10, 0.22);
@@ -175,26 +204,6 @@ code, pre {
   color: var(--color-ink);
 }
 
-/* Route the legacy .material-icons class through Material Symbols Outlined
-   so we can use modern symbols (avg_pace, clock_loader_*) without renaming
-   every existing icon. Symbols are a superset of Icons — the old names
-   still resolve via ligatures. */
-.material-icons {
-  font-family: "Material Symbols Outlined";
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  font-feature-settings: "liga";
-  -webkit-font-smoothing: antialiased;
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-}
-
 /* The chin: deep accent strip beneath the play surface. Sits flush to the
    viewport bottom and pads for the iOS home indicator so content never hides
    behind it.
@@ -223,4 +232,22 @@ code, pre {
     0 52px 68px -16px rgba(15, 50, 45, 0.32),
     0 80px 100px -32px rgba(15, 50, 45, 0.22),
     0 2px 0 rgba(255, 255, 255, 0.4) inset;
+}
+
+/* Semantic radius utilities — see --r-* above. */
+.r-card  { border-radius: var(--r-card); }
+.r-panel { border-radius: var(--r-panel); }
+.r-tile  { border-radius: var(--r-tile); }
+.r-pill  { border-radius: var(--r-pill); }
+.r-btn   { border-radius: var(--r-btn); }
+
+/* TM's signature: a heavy black rule under the masthead, hairlines elsewhere. */
+.rule-heavy { border-bottom: var(--rule-weight) solid var(--color-ink); }
+.rule-hair  { border-bottom: 1px solid var(--color-paper-line); }
+
+/* The slot placeholder counter-rotates with the board, but `transform` is
+   ignored on a non-replaced inline element — so the counter-rotation silently
+   never applied in either edition. */
+.slot-label {
+  display: inline-block;
 }

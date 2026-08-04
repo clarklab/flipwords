@@ -1,16 +1,20 @@
 import type { Level } from "./types";
 import { getExpectedEdges, isLevelSolved } from "./transforms";
-import levelsJson from "../../levels_generated.json";
 
 /**
- * The loaded puzzle library. In dev, we run a runtime audit that asserts
- * every level has exactly one valid solved configuration — if a level slips
- * through with broken data we want to know in the browser console immediately.
+ * Level-selection algorithms. This module deliberately owns NO puzzle data —
+ * each edition supplies its own library via `EditionConfig.levels`, and every
+ * function here takes the pool it should draw from. That keeps the two
+ * editions from ever sharing or leaking puzzles into each other.
  */
-const RAW: Level[] = levelsJson as Level[];
 
-if (typeof window !== "undefined" && import.meta.env.DEV) {
-  for (const level of RAW) {
+/**
+ * Dev-only integrity audit: asserts every level has exactly one assemblable,
+ * solvable configuration. Broken data should scream in the console rather
+ * than surface as an unsolvable puzzle mid-session.
+ */
+export const auditLevels = (levels: Level[], label: string): void => {
+  for (const level of levels) {
     const expected = getExpectedEdges(level);
     // Sanity: the level's expected solution is actually solvable with the
     // tiles it ships with — i.e. each slot has a tile (possibly flipped) that
@@ -27,7 +31,7 @@ if (typeof window !== "undefined" && import.meta.env.DEV) {
     );
     if (!slotsSolved[0] || !slotsSolved[1]) {
       // eslint-disable-next-line no-console
-      console.error(`[FlipWords] Level ${level.id} solution can't be assembled from its tiles`, level);
+      console.error(`[${label}] Level ${level.id} solution can't be assembled from its tiles`, level);
     }
     // Verify the solution placed at storage with the required rotation actually solves the level
     const placedSlots: [
@@ -51,14 +55,12 @@ if (typeof window !== "undefined" && import.meta.env.DEV) {
     if (!isLevelSolved(placedSlots, rotation, level)) {
       // eslint-disable-next-line no-console
       console.error(
-        `[FlipWords] Level ${level.id} expected solution does not satisfy isLevelSolved — expected edges`,
+        `[${label}] Level ${level.id} expected solution does not satisfy isLevelSolved — expected edges`,
         expected
       );
     }
   }
-}
-
-export const allLevels: Level[] = RAW;
+};
 
 const shuffle = <T,>(arr: T[]): T[] => arr.slice().sort(() => Math.random() - 0.5);
 
@@ -71,7 +73,7 @@ const pickOne = <T,>(arr: T[], rejectIds?: Set<number>): T | undefined => {
 };
 
 /**
- * Builds a difficulty-escalating session. By default the curve is:
+ * Builds a difficulty-escalating session from `pool`. By default the curve is:
  *
  *   slot 1 — tier 1, no rotation       (placement only — gentle warm-up)
  *   slot 2 — tier 1, no rotation       (placement + flipping starts mattering)
@@ -82,18 +84,18 @@ const pickOne = <T,>(arr: T[], rejectIds?: Set<number>): T | undefined => {
  * Falls back gracefully if any pool runs dry — the picker is opportunistic
  * about substitutions but always tries to keep difficulty monotonic.
  */
-export const pickSessionLevels = (count: number = 5): Level[] => {
-  const tier1 = RAW.filter((l) => (l.tier ?? 1) === 1);
-  const tier2 = RAW.filter((l) => l.tier === 2);
-  const tier3 = RAW.filter((l) => l.tier === 3);
+export const pickSessionLevels = (pool: Level[], count: number = 5): Level[] => {
+  const tier1 = pool.filter((l) => (l.tier ?? 1) === 1);
+  const tier2 = pool.filter((l) => l.tier === 2);
+  const tier3 = pool.filter((l) => l.tier === 3);
   const tier3Rotated = tier3.filter((l) => l.requiresRotation);
   const tier3Flat = tier3.filter((l) => !l.requiresRotation);
 
   const picked: Level[] = [];
   const used = new Set<number>();
 
-  const take = (pool: Level[]) => {
-    const choice = pickOne(pool, used);
+  const take = (candidates: Level[]) => {
+    const choice = pickOne(candidates, used);
     if (choice) {
       picked.push(choice);
       used.add(choice.id);
@@ -112,7 +114,7 @@ export const pickSessionLevels = (count: number = 5): Level[] => {
     take(
       tier3Rotated.length > 0
         ? tier3Rotated
-        : RAW.filter((l) => l.requiresRotation)
+        : pool.filter((l) => l.requiresRotation)
     );
     // Any remaining slots top up with the hardest pool we have.
     while (picked.length < count) {
@@ -130,7 +132,7 @@ export const pickSessionLevels = (count: number = 5): Level[] => {
   // Final safety net — if pools were exhausted, fill from the full set so we
   // never hand the UI a session shorter than requested.
   if (picked.length < count) {
-    for (const lvl of shuffle(RAW)) {
+    for (const lvl of shuffle(pool)) {
       if (picked.length >= count) break;
       if (!used.has(lvl.id)) {
         picked.push(lvl);
@@ -143,10 +145,14 @@ export const pickSessionLevels = (count: number = 5): Level[] => {
 };
 
 /** Lightweight escape hatch — same difficulty intent without a fixed count. */
-export const pickLevels = (count: number, startTier?: 1 | 2 | 3): Level[] => {
-  if (!startTier) return pickSessionLevels(count);
-  const pool = RAW.filter((l) => (l.tier ?? 1) >= startTier);
-  return shuffle(pool).slice(0, count);
+export const pickLevels = (
+  pool: Level[],
+  count: number,
+  startTier?: 1 | 2 | 3
+): Level[] => {
+  if (!startTier) return pickSessionLevels(pool, count);
+  const filtered = pool.filter((l) => (l.tier ?? 1) >= startTier);
+  return shuffle(filtered).slice(0, count);
 };
 
 /** 32-bit FNV-1a hash of a string — used as the seed for the daily RNG. */
@@ -175,14 +181,14 @@ function mulberry32(seed: number): () => number {
  * Same tier curve as pickSessionLevels, but every random call is seeded so the
  * output is deterministic for a given seed string. Used by the daily scheduler.
  *
- * `pool` defaults to the full library. The daily scheduler passes a
- * date-gated subset so that levels added AFTER launch never rewrite the
- * sessions of days players have already played (see daily/schedule.ts).
+ * `pool` is the date-gated subset for the edition, so that levels added AFTER
+ * launch never rewrite the sessions of days players have already played
+ * (see daily/schedule.ts).
  */
 export const pickSessionLevelsSeeded = (
   seedStr: string,
   count: number = 5,
-  pool: Level[] = RAW
+  pool: Level[] = []
 ): Level[] => {
   const rand = mulberry32(fnv1a(seedStr))
   const seededPickOne = <T extends { id: number }>(arr: T[], reject: Set<number>): T | undefined => {

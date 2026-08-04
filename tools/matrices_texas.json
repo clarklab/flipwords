@@ -1,0 +1,1106 @@
+[
+  {
+    "id": 1001,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Fried, Then Judged",
+    "matrix": [
+      "CORN",
+      "DOG",
+      "FIELD",
+      "HOUSE"
+    ],
+    "compounds": {
+      "top": "CORNDOG",
+      "bottom": "FIELDHOUSE",
+      "left": "CORNFIELD",
+      "right": "DOGHOUSE"
+    },
+    "clues": {
+      "top": "Batter on a stick, at the fair",
+      "bottom": "Gym big enough for a track",
+      "left": "Panhandle acreage, in rows",
+      "right": "Figurative spot after a spat"
+    }
+  },
+  {
+    "id": 1002,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Asphalt and Ice",
+    "matrix": [
+      "BLACK",
+      "OUT",
+      "TOP",
+      "SIDE"
+    ],
+    "compounds": {
+      "top": "BLACKOUT",
+      "bottom": "TOPSIDE",
+      "left": "BLACKTOP",
+      "right": "OUTSIDE"
+    },
+    "clues": {
+      "top": "February 2021, for millions",
+      "bottom": "Above deck",
+      "left": "What shimmers on I-10 in July",
+      "right": "Not in the air conditioning"
+    }
+  },
+  {
+    "id": 1003,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Cattle Hours",
+    "matrix": [
+      "SUN",
+      "DOWN",
+      "UP",
+      "STREAM"
+    ],
+    "compounds": {
+      "top": "SUNDOWN",
+      "bottom": "UPSTREAM",
+      "left": "SUNUP",
+      "right": "DOWNSTREAM"
+    },
+    "clues": {
+      "top": "Last light",
+      "bottom": "Against the current",
+      "left": "When the cattle get moving",
+      "right": "Toward the Gulf, on the Brazos"
+    }
+  },
+  {
+    "id": 1004,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Ninety in the Shade",
+    "matrix": [
+      "MID",
+      "DAY",
+      "SUMMER",
+      "TIME"
+    ],
+    "compounds": {
+      "top": "MIDDAY",
+      "bottom": "SUMMERTIME",
+      "left": "MIDSUMMER",
+      "right": "DAYTIME"
+    },
+    "clues": {
+      "top": "Noon, roughly",
+      "bottom": "Janis Joplin's Gershwin cover",
+      "left": "Shakespeare's night's dream",
+      "right": "When the soaps used to air"
+    }
+  },
+  {
+    "id": 1005,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Two Kinds of Floor",
+    "matrix": [
+      "FOOT",
+      "BALL",
+      "WORK",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "FOOTBALL",
+      "bottom": "WORKROOM",
+      "left": "FOOTWORK",
+      "right": "BALLROOM"
+    },
+    "clues": {
+      "top": "The reason for Friday",
+      "bottom": "Sewing machine, cutting table",
+      "left": "The boxer's first lesson",
+      "right": "Sprung floor, chandeliers"
+    }
+  },
+  {
+    "id": 1006,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Five On, Two Off",
+    "matrix": [
+      "WORK",
+      "BOOK",
+      "WEEK",
+      "END"
+    ],
+    "compounds": {
+      "top": "WORKBOOK",
+      "bottom": "WEEKEND",
+      "left": "WORKWEEK",
+      "right": "BOOKEND"
+    },
+    "clues": {
+      "top": "Fill-in-the-blank pages",
+      "bottom": "Two days on Lake Travis",
+      "left": "Monday through Friday",
+      "right": "It keeps the row upright"
+    }
+  },
+  {
+    "id": 1007,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "The Salt Edge",
+    "matrix": [
+      "SEA",
+      "COAST",
+      "WATER",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "SEACOAST",
+      "bottom": "WATERLINE",
+      "left": "SEAWATER",
+      "right": "COASTLINE"
+    },
+    "clues": {
+      "top": "Bohemia's, in Shakespeare",
+      "bottom": "The mark a hull sits at",
+      "left": "Salty by definition",
+      "right": "367 miles, NOAA's count"
+    }
+  },
+  {
+    "id": 1008,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Longest in the World",
+    "matrix": [
+      "SEA",
+      "SHORE",
+      "SIDE",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "SEASHORE",
+      "bottom": "SIDELINE",
+      "left": "SEASIDE",
+      "right": "SHORELINE"
+    },
+    "clues": {
+      "top": "Padre, for seventy miles",
+      "bottom": "Moonlighting income",
+      "left": "By the surf",
+      "right": "What a hurricane rewrites"
+    }
+  },
+  {
+    "id": 1009,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Two Hundred Fifty-Four",
+    "matrix": [
+      "COURT",
+      "HOUSE",
+      "ROOM",
+      "MATE"
+    ],
+    "compounds": {
+      "top": "COURTHOUSE",
+      "bottom": "ROOMMATE",
+      "left": "COURTROOM",
+      "right": "HOUSEMATE"
+    },
+    "clues": {
+      "top": "The building on the square",
+      "bottom": "Dorm-issue companion",
+      "left": "Roy Bean's was a saloon",
+      "right": "One of four on the lease"
+    }
+  },
+  {
+    "id": 1010,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "The Wright Amendment",
+    "matrix": [
+      "OUT",
+      "DOOR",
+      "RUN",
+      "WAY"
+    ],
+    "compounds": {
+      "top": "OUTDOOR",
+      "bottom": "RUNWAY",
+      "left": "OUTRUN",
+      "right": "DOORWAY"
+    },
+    "clues": {
+      "top": "Held in the open air",
+      "bottom": "Strip at Love Field",
+      "left": "Beat on foot",
+      "right": "The frame you stand in"
+    }
+  },
+  {
+    "id": 1011,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Lights Out at Ten",
+    "matrix": [
+      "WEEK",
+      "DAY",
+      "NIGHT",
+      "LIGHT"
+    ],
+    "compounds": {
+      "top": "WEEKDAY",
+      "bottom": "NIGHTLIGHT",
+      "left": "WEEKNIGHT",
+      "right": "DAYLIGHT"
+    },
+    "clues": {
+      "top": "When the DPS office is open",
+      "bottom": "Small glow in the hallway",
+      "left": "School the next morning",
+      "right": "What we save in March"
+    }
+  },
+  {
+    "id": 1012,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Last Call",
+    "matrix": [
+      "MARK",
+      "DOWN",
+      "UP",
+      "BEAT"
+    ],
+    "compounds": {
+      "top": "MARKDOWN",
+      "bottom": "UPBEAT",
+      "left": "MARKUP",
+      "right": "DOWNBEAT"
+    },
+    "clues": {
+      "top": "Red tag at Neiman's",
+      "bottom": "Sunny in disposition",
+      "left": "The retailer's cut",
+      "right": "Beat one, in the measure"
+    }
+  },
+  {
+    "id": 1013,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "The Second Ballot",
+    "matrix": [
+      "RUN",
+      "DOWN",
+      "OFF",
+      "SIDE"
+    ],
+    "compounds": {
+      "top": "RUNDOWN",
+      "bottom": "OFFSIDE",
+      "left": "RUNOFF",
+      "right": "DOWNSIDE"
+    },
+    "clues": {
+      "top": "The quick summary",
+      "bottom": "Past the last defender",
+      "left": "May in Texas politics",
+      "right": "The catch, in other words"
+    }
+  },
+  {
+    "id": 1014,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Blue Norther",
+    "matrix": [
+      "UP",
+      "SIDE",
+      "WIND",
+      "BURN"
+    ],
+    "compounds": {
+      "top": "UPSIDE",
+      "bottom": "WINDBURN",
+      "left": "UPWIND",
+      "right": "SIDEBURN"
+    },
+    "clues": {
+      "top": "The good news, at least",
+      "bottom": "What a norther leaves on you",
+      "left": "The clean-air side",
+      "right": "Whisker patch by the ear"
+    }
+  },
+  {
+    "id": 1015,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "No Shadows Today",
+    "matrix": [
+      "HOLD",
+      "OUT",
+      "OVER",
+      "CAST"
+    ],
+    "compounds": {
+      "top": "HOLDOUT",
+      "bottom": "OVERCAST",
+      "left": "HOLDOVER",
+      "right": "OUTCAST"
+    },
+    "clues": {
+      "top": "The last ranch that won't sell",
+      "bottom": "Gray, edge to edge",
+      "left": "Kept on from before",
+      "right": "Nobody's welcome guest"
+    }
+  },
+  {
+    "id": 1016,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Off the Island",
+    "matrix": [
+      "MAIN",
+      "LAND",
+      "STREAM",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "MAINLAND",
+      "bottom": "STREAMLINE",
+      "left": "MAINSTREAM",
+      "right": "LANDLINE"
+    },
+    "clues": {
+      "top": "What Galveston isn't",
+      "bottom": "Trim the process",
+      "left": "The broad middle of taste",
+      "right": "The phone on the wall"
+    }
+  },
+  {
+    "id": 1017,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Smoke and Timber",
+    "matrix": [
+      "OUT",
+      "POST",
+      "LIVE",
+      "OAK"
+    ],
+    "compounds": {
+      "top": "OUTPOST",
+      "bottom": "LIVEOAK",
+      "left": "OUTLIVE",
+      "right": "POSTOAK"
+    },
+    "clues": {
+      "top": "Fort Davis, once",
+      "bottom": "The Treaty Oak, for one",
+      "left": "Last longer than",
+      "right": "Franklin's wood of choice"
+    }
+  },
+  {
+    "id": 1018,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Low and Slow",
+    "matrix": [
+      "OVER",
+      "COOK",
+      "SHOOT",
+      "OUT"
+    ],
+    "compounds": {
+      "top": "OVERCOOK",
+      "bottom": "SHOOTOUT",
+      "left": "OVERSHOOT",
+      "right": "COOKOUT"
+    },
+    "clues": {
+      "top": "What ruins a brisket",
+      "bottom": "How a tied final ends",
+      "left": "Go well past the mark",
+      "right": "Folding chairs and a grill"
+    }
+  },
+  {
+    "id": 1019,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Rhythm and Graft",
+    "matrix": [
+      "KICK",
+      "OFF",
+      "BACK",
+      "BEAT"
+    ],
+    "compounds": {
+      "top": "KICKOFF",
+      "bottom": "BACKBEAT",
+      "left": "KICKBACK",
+      "right": "OFFBEAT"
+    },
+    "clues": {
+      "top": "7:30 on a Friday in Odessa",
+      "bottom": "The two and the four",
+      "left": "Under-the-table cut",
+      "right": "Not quite Nashville"
+    }
+  },
+  {
+    "id": 1020,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Two Lanes, No Stripe",
+    "matrix": [
+      "BACK",
+      "ROAD",
+      "WATER",
+      "WAY"
+    ],
+    "compounds": {
+      "top": "BACKROAD",
+      "bottom": "WATERWAY",
+      "left": "BACKWATER",
+      "right": "ROADWAY"
+    },
+    "clues": {
+      "top": "Farm-to-Market, generally",
+      "bottom": "The Intracoastal, for one",
+      "left": "Still water off the channel",
+      "right": "The paved part"
+    }
+  },
+  {
+    "id": 1021,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Out Past the City Limits",
+    "matrix": [
+      "CROSS",
+      "FIRE",
+      "ROAD",
+      "HOUSE"
+    ],
+    "compounds": {
+      "top": "CROSSFIRE",
+      "bottom": "ROADHOUSE",
+      "left": "CROSSROAD",
+      "right": "FIREHOUSE"
+    },
+    "clues": {
+      "top": "Caught between two guns",
+      "bottom": "Beer, gravel lot, dance floor",
+      "left": "An intersection, poetically",
+      "right": "Volunteer department's base"
+    }
+  },
+  {
+    "id": 1022,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Black Sunday",
+    "matrix": [
+      "STAR",
+      "FISH",
+      "DUST",
+      "BOWL"
+    ],
+    "compounds": {
+      "top": "STARFISH",
+      "bottom": "DUSTBOWL",
+      "left": "STARDUST",
+      "right": "FISHBOWL"
+    },
+    "clues": {
+      "top": "Sea star, less precisely",
+      "bottom": "The Panhandle, 1935",
+      "left": "Hoagy Carmichael standard",
+      "right": "Life with no privacy"
+    }
+  },
+  {
+    "id": 1023,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Both Halls, Fort Worth",
+    "matrix": [
+      "COW",
+      "BOY",
+      "GIRL",
+      "HOOD"
+    ],
+    "compounds": {
+      "top": "COWBOY",
+      "bottom": "GIRLHOOD",
+      "left": "COWGIRL",
+      "right": "BOYHOOD"
+    },
+    "clues": {
+      "top": "Gus and Call, in the novel",
+      "bottom": "Sissy Spacek's, in Quitman",
+      "left": "Dale Evans, professionally",
+      "right": "Linklater's twelve-year film"
+    }
+  },
+  {
+    "id": 1024,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "The Clock on the Wall",
+    "matrix": [
+      "AIR",
+      "SHOW",
+      "LOCK",
+      "DOWN"
+    ],
+    "compounds": {
+      "top": "AIRSHOW",
+      "bottom": "LOCKDOWN",
+      "left": "AIRLOCK",
+      "right": "SHOWDOWN"
+    },
+    "clues": {
+      "top": "Wings Over Houston, e.g.",
+      "bottom": "Nobody in, nobody out",
+      "left": "The door between pressures",
+      "right": "The final confrontation"
+    }
+  },
+  {
+    "id": 1025,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Then Houston Has It",
+    "matrix": [
+      "AIR",
+      "LIFT",
+      "DROP",
+      "OFF"
+    ],
+    "compounds": {
+      "top": "AIRLIFT",
+      "bottom": "DROPOFF",
+      "left": "AIRDROP",
+      "right": "LIFTOFF"
+    },
+    "clues": {
+      "top": "Rescue by helicopter",
+      "bottom": "Steep edge, or the school lane",
+      "left": "Supplies by parachute",
+      "right": "What Houston hears at T-zero"
+    }
+  },
+  {
+    "id": 1026,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "No State Return",
+    "matrix": [
+      "IN",
+      "COME",
+      "TAKE",
+      "DOWN"
+    ],
+    "compounds": {
+      "top": "INCOME",
+      "bottom": "TAKEDOWN",
+      "left": "INTAKE",
+      "right": "COMEDOWN"
+    },
+    "clues": {
+      "top": "The tax Texas doesn't have",
+      "bottom": "Wrestling's opening move",
+      "left": "The form before the exam",
+      "right": "The morning after, roughly"
+    }
+  },
+  {
+    "id": 1027,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Nickel a Play",
+    "matrix": [
+      "SIDE",
+      "BOARD",
+      "BAR",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "SIDEBOARD",
+      "bottom": "BARROOM",
+      "left": "SIDEBAR",
+      "right": "BOARDROOM"
+    },
+    "clues": {
+      "top": "Dining piece for platters",
+      "bottom": "Lone Star longnecks, cold",
+      "left": "Conference at the bench",
+      "right": "Twelve chairs and a carafe"
+    }
+  },
+  {
+    "id": 1028,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Never Billed",
+    "matrix": [
+      "BED",
+      "POST",
+      "SIDE",
+      "MAN"
+    ],
+    "compounds": {
+      "top": "BEDPOST",
+      "bottom": "SIDEMAN",
+      "left": "BEDSIDE",
+      "right": "POSTMAN"
+    },
+    "clues": {
+      "top": "Corner of an iron frame",
+      "bottom": "A Texas Playboy, not Bob Wills",
+      "left": "Table for the water glass",
+      "right": "He rings twice, in the title"
+    }
+  },
+  {
+    "id": 1029,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Ask the Comptroller",
+    "matrix": [
+      "SHORT",
+      "FALL",
+      "HAND",
+      "OUT"
+    ],
+    "compounds": {
+      "top": "SHORTFALL",
+      "bottom": "HANDOUT",
+      "left": "SHORTHAND",
+      "right": "FALLOUT"
+    },
+    "clues": {
+      "top": "Budget gap, to the Lege",
+      "bottom": "The flyer they give you",
+      "left": "Stenographer's squiggles",
+      "right": "What drifts after the blast"
+    }
+  },
+  {
+    "id": 1030,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "San Jos\u00e9 Island, 2017",
+    "matrix": [
+      "OVER",
+      "LAND",
+      "NIGHT",
+      "FALL"
+    ],
+    "compounds": {
+      "top": "OVERLAND",
+      "bottom": "NIGHTFALL",
+      "left": "OVERNIGHT",
+      "right": "LANDFALL"
+    },
+    "clues": {
+      "top": "By wagon, not by sea",
+      "bottom": "When the porch light matters",
+      "left": "One stop on the drive west",
+      "right": "What Harvey made near Rockport"
+    }
+  },
+  {
+    "id": 1031,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Friday Sky",
+    "matrix": [
+      "BACK",
+      "FIELD",
+      "FIRE",
+      "WORK"
+    ],
+    "compounds": {
+      "top": "BACKFIELD",
+      "bottom": "FIREWORK",
+      "left": "BACKFIRE",
+      "right": "FIELDWORK"
+    },
+    "clues": {
+      "top": "Behind the line of scrimmage",
+      "bottom": "One shell over Lady Bird Lake",
+      "left": "Go wrong in the opposite way",
+      "right": "Research done outdoors"
+    }
+  },
+  {
+    "id": 1032,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Past the Last Tower",
+    "matrix": [
+      "SHUT",
+      "OFF",
+      "OUT",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "SHUTOFF",
+      "bottom": "OUTLINE",
+      "left": "SHUTOUT",
+      "right": "OFFLINE"
+    },
+    "clues": {
+      "top": "The valve you turn in a freeze",
+      "bottom": "The shape, roughly",
+      "left": "Nine innings, no runs",
+      "right": "No bars out past Marfa"
+    }
+  },
+  {
+    "id": 1033,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "The High Point of Texas",
+    "matrix": [
+      "SHAKE",
+      "DOWN",
+      "UP",
+      "HILL"
+    ],
+    "compounds": {
+      "top": "SHAKEDOWN",
+      "bottom": "UPHILL",
+      "left": "SHAKEUP",
+      "right": "DOWNHILL"
+    },
+    "clues": {
+      "top": "The extortionist's visit",
+      "bottom": "Mostly, up Guadalupe Peak",
+      "left": "New names on the org chart",
+      "right": "How it went after that"
+    }
+  },
+  {
+    "id": 1034,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Ground Level",
+    "matrix": [
+      "UNDER",
+      "FOOT",
+      "SIDE",
+      "STEP"
+    ],
+    "compounds": {
+      "top": "UNDERFOOT",
+      "bottom": "SIDESTEP",
+      "left": "UNDERSIDE",
+      "right": "FOOTSTEP"
+    },
+    "clues": {
+      "top": "In the way, and low down",
+      "bottom": "Dodge the question",
+      "left": "A Big Bend ledge's shaded face",
+      "right": "Boot on the porch boards"
+    }
+  },
+  {
+    "id": 1035,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Fiddle and Fang",
+    "matrix": [
+      "COTTON",
+      "MOUTH",
+      "TAIL",
+      "PIECE"
+    ],
+    "compounds": {
+      "top": "COTTONMOUTH",
+      "bottom": "TAILPIECE",
+      "left": "COTTONTAIL",
+      "right": "MOUTHPIECE"
+    },
+    "clues": {
+      "top": "Water moccasin, another way",
+      "bottom": "It anchors a violin's strings",
+      "left": "Rabbit of the brush country",
+      "right": "A lawyer, in old slang"
+    }
+  },
+  {
+    "id": 1036,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Flight, Not Fabrication",
+    "matrix": [
+      "BACK",
+      "HAND",
+      "SPACE",
+      "CRAFT"
+    ],
+    "compounds": {
+      "top": "BACKHAND",
+      "bottom": "SPACECRAFT",
+      "left": "BACKSPACE",
+      "right": "HANDCRAFT"
+    },
+    "clues": {
+      "top": "Stroke across the body",
+      "bottom": "Flown from a Clear Lake console",
+      "left": "The key that undoes a typo",
+      "right": "Make it without a machine"
+    }
+  },
+  {
+    "id": 1037,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Staked Plains",
+    "matrix": [
+      "ROUND",
+      "UP",
+      "TABLE",
+      "LAND"
+    ],
+    "compounds": {
+      "top": "ROUNDUP",
+      "bottom": "TABLELAND",
+      "left": "ROUNDTABLE",
+      "right": "UPLAND"
+    },
+    "clues": {
+      "top": "Spring work on a ranch",
+      "bottom": "The Llano Estacado, flatly",
+      "left": "Arthur's furniture",
+      "right": "Quail country, to hunters"
+    }
+  },
+  {
+    "id": 1038,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Nashville, Actually",
+    "matrix": [
+      "OUT",
+      "PLAY",
+      "LAW",
+      "MAKER"
+    ],
+    "compounds": {
+      "top": "OUTPLAY",
+      "bottom": "LAWMAKER",
+      "left": "OUTLAW",
+      "right": "PLAYMAKER"
+    },
+    "clues": {
+      "top": "Best them at their own game",
+      "bottom": "One of the 181 in Austin",
+      "left": "Willie and Waylon's genre",
+      "right": "The one who sets it up"
+    }
+  },
+  {
+    "id": 1039,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Colorado Bend",
+    "matrix": [
+      "BREAK",
+      "DOWN",
+      "WATER",
+      "FALL"
+    ],
+    "compounds": {
+      "top": "BREAKDOWN",
+      "bottom": "WATERFALL",
+      "left": "BREAKWATER",
+      "right": "DOWNFALL"
+    },
+    "clues": {
+      "top": "A fiddle tune, or a collapse",
+      "bottom": "Gorman, in the Hill Country",
+      "left": "Rock arm that calms a harbor",
+      "right": "The undoing, in the end"
+    }
+  },
+  {
+    "id": 1040,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Independence to Secession",
+    "matrix": [
+      "OVER",
+      "HEAD",
+      "TIME",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "OVERHEAD",
+      "bottom": "TIMELINE",
+      "left": "OVERTIME",
+      "right": "HEADLINE"
+    },
+    "clues": {
+      "top": "Rent, power, and the rest",
+      "bottom": "1836, 1845, 1861, in a row",
+      "left": "Time and a half",
+      "right": "Above the fold"
+    }
+  },
+  {
+    "id": 1041,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Show of Force",
+    "matrix": [
+      "OVER",
+      "PLAY",
+      "POWER",
+      "HOUSE"
+    ],
+    "compounds": {
+      "top": "OVERPLAY",
+      "bottom": "POWERHOUSE",
+      "left": "OVERPOWER",
+      "right": "PLAYHOUSE"
+    },
+    "clues": {
+      "top": "Push the bluff too far",
+      "bottom": "Buchanan Dam has one",
+      "left": "Win by sheer force",
+      "right": "Small theater, or a kid's fort"
+    }
+  },
+  {
+    "id": 1042,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "The Older Airport",
+    "matrix": [
+      "UNDER",
+      "STAND",
+      "TAKE",
+      "OFF"
+    ],
+    "compounds": {
+      "top": "UNDERSTAND",
+      "bottom": "TAKEOFF",
+      "left": "UNDERTAKE",
+      "right": "STANDOFF"
+    },
+    "clues": {
+      "top": "Follow the drift",
+      "bottom": "Wheels up at Hobby",
+      "left": "Set about it",
+      "right": "Neither side blinking"
+    }
+  },
+  {
+    "id": 1043,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Smokehouse Creek",
+    "matrix": [
+      "WILD",
+      "FIRE",
+      "LIFE",
+      "BOAT"
+    ],
+    "compounds": {
+      "top": "WILDFIRE",
+      "bottom": "LIFEBOAT",
+      "left": "WILDLIFE",
+      "right": "FIREBOAT"
+    },
+    "clues": {
+      "top": "A million acres, 2024",
+      "bottom": "Davits swing it out",
+      "left": "Deer, dove, and everything",
+      "right": "It fights a ship-channel blaze"
+    }
+  },
+  {
+    "id": 1044,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Donald Judd's Doing",
+    "matrix": [
+      "HOT",
+      "SPOT",
+      "HEAD",
+      "LIGHT"
+    ],
+    "compounds": {
+      "top": "HOTSPOT",
+      "bottom": "HEADLIGHT",
+      "left": "HOTHEAD",
+      "right": "SPOTLIGHT"
+    },
+    "clues": {
+      "top": "Marfa, to the art world",
+      "bottom": "What the deer stares into",
+      "left": "The one who swings first",
+      "right": "One circle on a dark stage"
+    }
+  },
+  {
+    "id": 1045,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "The Killer Ds",
+    "matrix": [
+      "CROSS",
+      "CUT",
+      "WALK",
+      "OUT"
+    ],
+    "compounds": {
+      "top": "CROSSCUT",
+      "bottom": "WALKOUT",
+      "left": "CROSSWALK",
+      "right": "CUTOUT"
+    },
+    "clues": {
+      "top": "Saw that cuts across grain",
+      "bottom": "Ardmore, Oklahoma, 2003",
+      "left": "Painted stripes at the corner",
+      "right": "Cardboard likeness at the door"
+    }
+  },
+  {
+    "id": 1046,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Boomtown on the Sabine",
+    "matrix": [
+      "HARD",
+      "BACK",
+      "SHIP",
+      "YARD"
+    ],
+    "compounds": {
+      "top": "HARDBACK",
+      "bottom": "SHIPYARD",
+      "left": "HARDSHIP",
+      "right": "BACKYARD"
+    },
+    "clues": {
+      "top": "The edition with a dust jacket",
+      "bottom": "Orange built destroyers in one",
+      "left": "Grounds for a discharge",
+      "right": "The fence, the grass, the pit"
+    }
+  }
+]

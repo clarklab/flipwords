@@ -1,12 +1,25 @@
 import { useMemo, useState } from 'react'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { dayNumber, LAUNCH_DATE, shiftDate } from '@/daily/date'
+import { Icon } from './Icon'
+import { dayNumber, shiftDate } from '@/daily/date'
+import { useEdition } from '@/edition'
 import { useEasternDate } from '@/daily/useEasternDate'
 import { useDailyStorage } from '@/daily/useDailyStorage'
 import type { StoredSession } from '@/daily/types'
 
 const WEEKDAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+/**
+ * The Texas display face is a 65-glyph trial — space, comma, period, 0-9,
+ * A-Z, a-z — so anything set in it must contain nothing else, or the missing
+ * character falls back mid-string to a different family at a different
+ * weight. Stat values are user data and can be the em-dash placeholder, so
+ * they are gated: plain numerals get the display face, anything else keeps
+ * the UI face. Month names ("August 2026") and "Archive" are safe by
+ * inspection and are not gated.
+ */
+const DISPLAY_SAFE = /^[0-9. ]+$/
 
 function ymdFromYM(year: number, month0: number, day: number): string {
   return `${year}-${String(month0 + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
@@ -29,17 +42,18 @@ export default function Archive() {
   const navigate = useNavigate()
   // Live date + cross-tab-synced storage: the calendar's today ring, future
   // gating, and played counts stay correct without a reload.
+  const { config } = useEdition()
   const today = useEasternDate()
-  const launch = parseYM(LAUNCH_DATE)
+  const launch = parseYM(config.launchDate)
   const todayYM = parseYM(today)
 
   // Default: show today's month
   const [{ y, m }, setMonth] = useState(todayYM)
 
-  const { storage } = useDailyStorage()
+  const { storage } = useDailyStorage(config)
 
   const playedCount = storage ? Object.keys(storage.sessions).length : 0
-  const totalDaysSinceLaunch = Math.max(0, dayNumber(today))
+  const totalDaysSinceLaunch = Math.max(0, dayNumber(today, config.launchDate))
   const perfects = storage?.totals.perfectSessions ?? 0
   const avgStars = (() => {
     if (!storage || playedCount === 0) return '—'
@@ -69,67 +83,83 @@ export default function Archive() {
   }
 
   return (
-    <div className="h-[100dvh] w-full flex flex-col bg-chin overflow-hidden">
-      <div className="flex-1 min-h-0 mt-1.5 md:mt-2 flex flex-col bg-paper rounded-[28px] md:rounded-[36px] shadow-play-lift relative z-10 overflow-y-auto px-4 py-4 md:px-6 md:py-5">
+    <div className="app-shell h-[100dvh] w-full flex flex-col bg-chin overflow-hidden">
+      {/* .play-surface / .r-surface are the shared app-shell classes the title
+          and play routes use, so all three full-screen surfaces take the same
+          corner under FlipWords. Under Texas texas-page.css dissolves it. */}
+      <div className="play-surface r-surface flex-1 min-h-0 mt-1.5 md:mt-2 flex flex-col bg-paper shadow-play-lift relative z-10 overflow-y-auto px-4 py-4 md:px-6 md:py-5">
 
-        {/* Header */}
-        <div className="flex items-center justify-between mb-3">
+        {/* Masthead — eyebrow over the title over a section rule, the way TM
+            sets every page head. The eyebrow is the edition's own name, so it
+            comes from the registry rather than a literal. */}
+        <div className="arc-masthead tm-container relative rule-heavy pb-3 mb-3.5">
           <Link
             to="/"
-            className="w-10 h-10 rounded-full flex items-center justify-center bg-white border border-tile-edge text-ink-muted hover:text-ink shadow-tile"
+            className="arc-back absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink shadow-tile"
             aria-label="Back"
           >
-            <span className="material-icons text-[20px]">chevron_left</span>
+            <Icon name="chevron" size={20} />
           </Link>
-          <h1 className="font-wide text-xl text-ink tracking-[-0.01em]">Archive</h1>
-          <div className="w-10 h-10" />
+          <div className="arc-masthead-type text-center">
+            <p className="tm-eyebrow tm-eyebrow-sm accent-type text-accent">
+              {config.shortName}
+            </p>
+            <h1 className="arc-title tm-page-title tm-display font-wide text-xl text-ink tracking-[-0.01em] mt-1">
+              Archive
+            </h1>
+          </div>
         </div>
 
-        {/* Summary card */}
-        <div className="grid grid-cols-3 border border-tile-edge rounded-[14px] bg-tile-face shadow-tile overflow-hidden mb-4">
+        <div className="arc-body tm-container">
+        {/* Summary band */}
+        <div className="arc-summary grid grid-cols-3 border border-tile-edge r-panel bg-tile-face shadow-tile overflow-hidden mb-4">
           <SummaryCell value={playedCount.toString()} label="Played" />
           <SummaryCell value={perfects.toString()} label="Perfect" />
-          <SummaryCell value={avgStars} label="Avg ★" />
+          <SummaryCell value={avgStars} label="Avg stars" />
         </div>
 
-        {/* Month nav */}
-        <div className="flex items-center justify-between pb-2.5">
+        {/* Month nav — the calendar's section head, ruled like one */}
+        <div className="flex items-center justify-between rule-heavy pb-2 mb-2.5">
           <button
             onClick={goPrev}
             disabled={!canGoBack}
-            className={`p-1 ${canGoBack ? 'text-ink-muted hover:text-ink' : 'text-ink-soft/30'}`}
+            className={`p-1 ${canGoBack ? 'text-ink-muted hover:text-ink' : 'arc-nav-off text-ink-soft/30'}`}
+            aria-label="Previous month"
           >
-            <span className="material-icons">chevron_left</span>
+            <Icon name="chevron" size={24} />
           </button>
-          <p className="font-expand text-[17px] text-ink">
+          <p className="arc-month tm-display font-expand text-[17px] text-ink">
             {MONTH_NAMES[m]} {y}
           </p>
           <button
             onClick={goNext}
             disabled={!canGoForward}
-            className={`p-1 ${canGoForward ? 'text-ink-muted hover:text-ink' : 'text-ink-soft/30'}`}
+            className={`p-1 ${canGoForward ? 'text-ink-muted hover:text-ink' : 'arc-nav-off text-ink-soft/30'}`}
+            aria-label="Next month"
           >
-            <span className="material-icons">chevron_right</span>
+            <Icon name="chevron" dir="right" size={24} />
           </button>
         </div>
 
         {/* Day-of-week header */}
-        <div className="grid grid-cols-7 gap-1.5 mb-1.5">
+        <div className="arc-grid grid grid-cols-7 gap-1.5 rule-hair pb-1.5 mb-1.5">
           {WEEKDAY_LABELS.map((w, i) => (
-            <span
-              key={i}
-              className="text-center font-ui text-[10px] text-ink-soft uppercase tracking-[0.18em]"
-            >
+            <span key={i} className="tm-eyebrow tm-eyebrow-sm text-center text-ink-soft">
               {w}
             </span>
           ))}
         </div>
 
         {/* Calendar grid */}
-        <div className="grid grid-cols-7 gap-1.5">
+        <div className="arc-grid grid grid-cols-7 gap-1.5">
           {cells.map((cell, i) => {
             if (cell.kind === 'empty') {
-              return <div key={i} className="aspect-square" />
+              return (
+                <div
+                  key={i}
+                  className="cal-cell cal-cell--blank aspect-square r-mark border border-transparent"
+                />
+              )
             }
             return (
               <DayCell
@@ -137,7 +167,7 @@ export default function Archive() {
                 day={cell.day}
                 date={cell.date}
                 today={today}
-                launch={LAUNCH_DATE}
+                launch={config.launchDate}
                 stored={storage?.sessions[cell.date]}
                 onClick={() => navigate({ to: '/archive/$date', params: { date: cell.date } })}
               />
@@ -145,54 +175,30 @@ export default function Archive() {
           })}
         </div>
 
-        {/* Legend */}
-        <div className="flex items-center justify-center gap-3.5 pt-3.5 pb-2 text-[11px] text-ink-muted">
-          <span className="inline-flex items-center gap-1.5">
-            <span
-              className="inline-block w-3 h-3 rounded-[3px] border"
-              style={{
-                background:
-                  'linear-gradient(180deg, oklch(96% 0.06 180), oklch(92% 0.05 180))',
-                borderColor: 'var(--color-accent)',
-              }}
-            />
-            3-star
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="inline-block w-3 h-3 rounded-[3px] bg-tile-face border border-tile-edge" />
-            Played
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span
-              className="inline-block w-3 h-3 rounded-[3px]"
-              style={{
-                background: 'oklch(94% 0.012 85 / 0.45)',
-                border: '1px dashed var(--color-paper-line)',
-              }}
-            />
-            Missed
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="material-icons text-ink-soft" style={{ fontSize: 12 }}>
-              history
-            </span>
+        {/* Legend — the swatches carry the same state classes as the cells
+            they describe, so the key can never drift from the grid. */}
+        <div className="arc-legend flex items-center justify-center flex-wrap gap-x-3.5 gap-y-1.5 mt-2 pt-2.5 pb-2 text-ink-muted">
+          <LegendKey state="cal-cell--perfect" label="3-star" />
+          <LegendKey state="cal-cell--played" label="Played" />
+          <LegendKey state="cal-cell--missed" dashed label="Missed" />
+          <span className="tm-eyebrow tm-eyebrow-sm inline-flex items-center gap-1.5">
+            <Icon name="clock" size={12} className="text-ink-soft" />
             Late
           </span>
         </div>
+        </div>
       </div>
 
-      {/* Chin */}
-      <div
-        className="flex-shrink-0 bg-chin text-surface relative"
-        style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
-      >
-        <div className="relative z-20 w-full max-w-3xl mx-auto px-5 md:px-7 pt-3 md:pt-4 pb-1 flex items-center justify-between gap-4">
-          <span className="font-ui text-[12px] uppercase tracking-[0.18em] text-surface/85">
-            {playedCount} of {totalDaysSinceLaunch} sessions
+      {/* Chin — a ruled caps line closing the column under Texas. */}
+      <div className="page-meta chin-safe flex-shrink-0 bg-chin text-surface relative">
+        {/* .chin-row drives the chin foreground through --chin-ink: white on
+            FlipWords' teal, near-black on the Texas orange, where white would
+            not carry. Same treatment as the title and play chins. */}
+        <div className="chin-row relative z-20 w-full max-w-3xl mx-auto px-5 md:px-7 pt-3 md:pt-4 pb-1 flex items-center justify-between gap-4">
+          <span className="tm-eyebrow chin-dim">
+            {playedCount} of {totalDaysSinceLaunch} days played
           </span>
-          <span className="font-ui text-[12px] uppercase tracking-[0.18em] text-surface/85">
-            Tap a day
-          </span>
+          <span className="tm-eyebrow chin-dim">Choose a date</span>
         </div>
       </div>
     </div>
@@ -201,12 +207,38 @@ export default function Archive() {
 
 function SummaryCell({ value, label }: { value: string; label: string }) {
   return (
-    <div className="text-center py-3 border-l border-tile-edge first:border-l-0">
-      <p className="font-expand text-[22px] text-ink leading-none">{value}</p>
-      <p className="font-ui text-[10px] text-ink-soft uppercase tracking-[0.18em] mt-1.5">
-        {label}
+    <div className="arc-summary-cell text-center py-3 border-l border-tile-edge first:border-l-0">
+      <p
+        className={`arc-stat font-expand text-[22px] text-ink leading-none tabular-nums ${
+          DISPLAY_SAFE.test(value) ? 'tm-display' : ''
+        }`}
+      >
+        {value}
       </p>
+      <p className="tm-eyebrow tm-eyebrow-sm text-ink-soft mt-1.5">{label}</p>
     </div>
+  )
+}
+
+/** One swatch + label in the calendar key. */
+function LegendKey({
+  state,
+  label,
+  dashed = false,
+}: {
+  state: string
+  label: string
+  dashed?: boolean
+}) {
+  return (
+    <span className="tm-eyebrow tm-eyebrow-sm inline-flex items-center gap-1.5">
+      <span
+        className={`inline-block w-3 h-3 r-mark border border-transparent ${
+          dashed ? 'border-dashed ' : ''
+        }${state}`}
+      />
+      {label}
+    </span>
   )
 }
 
@@ -232,23 +264,28 @@ function DayCell({
   const isPlayed = !!stored && !isThreeStar
   const isMissed = !stored && !isFuture && !isPreLaunch && !isToday
 
-  let cls = 'aspect-square rounded-[5px] relative flex flex-col items-center justify-center text-[12px] font-ui '
+  // Every cell carries a border, transparent by default, so the Texas grid
+  // can rule the whole table from CSS without changing any box size. Fill and
+  // border colour live in texas-modals.css as .cal-cell--* so the legend can
+  // reuse them and so both editions resolve from the same tokens — the four
+  // oklch literals that used to live here did not survive the edition swap.
+  let cls =
+    'cal-cell aspect-square r-mark border border-transparent relative ' +
+    'flex flex-col items-center justify-center text-[12px] font-ui tabular-nums '
   if (isFuture) {
-    cls += 'text-ink-soft/40 cursor-default'
+    cls += 'cal-cell--future text-ink-soft/40 cursor-default'
   } else if (isPreLaunch) {
-    cls += 'opacity-30 cursor-default'
+    cls += 'cal-cell--prelaunch opacity-30 cursor-default'
   } else if (isThreeStar) {
-    cls +=
-      'text-ink border border-accent cursor-pointer ' +
-      '[background:linear-gradient(180deg,oklch(96%_0.06_180),oklch(92%_0.05_180))]'
+    cls += 'cal-cell--perfect text-ink cursor-pointer'
   } else if (isPlayed) {
-    cls += 'text-ink bg-tile-face border border-tile-edge cursor-pointer shadow-tile/40'
+    cls += 'cal-cell--played text-ink cursor-pointer'
   } else if (isMissed) {
     // Missed days are playable as makeups — tappable, with a hover invite.
-    cls +=
-      'text-ink-soft cursor-pointer border border-dashed border-paper-line ' +
-      'hover:border-accent hover:text-ink transition-colors ' +
-      '[background:oklch(94%_0.012_85_/_0.45)]'
+    cls += 'cal-cell--missed border-dashed text-ink-soft hover:text-ink cursor-pointer transition-colors'
+  } else {
+    // Today, not yet played.
+    cls += 'cal-cell--open cursor-pointer'
   }
   if (isToday) cls += ' ring-2 ring-accent'
 
@@ -264,31 +301,25 @@ function DayCell({
       {stored && (
         <span className="inline-flex gap-px mt-1">
           {[1, 2, 3].map((n) => (
-            <span
+            <Icon
               key={n}
-              className="material-icons"
+              name="star"
+              size={9}
+              filled={n <= stored.stars}
               style={{
-                fontSize: 9,
                 color:
                   n <= stored.stars ? 'var(--color-accent)' : 'var(--color-tile-edge)',
-                fontVariationSettings:
-                  n <= stored.stars
-                    ? '"FILL" 1, "wght" 500, "GRAD" 0, "opsz" 20'
-                    : '"FILL" 0, "wght" 500, "GRAD" 0, "opsz" 20',
               }}
-            >
-              star
-            </span>
+            />
           ))}
         </span>
       )}
       {stored?.mode === 'makeup' && (
         <span
-          className="material-icons absolute top-0.5 right-0.5 text-ink-soft"
-          style={{ fontSize: 8 }}
+          className="absolute top-0.5 right-0.5 text-ink-soft"
           aria-label="Played late"
         >
-          history
+          <Icon name="clock" size={8} />
         </span>
       )}
     </button>

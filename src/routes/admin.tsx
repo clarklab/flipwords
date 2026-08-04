@@ -1,11 +1,16 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { allLevels, getLevelHintPattern, getSolvedEdgeAnswers } from '@/components/FlipWords'
+import { getLevelHintPattern, getSolvedEdgeAnswers } from '@/components/FlipWords'
+import { useEdition } from '@/edition'
 
 export const Route = createFileRoute('/admin')({
   component: AdminPage,
 })
 
 function AdminPage() {
+  // The library view follows the active edition, so both puzzle sets are
+  // inspectable by flipping the toggle.
+  const { config } = useEdition()
+  const allLevels = config.levels
   const tierCount = {
     1: allLevels.filter((l) => (l.tier ?? 1) === 1).length,
     2: allLevels.filter((l) => l.tier === 2).length,
@@ -19,6 +24,7 @@ function AdminPage() {
         <header className="flex flex-wrap items-baseline justify-between gap-y-2 border-b border-paper-line/40 pb-5">
           <div>
             <h1 className="font-wide text-3xl md:text-4xl text-ink">PUZZLE LIBRARY</h1>
+            <p className="font-ui text-xs text-ink-soft mt-1 uppercase tracking-[0.16em]">{config.name}</p>
             <p className="font-clue text-sm text-ink-muted mt-2">
               All {allLevels.length} levels, with clue text, solved edges, and the hint walkthrough.
             </p>
@@ -44,18 +50,18 @@ function AdminPage() {
             return (
               <article
                 key={level.id}
-                className="rounded-2xl border border-tile-edge bg-tile-face/80 backdrop-blur-sm p-5 shadow-tile"
+                className="r-card border border-tile-edge bg-tile-face/80 backdrop-blur-sm p-5 shadow-tile"
               >
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <h2 className="font-expand text-lg text-ink">
                     {level.title ?? `Puzzle ${level.id}`}
                   </h2>
                   <span className="font-ui text-[11px] text-ink-soft">#{level.id}</span>
-                  <span className="font-ui rounded-full bg-surface-deep/40 px-2.5 py-0.5 text-[11px] text-ink-muted uppercase tracking-wide">
+                  <span className="font-ui r-pill bg-surface-deep/40 px-2.5 py-0.5 text-[11px] text-ink-muted uppercase tracking-wide">
                     Tier {level.tier ?? 1}
                   </span>
                   <span
-                    className={`font-ui rounded-full px-2.5 py-0.5 text-[11px] uppercase tracking-wide ${
+                    className={`font-ui r-pill px-2.5 py-0.5 text-[11px] uppercase tracking-wide ${
                       level.requiresRotation
                         ? 'bg-accent-soft text-accent'
                         : 'bg-surface-deep/40 text-ink-muted'
@@ -90,19 +96,19 @@ function AdminPage() {
                   </p>
                   <div className="mt-2 grid gap-1 md:grid-cols-2">
                     <p>
-                      <span className="font-ui text-accent uppercase text-[10px] tracking-wider">Top answer</span> {solvedEdges.top}
+                      <span className="accent-type font-ui text-accent uppercase text-[10px] tracking-wider">Top answer</span> {solvedEdges.top}
                     </p>
                     <p>
-                      <span className="font-ui text-accent uppercase text-[10px] tracking-wider">Bottom answer</span> {solvedEdges.bottom}
+                      <span className="accent-type font-ui text-accent uppercase text-[10px] tracking-wider">Bottom answer</span> {solvedEdges.bottom}
                     </p>
                     <p>
-                      <span className="font-ui text-accent uppercase text-[10px] tracking-wider">Left answer</span> {solvedEdges.left}
+                      <span className="accent-type font-ui text-accent uppercase text-[10px] tracking-wider">Left answer</span> {solvedEdges.left}
                     </p>
                     <p>
-                      <span className="font-ui text-accent uppercase text-[10px] tracking-wider">Right answer</span> {solvedEdges.right}
+                      <span className="accent-type font-ui text-accent uppercase text-[10px] tracking-wider">Right answer</span> {solvedEdges.right}
                     </p>
                   </div>
-                  <details className="mt-3 rounded-lg bg-surface-deep/30 p-3">
+                  <details className="mt-3 r-panel bg-surface-deep/30 p-3">
                     <summary className="font-ui text-xs text-ink-muted cursor-pointer hover:text-ink">Hint walkthrough</summary>
                     <ol className="mt-2 list-decimal space-y-1 pl-5 text-ink-muted text-sm">
                       {hintPattern.map((step, index) => (

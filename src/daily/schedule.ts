@@ -1,5 +1,5 @@
-import { allLevels, pickSessionLevelsSeeded } from '@/game/levels'
-import { LAUNCH_DATE } from './date'
+import { pickSessionLevelsSeeded } from '@/game/levels'
+import type { EditionConfig } from '@/edition/types'
 import type { Level } from '@/game/types'
 import type { EasternDate } from './types'
 
@@ -10,32 +10,43 @@ import type { EasternDate } from './types'
  * changes. So each batch of levels gets a release date, and a given day's
  * session draws exclusively from the batches live on that day.
  *
+ * The schedule now lives on the edition config (`EditionConfig.poolReleases`)
+ * so each edition grows independently.
+ *
  * RULES FOR ADDING LEVELS:
- *   1. Append the new levels to matrices.json / levels_generated.json with
- *      ids ABOVE the previous maximum. Never renumber shipped levels.
- *   2. Add one entry here: { from: <tomorrow-or-later>, maxId: <new max> }.
- *      Entries must stay sorted by `from`, and `from` must never be a date
- *      that has already passed for live players.
+ *   1. Append new levels with ids ABOVE the edition's previous maximum.
+ *      Never renumber shipped levels.
+ *   2. Add one entry to that edition's `poolReleases`:
+ *      { from: <tomorrow-or-later>, maxId: <new max> }. Entries stay sorted
+ *      by `from`, and `from` must never be a date that has already passed
+ *      for live players.
  */
-const POOL_RELEASES: Array<{ from: EasternDate; maxId: number }> = [
-  { from: LAUNCH_DATE, maxId: 101 },
-  { from: '2026-07-03', maxId: 151 },
-]
 
-/** The subset of the library eligible for the given date's daily session. */
-export function poolForDate(date: EasternDate): Level[] {
-  let maxId = POOL_RELEASES[0].maxId
-  for (const release of POOL_RELEASES) {
+/** The subset of the edition's library eligible for the given date. */
+export function poolForDate(
+  edition: EditionConfig,
+  date: EasternDate
+): Level[] {
+  const releases = edition.poolReleases
+  let maxId = releases[0].maxId
+  for (const release of releases) {
     if (date >= release.from) maxId = release.maxId
   }
-  return allLevels.filter((l) => l.id <= maxId)
+  return edition.levels.filter((l) => l.id <= maxId)
 }
 
 /**
  * Today's (or any past day's) 5-puzzle session. Deterministic for the given
- * date string — same date returns the same sequence, identically ordered,
- * forever, even as the level library grows (see POOL_RELEASES).
+ * edition + date — the same pair returns the same sequence, identically
+ * ordered, forever, even as the level library grows (see poolReleases).
  */
-export function getSessionForDate(date: EasternDate): Level[] {
-  return pickSessionLevelsSeeded(`flipwords:${date}`, 5, poolForDate(date))
+export function getSessionForDate(
+  edition: EditionConfig,
+  date: EasternDate
+): Level[] {
+  return pickSessionLevelsSeeded(
+    `${edition.seedPrefix}:${date}`,
+    5,
+    poolForDate(edition, date)
+  )
 }

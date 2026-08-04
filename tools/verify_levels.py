@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""Verify levels_generated.json: each level must have EXACTLY ONE valid configuration.
+"""Verify a built levels file: each level must have EXACTLY ONE valid configuration.
+
+Defaults to the base FlipWords library:
+
+    python3 tools/verify_levels.py
+
+Alternate editions pass their own build product:
+
+    python3 tools/verify_levels.py --levels levels_texas.json
+
 
 A configuration is (pair-of-tiles, flip0, flip1, rotation). For each level we enumerate
 all 5*4*2*2*2 = 160 configurations. A configuration is "valid" if:
@@ -13,6 +22,7 @@ the level's top-edge clue (i.e. the level's expected edge), the rotation matches
 level's requiresRotation, and the slot state matches the level's solution.
 """
 
+import argparse
 import json
 import re
 import sys
@@ -33,8 +43,8 @@ def load_compounds() -> set[str]:
         return {line.strip().upper() for line in f if line.strip()}
 
 
-def load_levels() -> list[dict]:
-    with LEVELS_FILE.open() as f:
+def load_levels(path: Path) -> list[dict]:
+    with path.open() as f:
         return json.load(f)
 
 
@@ -279,9 +289,23 @@ def verify_level(level: dict, compounds: set[str]) -> tuple[bool, str]:
     return True, ""
 
 
-def main() -> int:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    ap = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    ap.add_argument(
+        "--levels",
+        type=Path,
+        default=LEVELS_FILE,
+        help=f"built levels JSON to verify (default: {LEVELS_FILE.name})",
+    )
+    return ap.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
     compounds = load_compounds()
-    levels = load_levels()
+    levels = load_levels(args.levels)
 
     failures = []
     for level in levels:
@@ -290,11 +314,11 @@ def main() -> int:
             failures.append(err)
 
     if failures:
-        print(f"FAILED: {len(failures)}/{len(levels)} levels failed verification")
+        print(f"FAILED: {len(failures)}/{len(levels)} levels failed verification ({args.levels})")
         for f in failures:
             print(f)
         return 1
-    print(f"OK: all {len(levels)} levels verified (exactly one valid config each).")
+    print(f"OK: all {len(levels)} levels verified (exactly one valid config each). [{args.levels.name}]")
     return 0
 
 

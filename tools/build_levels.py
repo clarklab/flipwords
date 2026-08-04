@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
-"""Build levels_generated.json from matrices + decoys, validating against compound word list."""
+"""Build a levels JSON from matrices + decoys, validating against the compound word list.
 
+Defaults build the base FlipWords library:
+
+    python3 tools/build_levels.py
+
+Alternate editions (e.g. the Texas Monthly "Texas Two-Step" reskin) share this
+exact pipeline and differ only in their inputs/outputs:
+
+    python3 tools/build_levels.py --matrices tools/matrices_texas.json \\
+                                  --output levels_texas.json
+"""
+
+import argparse
 import json
 import random
 import re
@@ -26,13 +38,13 @@ def load_compounds() -> set[str]:
         return {line.strip().upper() for line in f if line.strip()}
 
 
-def load_matrices() -> list[dict]:
-    with MATRICES_FILE.open() as f:
+def load_matrices(path: Path) -> list[dict]:
+    with path.open() as f:
         return json.load(f)
 
 
-def load_decoys() -> list[dict]:
-    with DECOYS_FILE.open() as f:
+def load_decoys(path: Path) -> list[dict]:
+    with path.open() as f:
         return json.load(f)
 
 
@@ -290,9 +302,12 @@ def _filler_pool(
     These are safe to pair with a solution word on a decoy tile — the player sees
     the solution word duplicated but the other half is a dead end.
     """
+    # sorted(): `atomic` is a set, and set iteration order depends on
+    # PYTHONHASHSEED. Iterating it unsorted made every build re-roll the decoy
+    # tiles, which silently re-deals puzzles players have already archived.
     return [
         w
-        for w in atomic
+        for w in sorted(atomic)
         if w not in soln_words
         and not any((s + w) in compounds or (w + s) in compounds for s in soln_words)
     ]
@@ -340,8 +355,9 @@ def pick_decoys(
     # Build per-solution-word lists of safe single-decoy tiles. For each solution
     # word S, try every filler F in both orientations (S/F and F/S) and keep
     # those that don't create an alternate solution alongside t1/t2.
-    singles_by_word: dict[str, list[dict]] = {s: [] for s in soln_set}
-    for s in soln_set:
+    # sorted() for the same reason as _filler_pool — set order is seed-dependent.
+    singles_by_word: dict[str, list[dict]] = {s: [] for s in sorted(soln_set)}
+    for s in sorted(soln_set):
         for f in fillers:
             for top, bot in ((s, f), (f, s)):
                 tile = _bare(top, bot)
@@ -382,7 +398,9 @@ def pick_decoys(
         return True
 
     # Preferred shape: 2 singles (covering 2 different solution words) + 1 double.
-    soln_word_order = list(soln_set)
+    # sorted() before the shuffle: list(set) starts from a seed-dependent order,
+    # so shuffling it yields a seed-dependent result even with a fixed RNG.
+    soln_word_order = sorted(soln_set)
     rng.shuffle(soln_word_order)
     for i, wa in enumerate(soln_word_order):
         for wb in soln_word_order[i + 1 :]:
@@ -410,27 +428,53 @@ def pick_decoys(
     return None, "no-overlap-triple"
 
 
-def load_existing_levels() -> dict[int, dict]:
-    """Levels already shipped in levels_generated.json, keyed by id.
+def load_existing_levels(path: Path) -> dict[int, dict]:
+    """Levels already shipped in the output file, keyed by id.
 
     SHIPPED LEVELS ARE FROZEN. Players have played them and the daily archive
     replays them, so a rebuild must reproduce them byte-for-byte rather than
     re-rolling decoys with a drifted RNG stream. A matrix whose id already has
     a shipped level (and whose solution still matches) is reused verbatim;
     only genuinely new matrices generate fresh levels. To intentionally re-roll
-    a shipped level, delete it from levels_generated.json and rebuild.
+    a shipped level, delete it from the output file and rebuild.
     """
-    if not OUTPUT_FILE.exists():
+    if not path.exists():
         return {}
-    with OUTPUT_FILE.open() as f:
+    with path.open() as f:
         return {lvl["id"]: lvl for lvl in json.load(f)}
 
 
-def main() -> int:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument(
+        "--matrices",
+        type=Path,
+        default=MATRICES_FILE,
+        help=f"curated matrices JSON (default: {MATRICES_FILE.name})",
+    )
+    ap.add_argument(
+        "--output",
+        type=Path,
+        default=OUTPUT_FILE,
+        help=f"levels JSON to write (default: {OUTPUT_FILE.name})",
+    )
+    ap.add_argument(
+        "--decoys",
+        type=Path,
+        default=DECOYS_FILE,
+        help=f"decoy tile pool (default: {DECOYS_FILE.name})",
+    )
+    return ap.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    output_file = args.output
+
     compounds = load_compounds()
-    matrices = load_matrices()
-    decoys = load_decoys()
-    existing = load_existing_levels()
+    matrices = load_matrices(args.matrices)
+    decoys = load_decoys(args.decoys)
+    existing = load_existing_levels(output_file)
 
     rng = random.Random(42)
 
@@ -451,12 +495,29 @@ def main() -> int:
         t1, t2 = build_solution_tiles(m["matrix"], rotation)
         expected = expected_edges(m["matrix"])
 
-        # Frozen path: reuse the shipped level for this matrix untouched.
-        prior = existing.get(int(m["id"]))
+        # Level id IS the matrix id. It used to be positional (len(levels)+1),
+        # which meant skipping or inserting a single matrix silently renumbered
+        # every level after it — re-pointing ids that players' archives and the
+        # daily scheduler already depend on.
+        level_id = int(m["id"])
+
+        # Frozen path: a shipped level for this id, with a matching solution,
+        # is reused so its RNG-picked decoys stay byte-stable forever.
+        prior = existing.get(level_id)
         if prior is not None and prior["solution"] == expected_solution(m["matrix"], rotation):
             frozen = dict(prior)
-            # Titles are display-only metadata — safe to add/refresh on frozen
-            # levels without changing gameplay content.
+            frozen["id"] = level_id
+            # EDITORIAL metadata is refreshed; GENERATED content (tiles) is not.
+            # Previously only `title` refreshed, so fixing a clue or a tier in
+            # the matrices file was silently discarded on rebuild and looked
+            # like the edit hadn't taken.
+            frozen["hints"] = {
+                "topRow": m["clues"]["top"],
+                "bottomRow": m["clues"]["bottom"],
+                "leftCol": m["clues"]["left"],
+                "rightCol": m["clues"]["right"],
+            }
+            frozen["tier"] = int(m.get("tier", 1))
             if m.get("title"):
                 frozen["title"] = m["title"]
             elif "title" in frozen:
@@ -490,7 +551,7 @@ def main() -> int:
         # a matrix entry forgets to set it.
         tier = int(m.get("tier", 1))
         level = {
-            "id": len(levels) + 1,
+            "id": level_id,
             "tier": tier,
             "requiresRotation": rotation,
             "tiles": tiles,
@@ -508,18 +569,22 @@ def main() -> int:
             level["title"] = m["title"]
         levels.append(level)
 
-    OUTPUT_FILE.write_text(json.dumps(levels, indent=2) + "\n")
+    if skipped:
+        # Write nothing on failure. Previously the file was emitted first and
+        # the non-zero exit came after, so a failed build left a renumbered,
+        # partially-rebuilt library on disk that looked successful.
+        print(f"REFUSING TO WRITE — {len(skipped)} matrices failed validation:")
+        for sid, err in skipped:
+            print(f"  id={sid}: {err}")
+        return 1
 
-    print(f"Built {len(levels)} levels ({reused} frozen/reused) -> {OUTPUT_FILE}")
+    output_file.write_text(json.dumps(levels, indent=2) + "\n")
+
+    print(f"Built {len(levels)} levels ({reused} frozen/reused) -> {output_file}")
     if shape_counts:
         print("Decoy shape breakdown:")
         for shape, n in sorted(shape_counts.items(), key=lambda kv: -kv[1]):
             print(f"  {shape}: {n}")
-    if skipped:
-        print(f"Skipped {len(skipped)} matrices:")
-        for sid, err in skipped:
-            print(f"  id={sid}: {err}")
-        return 1
     return 0
 
 

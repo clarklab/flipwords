@@ -1,10 +1,11 @@
 import type { EasternDate } from './types'
 
 /**
- * The first day the daily feature is live. Day 1 of the puzzle numbering.
- * Set right before shipping. Until shipped, leave at the planned launch date.
+ * Each edition has its own day 1 — see `EditionConfig.launchDate`. Date math
+ * that depends on it takes the launch date as an argument rather than reading
+ * a module constant, so the two editions can number their puzzles
+ * independently.
  */
-export const LAUNCH_DATE: EasternDate = '2026-05-18'
 
 const FORMATTER = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'America/New_York',
@@ -26,9 +27,12 @@ function parseDate(date: EasternDate): Date {
   return new Date(Date.UTC(y, m - 1, d))
 }
 
-/** Number of days since LAUNCH_DATE (inclusive). Launch day = 1. */
-export function dayNumber(date: EasternDate): number {
-  const diff = parseDate(date).getTime() - parseDate(LAUNCH_DATE).getTime()
+/** Number of days since the edition's launch (inclusive). Launch day = 1. */
+export function dayNumber(
+  date: EasternDate,
+  launchDate: EasternDate
+): number {
+  const diff = parseDate(date).getTime() - parseDate(launchDate).getTime()
   return Math.round(diff / MS_PER_DAY) + 1
 }
 

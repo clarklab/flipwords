@@ -1,4 +1,4 @@
-const SITE_URL = 'flipwords.superfun.games'
+import type { EditionConfig } from '@/edition/types'
 
 export type ShareInput = {
   dayNumber: number
@@ -27,14 +27,19 @@ function starString(stars: 1 | 2 | 3): string {
   return '★'.repeat(stars) + '☆'.repeat(3 - stars)
 }
 
-export function formatShareString(input: ShareInput): string {
-  const headline = `FLIPWORDS No. ${padNumber(input.dayNumber)}${input.late ? ' (late)' : ''}`
+export function formatShareString(
+  edition: EditionConfig,
+  input: ShareInput
+): string {
+  const headline = `${edition.share.headline} No. ${padNumber(input.dayNumber)}${
+    input.late ? ' (late)' : ''
+  }`
   const grid = input.perPuzzleStars.map(starString).join(' ')
   const lines = [headline, `${grid} — ${formatTime(input.totalDurationMs)}`]
   if (!input.late && input.streak >= 2) {
     lines.push(`🔥 ${input.streak}-day streak`)
   }
-  lines.push(SITE_URL)
+  lines.push(edition.share.siteUrl)
   return lines.join('\n')
 }
 
@@ -42,8 +47,11 @@ export function formatShareString(input: ShareInput): string {
  * Share via the Web Share API if available, falling back to clipboard.
  * Returns the method used so the caller can show appropriate UI feedback.
  */
-export async function shareSession(input: ShareInput): Promise<'native' | 'clipboard' | 'failed'> {
-  const text = formatShareString(input)
+export async function shareSession(
+  edition: EditionConfig,
+  input: ShareInput
+): Promise<'native' | 'clipboard' | 'failed'> {
+  const text = formatShareString(edition, input)
   if (typeof navigator === 'undefined') return 'failed'
   if (typeof navigator.share === 'function') {
     try {

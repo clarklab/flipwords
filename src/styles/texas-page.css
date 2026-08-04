@@ -1,0 +1,282 @@
+/* ===========================================================================
+   THE TEXAS TWO-STEP — the page itself
+   ---------------------------------------------------------------------------
+   This file exists because of one review note:
+
+     "Right now the page is a white card floating inside an orange bezel with a
+      persistent orange status bar welded to the bottom, centred in a 1400px
+      browser. That silhouette — not any font, colour or radius — is what says
+      'generic app wearing your colours.'"
+
+   Everything else in the Texas layer was styling the furniture inside a phone
+   shell. This file deletes the shell.
+
+     • `.app-shell`  — the `h-[100dvh] overflow-hidden` root every route wraps
+       content in. Under Texas it becomes a normal, scrolling document.
+     • `.play-surface` — the floating rounded card. Under Texas it is nothing:
+       no border, no radius, no shadow, no background. The page IS the surface.
+     • `.page-meta` — what used to be `.bg-chin`, the orange strip welded to the
+       viewport bottom. Under Texas it is a ruled caps line in the content
+       column: editorial metadata, not a status bar.
+
+   FLIPWORDS IS UNTOUCHED. Every rule below is either a new edition-agnostic
+   class whose base branch reproduces the literal it replaces (`.chin-safe`), or
+   is scoped `:root[data-edition="texas"]` and simply does not apply there.
+
+   Cascade: unlayered, so these beat Tailwind utilities (@layer utilities)
+   outright — that is how `height: auto` defeats `h-[100dvh]` and
+   `max-width: var(--tm-col)` defeats `max-w-3xl`. Against the hand-written
+   classes in styles.css — all (0,1,0) — the `:root[data-edition] .x` form is
+   (0,2,1) and wins on specificity, never on @import order.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. EDITION-AGNOSTIC — the base branch is byte-equivalent to what it replaces
+   --------------------------------------------------------------------------- */
+
+/* Was an inline `style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-
+   bottom))' }}` on all three chins. An inline style outranks every author
+   rule, so the Texas layer could not otherwise reach it. Same value. */
+.chin-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+/* ===========================================================================
+   2. TEXAS — the shell comes off
+   =========================================================================== */
+
+:root[data-edition="texas"] {
+  /* TM's content column, measured off the screenshots: the grid spans ~86% of
+     a ~1340px viewport, i.e. ~1160 CSS px. Everything on the page — masthead,
+     rules, board, calendar — hangs off this one measure, which is most of what
+     makes a magazine page feel set rather than assembled. */
+  --tm-col: 1160px;
+  --tm-gutter: 1.25rem;
+  --tm-measure: min(var(--tm-col), 100% - var(--tm-gutter) * 2);
+}
+
+@media (min-width: 48rem) {
+  :root[data-edition="texas"] { --tm-gutter: 2rem; }
+}
+
+/* TM's page is flat white to the edges. The base sheet paints a warm radial
+   wash plus a diagonal weave over the whole viewport; the grain belongs in the
+   drawn artwork, not in the chrome. (`--paper-tex: none` in texas-theme.css
+   does most of this; this rule removes the literal gradient styles.css bakes
+   in, which no custom property can reach.) */
+:root[data-edition="texas"] body::before {
+  background: var(--color-surface);
+}
+
+/* --- the shell ----------------------------------------------------------
+   `h-[100dvh] w-full flex flex-col bg-chin overflow-hidden` becomes a normal
+   document: full height as a MINIMUM, not a cage, and no orange anywhere.
+   Kept as a flex column (rather than block) purely so `.page-meta--lead` can
+   reorder itself above the surface on /play without moving any markup.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .app-shell {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+  background: var(--color-surface);
+}
+
+/* --- the floating card --------------------------------------------------
+   The single highest-leverage rule in the reskin. `flex: 1 0 auto` rather than
+   Tailwind's `flex-1` (= `1 1 0%`): basis 0 would let a tall board overflow a
+   short viewport, which is exactly the bug that put the bottom clue under the
+   tile rail. Basis auto means the surface is never shorter than its content —
+   the page scrolls instead.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .play-surface {
+  /* `display: contents` rather than a stack of resets, because the card is not
+     supposed to be a *plain* box here — it is supposed to not exist. Its
+     children become sections of the page itself, which is what lets the
+     masthead rule run edge to edge, lets the board size to its content instead
+     of to a leftover flex line, and lets the metadata row slot in under the
+     masthead without moving a single line of markup (see .page-meta--lead).
+     Note that `display: contents` does not affect selector matching, so the
+     `.play-surface > *` rules below still reach the flattened children. */
+  display: contents;
+}
+
+/* Section order once the card is flattened. DOM order is masthead, hint,
+   board, rail, metadata; TM puts the metadata line directly under the masthead
+   rule (their "READ NEXT ..." bar), so it is pulled up by one step. Every rule
+   here is Texas-only — FlipWords still renders a chin, last, on the teal. */
+:root[data-edition="texas"] .play-surface > * { order: 2; }
+:root[data-edition="texas"] .game-masthead { order: 0; }
+:root[data-edition="texas"] .page-meta { order: 3; }
+:root[data-edition="texas"] .page-meta--lead { order: 1; }
+
+/* The board used to be `flex-1 min-h-0` — a basis-0 flex line inside a fixed
+   100dvh cage. That is the mechanism behind the reported bug: when the board's
+   content was taller than the line it was given, being centred, it overflowed
+   both ways at once — up through the masthead and down under the tile rail.
+   Content-sized, it can only push. */
+:root[data-edition="texas"] .board-area {
+  /* Basis `auto`, not Tailwind's `flex-1` basis of 0: the board can grow into
+     whatever height is spare (so it sits optically centred on a tall phone)
+     but can never be squeezed below its own content. */
+  flex: 1 0 auto;
+  min-height: 0;
+}
+
+/* The rack hangs --tile-bleed past its own container, which the card's
+   `overflow-hidden` used to crop. Nothing crops now, so the page pays for it
+   explicitly instead of growing a stray scroll. */
+:root[data-edition="texas"] .tile-rail-area {
+  padding-bottom: calc(var(--tile-bleed) + 1.5rem);
+}
+
+/* --- the content measure ------------------------------------------------
+   The markup pins its columns with `max-w-3xl` (768px) and `max-w-md` (448px)
+   — phone measures. Unlayered, so this wins over both without touching the
+   utilities, which FlipWords still needs.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .tm-container {
+  width: 100%;
+  max-width: var(--tm-measure);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+/* --- masthead -----------------------------------------------------------
+   TM's masthead runs the full width of the page above a heavy black rule; the
+   rule is the page's top edge, not a card's. `.game-masthead` and the title
+   screen's `<header class="rule-heavy">` both already draw it — all that is
+   missing is for it to span the viewport rather than a 768px column.
+   ------------------------------------------------------------------------ */
+:root[data-edition="texas"] .tm-masthead {
+  width: 100%;
+  border-bottom: var(--rule-weight) solid var(--color-ink);
+  padding-bottom: 0;
+}
+
+/* Wordmark left, utilities right — TM's arrangement — from the tablet up. On a
+   phone it stays optically centred, which is where the two 44px icon buttons
+   leave room for it. */
+@media (min-width: 48rem) {
+  :root[data-edition="texas"] .tm-wordmark-slot {
+    justify-content: flex-start;
+    padding-left: 3.75rem;
+  }
+}
+
+/* ===========================================================================
+   3. THE CHIN BECOMES A METADATA LINE
+   The countdown and "1 of 5" are the page's date line: what TM sets under a
+   headline as "July 30, 2026". Ruled, tracked caps, in the content column, in
+   normal flow — nothing pinned to the viewport.
+   =========================================================================== */
+
+:root[data-edition="texas"] .page-meta {
+  background: none;
+  padding: 0;
+  color: var(--color-ink);
+}
+
+/* (Ordering is set once, above, where the card is flattened.) */
+
+:root[data-edition="texas"] .chin-row {
+  width: 100%;
+  max-width: var(--tm-measure);
+  margin-inline: auto;
+  padding: 0.6rem 0 0.7rem;
+  border-bottom: 1px solid var(--color-paper-line);
+}
+
+/* The trailing metadata lines (title screen, archive) sit under a rule instead
+   of over one — a colophon rather than a standfirst. */
+:root[data-edition="texas"] .page-meta:not(.page-meta--lead) .chin-row {
+  border-bottom: 0;
+  border-top: 1px solid var(--color-paper-line);
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+/* 22px semibold figures are a status bar. Tracked caps at eyebrow scale are a
+   date line. Tabular so the ticking clock does not jitter. */
+:root[data-edition="texas"] .meta-figure {
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-variation-settings: "wdth" 100, "wght" 700;
+  text-transform: uppercase;
+}
+
+/* The label that follows a figure ("of 5") — same line, softer. */
+:root[data-edition="texas"] .chin-dim {
+  color: var(--color-ink-muted);
+}
+
+/* Label shown only under Texas, so the caps line reads as prose rather than as
+   two orphaned numbers. */
+.meta-label { display: none; }
+:root[data-edition="texas"] .meta-label {
+  display: inline;
+  color: var(--color-ink-muted);
+  margin-right: 0.5em;
+}
+
+/* Once the figure carries its own label ("NEXT PUZZLE IN 4H 52M"), the trailing
+   caption on the other end of the line is saying it twice. */
+:root[data-edition="texas"] .tm-meta-trail {
+  display: none;
+}
+
+/* ===========================================================================
+   4. DISPLAY SCALE
+   "The didone is under-deployed and always small — Archive's 'Archive' is 28px
+   where TM would run ~82px. At 28px Grifinito's hairlines anti-alias to mush."
+   The brand's defining move is deck -> headline at 3.4-3.8x with nothing in
+   between; these are the places on each route where that jump can happen.
+   =========================================================================== */
+
+:root[data-edition="texas"] .tm-page-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: normal;
+  font-feature-settings: normal;
+  font-size: clamp(3.25rem, 11vw, 5.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================================================================
+   5. ACCESSIBILITY
+   Six measured AA failures, all of them inherited from copying TM's own site
+   too faithfully. Copying an accessibility bug is not matching a brand.
+   =========================================================================== */
+
+/* `--color-ink-soft` (byline grey, 2.61:1 -> 5.31:1) and `--color-accent-ink`
+   (coral type + coral fills under white type, 3.34:1 -> 5.10:1) are both set in
+   texas-theme.css, next to the sampled values they derive from. One block owns
+   the tokens so nothing here depends on @import order. */
+
+/* Disabled month-nav chevrons were `text-ink-soft/30` = 2.10:1. Inactive
+   controls are exempt from 1.4.3, but 2.1:1 is invisible, not merely dim. */
+:root[data-edition="texas"] .arc-nav-off {
+  color: color-mix(in oklab, var(--color-ink-soft) 78%, white);
+  cursor: default;
+}
+
+/* ===========================================================================
+   6. PRINT-LIKE DETAILS
+   =========================================================================== */
+
+/* TM sets prose flush left. Centred paragraphs are a slide deck. */
+:root[data-edition="texas"] .tm-prose {
+  text-align: left;
+}
+
+/* The rotating FLIP/FLOP/SWAP word is FlipWords' in-joke about its own
+   mechanics. Under a Texas Monthly masthead it means nothing, and mid-
+   transition it leaves a hole in the line. The interval is stopped in JS by
+   reading `--kicker-animate` (see TitleScreen.tsx) so no component has to know
+   an edition name; this hides the word itself. */
+.tm-kicker-word { display: inline-flex; }
+:root[data-edition="texas"] .tm-kicker-word { display: none; }

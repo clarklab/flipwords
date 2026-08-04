@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import FlipWords from '@/components/FlipWords'
 import Scorecard from '@/components/Scorecard'
 import { getSessionForDate } from '@/daily/schedule'
@@ -9,6 +9,7 @@ import { recordCompletion } from '@/daily/streak'
 import { readProgress, writeProgress } from '@/daily/progress'
 import { useEasternDate } from '@/daily/useEasternDate'
 import { formatShareString, shareSession } from '@/daily/share'
+import { useEdition } from '@/edition'
 import type { PuzzleResult, SessionResult, StoredSession } from '@/daily/types'
 
 export const Route = createFileRoute('/play')({
@@ -25,23 +26,21 @@ function ShareFallback({ text, onClose }: { text: string; onClose: () => void })
   return (
     <div
       className="fixed inset-0 z-[70] flex items-center justify-center p-6"
-      style={{ background: 'rgba(20,15,5,0.55)', backdropFilter: 'blur(6px)' }}
+      style={{ background: 'rgb(var(--scrim-rgb) / 0.55)', backdropFilter: 'blur(6px)' }}
     >
-      <div className="bg-tile-face rounded-3xl w-full max-w-sm p-5 shadow-tile-lift">
-        <p className="font-ui text-[11px] text-ink-soft uppercase tracking-[0.22em] mb-3">
-          Copy this manually
-        </p>
+      <div className="bg-tile-face r-card w-full max-w-sm p-5 shadow-tile-lift">
+        <p className="tm-eyebrow text-ink-soft mb-3">Copy this manually</p>
         <textarea
           readOnly
           autoFocus
           onFocus={(e) => e.currentTarget.select()}
-          className="w-full font-mono text-[13px] text-ink bg-surface border border-tile-edge rounded-2xl p-3 mb-4 resize-none"
+          className="w-full font-mono text-[13px] text-ink bg-surface border border-tile-edge r-panel p-3 mb-4 resize-none"
           rows={4}
           value={text}
         />
         <button
           onClick={onClose}
-          className="w-full font-ui bg-ink text-surface rounded-full py-3 text-sm"
+          className="btn-primary w-full font-ui bg-ink text-surface r-btn py-3 text-sm"
         >
           Done
         </button>
@@ -53,40 +52,50 @@ function ShareFallback({ text, onClose }: { text: string; onClose: () => void })
 function PlayRoute() {
   const navigate = useNavigate()
   const { tutorial: tutorialFromSearch } = Route.useSearch()
+  const { config } = useEdition()
 
   // Snapshot the start date so a cross-midnight session still resolves to its
   // original day (per the design spec edge case). Resettable so the done-state
   // "new puzzle" CTA can roll the route onto the new day without a reload.
   const [startDate, setStartDate] = useState(() => easternDateString())
   const liveToday = useEasternDate()
-  const session = useMemo(() => getSessionForDate(startDate), [startDate])
-  const dn = dayNumber(startDate)
+  const session = useMemo(
+    () => getSessionForDate(config, startDate),
+    [config, startDate]
+  )
+  const dn = dayNumber(startDate, config.launchDate)
 
   const [existingResult, setExistingResult] = useState<StoredSession | null>(
-    () => loadStorage().sessions[startDate] ?? null
+    () => loadStorage(config).sessions[startDate] ?? null
   )
+  // The lazy initialiser above runs once. Re-read whenever the edition or date
+  // changes, or a toggle leaves this route showing the other edition's result.
+  useEffect(() => {
+    setExistingResult(loadStorage(config).sessions[startDate] ?? null)
+  }, [config, startDate])
+
   const [practiceMode, setPracticeMode] = useState(false)
   const [shareFallbackText, setShareFallbackText] = useState<string | null>(null)
 
   // Resume seed: a valid inProgress record for this date restores finished
   // puzzles + the timer; the puzzle that was underway restarts fresh.
   const resume = useMemo(() => {
-    const p = readProgress(loadStorage(), startDate, 'daily')
+    const p = readProgress(loadStorage(config), startDate, 'daily')
     return p ? { puzzlesDone: p.puzzlesDone, elapsedMs: p.elapsedMs } : null
-  }, [startDate])
+  }, [config, startDate])
 
   const handleProgress = (p: {
     puzzlesDone: PuzzleResult[]
     currentIdx: number
     elapsedMs: number
   }) => {
-    saveStorage(writeProgress(loadStorage(), startDate, 'daily', p))
+    saveStorage(config, writeProgress(loadStorage(config), startDate, 'daily', p))
   }
 
   const handleComplete = (result: SessionResult) => {
     // recordCompletion also clears the matching inProgress record.
-    const next = recordCompletion(loadStorage(), startDate, result)
-    saveStorage(next)
+    const next = recordCompletion(loadStorage(config), startDate, result)
+    saveStorage(config, next)
     setExistingResult(next.sessions[startDate] ?? null)
   }
 
@@ -98,7 +107,7 @@ function PlayRoute() {
     const today = easternDateString()
     setPracticeMode(false)
     setStartDate(today)
-    setExistingResult(loadStorage().sessions[today] ?? null)
+    setExistingResult(loadStorage(config).sessions[today] ?? null)
   }
 
   const handleShare = async (input: {
@@ -107,9 +116,9 @@ function PlayRoute() {
     totalDurationMs: number
     streak: number
   }) => {
-    const result = await shareSession(input)
+    const result = await shareSession(config, input)
     if (result === 'failed') {
-      setShareFallbackText(formatShareString(input))
+      setShareFallbackText(formatShareString(config, input))
     }
   }
 
@@ -117,7 +126,7 @@ function PlayRoute() {
   if (practiceMode) {
     return (
       <>
-        <div className="h-[100dvh] w-full overflow-hidden bg-paper relative">
+        <div className="app-shell h-[100dvh] w-full overflow-hidden bg-paper relative">
           <FlipWords
             key={`practice-${startDate}`}
             session={session}
@@ -125,7 +134,6 @@ function PlayRoute() {
             dayNumber={dn}
             mode="practice"
             scorecardPrimaryLabel="Back to title"
-            scorecardPrimaryIcon="home"
             onScorecardPrimary={() => navigate({ to: '/' })}
           />
         </div>
@@ -147,7 +155,7 @@ function PlayRoute() {
           onPractice={handlePractice}
           onArchive={() => navigate({ to: '/archive' })}
           onShare={() => {
-            const stored = loadStorage()
+            const stored = loadStorage(config)
             void handleShare({
               dayNumber: dn,
               perPuzzleStars: existingResult.perPuzzle.map((p) => p.stars),
@@ -166,7 +174,7 @@ function PlayRoute() {
   // First run of today.
   return (
     <>
-      <div className="h-[100dvh] w-full overflow-hidden bg-paper relative">
+      <div className="app-shell h-[100dvh] w-full overflow-hidden bg-paper relative">
         <FlipWords
           key={`daily-${startDate}`}
           session={session}
@@ -177,11 +185,10 @@ function PlayRoute() {
           onProgress={handleProgress}
           showTutorial={tutorialFromSearch}
           scorecardPrimaryLabel="Share result"
-          scorecardPrimaryIcon="ios_share"
           onScorecardPrimary={() => {
             // Read fresh from storage — existingResult state may not have updated
             // yet on the very first React re-render after onComplete fires.
-            const stored = loadStorage()
+            const stored = loadStorage(config)
             const session = stored.sessions[startDate]
             if (!session) return
             void handleShare({
@@ -223,7 +230,8 @@ function ScorecardLock({
   const totalGuesses = result.perPuzzle.reduce((s, p) => s + p.attempts, 0)
   const totalHints = result.perPuzzle.reduce((s, p) => s + p.hints, 0)
 
-  const stored = loadStorage()
+  const { config } = useEdition()
+  const stored = loadStorage(config)
   const streakSnapshot = {
     current: stored.streak.current,
     best: stored.streak.best,
@@ -231,10 +239,10 @@ function ScorecardLock({
   }
 
   return (
-    <div className="h-[100dvh] w-full overflow-hidden bg-paper relative">
+    <div className="app-shell h-[100dvh] w-full overflow-hidden bg-paper relative">
       <Scorecard
         open
-        headline="Today's session"
+        headline="This session"
         overallStars={overall}
         totalStars={totalStars}
         possibleStars={possible}
@@ -243,7 +251,6 @@ function ScorecardLock({
         totalHints={totalHints}
         perPuzzle={result.perPuzzle}
         primaryLabel="Share result"
-        primaryIcon="ios_share"
         onPrimary={onShare}
         streak={streakSnapshot}
       />
@@ -254,9 +261,8 @@ function ScorecardLock({
         {newDayAvailable && (
           <button
             onClick={onPlayToday}
-            className="pointer-events-auto font-ui flex items-center gap-2 bg-accent text-white px-6 py-3 rounded-full text-sm shadow-tile-lift active:scale-95"
+            className="accent-fill btn-primary pointer-events-auto font-ui flex items-center gap-2 bg-accent text-white px-6 py-3 r-btn text-sm shadow-tile-lift active:scale-95"
           >
-            <span className="material-icons text-[18px]">wb_sunny</span>
             A new puzzle is ready — play now
           </button>
         )}
@@ -264,14 +270,12 @@ function ScorecardLock({
           onClick={onPractice}
           className="pointer-events-auto font-ui flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink py-2 px-3"
         >
-          <span className="material-icons text-[18px] text-ink-soft">refresh</span>
-          Play again (practice — won't change score)
+          Play again for practice. Your score stands.
         </button>
         <button
           onClick={onArchive}
           className="pointer-events-auto font-ui flex items-center gap-1.5 text-sm text-ink-muted hover:text-ink py-1 px-3"
         >
-          <span className="material-icons text-[18px] text-ink-soft">history</span>
           Browse archive
         </button>
       </div>
