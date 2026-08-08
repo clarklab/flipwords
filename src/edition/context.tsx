@@ -22,6 +22,9 @@ export const EDITION_STORAGE_KEY = 'game_edition_v1'
 /** Query param that pins an edition, e.g. `/play?edition=flipwords`. */
 export const EDITION_QUERY_PARAM = 'edition'
 
+/** Where the fork-in-the-road game chooser lives. */
+export const GAME_SELECT_PATH = '/choose'
+
 /**
  * Resolve the edition: explicit URL param wins, then the remembered choice,
  * then the default. Kept in sync with the inline boot script in
@@ -48,22 +51,48 @@ export function resolveEdition(): Edition {
 }
 
 /**
- * Runs before first paint so the correct palette is on `<html>` immediately.
+ * Has the visitor EXPLICITLY picked a game (fork screen, or an `?edition=`
+ * deep link that got persisted)? Distinct from `resolveEdition()`, which
+ * always answers something — host mapping and the default are fallbacks, not
+ * choices. Used to decide whether the fork in the road has been passed.
+ */
+export function hasChosenEdition(): boolean {
+  if (typeof window === 'undefined') return false
+  try {
+    return isEdition(window.localStorage.getItem(EDITION_STORAGE_KEY))
+  } catch {
+    // Blocked storage: no durable choice is possible; treat as unchosen.
+    return false
+  }
+}
+
+/**
+ * Runs before first paint so the correct palette is on `<html>` immediately —
+ * and, on a first visit to the front door, swaps the whole page for the game
+ * chooser before the title screen can flash.
  *
  * The URL read and the storage read are wrapped SEPARATELY on purpose: a
  * single try/catch meant that a throwing `localStorage` (Safari private mode,
  * blocked cookies) skipped the attribute write entirely, so even an explicit
  * `?edition=…` was ignored. Mirrors `resolveEdition()`; keep the two in step.
+ *
+ * The redirect fires only for `/` with NO explicit choice (URL param or
+ * stored value). A host-pinned origin still shows the fork on a first visit —
+ * the pin decides branding fallbacks, not the visitor's answer to "which game
+ * do you want to play?". Blocked storage degrades gracefully: the chooser
+ * reappears on the next full load, but in-app navigation (`/choose` → `/`) is
+ * client-side routing and never re-runs this script, so nobody loops.
  */
 export function editionBootScript(): string {
   return `(function(){
 var K=${JSON.stringify(EDITION_STORAGE_KEY)},P=${JSON.stringify(EDITION_QUERY_PARAM)},D=${JSON.stringify(DEFAULT_EDITION)};
 function ok(v){return v==='flipwords'||v==='texas'}
-var e=null;
-try{var q=new URLSearchParams(location.search).get(P);if(ok(q))e=q}catch(_){}
-if(!e){try{var s=localStorage.getItem(K);if(ok(s))e=s}catch(_){}}
+var e=null,chosen=false;
+try{var q=new URLSearchParams(location.search).get(P);if(ok(q)){e=q;chosen=true}}catch(_){}
+if(!e){try{var s=localStorage.getItem(K);if(ok(s)){e=s;chosen=true}}catch(_){}}
 if(!e){try{var h=${JSON.stringify(EDITION_BY_HOST)}[location.hostname];if(ok(h))e=h}catch(_){}}
 try{document.documentElement.setAttribute('data-edition',e||D)}catch(_){}
+if(!chosen&&location.pathname==='/'){try{location.replace(${JSON.stringify(GAME_SELECT_PATH)})}catch(_){}}
 })();`
 }
 
@@ -131,8 +160,6 @@ type EditionContextValue = {
   edition: Edition
   config: EditionConfig
   setEdition: (next: Edition) => void
-  /** Flip to the other edition. Convenience for the toggle control. */
-  toggleEdition: () => void
 }
 
 const EditionContext = createContext<EditionContextValue | null>(null)
@@ -165,8 +192,6 @@ export function EditionProvider({
       edition,
       config: EDITIONS[edition],
       setEdition,
-      toggleEdition: () =>
-        setEdition(edition === 'texas' ? 'flipwords' : 'texas'),
     }),
     [edition, setEdition]
   )

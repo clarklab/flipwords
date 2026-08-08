@@ -33,17 +33,42 @@ src/edition/
 overrides to `[data-edition='texas']`, so flipping the attribute retextures the
 entire app without a single component re-render for styling purposes.
 
-**Resolution order** is URL param → remembered choice → default:
+**Resolution order** is URL param → remembered choice → host pin → default:
 
 ```
-/play?edition=flipwords     pins an edition (useful for demos and QA)
+/play?edition=flipwords       pins an edition (useful for demos and QA)
 localStorage game_edition_v1  remembers the last choice
-DEFAULT_EDITION             falls back
+EDITION_BY_HOST               host-pinned origins (flipwords.superfun.games)
+DEFAULT_EDITION               falls back
 ```
 
 `editionBootScript()` runs in `<head>` before first paint and applies the same
 precedence, so a remembered edition never flashes the default palette. It
 mirrors `resolveEdition()` — **change one, change the other.**
+
+## The fork in the road (`/choose`)
+
+The first two entries above are *choices*; the last two are *fallbacks*. That
+distinction drives the game chooser:
+
+- A full page load of `/` with **no choice** (no valid `?edition=`, nothing in
+  storage) is redirected to `/choose` by the boot script, pre-paint. The
+  chooser explains that the game ships under two names and offers one card per
+  registry entry; picking one persists the edition and lands on `/`.
+- The title screen links back to `/choose` ("Also published as … — switch
+  games", plus a masthead-menu entry) — that link replaced the old inline
+  segmented toggle, which read as a settings control and confused people.
+- Host-pinned origins still show the fork on a first visit: the pin decides
+  which palette the chooser boots in, not the visitor's answer.
+- If storage is blocked (private mode), the choice can't persist, so the fork
+  reappears on the next full load — but never mid-session: in-app navigation
+  is client-side routing and the boot script only runs on document loads, so
+  choosing always lands on the title screen.
+
+`GAME_SELECT_PATH` in `src/edition/context.tsx` and the file route
+`src/routes/choose.tsx` both spell the path — rename both or neither.
+`tests/edition/boot-script.test.ts` executes the generated script and pins
+this behavior down.
 
 ## Why the daily functions take an explicit config
 
@@ -59,8 +84,8 @@ into a type error.
 
 Enforced by convention; worth checking in review:
 
-- **`storageKey` unique** — else streaks and in-progress sessions bleed across
-  the toggle.
+- **`storageKey` unique** — else streaks and in-progress sessions bleed from
+  one edition into the other when the player switches.
 - **`seedPrefix` unique** — else the two editions deal correlated sessions.
 - **`themeColor` matches `--chin`** for that edition. Chrome paints the URL bar
   with `theme-color` literally, so any drift shows as a visible seam.

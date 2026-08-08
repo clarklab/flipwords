@@ -10,7 +10,9 @@ export {
   EditionProvider,
   useEdition,
   resolveEdition,
+  hasChosenEdition,
   editionBootScript,
   EDITION_STORAGE_KEY,
   EDITION_QUERY_PARAM,
+  GAME_SELECT_PATH,
 } from './context'

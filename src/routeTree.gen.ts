@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PlayRouteImport } from './routes/play'
+import { Route as ChooseRouteImport } from './routes/choose'
 import { Route as ArchiveRouteImport } from './routes/archive'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -18,6 +19,11 @@ import { Route as ArchiveDateRouteImport } from './routes/archive_.$date'
 const PlayRoute = PlayRouteImport.update({
   id: '/play',
   path: '/play',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChooseRoute = ChooseRouteImport.update({
+  id: '/choose',
+  path: '/choose',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArchiveRoute = ArchiveRouteImport.update({
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
+  '/choose': typeof ChooseRoute
   '/play': typeof PlayRoute
   '/archive/$date': typeof ArchiveDateRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
+  '/choose': typeof ChooseRoute
   '/play': typeof PlayRoute
   '/archive/$date': typeof ArchiveDateRoute
 }
@@ -60,21 +68,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archive': typeof ArchiveRoute
+  '/choose': typeof ChooseRoute
   '/play': typeof PlayRoute
   '/archive_/$date': typeof ArchiveDateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/archive' | '/play' | '/archive/$date'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/archive'
+    | '/choose'
+    | '/play'
+    | '/archive/$date'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/archive' | '/play' | '/archive/$date'
-  id: '__root__' | '/' | '/admin' | '/archive' | '/play' | '/archive_/$date'
+  to: '/' | '/admin' | '/archive' | '/choose' | '/play' | '/archive/$date'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/archive'
+    | '/choose'
+    | '/play'
+    | '/archive_/$date'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   ArchiveRoute: typeof ArchiveRoute
+  ChooseRoute: typeof ChooseRoute
   PlayRoute: typeof PlayRoute
   ArchiveDateRoute: typeof ArchiveDateRoute
 }
@@ -86,6 +109,13 @@ declare module '@tanstack/react-router' {
       path: '/play'
       fullPath: '/play'
       preLoaderRoute: typeof PlayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/choose': {
+      id: '/choose'
+      path: '/choose'
+      fullPath: '/choose'
+      preLoaderRoute: typeof ChooseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/archive': {
@@ -123,6 +153,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   ArchiveRoute: ArchiveRoute,
+  ChooseRoute: ChooseRoute,
   PlayRoute: PlayRoute,
   ArchiveDateRoute: ArchiveDateRoute,
 }
