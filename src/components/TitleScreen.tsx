@@ -6,8 +6,7 @@ import { Icon, type IconName } from './Icon'
 import TutorialModal from './TutorialModal'
 import WelcomeCarousel from './WelcomeCarousel'
 import { dayNumber, msUntilNextRollover } from '@/daily/date'
-import { useEdition } from '@/edition'
-import EditionToggle from './EditionToggle'
+import { EDITIONS, EDITION_IDS, useEdition } from '@/edition'
 import { settleStreak } from '@/daily/streak'
 import { useEasternDate } from '@/daily/useEasternDate'
 import { useDailyStorage } from '@/daily/useDailyStorage'
@@ -135,7 +134,13 @@ function FlipFlopSwap() {
 export default function TitleScreen() {
   // Live Eastern date — flips at midnight so day number, CTA, and stats never
   // go stale in a long-lived tab.
-  const { config } = useEdition()
+  const { edition, config } = useEdition()
+
+  // The other masthead this game is published under, named via the registry
+  // rather than a literal (docs/edition-architecture.md). With more than two
+  // editions the link would still read fine — it goes to the chooser either way.
+  const otherEdition = EDITION_IDS.find((id) => id !== edition)
+  const otherName = otherEdition ? EDITIONS[otherEdition].name : null
   const today = useEasternDate()
   const dn = dayNumber(today, config.launchDate)
 
@@ -241,6 +246,13 @@ export default function TitleScreen() {
             >
               How to play
             </button>
+            <Link
+              to="/choose"
+              onClick={() => setMenuOpen(false)}
+              className="tm-menu-item tm-eyebrow"
+            >
+              Switch games
+            </Link>
           </nav>
         )}
 
@@ -361,8 +373,18 @@ export default function TitleScreen() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center mt-1 mb-3">
-            <EditionToggle />
+          {/* The fork-in-the-road link that replaced the inline edition
+              toggle: it names the game's other identity outright and leads
+              back to the chooser, where either edition is one tap away. */}
+          <div className="flex items-center justify-center mt-2 mb-3">
+            <Link
+              to="/choose"
+              className="tm-switch font-ui text-[13px] text-ink-muted hover:text-ink underline decoration-1 underline-offset-4 py-1.5 px-2 text-center"
+            >
+              {otherName
+                ? `Also published as ${otherName} — switch games`
+                : 'Switch games'}
+            </Link>
           </div>
         </div>
 

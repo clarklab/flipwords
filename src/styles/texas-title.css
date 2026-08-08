@@ -326,14 +326,19 @@
    illustration's own #2a2928 on the orange field for Texas (white on #f58537
    is only ~2.4:1). Same classes the game chin uses. */
 
-/* --- edition toggle ------------------------------------------------------
-   `--r-pill` already squares this off; all that's left is trading the app's
-   translucent capsule for a ruled segmented strip.
+/* --- switch-games link ---------------------------------------------------
+   The fork-in-the-road link that replaced the segmented edition toggle. Set
+   exactly like the other underlined caps links on this screen (`.tm-learn`,
+   `.tm-archive` above) so the closing run of links reads as one register.
    ------------------------------------------------------------------------ */
-:root[data-edition="texas"] .tm-edition-toggle {
-  background: none;
-  border-color: var(--color-paper-line);
-  padding: 0;
+:root[data-edition="texas"] .tm-switch {
+  color: var(--color-ink);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
 /* ===========================================================================

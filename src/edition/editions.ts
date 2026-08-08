@@ -8,7 +8,7 @@ import texasLevels from '../../levels_texas.json'
  * differs between FlipWords and the Texas Monthly edition.
  *
  * Invariants worth preserving:
- *   • `storageKey` is unique per edition (else streaks bleed across the toggle)
+ *   • `storageKey` is unique per edition (else streaks bleed on a game switch)
  *   • `seedPrefix` is unique per edition (else sessions correlate)
  *   • `themeColor` matches the `--chin` value in that edition's CSS block
  *   • `poolReleases` is sorted by `from` and never gains a past-dated entry
