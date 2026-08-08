@@ -11,6 +11,7 @@ import {
   DEFAULT_EDITION,
   EDITIONS,
   EDITION_BY_HOST,
+  EDITION_IDS,
   editionForHost,
   isEdition,
 } from './editions'
@@ -26,7 +27,41 @@ export const EDITION_QUERY_PARAM = 'edition'
 export const GAME_SELECT_PATH = '/choose'
 
 /**
+ * Which editions have at least one COMPLETED session on this device. Key
+ * existence is not enough: merely glancing at an edition's title screen
+ * writes a fresh empty blob (the settle-streak save), so the signal is a
+ * non-empty `sessions` map — days actually played.
+ *
+ * This exists for players who predate the game chooser: they never wrote
+ * `game_edition_v1`, but months of daily sessions are a louder answer to
+ * "which game do you play?" than any fork screen. Unreadable or corrupt
+ * blobs count as no evidence — `loadStorage` deals with backing those up.
+ */
+export function editionsWithPlay(): Edition[] {
+  if (typeof window === 'undefined') return []
+  const played: Edition[] = []
+  for (const id of EDITION_IDS) {
+    try {
+      const raw = window.localStorage.getItem(EDITIONS[id].storageKey)
+      if (!raw) continue
+      const parsed = JSON.parse(raw) as { sessions?: Record<string, unknown> }
+      if (
+        parsed?.sessions &&
+        typeof parsed.sessions === 'object' &&
+        Object.keys(parsed.sessions).length > 0
+      ) {
+        played.push(id)
+      }
+    } catch {
+      // Blocked storage or malformed JSON — not evidence of play.
+    }
+  }
+  return played
+}
+
+/**
  * Resolve the edition: explicit URL param wins, then the remembered choice,
+ * then a play history that names exactly one edition, then the host pin,
  * then the default. Kept in sync with the inline boot script in
  * `editionBootScript()` — if you change the precedence here, change it there.
  */
@@ -47,23 +82,29 @@ export function resolveEdition(): Edition {
   } catch {
     // Private mode / blocked storage — fall through.
   }
+  const played = editionsWithPlay()
+  if (played.length === 1) return played[0]
   return editionForHost(window.location.hostname) ?? DEFAULT_EDITION
 }
 
 /**
- * Has the visitor EXPLICITLY picked a game (fork screen, or an `?edition=`
- * deep link that got persisted)? Distinct from `resolveEdition()`, which
- * always answers something — host mapping and the default are fallbacks, not
- * choices. Used to decide whether the fork in the road has been passed.
+ * Has the visitor picked a game — explicitly (fork screen, or an `?edition=`
+ * deep link that got persisted) or implicitly, by having a play history in
+ * exactly one edition? Distinct from `resolveEdition()`, which always answers
+ * something — host mapping and the default are fallbacks, not choices. Used
+ * to decide whether the fork in the road has been passed.
  */
 export function hasChosenEdition(): boolean {
   if (typeof window === 'undefined') return false
   try {
-    return isEdition(window.localStorage.getItem(EDITION_STORAGE_KEY))
+    if (isEdition(window.localStorage.getItem(EDITION_STORAGE_KEY))) {
+      return true
+    }
   } catch {
-    // Blocked storage: no durable choice is possible; treat as unchosen.
-    return false
+    // Blocked storage: fall through to the play-history read, which guards
+    // itself — an in-memory session may still have readable evidence.
   }
+  return editionsWithPlay().length === 1
 }
 
 /**
@@ -76,20 +117,33 @@ export function hasChosenEdition(): boolean {
  * blocked cookies) skipped the attribute write entirely, so even an explicit
  * `?edition=…` was ignored. Mirrors `resolveEdition()`; keep the two in step.
  *
- * The redirect fires only for `/` with NO explicit choice (URL param or
- * stored value). A host-pinned origin still shows the fork on a first visit —
- * the pin decides branding fallbacks, not the visitor's answer to "which game
- * do you want to play?". Blocked storage degrades gracefully: the chooser
- * reappears on the next full load, but in-app navigation (`/choose` → `/`) is
- * client-side routing and never re-runs this script, so nobody loops.
+ * The redirect fires only for `/` with NO choice — explicit (URL param,
+ * stored value) or implicit (a play history naming exactly one edition; see
+ * `editionsWithPlay()`). The implicit branch is what keeps players who
+ * predate the chooser out of the fork: someone with a months-long streak
+ * already answered the question by playing, and bouncing them through a
+ * "pick your game" screen risks a wrong tap that hides their progress and
+ * costs them that day's streak. Their inferred edition is persisted as the
+ * choice so every later load takes the fast path. A host-pinned origin still
+ * shows the fork on a genuine first visit — the pin decides branding
+ * fallbacks, not the visitor's answer. Blocked storage degrades gracefully:
+ * the chooser reappears on the next full load, but in-app navigation
+ * (`/choose` → `/`) is client-side routing and never re-runs this script, so
+ * nobody loops.
  */
 export function editionBootScript(): string {
+  const storageKeyById = Object.fromEntries(
+    EDITION_IDS.map((id) => [id, EDITIONS[id].storageKey])
+  )
   return `(function(){
 var K=${JSON.stringify(EDITION_STORAGE_KEY)},P=${JSON.stringify(EDITION_QUERY_PARAM)},D=${JSON.stringify(DEFAULT_EDITION)};
 function ok(v){return v==='flipwords'||v==='texas'}
 var e=null,chosen=false;
 try{var q=new URLSearchParams(location.search).get(P);if(ok(q)){e=q;chosen=true}}catch(_){}
 if(!e){try{var s=localStorage.getItem(K);if(ok(s)){e=s;chosen=true}}catch(_){}}
+if(!e){var M=${JSON.stringify(storageKeyById)},w=[];
+for(var k in M){try{var d=JSON.parse(localStorage.getItem(M[k])||'null');if(d&&d.sessions&&typeof d.sessions==='object'){for(var i in d.sessions){w.push(k);break}}}catch(_){}}
+if(w.length===1){e=w[0];chosen=true;try{localStorage.setItem(K,e)}catch(_){}}}
 if(!e){try{var h=${JSON.stringify(EDITION_BY_HOST)}[location.hostname];if(ok(h))e=h}catch(_){}}
 try{document.documentElement.setAttribute('data-edition',e||D)}catch(_){}
 if(!chosen&&location.pathname==='/'){try{location.replace(${JSON.stringify(GAME_SELECT_PATH)})}catch(_){}}

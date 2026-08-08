@@ -33,11 +33,13 @@ src/edition/
 overrides to `[data-edition='texas']`, so flipping the attribute retextures the
 entire app without a single component re-render for styling purposes.
 
-**Resolution order** is URL param → remembered choice → host pin → default:
+**Resolution order** is URL param → remembered choice → play history → host
+pin → default:
 
 ```
 /play?edition=flipwords       pins an edition (useful for demos and QA)
 localStorage game_edition_v1  remembers the last choice
+editionsWithPlay()            a play history naming exactly ONE edition
 EDITION_BY_HOST               host-pinned origins (flipwords.superfun.games)
 DEFAULT_EDITION               falls back
 ```
@@ -48,13 +50,22 @@ mirrors `resolveEdition()` — **change one, change the other.**
 
 ## The fork in the road (`/choose`)
 
-The first two entries above are *choices*; the last two are *fallbacks*. That
-distinction drives the game chooser:
+The first three entries above are *choices* — two explicit, one implicit; the
+last two are *fallbacks*. That distinction drives the game chooser:
 
 - A full page load of `/` with **no choice** (no valid `?edition=`, nothing in
-  storage) is redirected to `/choose` by the boot script, pre-paint. The
-  chooser explains that the game ships under two names and offers one card per
-  registry entry; picking one persists the edition and lands on `/`.
+  storage, no unambiguous play history) is redirected to `/choose` by the boot
+  script, pre-paint. The chooser explains that the game ships under two names
+  and offers one card per registry entry; picking one persists the edition and
+  lands on `/`.
+- **Players who predate the chooser never see the fork.** Someone with
+  completed sessions in exactly one edition (a non-empty `sessions` map under
+  that edition's `storageKey` — key existence alone doesn't count, since
+  glancing at a title screen writes an empty blob) has already answered the
+  question by playing. The boot script boots them straight into that edition
+  and persists it as their choice, so their streak is never one confused tap
+  away from a missed day. A history in both editions is ambiguous and gets
+  the fork.
 - The title screen links back to `/choose` ("Also published as … — switch
   games", plus a masthead-menu entry) — that link replaced the old inline
   segmented toggle, which read as a settings control and confused people.

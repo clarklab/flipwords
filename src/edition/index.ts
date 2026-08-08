@@ -11,6 +11,7 @@ export {
   useEdition,
   resolveEdition,
   hasChosenEdition,
+  editionsWithPlay,
   editionBootScript,
   EDITION_STORAGE_KEY,
   EDITION_QUERY_PARAM,
