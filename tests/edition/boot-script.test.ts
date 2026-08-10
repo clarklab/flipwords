@@ -11,8 +11,9 @@ import {
  * so it can't share code with `resolveEdition()` — it can only mirror it.
  * These tests execute the actual generated string against a stubbed
  * environment, covering all three of its jobs: painting `data-edition` early,
- * inferring a choice from an existing play history, and bouncing a genuine
- * first visit to `/` over to the game chooser.
+ * inferring a returning player's edition from their play history, and landing
+ * every full load of `/` on the game chooser — the default front door —
+ * unless an explicit `?edition=` deep link pins straight through.
  */
 
 type BootEnv = {
@@ -81,70 +82,71 @@ function runBootScript({
 }
 
 describe('editionBootScript', () => {
-  it('sends a genuine first visit to / to the game chooser, pre-paint', () => {
-    const r = runBootScript()
-    expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
-    // The palette is still painted, in case the redirect is slow or blocked.
-    expect(r.edition).toBe('texas')
-  })
-
-  it('does not redirect once an edition is remembered', () => {
-    const r = runBootScript({
-      storage: { [EDITION_STORAGE_KEY]: 'flipwords' },
+  describe('the chooser is the default front door', () => {
+    it('a first visit to / lands on the chooser, pre-paint', () => {
+      const r = runBootScript()
+      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+      // The palette is still painted, in case the redirect is slow or blocked.
+      expect(r.edition).toBe('texas')
     })
-    expect(r.redirectedTo).toBeNull()
-    expect(r.edition).toBe('flipwords')
-  })
 
-  it('treats an explicit ?edition= deep link as a choice', () => {
-    const r = runBootScript({ search: '?edition=flipwords' })
-    expect(r.redirectedTo).toBeNull()
-    expect(r.edition).toBe('flipwords')
-  })
-
-  it('ignores an invalid ?edition= and still shows the fork', () => {
-    const r = runBootScript({ search: '?edition=klingon' })
-    expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
-    expect(r.edition).toBe('texas')
-  })
-
-  it('never redirects away from routes other than /', () => {
-    for (const path of [GAME_SELECT_PATH, '/play', '/archive']) {
-      expect(runBootScript({ path }).redirectedTo).toBeNull()
-    }
-  })
-
-  it('shows the fork on a host-pinned origin too, themed for that host', () => {
-    const r = runBootScript({ hostname: 'flipwords.superfun.games' })
-    // The pin answers "which brand does this origin fall back to", not
-    // "which game did this person pick" — first visits still get the choice.
-    expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
-    expect(r.edition).toBe('flipwords')
-  })
-
-  it('survives blocked storage: paints the default and shows the fork', () => {
-    const r = runBootScript({ getThrows: true })
-    expect(r.edition).toBe('texas')
-    expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
-  })
-
-  it('a stored choice beats the host pin', () => {
-    const r = runBootScript({
-      hostname: 'flipwords.superfun.games',
-      storage: { [EDITION_STORAGE_KEY]: 'texas' },
+    it('a remembered choice still lands on the chooser — themed for it', () => {
+      const r = runBootScript({
+        storage: { [EDITION_STORAGE_KEY]: 'flipwords' },
+      })
+      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+      expect(r.edition).toBe('flipwords')
     })
-    expect(r.redirectedTo).toBeNull()
-    expect(r.edition).toBe('texas')
+
+    it('host-pinned origins land on the chooser too, themed for the host', () => {
+      const r = runBootScript({ hostname: 'flipwords.superfun.games' })
+      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+      expect(r.edition).toBe('flipwords')
+    })
+
+    it('survives blocked storage: paints the default and shows the chooser', () => {
+      const r = runBootScript({ getThrows: true })
+      expect(r.edition).toBe('texas')
+      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+    })
+
+    it('never redirects away from routes other than /', () => {
+      for (const path of [GAME_SELECT_PATH, '/play', '/archive']) {
+        expect(runBootScript({ path }).redirectedTo).toBeNull()
+      }
+    })
   })
 
-  describe('players who predate the chooser (play history, no choice key)', () => {
-    it('boots straight into the only edition ever played — no fork', () => {
+  describe('?edition= deep links pin straight through', () => {
+    it('a valid ?edition= skips the chooser and lands directly', () => {
+      const r = runBootScript({ search: '?edition=flipwords' })
+      expect(r.redirectedTo).toBeNull()
+      expect(r.edition).toBe('flipwords')
+    })
+
+    it('an invalid ?edition= is ignored — chooser as usual', () => {
+      const r = runBootScript({ search: '?edition=klingon' })
+      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+      expect(r.edition).toBe('texas')
+    })
+
+    it('the param outranks a stored choice for theming', () => {
+      const r = runBootScript({
+        search: '?edition=texas',
+        storage: { [EDITION_STORAGE_KEY]: 'flipwords' },
+      })
+      expect(r.redirectedTo).toBeNull()
+      expect(r.edition).toBe('texas')
+    })
+  })
+
+  describe('returning players are recognised from their play history', () => {
+    it('the only edition ever played themes the chooser and is persisted', () => {
       const r = runBootScript({
         storage: { [EDITIONS.flipwords.storageKey]: playedBlob },
       })
-      expect(r.redirectedTo).toBeNull()
       expect(r.edition).toBe('flipwords')
-      // The inference is persisted so every later load takes the fast path.
+      // Persisted so resolution stays stable everywhere (play route, badge).
       expect(r.writes[EDITION_STORAGE_KEY]).toBe('flipwords')
     })
 
@@ -152,7 +154,6 @@ describe('editionBootScript', () => {
       const r = runBootScript({
         storage: { [EDITIONS.texas.storageKey]: playedBlob },
       })
-      expect(r.redirectedTo).toBeNull()
       expect(r.edition).toBe('texas')
       expect(r.writes[EDITION_STORAGE_KEY]).toBe('texas')
     })
@@ -162,47 +163,45 @@ describe('editionBootScript', () => {
         hostname: 'flipwords.superfun.games',
         storage: { [EDITIONS.texas.storageKey]: playedBlob },
       })
-      expect(r.redirectedTo).toBeNull()
       expect(r.edition).toBe('texas')
     })
 
-    it('still boots into the played edition when the choice cannot persist', () => {
+    it('still resolves the played edition when the choice cannot persist', () => {
       const r = runBootScript({
         storage: { [EDITIONS.flipwords.storageKey]: playedBlob },
         setThrows: true,
       })
-      expect(r.redirectedTo).toBeNull()
       expect(r.edition).toBe('flipwords')
     })
 
-    it('a history in BOTH editions is ambiguous — fork', () => {
+    it('a history in BOTH editions is ambiguous — nothing inferred', () => {
       const r = runBootScript({
         storage: {
           [EDITIONS.flipwords.storageKey]: playedBlob,
           [EDITIONS.texas.storageKey]: playedBlob,
         },
       })
-      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+      expect(r.edition).toBe('texas') // default fallback
       expect(r.writes[EDITION_STORAGE_KEY]).toBeUndefined()
     })
 
-    it('an empty settle-streak blob is not a play history — fork', () => {
+    it('an empty settle-streak blob is not a play history', () => {
       const r = runBootScript({
         storage: { [EDITIONS.texas.storageKey]: emptyBlob },
       })
-      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+      expect(r.writes[EDITION_STORAGE_KEY]).toBeUndefined()
     })
 
     it('a glanced-at edition does not muddy a real history elsewhere', () => {
-      // The parents' actual device state: months of FlipWords sessions plus
-      // the empty texas blob left by once opening the other title screen.
+      // A long-time player's actual device state: months of FlipWords
+      // sessions plus the empty texas blob left by once opening the other
+      // title screen.
       const r = runBootScript({
         storage: {
           [EDITIONS.flipwords.storageKey]: playedBlob,
           [EDITIONS.texas.storageKey]: emptyBlob,
         },
       })
-      expect(r.redirectedTo).toBeNull()
       expect(r.edition).toBe('flipwords')
       expect(r.writes[EDITION_STORAGE_KEY]).toBe('flipwords')
     })
@@ -211,7 +210,8 @@ describe('editionBootScript', () => {
       const r = runBootScript({
         storage: { [EDITIONS.flipwords.storageKey]: '{not json' },
       })
-      expect(r.redirectedTo).toBe(GAME_SELECT_PATH)
+      expect(r.edition).toBe('texas') // default fallback
+      expect(r.writes[EDITION_STORAGE_KEY]).toBeUndefined()
     })
 
     it('an explicit stored choice beats the play history', () => {
@@ -221,16 +221,6 @@ describe('editionBootScript', () => {
           [EDITIONS.flipwords.storageKey]: playedBlob,
         },
       })
-      expect(r.redirectedTo).toBeNull()
-      expect(r.edition).toBe('texas')
-    })
-
-    it('an ?edition= deep link beats the play history', () => {
-      const r = runBootScript({
-        search: '?edition=texas',
-        storage: { [EDITIONS.flipwords.storageKey]: playedBlob },
-      })
-      expect(r.redirectedTo).toBeNull()
       expect(r.edition).toBe('texas')
     })
   })

@@ -91,8 +91,9 @@ export function resolveEdition(): Edition {
  * Has the visitor picked a game — explicitly (fork screen, or an `?edition=`
  * deep link that got persisted) or implicitly, by having a play history in
  * exactly one edition? Distinct from `resolveEdition()`, which always answers
- * something — host mapping and the default are fallbacks, not choices. Used
- * to decide whether the fork in the road has been passed.
+ * something — host mapping and the default are fallbacks, not choices. The
+ * chooser uses this for its "Now playing" badge: a resolved fallback is not
+ * the visitor's game, and must not be labelled as such.
  */
 export function hasChosenEdition(): boolean {
   if (typeof window === 'undefined') return false
@@ -109,27 +110,24 @@ export function hasChosenEdition(): boolean {
 
 /**
  * Runs before first paint so the correct palette is on `<html>` immediately —
- * and, on a first visit to the front door, swaps the whole page for the game
- * chooser before the title screen can flash.
+ * and swaps a full load of the front door for the game chooser before the
+ * title screen can flash.
  *
  * The URL read and the storage read are wrapped SEPARATELY on purpose: a
  * single try/catch meant that a throwing `localStorage` (Safari private mode,
  * blocked cookies) skipped the attribute write entirely, so even an explicit
  * `?edition=…` was ignored. Mirrors `resolveEdition()`; keep the two in step.
  *
- * The redirect fires only for `/` with NO choice — explicit (URL param,
- * stored value) or implicit (a play history naming exactly one edition; see
- * `editionsWithPlay()`). The implicit branch is what keeps players who
- * predate the chooser out of the fork: someone with a months-long streak
- * already answered the question by playing, and bouncing them through a
- * "pick your game" screen risks a wrong tap that hides their progress and
- * costs them that day's streak. Their inferred edition is persisted as the
- * choice so every later load takes the fast path. A host-pinned origin still
- * shows the fork on a genuine first visit — the pin decides branding
- * fallbacks, not the visitor's answer. Blocked storage degrades gracefully:
- * the chooser reappears on the next full load, but in-app navigation
- * (`/choose` → `/`) is client-side routing and never re-runs this script, so
- * nobody loops.
+ * The chooser is the DEFAULT front door, always: every full page load of `/`
+ * lands on it, first visit or five-hundredth. A returning player's game is
+ * still resolved here (stored choice, or a play history naming exactly one
+ * edition — see `editionsWithPlay()`) because it themes the chooser and backs
+ * its "Now playing" badge; the inferred edition is persisted so resolution
+ * stays stable everywhere else. The one exception is a valid `?edition=` deep
+ * link, which pins an edition and lands directly — demo and QA links skip the
+ * fork. In-app navigation (`/choose` → `/`) is client-side routing and never
+ * re-runs this script, so choosing always reaches the title screen and nobody
+ * loops, storage or no storage.
  */
 export function editionBootScript(): string {
   const storageKeyById = Object.fromEntries(
@@ -138,15 +136,15 @@ export function editionBootScript(): string {
   return `(function(){
 var K=${JSON.stringify(EDITION_STORAGE_KEY)},P=${JSON.stringify(EDITION_QUERY_PARAM)},D=${JSON.stringify(DEFAULT_EDITION)};
 function ok(v){return v==='flipwords'||v==='texas'}
-var e=null,chosen=false;
-try{var q=new URLSearchParams(location.search).get(P);if(ok(q)){e=q;chosen=true}}catch(_){}
-if(!e){try{var s=localStorage.getItem(K);if(ok(s)){e=s;chosen=true}}catch(_){}}
+var e=null,pin=false;
+try{var q=new URLSearchParams(location.search).get(P);if(ok(q)){e=q;pin=true}}catch(_){}
+if(!e){try{var s=localStorage.getItem(K);if(ok(s))e=s}catch(_){}}
 if(!e){var M=${JSON.stringify(storageKeyById)},w=[];
 for(var k in M){try{var d=JSON.parse(localStorage.getItem(M[k])||'null');if(d&&d.sessions&&typeof d.sessions==='object'){for(var i in d.sessions){w.push(k);break}}}catch(_){}}
-if(w.length===1){e=w[0];chosen=true;try{localStorage.setItem(K,e)}catch(_){}}}
+if(w.length===1){e=w[0];try{localStorage.setItem(K,e)}catch(_){}}}
 if(!e){try{var h=${JSON.stringify(EDITION_BY_HOST)}[location.hostname];if(ok(h))e=h}catch(_){}}
 try{document.documentElement.setAttribute('data-edition',e||D)}catch(_){}
-if(!chosen&&location.pathname==='/'){try{location.replace(${JSON.stringify(GAME_SELECT_PATH)})}catch(_){}}
+if(!pin&&location.pathname==='/'){try{location.replace(${JSON.stringify(GAME_SELECT_PATH)})}catch(_){}}
 })();`
 }
 

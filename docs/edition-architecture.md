@@ -48,33 +48,36 @@ DEFAULT_EDITION               falls back
 precedence, so a remembered edition never flashes the default palette. It
 mirrors `resolveEdition()` — **change one, change the other.**
 
-## The fork in the road (`/choose`)
+## The fork in the road (`/choose`) — the default front door
 
-The first three entries above are *choices* — two explicit, one implicit; the
-last two are *fallbacks*. That distinction drives the game chooser:
+**The chooser is where every full page load of `/` lands, always** — first
+visit or five-hundredth. The boot script redirects pre-paint, so the title
+screen never flashes first. The chooser explains that the game ships under
+two names and offers one card per registry entry; picking one persists the
+edition and lands on `/`. The one exception: a valid `?edition=` deep link
+pins an edition and lands directly, so demo and QA links skip the fork.
 
-- A full page load of `/` with **no choice** (no valid `?edition=`, nothing in
-  storage, no unambiguous play history) is redirected to `/choose` by the boot
-  script, pre-paint. The chooser explains that the game ships under two names
-  and offers one card per registry entry; picking one persists the edition and
-  lands on `/`.
-- **Players who predate the chooser never see the fork.** Someone with
-  completed sessions in exactly one edition (a non-empty `sessions` map under
-  that edition's `storageKey` — key existence alone doesn't count, since
-  glancing at a title screen writes an empty blob) has already answered the
-  question by playing. The boot script boots them straight into that edition
-  and persists it as their choice, so their streak is never one confused tap
-  away from a missed day. A history in both editions is ambiguous and gets
-  the fork.
+Resolution still matters on the way in — the first three entries above are
+*choices* (two explicit, one implicit), the last two *fallbacks*:
+
+- The resolved edition themes the chooser (palette, `data-edition`) and, when
+  it comes from an actual choice, backs the card's **"Now playing"** badge —
+  a returning player's daily tap-through is a no-thought gesture. A resolved
+  *fallback* is never badged: it isn't the visitor's answer.
+- **Play history counts as an implicit choice.** Completed sessions in
+  exactly one edition (a non-empty `sessions` map under that edition's
+  `storageKey` — key existence alone doesn't count, since glancing at a title
+  screen writes an empty blob) resolve to that edition and get persisted, so
+  players who predate the chooser see their game badged without ever having
+  touched the choice key. A history in both editions is ambiguous — no
+  inference, no badge.
 - The title screen links back to `/choose` ("Also published as … — switch
   games", plus a masthead-menu entry) — that link replaced the old inline
   segmented toggle, which read as a settings control and confused people.
-- Host-pinned origins still show the fork on a first visit: the pin decides
-  which palette the chooser boots in, not the visitor's answer.
-- If storage is blocked (private mode), the choice can't persist, so the fork
-  reappears on the next full load — but never mid-session: in-app navigation
-  is client-side routing and the boot script only runs on document loads, so
-  choosing always lands on the title screen.
+- If storage is blocked (private mode), the choice can't persist — harmless:
+  in-app navigation is client-side routing and the boot script only runs on
+  document loads, so choosing always lands on the title screen and nobody
+  loops.
 
 `GAME_SELECT_PATH` in `src/edition/context.tsx` and the file route
 `src/routes/choose.tsx` both spell the path — rename both or neither.
