@@ -122,7 +122,7 @@ export default function WelcomeCarousel() {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: [0, 1.25, 1], opacity: 1 }}
               transition={{ duration: 0.5, times: [0, 0.7, 1] }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 accent-fill z-20 size-6 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
+              className="rotate-fab absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 accent-fill z-20 size-6 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
             >
               <Icon name="rotate" size={14} />
             </motion.div>
@@ -334,7 +334,7 @@ function FlippableTile({
             animate={{ scale: [0, 1.25, 1], opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ duration: 0.45, times: [0, 0.7, 1], delay: 0.5 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 accent-fill z-20 size-5 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
+            className="flip-fab absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 accent-fill z-20 size-5 rounded-full bg-accent text-white flex items-center justify-center shadow-tile-lift"
           >
             <Icon name="flip" size={12} />
           </motion.div>

@@ -189,8 +189,11 @@ export default function Tile({
           className={cn(
             // Genuinely circular icon control — stays rounded-full in both
             // editions. shadow-tile rather than Tailwind's grey shadow-md so
-            // it picks up the hard folk-art register under Texas.
-            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-tile transition-opacity duration-200 z-10",
+            // it picks up the hard folk-art register under Texas — except
+            // that register is for drawn OBJECTS, and this is a control
+            // painted on top of one, so .flip-fab flattens it there (same
+            // reasoning as .rotate-fab; see texas-game.css).
+            "flip-fab absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-tile transition-opacity duration-200 z-10",
             "opacity-0 group-hover:opacity-100 focus:opacity-100",
             inSlot
               ? "accent-fill bg-accent text-white"

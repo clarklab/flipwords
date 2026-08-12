@@ -192,7 +192,7 @@ export default function TitleScreen() {
               <button
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-expanded={menuOpen}
-                className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+                className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge nav-fab text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
                 title="Menu"
                 aria-label="Menu"
               >
@@ -200,7 +200,7 @@ export default function TitleScreen() {
               </button>
               <button
                 onClick={() => setShowTutorial(true)}
-                className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+                className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge nav-fab text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
                 title="How to play"
                 aria-label="How to play"
               >
