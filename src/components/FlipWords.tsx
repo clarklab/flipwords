@@ -222,11 +222,24 @@ const fireConfetti = (palette: string[]) => {
  * the DOM nodes the win-sequence GSAP tweens are animating (the edge flash
  * silently played against dead elements).
  */
+/**
+ * The direction label above each clue.
+ *
+ * It names the direction the TYPE ACTUALLY READS, not the grid axis — which is
+ * why the left clue is "Up": below 48rem it is set bottom-to-top, and telling a
+ * player to read down a run of upward type helps nobody. Above 48rem the same
+ * clue is un-rotated into a flanking column and reads left-to-right like the
+ * others, so it takes the grid word instead. Both are rendered and CSS shows
+ * the one that matches the composition (see `.clue-edge-label--flat`); picking
+ * in JS would need a resize listener to stay correct, for one word.
+ *
+ * `.tm-eyebrow` uppercases them.
+ */
 const EDGE_LABEL = {
-  top: "Across, top",
-  bottom: "Across, bottom",
-  left: "Down, left",
-  right: "Down, right",
+  top: { turned: "Across", flat: "Across" },
+  bottom: { turned: "Across", flat: "Across" },
+  left: { turned: "Up", flat: "Down" },
+  right: { turned: "Down", flat: "Down" },
 } as const;
 
 function ScreenEdgePill({
@@ -269,12 +282,22 @@ function ScreenEdgePill({
             "0 0 0 2px var(--color-accent), 0 0 24px rgb(var(--accent-rgb) / 0.4)",
         }}
       />
-      {/* Which edge this clue reads along. `display: none` everywhere except
-          the Texas desktop composition, where the four clues are set flat and
-          the crossword-style direction label does the work the rotation used
-          to do. Rendered for every edition so the markup stays edition-free. */}
-      <span aria-hidden="true" className="clue-edge-label tm-eyebrow">
-        {EDGE_LABEL[edge]}
+      {/* Direction label with a hairline running off the end of it — the same
+          device the tile rail's section head uses, and what a magazine sets
+          above a deck. The row is `display: none` under FlipWords, so that
+          edition still renders a bare pill and the markup stays edition-free.
+          Laid out along the INLINE axis, which is why it needs no special
+          casing for the two clues still set vertically: the label lands at the
+          start of the reading direction and the rule fills what is left of it,
+          whichever way the clue is turned. */}
+      <span aria-hidden="true" className="clue-head">
+        <span className="clue-edge-label tm-eyebrow">
+          {EDGE_LABEL[edge].turned}
+        </span>
+        <span className="clue-edge-label clue-edge-label--flat tm-eyebrow">
+          {EDGE_LABEL[edge].flat}
+        </span>
+        <span className="clue-head-rule" />
       </span>
       <span className="whitespace-nowrap">{clue}</span>
     </div>
@@ -1281,11 +1304,11 @@ export default function FlipWords(props: FlipWordsProps) {
                     ) : (
                       <span
                         className={cn(
-                          // tm-eyebrow: tiny caps on an 0.18em track — TM's
-                          // most characteristic typographic device, and the
-                          // right register for a placeholder label. "Slot 1 /
-                          // Slot 2" was internal jargon on the surface; the
-                          // ordinal says the same thing in plain English.
+                          // tm-eyebrow carries the uppercasing and the base
+                          // caps treatment; under Texas .slot-label re-sets
+                          // this in the tile's own condensed face, because a
+                          // placeholder is a ghost of the word about to land
+                          // there rather than a caption for the slot.
                           "slot-label tm-eyebrow select-none transition-colors",
                           isActive ? "accent-type text-accent" : "text-ink-soft/50"
                         )}
@@ -1307,7 +1330,7 @@ export default function FlipWords(props: FlipWordsProps) {
                           transform: `translateY(-2.25rem) rotate(${-boardRotation}deg)`,
                         }}
                       >
-                        {idx === 0 ? "First" : "Second"}
+                        {idx === 0 ? "Tile 1" : "Tile 2"}
                       </span>
                     )}
                   </div>

@@ -77,7 +77,7 @@ const AnimatedWordmark = forwardRef<AnimatedWordmarkHandle, Props>(function Anim
   // A magazine masthead does not move. Under Texas Monthly the wordmark is a
   // logotype, so it never autoplays and never flips on hover — the letter-flip
   // is FlipWords' own brand idea (the game is *called* FlipWords) and reading
-  // it as "TEXAS TWO STEP" mid-cascade rendered the masthead illegible.
+  // it as "Texas Two Step" mid-cascade rendered the masthead illegible.
   const animated = autoplay ?? edition !== 'texas';
 
   useEffect(() => {
@@ -110,6 +110,10 @@ const AnimatedWordmark = forwardRef<AnimatedWordmarkHandle, Props>(function Anim
         // Word spaces are drawn as a fixed em gap rather than a space glyph:
         // Grifinito's trial charset has no U+00A0, so a literal nbsp would be
         // served by the fallback face at the fallback's advance width.
+        // Tokenised because the right gap depends on the face: 0.3em suits
+        // Mona Sans, but Grifinito is very condensed, so the same measure
+        // opens a hole between words wide enough to read as three separate
+        // marks rather than one wordmark. Texas sets its own.
         const isSpace = char === " ";
         return (
           <span
@@ -121,7 +125,7 @@ const AnimatedWordmark = forwardRef<AnimatedWordmarkHandle, Props>(function Anim
             style={{
               transformStyle: "preserve-3d",
               willChange: "transform",
-              width: isSpace ? "0.3em" : undefined,
+              width: isSpace ? "var(--wordmark-space, 0.3em)" : undefined,
             }}
             aria-hidden="true"
           >

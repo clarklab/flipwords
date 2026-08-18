@@ -51,7 +51,10 @@ export const EDITIONS: Record<Edition, EditionConfig> = {
     id: 'texas',
     name: 'The Texas Two-Step',
     shortName: 'Texas Two-Step',
-    wordmark: 'TEXAS TWO STEP',
+    // Title case, not caps. TM's own masthead is caps because it is four short
+    // words set very wide; three words of a didone at this size read as a
+    // headline, and a headline is what this is.
+    wordmark: 'Texas Two Step',
     tagline: 'Two tiles, four answers, one state.',
     description:
       'A daily word puzzle about Texas, from Texas Monthly. Two tiles, four answers.',
