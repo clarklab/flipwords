@@ -129,6 +129,17 @@
   padding-bottom: clamp(2.5rem, 14vh, 8rem);
 }
 
+/* The bias is a PHONE correction: it exists because a portrait viewport leaves
+   far more slack than the board needs. A landscape laptop has the opposite
+   problem — at 1366x768 the board, the clues and the rack already want more
+   column than there is — so 14vh of padding there is 107px spent pushing the
+   rack off the bottom of the screen. Much smaller above the fold. */
+@media (min-width: 48rem) {
+  :root[data-edition="texas"] .board-area {
+    padding-bottom: clamp(1.5rem, 6vh, 4rem);
+  }
+}
+
 /* The rack hangs --tile-bleed past its own container, which the card's
    `overflow-hidden` used to crop. Nothing crops now, so the page pays for it
    explicitly instead of growing a stray scroll. */

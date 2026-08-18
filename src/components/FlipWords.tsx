@@ -1265,7 +1265,10 @@ export default function FlipWords(props: FlipWordsProps) {
                       slotRefs.current[idx] = el;
                     }}
                     className={cn(
-                      "w-[var(--tile-w)] h-[var(--tile-h)] r-tile flex items-center justify-center relative cursor-pointer transition-[border-color,background-color,box-shadow,transform] duration-150",
+                      // --slot-* rather than --tile-*: under Texas the board
+                      // runs a quarter larger than the hand (see texas-game).
+                      // Both resolve to the same value under FlipWords.
+                      "w-[var(--slot-w)] h-[var(--slot-h)] r-tile flex items-center justify-center relative cursor-pointer transition-[border-color,background-color,box-shadow,transform] duration-150",
                       // Drop-target highlight wins over every other state. Solid
                       // accent ring, soft glow, faint scale-up so the slot
                       // reads as "I'll catch the tile if you let go now."

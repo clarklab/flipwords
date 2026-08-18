@@ -115,6 +115,26 @@
      At 390px that is 77px -> 72px of tile and 8px -> 14px of air. */
   --tile-gap: 0.9rem;
 
+  /* THE BOARD IS BIGGER THAN THE HAND. The slots used to be a rack tile
+     exactly, which made the drop zone the smallest it could possibly be — and
+     the drop zone is where the whole game happens. Everything else on the page
+     is either furniture or inventory.
+
+     A quarter over tile size is enough to make the board read as the subject
+     of the composition rather than as two of the five objects at the bottom,
+     and it takes back most of the empty white the page was carrying between
+     the date line and the first clue. It is also a materially bigger touch
+     target for the one gesture the game is made of.
+
+     The rack is deliberately NOT scaled with it: five tiles across a phone
+     already sit at the width the viewport allows, and the size difference is
+     what says "in hand" versus "in play". A tile grows into its slot on drop
+     and shrinks on the way out — Framer's shared layout animates it for free,
+     and the tile's own type is viewport-sized rather than tile-sized, so the
+     word itself never reflows. */
+  --slot-w: calc(var(--tile-w) * 1.25);
+  --slot-h: calc(var(--slot-w) * 2);
+
   /* The drop zone. TM squares everything at 2px (--r-panel), which turned the
      tray into a hard-edged box around two rounded tiles — the one place in
      the composition where the frame fought its contents. This is --r-tile plus
@@ -428,6 +448,13 @@
       min(calc((100vw - var(--tile-gap) * 4) / 4.64), 10dvh),
       7rem
     );
+    /* The slot is now the tallest thing in the column, so the height term has
+       to govern IT rather than the tile it is derived from — otherwise a
+       1366x768 laptop gets a board 30px taller than the space it has. 12dvh
+       rather than the tile's 10: --tile-w is already capped at 10dvh, so
+       anything above 12.5 would never bind, and anything below 10 would make a
+       slot smaller than the tile inside it. */
+    --slot-w: min(calc(var(--tile-w) * 1.25), 12dvh);
   }
   :root[data-edition="texas"] .board-area {
     margin-top: 1rem;
