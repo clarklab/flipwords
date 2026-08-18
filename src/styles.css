@@ -83,6 +83,14 @@
   --tile-w: clamp(3.5rem, calc((100vw - var(--tile-gap) * 4) / 4.64), 7rem);
   --tile-h: calc(var(--tile-w) * 2);
   --tile-bleed: calc(var(--tile-w) * 0.18);
+
+  /* The two board slots. Identical to a rack tile here, which is what
+     FlipWords has always drawn — a tile is the same object in hand and on the
+     board. Texas overrides them to run larger; a slotted tile is `w-full
+     h-full` inside its slot, so it simply takes whatever these say and the
+     shared-layout transition animates the change on drop. */
+  --slot-w: var(--tile-w);
+  --slot-h: var(--tile-h);
 }
 
 html, body {
