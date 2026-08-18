@@ -64,6 +64,16 @@
   :root { --r-surface: 36px; }
 }
 
+/* Above md the tray takes p-4 rather than p-3, so the concentric corner grows
+   with it. --tile-w is already at its 7rem ceiling by this width, so the wider
+   gap here costs the tiles nothing — it only opens the rack. */
+@media (min-width: 48rem) {
+  :root[data-edition="texas"] {
+    --tile-gap: 1.15rem;
+    --r-tray: calc(var(--r-tile) + 1rem);
+  }
+}
+
 :root[data-edition="texas"] {
   /* TM is squared and ruled. 3px keeps a printed-card hairline of rounding
      without reading as an app chrome radius. */
@@ -93,6 +103,25 @@
   --flame-fg: var(--color-art-ink);
 
   --star-empty: color-mix(in oklab, var(--color-tile-edge) 26%, transparent);
+
+  /* THE RACK BREATHES. At 0.5rem the five dominoes sat almost edge to edge —
+     with a 2px outline and a printed edge on each, the row read as one ruled
+     strip rather than five separate objects, and the drag target for the middle
+     tiles was ambiguous. Nearly doubling the gap buys back the separation.
+
+     The tiles pay for it: --tile-w is `(100vw - 4 × gap) / 4.64`, so every
+     pixel added here comes straight off the tile width and the rack still lands
+     exactly one viewport wide with the same ~18% overhang on the outer two.
+     At 390px that is 77px -> 72px of tile and 8px -> 14px of air. */
+  --tile-gap: 0.9rem;
+
+  /* The drop zone. TM squares everything at 2px (--r-panel), which turned the
+     tray into a hard-edged box around two 7px-rounded tiles — the one place in
+     the composition where the frame fought its contents. This is --r-tile plus
+     the tray's own padding, i.e. the corner that runs exactly concentric with
+     the tile corner inside it. Restated per breakpoint below because the
+     padding changes at md. */
+  --r-tray: calc(var(--r-tile) + 0.75rem);
 }
 
 .r-surface { border-radius: var(--r-surface); }
@@ -230,17 +259,52 @@
 
 /* Clue rails. TM's third voice — after the didone display and the caps sans
    eyebrow — is an editorial serif for deck and body copy, and the four clues
-   are precisely a deck: short prose that describes the puzzle. Cream face and
-   ink outline tie them to the tiles, so the whole board reads as one drawn
-   set. Coral stays a punctuation colour and is not used here. */
+   are precisely a deck: short prose that describes the puzzle.
+
+   ONE VOICE AT EVERY WIDTH. This used to be two different components wearing
+   the same class: a cream pill in a heavy ink box below 48rem, and a ruled
+   editorial deck with a coral direction label above it. The pill lost on every
+   count — it re-stated the tile's own chrome (cream face, 2px ink outline, hard
+   printed shadow) on something that is type rather than an object, it set the
+   clue in the UI sans instead of the serif, and it dropped the ACROSS/DOWN
+   label that tells you which edge you are reading. So the deck is now the base
+   treatment and the media query below only handles LAYOUT: un-rotating the two
+   side clues once there is width for flanking columns.
+
+   Everything here is logical rather than physical (`border-block-start`, not
+   `border-top`), because on a phone the side clues are still set in
+   `vertical-rl`. The rule lands above the label in each clue's own reading
+   frame, which puts it on the outer edge of both side columns — symmetric, and
+   the same relationship the top and bottom clues have. */
 :root[data-edition="texas"] .clue-rail {
   font-family: var(--font-serif-text);
   font-variation-settings: normal;
   font-feature-settings: normal;
-  background-color: var(--color-tile-face);
-  border-width: var(--ink-stroke);
-  border-color: var(--color-tile-edge);
   color: var(--color-ink);
+  /* No box: no face, no outline, no radius, no printed shadow. `border: 0`
+     first so the block-start rule below is the only edge left standing. */
+  background-color: transparent;
+  border: 0;
+  border-block-start: var(--rule-weight) solid var(--color-ink);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  padding-block-start: 0.45rem;
+}
+
+/* The direction label. Coral is TM's eyebrow colour — GAMES, READ NEXT and
+   POLITICS & POLICY are all set in it — and at 11px the sampled coral is
+   3.34:1 on white, so the type takes the AA-compliant derivative. Hidden
+   outright under FlipWords (see `.clue-edge-label` above). */
+:root[data-edition="texas"] .clue-edge-label {
+  display: block;
+  margin-block-end: 0.28rem;
+  color: var(--color-accent-ink);
+}
+
+/* The win flash rings the clue block rather than a pill. */
+:root[data-edition="texas"] .clue-rail > [data-edge-glow] {
+  border-radius: 0;
 }
 
 /* ---------------------------------------------------------------------------
@@ -266,17 +330,18 @@
       the rotation was buying: the position of a clue tells you which edge it
       describes, and that mapping has to survive a board rotation.
 
-   The clue stops being a cream pill and becomes what a magazine would set: a
-   heavy rule, a tracked-caps direction label, then the clue in the editorial
-   serif. Same information, same place, no sideways type, no card chrome.
+   The voice — rule, tracked-caps direction label, editorial serif — is set
+   once above and applies at every width. All that is left here is layout.
    --------------------------------------------------------------------------- */
 
-/* The direction label ("ACROSS, TOP") only exists under Texas at desktop. */
+/* The direction label ("ACROSS, TOP") is a Texas device; FlipWords never draws
+   it. Its Texas branch is set above, next to the clue's own type. */
 .clue-edge-label { display: none; }
 
 /* 48rem is the width at which the two flanking columns are ~19 characters
    wide. Below that they fall to ~7 characters, which is worse typography than
-   the rotated rail it would be replacing — so phones keep the rails. */
+   the rotated rail it would be replacing — so phones keep the rotation (they
+   no longer keep the pill). */
 @media (min-width: 48rem) {
   :root[data-edition="texas"] .board-grid {
     grid-template-columns:
@@ -284,7 +349,15 @@
     column-gap: clamp(1.5rem, 4vw, 3.5rem);
     row-gap: 1.5rem;
     align-items: center;
-    width: 100%;
+    /* `width: 100%` let the grid stretch to the full 1160px measure, which put
+       the two side clues against the far edges of a 1366px window — ~350px of
+       empty page between "DOWN, LEFT" and the slot it describes. At that
+       distance the position stops encoding anything and the player has to
+       re-read all four clues to work out which edge is which. Bounded, the
+       flanking columns sit about a gap's width off the tray, so the mapping is
+       readable at a glance. Below 54rem this still resolves to 100%, so the md
+       composition is unchanged. */
+    width: min(100%, 54rem);
   }
 
   /* The two side cells are the only ones that need to be told how to sit; the
@@ -299,12 +372,9 @@
     writing-mode: horizontal-tb;
     rotate: none;
     transform: none;
-    background-color: transparent;
-    border: 0;
-    border-top: var(--rule-weight) solid var(--color-ink);
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0.5rem 0 0;
+    /* The face, outline, radius and shadow are already gone at every width;
+       only the measure and the type size change here. */
+    padding-block-start: 0.5rem;
     max-width: 15rem;
     font-size: 1.0625rem;
     line-height: 1.32;
@@ -320,16 +390,8 @@
     white-space: normal;
   }
 
-  :root[data-edition="texas"] .clue-edge-label {
-    display: block;
-    margin-bottom: 0.3rem;
-    color: var(--color-accent-ink);
-  }
-
-  /* The win flash rings the clue block rather than a pill. */
-  :root[data-edition="texas"] .clue-rail > [data-edge-glow] {
-    border-radius: 0;
-  }
+  /* (The label and the win flash are set once, at the top of this section —
+     they no longer belong to the desktop composition.) */
 }
 
 /* Vertical breathing room, and a tile size that also answers to the viewport
@@ -339,7 +401,11 @@
    untouched, so phones keep the exact tile size they ship today. */
 @media (min-width: 56rem) {
   :root[data-edition="texas"] {
-    --tile-w: clamp(3.5rem, min(calc((100vw - 2rem) / 4.64), 10dvh), 7rem);
+    --tile-w: clamp(
+      3.5rem,
+      min(calc((100vw - var(--tile-gap) * 4) / 4.64), 10dvh),
+      7rem
+    );
   }
   :root[data-edition="texas"] .board-area {
     margin-top: 1rem;
@@ -369,6 +435,38 @@
   border-style: solid;
   border-color: color-mix(in oklab, var(--color-tile-edge) 30%, transparent);
   background-color: var(--color-surface);
+}
+
+/* The drop zone's own corner. `.r-panel` squares this to 2px along with the
+   rest of the system, which is wrong here specifically: the tray is a frame
+   drawn around two 7px-rounded dominoes, and a hard corner 12px outside a
+   rounded one reads as a mistake at exactly the size the eye checks it. See
+   --r-tray — this is the concentric corner, not a soft-app default. */
+:root[data-edition="texas"] .slot-tray {
+  border-radius: var(--r-tray);
+}
+
+/* The rotate control. It shipped with `.shadow-tile-lift`, which under Texas is
+   a three-layer stack — a 6px opaque ink slab, a 9px translucent one behind it,
+   and a 26px ambient blur. That is the treatment for a domino: a printed object
+   with real thickness lying on paper. The rotate button is not an object, it is
+   a control drawn on top of the tray, and at 40px across the doubled hard slab
+   read as a rendering artifact rather than as depth.
+
+   Flat coral disc instead. The white keyline is not a shadow — it is the same
+   knockout a printed roundel gets when it overlaps a tinted panel, and it is
+   what keeps the button legible where it crosses the tray's edge. */
+:root[data-edition="texas"] .rotate-fab {
+  box-shadow: 0 0 0 3px var(--color-surface);
+}
+
+/* The tile's flip control, same argument. It carried `.shadow-tile`, which is
+   the domino's own printed edge — so a 36px button was casting the shadow of
+   the object it is sitting on top of, doubling the hard ink offset already
+   under the tile. Flat here; it reads from the coral fill in a slot and from
+   the ink outline in the rack. */
+:root[data-edition="texas"] .flip-fab {
+  box-shadow: none;
 }
 
 /* Tile-rail section head: TM sets section labels as tracked caps flanked or
@@ -431,11 +529,37 @@
   color: var(--color-accent-ink);
 }
 
-/* Icon FABs stay circular — they are genuinely circular objects — but pick up
-   the illustration's constant outline weight. */
+/* Drawn objects — the scorecard's streak panel, the judge card, the tile's own
+   flip button — pick up the illustration's constant outline weight. */
 :root[data-edition="texas"] .fab-outline {
   border-width: var(--ink-stroke);
   border-color: var(--color-tile-edge);
+}
+
+/* MASTHEAD UTILITIES ARE NOT DRAWN OBJECTS. Back, help and menu were wearing
+   the domino's costume: a 2px near-black outline plus `.shadow-tile`, which
+   under Texas is a hard 2px ink offset. Two buttons with that much presence at
+   the top of every screen compete with the wordmark and the masthead rule —
+   the three heaviest marks on the page were the two things you are least
+   likely to press.
+
+   A magazine's utility nav is a hairline and nothing else. 1px in the paper
+   grey, no shadow at any state; the hover moves the border and the fill rather
+   than lifting the button off the page. `.nav-fab` is narrower than
+   `.fab-outline` on purpose so the cards above keep their outline.
+
+   `hover:shadow-tile-hover` on these buttons is a Tailwind utility, i.e.
+   `@layer utilities`; this file is unlayered and beats it outright. */
+:root[data-edition="texas"] .nav-fab {
+  border-width: 1px;
+  border-color: var(--color-paper-line);
+  box-shadow: none;
+  transition-property: color, background-color, border-color, transform;
+}
+:root[data-edition="texas"] .nav-fab:hover {
+  border-color: var(--color-ink-soft);
+  background-color: var(--color-surface-deep);
+  box-shadow: none;
 }
 
 /* ===========================================================================

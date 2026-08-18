@@ -70,9 +70,17 @@
      (in px) peeks below the bottom edge. Height is 2× width (1:2 portrait).
      Slots use the same vars so a slotted tile is identical in size to a
      rack tile. Cap at 7rem so tiles don't get absurd on desktop — the rack
-     then centers with normal margins (no bleed). */
+     then centers with normal margins (no bleed).
+
+     The rack is `5w + 4g` wide and is allowed to overhang by 0.18w a side, so
+     `5w + 4g = 100vw + 0.36w`, i.e. `w = (100vw - 4g) / 4.64`. That used to be
+     written with the gap already folded in as the literal `2rem`, which meant
+     widening the gap silently pushed the outer tiles further off-screen instead
+     of just spacing the row. Stating the relationship makes --tile-gap the one
+     dial: open the row up and the tiles give back exactly the width the gaps
+     take. FlipWords' 0.5rem gap resolves to the identical 2rem it always was. */
   --tile-gap: 0.5rem;
-  --tile-w: clamp(3.5rem, calc((100vw - 2rem) / 4.64), 7rem);
+  --tile-w: clamp(3.5rem, calc((100vw - var(--tile-gap) * 4) / 4.64), 7rem);
   --tile-h: calc(var(--tile-w) * 2);
   --tile-bleed: calc(var(--tile-w) * 0.18);
 }
@@ -173,6 +181,43 @@ code, pre {
   box-shadow: var(--inset-slot);
 }
 
+/* Material Symbols — the app's mark set. See components/Icon.tsx for why the
+   family is used at all and how the axes are driven.
+
+   Three of these declarations are load-bearing rather than boilerplate:
+     • `font-feature-settings: 'liga'` — body sets ss01/ss02/cv01/cv11 and that
+       inherits into every element. Restating the feature list here is what
+       keeps the ligature substitution ("menu" -> the glyph) switched on.
+     • `font-variation-settings: normal` — body also sets wdth/wght axes that
+       Material Symbols does not have; Icon's inline value replaces this per
+       call, and this is the floor it replaces.
+     • `width/height: 1em` + `overflow: hidden` — Material glyphs are 1em
+       square, so this is a no-op once the font is live. Before that (or if the
+       request fails outright) it is what stops a fallback face from laying out
+       the ligature's NAME as a wide run of text and reflowing the header. */
+.material-symbols {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: normal;
+  font-feature-settings: "liga";
+  /* block, so the mark never sits on a text baseline and drags a descender gap
+     into the flex rows it lives in. */
+  display: block;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Hide scrollbars on tile rail */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
@@ -196,6 +241,17 @@ code, pre {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Keyboard focus. Nothing in the app drew a focus ring, and several controls
+   (the header FABs, the rotate button, the tile flip button) also suppress the
+   UA default by having no visible border in their rest state — so tabbing
+   through the board was invisible. `:focus-visible` rather than `:focus` keeps
+   it off mouse and touch presses. The accent reads ≥3:1 on the page in both
+   editions, which is the bar for a non-text indicator. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 /* Selection feels paper-y */

@@ -73,6 +73,18 @@ export const Route = createRootRoute({
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap',
       },
+      // Material Symbols — the app's whole mark set (see components/Icon.tsx).
+      // All four axes are requested because Icon drives three of them per call
+      // site: FILL (earned stars), wght (marks run heavier than Material's 400
+      // default), opsz (fed the rendered px size).
+      // `display=block` rather than `swap`: these are ligatures, so a fallback
+      // render shows the glyph's NAME as literal text ("local_fire_department")
+      // rather than a plausible substitute. Block keeps the box empty until the
+      // font lands; `.material-symbols` clamps it to 1em either way.
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block',
+      },
     ],
   }),
   shellComponent: RootDocument,

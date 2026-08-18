@@ -95,7 +95,7 @@ export default function Archive() {
         <div className="arc-masthead tm-container relative rule-heavy pb-3 mb-3.5">
           <Link
             to="/"
-            className="arc-back absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink shadow-tile"
+            className="arc-back absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-white border border-tile-edge nav-fab text-ink-muted hover:text-ink shadow-tile"
             aria-label="Back"
           >
             <Icon name="chevron" size={20} />

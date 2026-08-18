@@ -182,7 +182,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                 ease: 'easeInOut',
                 times: [0, 0.12, 0.18, 0.3, 1],
               }}
-              className="accent-fill absolute w-9 h-9 rounded-full bg-accent text-white border border-accent/40 flex items-center justify-center shadow-tile-lift z-10"
+              className="flip-fab accent-fill absolute w-9 h-9 rounded-full bg-accent text-white border border-accent/40 flex items-center justify-center shadow-tile-lift z-10"
             >
               <Icon name="flip" size={18} />
             </motion.div>
@@ -302,7 +302,7 @@ export default function TutorialModal({ onComplete }: { onComplete: () => void }
                 ease: 'easeInOut',
                 times: [0, 0.14, 0.2, 0.32, 0.56, 0.62, 0.74, 1],
               }}
-              className="accent-fill absolute -bottom-2 -right-2 z-30 w-9 h-9 rounded-full flex items-center justify-center bg-accent text-white shadow-tile-lift"
+              className="rotate-fab accent-fill absolute -bottom-2 -right-2 z-30 w-9 h-9 rounded-full flex items-center justify-center bg-accent text-white shadow-tile-lift"
             >
               <Icon name="rotate" size={18} />
             </motion.div>

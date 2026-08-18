@@ -244,8 +244,8 @@ function ScreenEdgePill({
         // persistent backdrop-filter would re-blur that region every frame.
         // .r-pill instead of rounded-full so the four clues square off with
         // the rest of the board under Texas; .clue-rail then re-voices them
-        // as an editorial deck (serif, cream face, ink outline), and above
-        // 56rem un-rotates the two side clues entirely.
+        // as an editorial deck at every width — rule, coral direction label,
+        // serif, no box — and above 48rem un-rotates the two side clues.
         "relative font-clue-strong text-ink-muted bg-tile-face/90 border border-tile-edge r-pill clue-rail px-3.5 py-1.5 md:px-4 md:py-2 shadow-tile transition-colors",
         edge === "left" || edge === "right" ? "[writing-mode:vertical-rl]" : "",
         edge === "left" ? "rotate-180" : ""
@@ -1082,7 +1082,7 @@ export default function FlipWords(props: FlipWordsProps) {
                 if (onBack) onBack()
                 else setShowTutorial(true)
               }}
-              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+              className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge nav-fab text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
               title="Back"
               aria-label="Back"
             >
@@ -1116,7 +1116,7 @@ export default function FlipWords(props: FlipWordsProps) {
                   exit={{ opacity: 0, scale: 0.85, x: 8 }}
                   transition={{ type: "spring", stiffness: 420, damping: 26 }}
                   onClick={() => setShowTutorial(true)}
-                  className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge fab-outline text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
+                  className="w-11 h-11 rounded-full flex items-center justify-center font-ui bg-white border border-tile-edge nav-fab text-ink-muted hover:text-ink hover:shadow-tile-hover transition-all active:scale-95 shadow-tile"
                   title="How to play"
                   aria-label="How to play"
                 >
@@ -1196,7 +1196,11 @@ export default function FlipWords(props: FlipWordsProps) {
                   setHintMessage("");
                   playBoardRotate();
                 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center p-[2px] active:scale-95 group"
+                // 44px of tap zone at every width — it was 40 on phones, which
+                // is under the touch-target minimum for the one control a
+                // player hits repeatedly. The extra 4px goes into padding, so
+                // the rendered disc stays exactly the size it was.
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full flex items-center justify-center p-1 md:p-[2px] active:scale-95 group"
                 title="Rotate board"
                 aria-label="Rotate board"
               >
@@ -1204,17 +1208,26 @@ export default function FlipWords(props: FlipWordsProps) {
                     of padding around it. The padding keeps the thumb
                     target the original w-10/w-11 while the rendered FAB
                     reads a touch smaller and less dominant over the
-                    slot area. */}
+                    slot area.
+
+                    .rotate-fab replaces the lift shadow with a flat disc
+                    and a printed knockout under Texas; FlipWords keeps
+                    shadow-tile-lift untouched. */}
                 <span
                   aria-hidden="true"
-                  className="accent-fill w-full h-full rounded-full bg-accent text-white group-hover:bg-accent/90 transition-colors flex items-center justify-center shadow-tile-lift"
+                  className="rotate-fab accent-fill w-full h-full rounded-full bg-accent text-white group-hover:bg-accent/90 transition-colors flex items-center justify-center shadow-tile-lift"
                 >
-                  <Icon name="rotate" size={18} className="md:size-[20px]" />
+                  {/* 700 on the wght axis: this is the only mark that sits
+                      knocked out of a filled disc, where Material's default
+                      weight thins out against the surrounding colour. Sized
+                      once rather than per-breakpoint — Icon writes font-size
+                      inline, which no `md:` utility can reach. */}
+                  <Icon name="rotate" size={21} weight={700} />
                 </span>
               </button>
               <div
                 ref={slotAreaRef}
-                className="tint-panel flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 r-panel shadow-slot-inset gpu"
+                className="slot-tray tint-panel flex gap-3 md:gap-4 p-3 md:p-4 bg-surface-deep/40 r-panel shadow-slot-inset gpu"
                 style={{ transformOrigin: "center center" }}
               >
               {[0, 1].map((idx) => {
@@ -1276,12 +1289,22 @@ export default function FlipWords(props: FlipWordsProps) {
                           "slot-label tm-eyebrow select-none transition-colors",
                           isActive ? "accent-type text-accent" : "text-ink-soft/50"
                         )}
-                        // translateY is composed AFTER the rotation, so it
-                        // always shifts the label "up" in its own reading
-                        // frame — clearing the centred rotate control at every
-                        // board orientation.
+                        // ORDER MATTERS, and the old order was wrong. With the
+                        // counter-rotation first, the offset was applied in
+                        // the label's own upright frame — i.e. always straight
+                        // up the SCREEN. At 0° and 180° the two slots sit side
+                        // by side and that is clear of the centred rotate
+                        // control, but at 90° and 270° they stack, and the
+                        // lower slot's label landed 6px from the middle of the
+                        // button: "Second" was legible as "S    D".
+                        //
+                        // Offsetting FIRST puts the shift in the TRAY's frame,
+                        // i.e. always perpendicular to the axis the two slots
+                        // are separated along, whichever way the board is
+                        // turned. The trailing rotate still stands the glyphs
+                        // upright, so nothing about the type changes.
                         style={{
-                          transform: `rotate(${-boardRotation}deg) translateY(-2.25rem)`,
+                          transform: `translateY(-2.25rem) rotate(${-boardRotation}deg)`,
                         }}
                       >
                         {idx === 0 ? "First" : "Second"}
