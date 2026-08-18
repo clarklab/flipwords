@@ -64,13 +64,14 @@
   :root { --r-surface: 36px; }
 }
 
-/* Above md the tray takes p-4 rather than p-3, so the concentric corner grows
-   with it. --tile-w is already at its 7rem ceiling by this width, so the wider
-   gap here costs the tiles nothing — it only opens the rack. */
+/* The tray's inset opens up with the viewport; --r-tray is derived from it, so
+   the concentric corner follows on its own. --tile-w is already at its 7rem
+   ceiling by this width, so the wider rack gap here costs the tiles nothing —
+   it only opens the row. */
 @media (min-width: 48rem) {
   :root[data-edition="texas"] {
     --tile-gap: 1.15rem;
-    --r-tray: calc(var(--r-tile) + 1rem);
+    --tray-pad: 1.5rem;
   }
 }
 
@@ -135,13 +136,20 @@
   --slot-w: calc(var(--tile-w) * 1.25);
   --slot-h: calc(var(--slot-w) * 2);
 
-  /* The drop zone. TM squares everything at 2px (--r-panel), which turned the
-     tray into a hard-edged box around two rounded tiles — the one place in
-     the composition where the frame fought its contents. This is --r-tile plus
-     the tray's own padding, i.e. the corner that runs exactly concentric with
-     the tile corner inside it. Restated per breakpoint below because the
-     padding changes at md. */
-  --r-tray: calc(var(--r-tile) + 0.75rem);
+  /* The drop zone's margin. The markup ships `p-3 md:p-4`, which is the app's
+     generic panel inset; the tray is not a panel, it is the mat the tiles are
+     laid on, and a mat wants to read as a deliberate border around them rather
+     than as the gap left over. Wider on both counts, and stated as a token
+     because the corner below is derived from it — change one without the other
+     and the tray stops being concentric with the tiles inside it. */
+  --tray-pad: 1.125rem;
+
+  /* TM squares everything at 2px (--r-panel), which turned the tray into a
+     hard-edged box around two rounded tiles — the one place in the composition
+     where the frame fought its contents. --r-tile plus the tray's own inset is
+     the corner that runs exactly concentric with the tile corner inside it.
+     Only --tray-pad is restated at md; this follows it. */
+  --r-tray: calc(var(--r-tile) + var(--tray-pad));
 }
 
 .r-surface { border-radius: var(--r-surface); }
@@ -507,6 +515,9 @@
    rounded one reads as a mistake at exactly the size the eye checks it. See
    --r-tray — this is the concentric corner, not a soft-app default. */
 :root[data-edition="texas"] .slot-tray {
+  /* Beats the markup's `p-3 md:p-4` — a layered utility, and this file is
+     unlayered. FlipWords keeps those values. */
+  padding: var(--tray-pad);
   border-radius: var(--r-tray);
   /* Flat. `--inset-slot` puts a ring and an inner shadow on the tray, which is
      a well pressed into a surface — depth this page does not otherwise have.
