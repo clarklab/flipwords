@@ -52,7 +52,10 @@ const GLYPH: Record<IconName, string> = {
   help: 'question_mark',
   // Base points left; `dir` rotates it.
   chevron: 'chevron_left',
-  rotate: 'rotate_right',
+  // Two arrows chasing each other, not one. `rotate_right` draws a single
+  // sweep, which reads as "undo/redo" — a one-way move. The board turn is a
+  // cycle you can keep taking, and two opposed arrowheads say that.
+  rotate: 'sync',
   // The tile's halves trading places — two opposed vertical arrows.
   flip: 'swap_vert',
   check: 'check',

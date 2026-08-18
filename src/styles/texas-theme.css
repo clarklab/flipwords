@@ -154,8 +154,12 @@
   --r-panel: 2px;
   /* Tiles are the hero object and must read as art.png's dominoes, whose
      corners are ~8-10% of the short side — noticeably rounder than the rest
-     of the squared system. Deliberately not 2px like everything else. */
-  --r-tile: 7px;
+     of the squared system. Deliberately not 2px like everything else.
+     9px is the top of that 8-10% band on a ~100px tile; 7px was the bottom of
+     it, and at the size the tiles actually render the difference is between a
+     domino and a squared card. --r-tray follows this, so the drop zone's
+     corner stays concentric with the tile corner inside it. */
+  --r-tile: 9px;
   --r-pill: 2px;
   --r-btn: 2px;
   --rule-weight: 3px;
@@ -229,6 +233,10 @@
      without any component having to know an edition name — the same way every
      other difference between the editions is expressed. */
   --kicker-animate: 0;
+
+  /* See AnimatedWordmark: word spaces are drawn as a fixed em gap. Grifinito's
+     letters are narrow enough that Mona Sans's 0.3em reads as a gutter. */
+  --wordmark-space: 0.2em;
 }
 
 /* ===========================================================================

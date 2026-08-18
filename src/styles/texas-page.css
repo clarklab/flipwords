@@ -120,6 +120,13 @@
      but can never be squeezed below its own content. */
   flex: 1 0 auto;
   min-height: 0;
+  /* Optically centred, not mathematically. The board floats in whatever the
+     masthead and the rack leave behind, and split evenly that put ~19% of a
+     phone screen of empty white between the date line and the first clue —
+     the page read as though something had failed to load. Padding the bottom
+     of the centring box lifts the board by half of it, so the slack lands
+     mostly below the board, where the rack's own bleed already absorbs it. */
+  padding-bottom: clamp(2.5rem, 14vh, 8rem);
 }
 
 /* The rack hangs --tile-bleed past its own container, which the card's

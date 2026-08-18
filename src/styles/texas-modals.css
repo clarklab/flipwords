@@ -140,7 +140,7 @@
 }
 
 /* The wordmark in scene one is set from the registry, so its length is not
-   fixed: "TEXAS TWO STEP" is 14 characters where "FLIPWORDS" is 9, and at
+   fixed: "Texas Two Step" is 14 characters where "FLIPWORDS" is 9, and at
    text-2xl in font-wide it crowds the sheet on a 320px screen. Stepped down
    below the narrowest common phone width; FlipWords is untouched. */
 @media (max-width: 359px) {

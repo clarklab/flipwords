@@ -147,12 +147,16 @@
    the same register; set large, in caps, on a small positive track (their
    house treatment for capitalised display), over the heavy rule.
    Sized against the viewport so it always clears the two 44px icon buttons:
-   "TEXAS TWO STEP" measures ~4.0em in this face, ~4.5em with the track, so at
-   the 375px floor it occupies 142px of the ~255px of free centre.
+   "Texas Two Step" measures ~3.7em in this face, so at the 375px floor it
+   occupies ~117px of the ~255px of free centre.
+
+   The track is near-zero because the wordmark is set in title case. 0.035em
+   was a caps track — caps need opening up, and a lowercase run set on the same
+   track reads as a spaced-out logotype rather than as a masthead.
    ------------------------------------------------------------------------ */
 :root[data-edition="texas"] .tm-wordmark {
   font-size: clamp(26px, 8.4vw, 42px);
-  letter-spacing: 0.035em;
+  letter-spacing: 0.01em;
   /* The caller's `text-xl` also carries a line-height, and twMerge strips the
      component's own `leading-none` because of it — so at 42px the line box
      would still be 28px. Restate it here; unlayered beats the utility. */
