@@ -11,10 +11,12 @@ export const Route = createFileRoute('/choose')({
 })
 
 /**
- * The fork in the road. First-time visitors are sent here before `/` can
- * paint (see `editionBootScript`); returning players reach it via the
- * "switch games" link on the title screen. Either way, choosing persists the
- * edition and lands on that edition's normal title screen.
+ * The fork in the road — the app's default front door, always. Every full
+ * page load of `/` lands here pre-paint (see `editionBootScript`; only an
+ * explicit `?edition=` deep link skips it), and the title screen's "switch
+ * games" link leads back. Returning players see their game badged "Now
+ * playing"; choosing persists the edition and lands on that edition's normal
+ * title screen.
  */
 function ChooseRoute() {
   const navigate = useNavigate()

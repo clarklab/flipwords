@@ -2,13 +2,14 @@ import { EDITIONS, EDITION_IDS } from '@/edition'
 import type { Edition } from '@/edition'
 
 /**
- * The fork in the road — the very first screen a new visitor sees.
+ * The fork in the road — the default front door, shown on every full load.
  *
  * One daily word game ships under two mastheads, and a quiet toggle turned
  * out to read as a settings control rather than a choice of front door. This
  * screen makes the choice explicit: it says outright that the game has two
  * names, offers one large card per edition, and picking one drops you into
- * that edition's normal title screen.
+ * that edition's normal title screen. Returning players get a "Now playing"
+ * badge on their game so the daily tap-through is a no-thought gesture.
  *
  * Deliberately registry-driven end to end (docs/edition-architecture.md):
  * every name, tagline, byline, and swatch below comes from `EDITIONS`, so a
