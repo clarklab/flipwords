@@ -184,16 +184,32 @@ function mulberry32(seed: number): () => number {
  * `pool` is the date-gated subset for the edition, so that levels added AFTER
  * launch never rewrite the sessions of days players have already played
  * (see daily/schedule.ts).
+ *
+ * `lastServed` (optional) maps level id → the day index it was most recently
+ * served. When given, each slot draws only from the least-recently-served
+ * candidates in its tier bucket (never-served levels first), with the seeded
+ * RNG breaking ties. A level therefore cannot come back until every other
+ * eligible level in its bucket has had a turn. When omitted the draw is
+ * uniform — the original behaviour, which shipped days depend on.
  */
 export const pickSessionLevelsSeeded = (
   seedStr: string,
   count: number = 5,
-  pool: Level[] = []
+  pool: Level[] = [],
+  lastServed?: ReadonlyMap<number, number>
 ): Level[] => {
   const rand = mulberry32(fnv1a(seedStr))
   const seededPickOne = <T extends { id: number }>(arr: T[], reject: Set<number>): T | undefined => {
-    const candidates = arr.filter((item) => !reject.has(item.id))
+    let candidates = arr.filter((item) => !reject.has(item.id))
     if (candidates.length === 0) return undefined
+    if (lastServed) {
+      // Least-recently-served: only the candidates that have waited longest
+      // (never-served first) stay in the draw. The seeded RNG then breaks the
+      // tie, so the result is still deterministic for a given seed + history.
+      const age = (item: T) => lastServed.get(item.id) ?? -1
+      const oldest = Math.min(...candidates.map(age))
+      candidates = candidates.filter((item) => age(item) === oldest)
+    }
     return candidates[Math.floor(rand() * candidates.length)]
   }
   const seededShuffle = <T,>(arr: T[]): T[] => {

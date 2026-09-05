@@ -29,7 +29,12 @@ export const EDITIONS: Record<Edition, EditionConfig> = {
     poolReleases: [
       { from: '2026-05-18', maxId: 101 },
       { from: '2026-07-03', maxId: 151 },
+      { from: '2026-09-08', maxId: 223 },
     ],
+    // Same day as the third release: from here on each slot deals the
+    // least-recently-played level in its tier, so the new batch surfaces
+    // immediately and nothing repeats until the whole pool has cycled.
+    noRepeatFrom: '2026-09-08',
     seedPrefix: 'flipwords',
 
     storageKey: 'flipwords_daily_v1',

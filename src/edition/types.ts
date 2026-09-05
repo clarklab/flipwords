@@ -47,6 +47,14 @@ export type EditionConfig = {
   /** Date-gated pool growth, sorted by `from`. */
   poolReleases: PoolRelease[]
   /**
+   * From this date on, the daily picker serves the least-recently-played
+   * levels in each tier bucket instead of drawing uniformly, so no puzzle
+   * repeats until every other eligible one has had a turn. Like a pool
+   * release, this must never be back-dated: days before it keep their
+   * original random deals. Omit to keep uniform draws forever.
+   */
+  noRepeatFrom?: EasternDate
+  /**
    * Namespace for the daily RNG seed. Must be unique per edition — two
    * editions sharing a prefix would deal correlated sessions.
    */
