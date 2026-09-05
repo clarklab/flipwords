@@ -96,9 +96,29 @@ Enforced by convention; worth checking in review:
 ## Adding puzzles to an edition
 
 1. Append to that edition's matrices file with ids **above** the previous max.
-   Never renumber shipped levels.
-2. Rebuild and verify (see `tools/`).
-3. Add one `poolReleases` entry dated **tomorrow or later**.
+   Never renumber shipped levels. Any compound not yet in
+   `tools/compound_words.txt` gets appended there (the verifier rejects edges
+   it does not know).
+2. Rebuild and verify (see `tools/`), then run `npx vitest run` — the fidelity
+   and schedule suites are the contract.
+3. Add one `poolReleases` entry dated **tomorrow or later**. Pick a date the
+   deploy will beat; if it slips past that date, bump the date before merging
+   rather than letting a day that was already played get re-dealt.
+
+## How a day's session is dealt
+
+`getSessionForDate` walks a fixed tier curve (tier 1, tier 1, tier 2, tier 2
+or flat tier 3, rotated tier 3) and fills each slot from the pool live on that
+date. Before `noRepeatFrom` each slot is a uniform seeded draw, which repeats
+freely — the original 151-level pool re-dealt some puzzles three times in a
+week while never touching others. From `noRepeatFrom` on, each slot draws
+only from the least-recently-served levels in its bucket (never-served first,
+seeded RNG breaking ties), so a puzzle cannot return until every other
+eligible puzzle in its bucket has been played, and a fresh release surfaces
+on the days right after it goes live. The history walk starts at launch, so
+the random era counts too. Like a pool release, `noRepeatFrom` must never be
+back-dated: days before it keep their original deals, and
+`tests/daily/schedule.test.ts` pins both eras.
 
 ## Known follow-ups
 
