@@ -294,6 +294,13 @@ def _build_atomic_vocab(matrices: list[dict], decoys_pool: list[dict]) -> set[st
     return vocab
 
 
+# Halves that appear in shipped matrices only as bound affixes (ARMFUL,
+# STATESMAN, MISPRINT). They are valid solution halves for those frozen
+# levels, but a decoy filler is shown alone on a tile face and must read as a
+# standalone word, so they are never used as fillers for new levels.
+NON_STANDALONE_FILLERS = {"FUL", "SMAN", "MIS"}
+
+
 def _filler_pool(
     atomic: set[str], soln_words: set[str], compounds: set[str]
 ) -> list[str]:
@@ -309,6 +316,7 @@ def _filler_pool(
         w
         for w in sorted(atomic)
         if w not in soln_words
+        and w not in NON_STANDALONE_FILLERS
         and not any((s + w) in compounds or (w + s) in compounds for s in soln_words)
     ]
 
