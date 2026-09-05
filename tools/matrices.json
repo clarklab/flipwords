@@ -3651,78 +3651,6 @@
     "id": 153,
     "tier": 1,
     "requires_rotation": false,
-    "title": "Special Delivery",
-    "matrix": [
-      "AIR",
-      "LIFT",
-      "DROP",
-      "OFF"
-    ],
-    "compounds": {
-      "top": "AIRLIFT",
-      "bottom": "DROPOFF",
-      "left": "AIRDROP",
-      "right": "LIFTOFF"
-    },
-    "clues": {
-      "top": "Emergency supply run by plane",
-      "bottom": "Sheer edge of a cliff",
-      "left": "Supplies by parachute",
-      "right": "Rocket's first moment up"
-    }
-  },
-  {
-    "id": 154,
-    "tier": 1,
-    "requires_rotation": false,
-    "title": "Shake on It",
-    "matrix": [
-      "HAND",
-      "SHAKE",
-      "PICK",
-      "UP"
-    ],
-    "compounds": {
-      "top": "HANDSHAKE",
-      "bottom": "PICKUP",
-      "left": "HANDPICK",
-      "right": "SHAKEUP"
-    },
-    "clues": {
-      "top": "Deal-sealing grip",
-      "bottom": "Truck with an open bed",
-      "left": "Choose with great care",
-      "right": "Big reshuffle at the top"
-    }
-  },
-  {
-    "id": 155,
-    "tier": 1,
-    "requires_rotation": false,
-    "title": "Full Service",
-    "matrix": [
-      "CAR",
-      "POOL",
-      "WASH",
-      "ROOM"
-    ],
-    "compounds": {
-      "top": "CARPOOL",
-      "bottom": "WASHROOM",
-      "left": "CARWASH",
-      "right": "POOLROOM"
-    },
-    "clues": {
-      "top": "Share the commute",
-      "bottom": "Restroom, in Canada",
-      "left": "Suds-and-rinse drive-through",
-      "right": "Where the cue sticks live"
-    }
-  },
-  {
-    "id": 156,
-    "tier": 1,
-    "requires_rotation": false,
     "title": "Chalk Talk",
     "matrix": [
       "BLACK",
@@ -3744,7 +3672,7 @@
     }
   },
   {
-    "id": 157,
+    "id": 154,
     "tier": 1,
     "requires_rotation": false,
     "title": "Happy Campers",
@@ -3768,7 +3696,7 @@
     }
   },
   {
-    "id": 158,
+    "id": 155,
     "tier": 1,
     "requires_rotation": false,
     "title": "Salon Day",
@@ -3792,7 +3720,7 @@
     }
   },
   {
-    "id": 159,
+    "id": 156,
     "tier": 2,
     "requires_rotation": false,
     "title": "Cold Shoulder",
@@ -3816,7 +3744,7 @@
     }
   },
   {
-    "id": 160,
+    "id": 157,
     "tier": 2,
     "requires_rotation": false,
     "title": "Full Steam Ahead",
@@ -3840,7 +3768,7 @@
     }
   },
   {
-    "id": 161,
+    "id": 158,
     "tier": 2,
     "requires_rotation": false,
     "title": "Opening Remarks",
@@ -3864,7 +3792,7 @@
     }
   },
   {
-    "id": 162,
+    "id": 159,
     "tier": 2,
     "requires_rotation": false,
     "title": "Burn Notice",
@@ -3888,7 +3816,7 @@
     }
   },
   {
-    "id": 163,
+    "id": 160,
     "tier": 3,
     "requires_rotation": false,
     "title": "Spring Fling",
@@ -3912,7 +3840,7 @@
     }
   },
   {
-    "id": 164,
+    "id": 161,
     "tier": 3,
     "requires_rotation": true,
     "title": "Take Aim",
@@ -3936,7 +3864,7 @@
     }
   },
   {
-    "id": 165,
+    "id": 162,
     "tier": 3,
     "requires_rotation": true,
     "title": "Shore Leave",
@@ -3960,7 +3888,7 @@
     }
   },
   {
-    "id": 166,
+    "id": 163,
     "tier": 3,
     "requires_rotation": true,
     "title": "Leave a Mark",
@@ -3979,12 +3907,12 @@
     "clues": {
       "top": "Pointer digit",
       "bottom": "Sandy trail left behind",
-      "left": "Front paw's business end",
+      "left": "Front paw, to a vet",
       "right": "Whorled ID at the crime scene"
     }
   },
   {
-    "id": 167,
+    "id": 164,
     "tier": 3,
     "requires_rotation": true,
     "title": "Big Idea",
@@ -4008,7 +3936,7 @@
     }
   },
   {
-    "id": 168,
+    "id": 165,
     "tier": 3,
     "requires_rotation": true,
     "title": "Legal Loophole",
@@ -4032,7 +3960,7 @@
     }
   },
   {
-    "id": 169,
+    "id": 166,
     "tier": 3,
     "requires_rotation": true,
     "title": "Leap of Faith",
@@ -4056,8 +3984,8 @@
     }
   },
   {
-    "id": 170,
-    "tier": 1,
+    "id": 167,
+    "tier": 2,
     "requires_rotation": false,
     "title": "Step Right Up",
     "matrix": [
@@ -4080,7 +4008,7 @@
     }
   },
   {
-    "id": 171,
+    "id": 168,
     "tier": 1,
     "requires_rotation": false,
     "title": "Spin Cycle",
@@ -4104,7 +4032,7 @@
     }
   },
   {
-    "id": 172,
+    "id": 169,
     "tier": 1,
     "requires_rotation": false,
     "title": "Three, Two, One",
@@ -4128,31 +4056,7 @@
     }
   },
   {
-    "id": 173,
-    "tier": 1,
-    "requires_rotation": false,
-    "title": "Cosmic Catch",
-    "matrix": [
-      "STAR",
-      "DUST",
-      "FISH",
-      "BOWL"
-    ],
-    "compounds": {
-      "top": "STARDUST",
-      "bottom": "FISHBOWL",
-      "left": "STARFISH",
-      "right": "DUSTBOWL"
-    },
-    "clues": {
-      "top": "Glittery cosmic sprinkle",
-      "bottom": "Pet's round glass home",
-      "left": "Five-armed tide pool dweller",
-      "right": "Dirty Thirties disaster"
-    }
-  },
-  {
-    "id": 174,
+    "id": 170,
     "tier": 1,
     "requires_rotation": false,
     "title": "Cash Flow",
@@ -4176,31 +4080,7 @@
     }
   },
   {
-    "id": 175,
-    "tier": 1,
-    "requires_rotation": false,
-    "title": "Study Break",
-    "matrix": [
-      "FLASH",
-      "BACK",
-      "CARD",
-      "BOARD"
-    ],
-    "compounds": {
-      "top": "FLASHBACK",
-      "bottom": "CARDBOARD",
-      "left": "FLASHCARD",
-      "right": "BACKBOARD"
-    },
-    "clues": {
-      "top": "Movie's jump to the past",
-      "bottom": "Moving box material",
-      "left": "Quiz-yourself study aid",
-      "right": "What a bank shot bounces off"
-    }
-  },
-  {
-    "id": 176,
+    "id": 171,
     "tier": 2,
     "requires_rotation": false,
     "title": "Once Upon a Time",
@@ -4224,7 +4104,7 @@
     }
   },
   {
-    "id": 177,
+    "id": 172,
     "tier": 2,
     "requires_rotation": false,
     "title": "Hung Jury",
@@ -4248,7 +4128,7 @@
     }
   },
   {
-    "id": 178,
+    "id": 173,
     "tier": 2,
     "requires_rotation": false,
     "title": "Special Delivery",
@@ -4272,7 +4152,7 @@
     }
   },
   {
-    "id": 179,
+    "id": 174,
     "tier": 3,
     "requires_rotation": false,
     "title": "Dive Right In",
@@ -4296,10 +4176,10 @@
     }
   },
   {
-    "id": 180,
+    "id": 175,
     "tier": 3,
     "requires_rotation": true,
-    "title": "Key Words",
+    "title": "Turn of Phrase",
     "matrix": [
       "FORE",
       "WORD",
@@ -4320,7 +4200,7 @@
     }
   },
   {
-    "id": 181,
+    "id": 176,
     "tier": 3,
     "requires_rotation": true,
     "title": "Anchors Aweigh",
@@ -4344,7 +4224,7 @@
     }
   },
   {
-    "id": 182,
+    "id": 177,
     "tier": 3,
     "requires_rotation": true,
     "title": "Desert Island Coup",
@@ -4362,13 +4242,13 @@
     },
     "clues": {
       "top": "Topple, as a regime",
-      "bottom": "Robinson Crusoe, e.g.",
+      "bottom": "Robinson Crusoe, for one",
       "left": "Gray from horizon to horizon",
       "right": "Offhand, as a remark"
     }
   },
   {
-    "id": 183,
+    "id": 178,
     "tier": 3,
     "requires_rotation": true,
     "title": "Order in the Court",
@@ -4392,31 +4272,7 @@
     }
   },
   {
-    "id": 184,
-    "tier": 1,
-    "requires_rotation": false,
-    "title": "Scenic Route",
-    "matrix": [
-      "BACK",
-      "ROAD",
-      "SLIDE",
-      "SHOW"
-    ],
-    "compounds": {
-      "top": "BACKROAD",
-      "bottom": "SLIDESHOW",
-      "left": "BACKSLIDE",
-      "right": "ROADSHOW"
-    },
-    "clues": {
-      "top": "Quiet route the GPS skips",
-      "bottom": "Vacation photos, one by one",
-      "left": "Relapse into old habits",
-      "right": "Antiques appraisal on tour"
-    }
-  },
-  {
-    "id": 185,
+    "id": 179,
     "tier": 1,
     "requires_rotation": false,
     "title": "Case of the Mondays",
@@ -4440,7 +4296,7 @@
     }
   },
   {
-    "id": 186,
+    "id": 180,
     "tier": 1,
     "requires_rotation": false,
     "title": "Big Bang",
@@ -4464,7 +4320,7 @@
     }
   },
   {
-    "id": 187,
+    "id": 181,
     "tier": 2,
     "requires_rotation": false,
     "title": "Crack the Whip",
@@ -4488,7 +4344,7 @@
     }
   },
   {
-    "id": 188,
+    "id": 182,
     "tier": 2,
     "requires_rotation": false,
     "title": "Rolling Stock",
@@ -4512,7 +4368,7 @@
     }
   },
   {
-    "id": 189,
+    "id": 183,
     "tier": 3,
     "requires_rotation": false,
     "title": "Come What May",
@@ -4536,7 +4392,7 @@
     }
   },
   {
-    "id": 190,
+    "id": 184,
     "tier": 3,
     "requires_rotation": true,
     "title": "Wanted Poster",
@@ -4560,7 +4416,7 @@
     }
   },
   {
-    "id": 191,
+    "id": 185,
     "tier": 3,
     "requires_rotation": true,
     "title": "Bargain Basement",
@@ -4584,7 +4440,7 @@
     }
   },
   {
-    "id": 192,
+    "id": 186,
     "tier": 3,
     "requires_rotation": true,
     "title": "Political Theater",
@@ -4608,7 +4464,7 @@
     }
   },
   {
-    "id": 193,
+    "id": 187,
     "tier": 1,
     "requires_rotation": false,
     "title": "Porch Light",
@@ -4632,7 +4488,7 @@
     }
   },
   {
-    "id": 194,
+    "id": 188,
     "tier": 1,
     "requires_rotation": false,
     "title": "Country Living",
@@ -4656,7 +4512,7 @@
     }
   },
   {
-    "id": 195,
+    "id": 189,
     "tier": 1,
     "requires_rotation": false,
     "title": "Shoes Optional",
@@ -4680,7 +4536,7 @@
     }
   },
   {
-    "id": 196,
+    "id": 190,
     "tier": 1,
     "requires_rotation": false,
     "title": "Opening Act",
@@ -4704,31 +4560,7 @@
     }
   },
   {
-    "id": 197,
-    "tier": 1,
-    "requires_rotation": false,
-    "title": "Punch Clock",
-    "matrix": [
-      "BED",
-      "POST",
-      "TIME",
-      "CARD"
-    ],
-    "compounds": {
-      "top": "BEDPOST",
-      "bottom": "TIMECARD",
-      "left": "BEDTIME",
-      "right": "POSTCARD"
-    },
-    "clues": {
-      "top": "Four-poster's corner pillar",
-      "bottom": "It gets punched at the factory",
-      "left": "Lights-out hour for kids",
-      "right": "Wish you were here!"
-    }
-  },
-  {
-    "id": 198,
+    "id": 191,
     "tier": 1,
     "requires_rotation": false,
     "title": "Final Bell",
@@ -4752,7 +4584,7 @@
     }
   },
   {
-    "id": 199,
+    "id": 192,
     "tier": 2,
     "requires_rotation": false,
     "title": "Fancy Footwork",
@@ -4769,38 +4601,14 @@
       "right": "LACEWORK"
     },
     "clues": {
-      "top": "Hiker's string to tie",
+      "top": "What a hiker double-knots",
       "bottom": "Grunt research done on foot",
       "left": "Smuggled, as moonshine",
       "right": "Delicate doily handiwork"
     }
   },
   {
-    "id": 200,
-    "tier": 2,
-    "requires_rotation": false,
-    "title": "Set in Stone",
-    "matrix": [
-      "GRAVE",
-      "SIDE",
-      "STONE",
-      "WALL"
-    ],
-    "compounds": {
-      "top": "GRAVESIDE",
-      "bottom": "STONEWALL",
-      "left": "GRAVESTONE",
-      "right": "SIDEWALL"
-    },
-    "clues": {
-      "top": "Where the eulogy is read",
-      "bottom": "Block every question",
-      "left": "Slab with two dates on it",
-      "right": "Tire's lettered flank"
-    }
-  },
-  {
-    "id": 201,
+    "id": 193,
     "tier": 2,
     "requires_rotation": false,
     "title": "Viking Crush",
@@ -4824,7 +4632,7 @@
     }
   },
   {
-    "id": 202,
+    "id": 194,
     "tier": 3,
     "requires_rotation": false,
     "title": "Strike It Rich",
@@ -4848,7 +4656,7 @@
     }
   },
   {
-    "id": 203,
+    "id": 195,
     "tier": 3,
     "requires_rotation": true,
     "title": "Board Meeting",
@@ -4872,7 +4680,7 @@
     }
   },
   {
-    "id": 204,
+    "id": 196,
     "tier": 3,
     "requires_rotation": true,
     "title": "Beacon Patrol",
@@ -4896,7 +4704,7 @@
     }
   },
   {
-    "id": 205,
+    "id": 197,
     "tier": 3,
     "requires_rotation": true,
     "title": "Tea on Deck",
@@ -4920,7 +4728,7 @@
     }
   },
   {
-    "id": 206,
+    "id": 198,
     "tier": 3,
     "requires_rotation": true,
     "title": "Center Ring",
@@ -4944,31 +4752,7 @@
     }
   },
   {
-    "id": 207,
-    "tier": 3,
-    "requires_rotation": true,
-    "title": "Rinse Cycle",
-    "matrix": [
-      "EYE",
-      "LET",
-      "WASH",
-      "DOWN"
-    ],
-    "compounds": {
-      "top": "EYELET",
-      "bottom": "WASHDOWN",
-      "left": "EYEWASH",
-      "right": "LETDOWN"
-    },
-    "clues": {
-      "top": "Sneaker lace hole",
-      "bottom": "Hose-off for a dirty rig",
-      "left": "Nonsense, or a soothing rinse",
-      "right": "Anticlimax"
-    }
-  },
-  {
-    "id": 208,
+    "id": 199,
     "tier": 1,
     "requires_rotation": false,
     "title": "Fresh Look",
@@ -4992,7 +4776,7 @@
     }
   },
   {
-    "id": 209,
+    "id": 200,
     "tier": 1,
     "requires_rotation": false,
     "title": "Down by the River",
@@ -5016,7 +4800,7 @@
     }
   },
   {
-    "id": 210,
+    "id": 201,
     "tier": 1,
     "requires_rotation": false,
     "title": "Family Tree",
@@ -5040,7 +4824,7 @@
     }
   },
   {
-    "id": 211,
+    "id": 202,
     "tier": 1,
     "requires_rotation": false,
     "title": "Barnyard Glow",
@@ -5064,7 +4848,7 @@
     }
   },
   {
-    "id": 212,
+    "id": 203,
     "tier": 1,
     "requires_rotation": false,
     "title": "Road Trip",
@@ -5088,7 +4872,7 @@
     }
   },
   {
-    "id": 213,
+    "id": 204,
     "tier": 2,
     "requires_rotation": false,
     "title": "Old Mill",
@@ -5112,7 +4896,7 @@
     }
   },
   {
-    "id": 214,
+    "id": 205,
     "tier": 2,
     "requires_rotation": false,
     "title": "Into the Woods",
@@ -5136,7 +4920,7 @@
     }
   },
   {
-    "id": 215,
+    "id": 206,
     "tier": 2,
     "requires_rotation": false,
     "title": "Abandon Ship",
@@ -5160,7 +4944,7 @@
     }
   },
   {
-    "id": 216,
+    "id": 207,
     "tier": 3,
     "requires_rotation": true,
     "title": "Global Reach",
@@ -5184,7 +4968,7 @@
     }
   },
   {
-    "id": 217,
+    "id": 208,
     "tier": 3,
     "requires_rotation": true,
     "title": "Coastal Tally",
@@ -5208,7 +4992,7 @@
     }
   },
   {
-    "id": 218,
+    "id": 209,
     "tier": 3,
     "requires_rotation": true,
     "title": "Storm Warning",
@@ -5232,10 +5016,10 @@
     }
   },
   {
-    "id": 219,
+    "id": 210,
     "tier": 3,
     "requires_rotation": true,
-    "title": "Spring Thaw",
+    "title": "After the Thaw",
     "matrix": [
       "MELT",
       "DOWN",
@@ -5256,7 +5040,7 @@
     }
   },
   {
-    "id": 220,
+    "id": 211,
     "tier": 3,
     "requires_rotation": true,
     "title": "Garden Shed",
@@ -5280,7 +5064,7 @@
     }
   },
   {
-    "id": 221,
+    "id": 212,
     "tier": 3,
     "requires_rotation": true,
     "title": "Under Surveillance",
@@ -5301,6 +5085,270 @@
       "bottom": "Seamstress's studio",
       "left": "Jewelry twisted from thin metal",
       "right": "Pub's beer-pouring parlor"
+    }
+  },
+  {
+    "id": 213,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Set in Stone",
+    "matrix": [
+      "GRAVE",
+      "SIDE",
+      "STONE",
+      "WALL"
+    ],
+    "compounds": {
+      "top": "GRAVESIDE",
+      "bottom": "STONEWALL",
+      "left": "GRAVESTONE",
+      "right": "SIDEWALL"
+    },
+    "clues": {
+      "top": "Where the eulogy is read",
+      "bottom": "Block every question",
+      "left": "Slab with two dates on it",
+      "right": "Tire's lettered flank"
+    }
+  },
+  {
+    "id": 214,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Dry Dock",
+    "matrix": [
+      "STEAM",
+      "BOAT",
+      "SHIP",
+      "YARD"
+    ],
+    "compounds": {
+      "top": "STEAMBOAT",
+      "bottom": "SHIPYARD",
+      "left": "STEAMSHIP",
+      "right": "BOATYARD"
+    },
+    "clues": {
+      "top": "Mark Twain's paddle-wheeler",
+      "bottom": "Where hulls get built",
+      "left": "Titanic, for one",
+      "right": "Where yachts spend the winter"
+    }
+  },
+  {
+    "id": 215,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Vegas Revue",
+    "matrix": [
+      "SHOW",
+      "MAN",
+      "GIRL",
+      "HOOD"
+    ],
+    "compounds": {
+      "top": "SHOWMAN",
+      "bottom": "GIRLHOOD",
+      "left": "SHOWGIRL",
+      "right": "MANHOOD"
+    },
+    "clues": {
+      "top": "P.T. Barnum, famously",
+      "bottom": "Pigtails-and-dollhouse years",
+      "left": "Feathered Vegas dancer",
+      "right": "Boyhood's sequel"
+    }
+  },
+  {
+    "id": 216,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Tooth and Nail",
+    "matrix": [
+      "PUSH",
+      "OVER",
+      "BACK",
+      "BITE"
+    ],
+    "compounds": {
+      "top": "PUSHOVER",
+      "bottom": "BACKBITE",
+      "left": "PUSHBACK",
+      "right": "OVERBITE"
+    },
+    "clues": {
+      "top": "Easy mark",
+      "bottom": "Trash-talk someone who's absent",
+      "left": "Resistance from the ranks",
+      "right": "Orthodontist's bread and butter"
+    }
+  },
+  {
+    "id": 217,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Stop the Presses",
+    "matrix": [
+      "LETTER",
+      "HEAD",
+      "PRESS",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "LETTERHEAD",
+      "bottom": "PRESSROOM",
+      "left": "LETTERPRESS",
+      "right": "HEADROOM"
+    },
+    "clues": {
+      "top": "Logo atop the stationery",
+      "bottom": "Where the morning edition rolls",
+      "left": "Printing with raised metal type",
+      "right": "Clearance under the overpass"
+    }
+  },
+  {
+    "id": 218,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Plug and Play",
+    "matrix": [
+      "OUT",
+      "LET",
+      "MATCH",
+      "UP"
+    ],
+    "compounds": {
+      "top": "OUTLET",
+      "bottom": "MATCHUP",
+      "left": "OUTMATCH",
+      "right": "LETUP"
+    },
+    "clues": {
+      "top": "Where the plug goes",
+      "bottom": "Head-to-head pairing",
+      "left": "Beat handily",
+      "right": "Break in the pounding rain"
+    }
+  },
+  {
+    "id": 219,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Dead Air",
+    "matrix": [
+      "DEAD",
+      "HEAD",
+      "WOOD",
+      "WIND"
+    ],
+    "compounds": {
+      "top": "DEADHEAD",
+      "bottom": "WOODWIND",
+      "left": "DEADWOOD",
+      "right": "HEADWIND"
+    },
+    "clues": {
+      "top": "Snip the spent blooms",
+      "bottom": "Oboe or clarinet",
+      "left": "Useless hangers-on",
+      "right": "Breeze that slows the flight"
+    }
+  },
+  {
+    "id": 220,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Getting There",
+    "matrix": [
+      "UNDER",
+      "PIN",
+      "WAY",
+      "POINT"
+    ],
+    "compounds": {
+      "top": "UNDERPIN",
+      "bottom": "WAYPOINT",
+      "left": "UNDERWAY",
+      "right": "PINPOINT"
+    },
+    "clues": {
+      "top": "Prop up, as an argument",
+      "bottom": "GPS route checkpoint",
+      "left": "In progress",
+      "right": "Locate to the inch"
+    }
+  },
+  {
+    "id": 221,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Claws Out",
+    "matrix": [
+      "WILD",
+      "CAT",
+      "FIRE",
+      "FIGHT"
+    ],
+    "compounds": {
+      "top": "WILDCAT",
+      "bottom": "FIREFIGHT",
+      "left": "WILDFIRE",
+      "right": "CATFIGHT"
+    },
+    "clues": {
+      "top": "Lynx or ocelot",
+      "bottom": "Bullets flying both ways",
+      "left": "Blaze racing through the brush",
+      "right": "Hair-pulling squabble"
+    }
+  },
+  {
+    "id": 222,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Open Road",
+    "matrix": [
+      "FREE",
+      "HAND",
+      "WAY",
+      "BILL"
+    ],
+    "compounds": {
+      "top": "FREEHAND",
+      "bottom": "WAYBILL",
+      "left": "FREEWAY",
+      "right": "HANDBILL"
+    },
+    "clues": {
+      "top": "Drawn without a ruler",
+      "bottom": "Shipment's paperwork",
+      "left": "No-toll highway",
+      "right": "Flyer pressed on passersby"
+    }
+  },
+  {
+    "id": 223,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Cold Feet",
+    "matrix": [
+      "WITH",
+      "DRAW",
+      "HOLD",
+      "BACK"
+    ],
+    "compounds": {
+      "top": "WITHDRAW",
+      "bottom": "HOLDBACK",
+      "left": "WITHHOLD",
+      "right": "DRAWBACK"
+    },
+    "clues": {
+      "top": "Pull out of the race",
+      "bottom": "Portion of pay kept in escrow",
+      "left": "Keep from the paycheck, as tax",
+      "right": "Con on the pros-and-cons list"
     }
   }
 ]
