@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { getSessionForDate, poolForDate } from '@/daily/schedule'
+import { shiftDate } from '@/daily/date'
 import { EDITIONS } from '@/edition'
 
 const ED = EDITIONS.flipwords
@@ -81,5 +82,87 @@ describe('getSessionForDate', () => {
         expect(has, `Level ${lvl.id} slot0 has no matching tile`).toBe(true)
       }
     }
+  })
+})
+
+/**
+ * The no-repeat era. From `noRepeatFrom` each slot deals the least-recently-
+ * played level in its tier bucket, so puzzles stop coming back within days of
+ * each other and a fresh release is dealt out before anything repeats.
+ */
+describe('no-repeat dealing (FlipWords, from noRepeatFrom)', () => {
+  const from = ED.noRepeatFrom!
+  const releases = ED.poolReleases
+  const latest = releases[releases.length - 1]
+  const previousMax = releases[releases.length - 2].maxId
+  const day = (i: number) => shiftDate(from, i)
+
+  it('is configured: cutoff coincides with the newest release, never back-dated', () => {
+    expect(from).toBe(latest.from)
+    expect(from > '2026-09-05').toBe(true)
+    expect(latest.maxId).toBeGreaterThan(previousMax)
+  })
+
+  it('leaves every day before the cutoff exactly as the uniform picker dealt it', () => {
+    const legacy = { ...ED, noRepeatFrom: undefined }
+    for (let d = ED.launchDate; d < from; d = shiftDate(d, 1)) {
+      expect(getSessionForDate(ED, d).map((l) => l.id), d).toEqual(
+        getSessionForDate(legacy, d).map((l) => l.id)
+      )
+    }
+  })
+
+  it('still walks the tier curve every day', () => {
+    for (let i = 0; i < 60; i++) {
+      const s = getSessionForDate(ED, day(i))
+      expect(s, day(i)).toHaveLength(5)
+      expect(s[0].tier ?? 1).toBe(1)
+      expect(s[1].tier ?? 1).toBe(1)
+      expect(s[2].tier).toBe(2)
+      expect(s[4].requiresRotation).toBe(true)
+      expect(new Set(s.map((l) => l.id)).size).toBe(5)
+    }
+  })
+
+  it('never repeats a level within the first 30 days after the cutoff', () => {
+    const seen = new Map<number, string>()
+    for (let i = 0; i < 30; i++) {
+      for (const l of getSessionForDate(ED, day(i))) {
+        expect(seen.has(l.id), `level ${l.id} on ${day(i)} already dealt ${seen.get(l.id)}`).toBe(false)
+        seen.set(l.id, day(i))
+      }
+    }
+  })
+
+  it('deals every newly released level within 30 days of release', () => {
+    const dealt = new Set<number>()
+    for (let i = 0; i < 30; i++) {
+      for (const l of getSessionForDate(ED, day(i))) dealt.add(l.id)
+    }
+    const fresh = ED.levels.filter((l) => l.id > previousMax).map((l) => l.id)
+    expect(fresh.length).toBeGreaterThan(0)
+    expect(fresh.filter((id) => !dealt.has(id))).toEqual([])
+  })
+
+  it('deals the whole pool before anything comes back', () => {
+    // Tier 1 is the tightest bucket (2 of 5 slots a day), so the first
+    // repeat of the era lands no sooner than its size / 2 days out.
+    const tier1 = ED.levels.filter((l) => (l.tier ?? 1) === 1).length
+    const firstRepeat = (() => {
+      const seen = new Set<number>()
+      for (let i = 0; i < 400; i++) {
+        for (const l of getSessionForDate(ED, day(i))) {
+          if (seen.has(l.id)) return i
+          seen.add(l.id)
+        }
+      }
+      return Infinity
+    })()
+    expect(firstRepeat).toBeGreaterThanOrEqual(Math.floor(tier1 / 2))
+    const dealt = new Set<number>()
+    for (let i = 0; i < 120; i++) {
+      for (const l of getSessionForDate(ED, day(i))) dealt.add(l.id)
+    }
+    expect(dealt.size).toBe(ED.levels.length)
   })
 })

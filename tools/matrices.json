@@ -3622,5 +3622,1685 @@
       "left": "Movie's length",
       "right": "Off the grid, digitally"
     }
+  },
+  {
+    "id": 152,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Pen and Pedal",
+    "matrix": [
+      "KICK",
+      "STAND",
+      "BALL",
+      "POINT"
+    ],
+    "compounds": {
+      "top": "KICKSTAND",
+      "bottom": "BALLPOINT",
+      "left": "KICKBALL",
+      "right": "STANDPOINT"
+    },
+    "clues": {
+      "top": "Keeps a parked bike upright",
+      "bottom": "Everyday pen type",
+      "left": "Schoolyard game, red bouncer",
+      "right": "Where you're coming from"
+    }
+  },
+  {
+    "id": 153,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Special Delivery",
+    "matrix": [
+      "AIR",
+      "LIFT",
+      "DROP",
+      "OFF"
+    ],
+    "compounds": {
+      "top": "AIRLIFT",
+      "bottom": "DROPOFF",
+      "left": "AIRDROP",
+      "right": "LIFTOFF"
+    },
+    "clues": {
+      "top": "Emergency supply run by plane",
+      "bottom": "Sheer edge of a cliff",
+      "left": "Supplies by parachute",
+      "right": "Rocket's first moment up"
+    }
+  },
+  {
+    "id": 154,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Shake on It",
+    "matrix": [
+      "HAND",
+      "SHAKE",
+      "PICK",
+      "UP"
+    ],
+    "compounds": {
+      "top": "HANDSHAKE",
+      "bottom": "PICKUP",
+      "left": "HANDPICK",
+      "right": "SHAKEUP"
+    },
+    "clues": {
+      "top": "Deal-sealing grip",
+      "bottom": "Truck with an open bed",
+      "left": "Choose with great care",
+      "right": "Big reshuffle at the top"
+    }
+  },
+  {
+    "id": 155,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Full Service",
+    "matrix": [
+      "CAR",
+      "POOL",
+      "WASH",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "CARPOOL",
+      "bottom": "WASHROOM",
+      "left": "CARWASH",
+      "right": "POOLROOM"
+    },
+    "clues": {
+      "top": "Share the commute",
+      "bottom": "Restroom, in Canada",
+      "left": "Suds-and-rinse drive-through",
+      "right": "Where the cue sticks live"
+    }
+  },
+  {
+    "id": 156,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Chalk Talk",
+    "matrix": [
+      "BLACK",
+      "BOARD",
+      "MAIL",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "BLACKBOARD",
+      "bottom": "MAILROOM",
+      "left": "BLACKMAIL",
+      "right": "BOARDROOM"
+    },
+    "clues": {
+      "top": "Chalk's home in old classrooms",
+      "bottom": "Where the envelopes get sorted",
+      "left": "Pay up, or I'll tell everyone",
+      "right": "Where the executives convene"
+    }
+  },
+  {
+    "id": 157,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Happy Campers",
+    "matrix": [
+      "CAMP",
+      "FIRE",
+      "GROUND",
+      "WORK"
+    ],
+    "compounds": {
+      "top": "CAMPFIRE",
+      "bottom": "GROUNDWORK",
+      "left": "CAMPGROUND",
+      "right": "FIREWORK"
+    },
+    "clues": {
+      "top": "S'mores headquarters",
+      "bottom": "Prep that everything rests on",
+      "left": "Where the tents go up",
+      "right": "Fourth of July sky-burst"
+    }
+  },
+  {
+    "id": 158,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Salon Day",
+    "matrix": [
+      "HAIR",
+      "NET",
+      "BRUSH",
+      "WORK"
+    ],
+    "compounds": {
+      "top": "HAIRNET",
+      "bottom": "BRUSHWORK",
+      "left": "HAIRBRUSH",
+      "right": "NETWORK"
+    },
+    "clues": {
+      "top": "Cafeteria worker's head cover",
+      "bottom": "Painter's visible strokes",
+      "left": "Detangler on the vanity",
+      "right": "Schmooze for contacts"
+    }
+  },
+  {
+    "id": 159,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Cold Shoulder",
+    "matrix": [
+      "SHUT",
+      "OUT",
+      "DOWN",
+      "CAST"
+    ],
+    "compounds": {
+      "top": "SHUTOUT",
+      "bottom": "DOWNCAST",
+      "left": "SHUTDOWN",
+      "right": "OUTCAST"
+    },
+    "clues": {
+      "top": "Win where they never scored",
+      "bottom": "Glum and staring at the floor",
+      "left": "Government's budget standstill",
+      "right": "Shunned by the whole village"
+    }
+  },
+  {
+    "id": 160,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Full Steam Ahead",
+    "matrix": [
+      "SHOW",
+      "CASE",
+      "BOAT",
+      "LOAD"
+    ],
+    "compounds": {
+      "top": "SHOWCASE",
+      "bottom": "BOATLOAD",
+      "left": "SHOWBOAT",
+      "right": "CASELOAD"
+    },
+    "clues": {
+      "top": "Glass cabinet for the trophies",
+      "bottom": "A whole heap, informally",
+      "left": "Grandstand for the crowd",
+      "right": "A social worker's docket"
+    }
+  },
+  {
+    "id": 161,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Opening Remarks",
+    "matrix": [
+      "KEY",
+      "WORD",
+      "NOTE",
+      "BOOK"
+    ],
+    "compounds": {
+      "top": "KEYWORD",
+      "bottom": "NOTEBOOK",
+      "left": "KEYNOTE",
+      "right": "WORDBOOK"
+    },
+    "clues": {
+      "top": "Search-box term",
+      "bottom": "Spiral-bound page stack",
+      "left": "Conference's marquee speech",
+      "right": "Dictionary's humbler name"
+    }
+  },
+  {
+    "id": 162,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Burn Notice",
+    "matrix": [
+      "SUN",
+      "BLOCK",
+      "LIGHT",
+      "HOUSE"
+    ],
+    "compounds": {
+      "top": "SUNBLOCK",
+      "bottom": "LIGHTHOUSE",
+      "left": "SUNLIGHT",
+      "right": "BLOCKHOUSE"
+    },
+    "clues": {
+      "top": "SPF 50, say",
+      "bottom": "Beacon for ships at night",
+      "left": "Vitamin D's source",
+      "right": "Squat concrete fort"
+    }
+  },
+  {
+    "id": 163,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Spring Fling",
+    "matrix": [
+      "HAND",
+      "SOME",
+      "SPRING",
+      "TIME"
+    ],
+    "compounds": {
+      "top": "HANDSOME",
+      "bottom": "SPRINGTIME",
+      "left": "HANDSPRING",
+      "right": "SOMETIME"
+    },
+    "clues": {
+      "top": "Easy on the eyes",
+      "bottom": "Tulip season",
+      "left": "Gymnast's flip off the palms",
+      "right": "One of these days"
+    }
+  },
+  {
+    "id": 164,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Take Aim",
+    "matrix": [
+      "CROSS",
+      "BOW",
+      "HAIR",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "CROSSBOW",
+      "bottom": "HAIRLINE",
+      "left": "CROSSHAIR",
+      "right": "BOWLINE"
+    },
+    "clues": {
+      "top": "Medieval trigger weapon",
+      "bottom": "Receding thing, for some",
+      "left": "Sniper's scope marker",
+      "right": "Sailor's go-to knot"
+    }
+  },
+  {
+    "id": 165,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Shore Leave",
+    "matrix": [
+      "DOCK",
+      "YARD",
+      "SIDE",
+      "ARM"
+    ],
+    "compounds": {
+      "top": "DOCKYARD",
+      "bottom": "SIDEARM",
+      "left": "DOCKSIDE",
+      "right": "YARDARM"
+    },
+    "clues": {
+      "top": "Where ships get built",
+      "bottom": "Holstered pistol",
+      "left": "Right by the moorings",
+      "right": "Sail-bearing spar on a mast"
+    }
+  },
+  {
+    "id": 166,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Leave a Mark",
+    "matrix": [
+      "FORE",
+      "FINGER",
+      "FOOT",
+      "PRINT"
+    ],
+    "compounds": {
+      "top": "FOREFINGER",
+      "bottom": "FOOTPRINT",
+      "left": "FOREFOOT",
+      "right": "FINGERPRINT"
+    },
+    "clues": {
+      "top": "Pointer digit",
+      "bottom": "Sandy trail left behind",
+      "left": "Front paw's business end",
+      "right": "Whorled ID at the crime scene"
+    }
+  },
+  {
+    "id": 167,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Big Idea",
+    "matrix": [
+      "BRAIN",
+      "STORM",
+      "CHILD",
+      "PROOF"
+    ],
+    "compounds": {
+      "top": "BRAINSTORM",
+      "bottom": "CHILDPROOF",
+      "left": "BRAINCHILD",
+      "right": "STORMPROOF"
+    },
+    "clues": {
+      "top": "Toss out ideas, no judging",
+      "bottom": "Latched against toddlers",
+      "left": "Your own bright invention",
+      "right": "Built to shrug off a gale"
+    }
+  },
+  {
+    "id": 168,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Legal Loophole",
+    "matrix": [
+      "BY",
+      "PASS",
+      "LAW",
+      "BOOK"
+    ],
+    "compounds": {
+      "top": "BYPASS",
+      "bottom": "LAWBOOK",
+      "left": "BYLAW",
+      "right": "PASSBOOK"
+    },
+    "clues": {
+      "top": "Route around the traffic",
+      "bottom": "Tome on the attorney's shelf",
+      "left": "Rule in the HOA handbook",
+      "right": "Savings account's old ledger"
+    }
+  },
+  {
+    "id": 169,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Leap of Faith",
+    "matrix": [
+      "BULL",
+      "PEN",
+      "FROG",
+      "MAN"
+    ],
+    "compounds": {
+      "top": "BULLPEN",
+      "bottom": "FROGMAN",
+      "left": "BULLFROG",
+      "right": "PENMAN"
+    },
+    "clues": {
+      "top": "Where relievers warm up",
+      "bottom": "Navy diver",
+      "left": "Pond's deepest croaker",
+      "right": "One with fine handwriting"
+    }
+  },
+  {
+    "id": 170,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Step Right Up",
+    "matrix": [
+      "SIDE",
+      "SHOW",
+      "BAR",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "SIDESHOW",
+      "bottom": "BARROOM",
+      "left": "SIDEBAR",
+      "right": "SHOWROOM"
+    },
+    "clues": {
+      "top": "Bearded lady's venue",
+      "bottom": "Where the brawl breaks out",
+      "left": "Lawyers' huddle with the judge",
+      "right": "Where the new cars gleam"
+    }
+  },
+  {
+    "id": 171,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Spin Cycle",
+    "matrix": [
+      "PUSH",
+      "PIN",
+      "CART",
+      "WHEEL"
+    ],
+    "compounds": {
+      "top": "PUSHPIN",
+      "bottom": "CARTWHEEL",
+      "left": "PUSHCART",
+      "right": "PINWHEEL"
+    },
+    "clues": {
+      "top": "Corkboard tack",
+      "bottom": "Sideways gymnastic flip",
+      "left": "Street vendor's rolling stall",
+      "right": "Toy that spins in the breeze"
+    }
+  },
+  {
+    "id": 172,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Three, Two, One",
+    "matrix": [
+      "HEAD",
+      "LOCK",
+      "COUNT",
+      "DOWN"
+    ],
+    "compounds": {
+      "top": "HEADLOCK",
+      "bottom": "COUNTDOWN",
+      "left": "HEADCOUNT",
+      "right": "LOCKDOWN"
+    },
+    "clues": {
+      "top": "Wrestler's neck squeeze",
+      "bottom": "Ten, nine, eight...",
+      "left": "Roll call tally",
+      "right": "Shelter-in-place order"
+    }
+  },
+  {
+    "id": 173,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Cosmic Catch",
+    "matrix": [
+      "STAR",
+      "DUST",
+      "FISH",
+      "BOWL"
+    ],
+    "compounds": {
+      "top": "STARDUST",
+      "bottom": "FISHBOWL",
+      "left": "STARFISH",
+      "right": "DUSTBOWL"
+    },
+    "clues": {
+      "top": "Glittery cosmic sprinkle",
+      "bottom": "Pet's round glass home",
+      "left": "Five-armed tide pool dweller",
+      "right": "Dirty Thirties disaster"
+    }
+  },
+  {
+    "id": 174,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Cash Flow",
+    "matrix": [
+      "RIVER",
+      "BANK",
+      "BED",
+      "ROLL"
+    ],
+    "compounds": {
+      "top": "RIVERBANK",
+      "bottom": "BEDROLL",
+      "left": "RIVERBED",
+      "right": "BANKROLL"
+    },
+    "clues": {
+      "top": "Where the fishermen sit",
+      "bottom": "Cowboy's sleeping bundle",
+      "left": "Floor beneath the current",
+      "right": "Fat wad of cash"
+    }
+  },
+  {
+    "id": 175,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Study Break",
+    "matrix": [
+      "FLASH",
+      "BACK",
+      "CARD",
+      "BOARD"
+    ],
+    "compounds": {
+      "top": "FLASHBACK",
+      "bottom": "CARDBOARD",
+      "left": "FLASHCARD",
+      "right": "BACKBOARD"
+    },
+    "clues": {
+      "top": "Movie's jump to the past",
+      "bottom": "Moving box material",
+      "left": "Quiz-yourself study aid",
+      "right": "What a bank shot bounces off"
+    }
+  },
+  {
+    "id": 176,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Once Upon a Time",
+    "matrix": [
+      "BACK",
+      "STORY",
+      "LOG",
+      "BOOK"
+    ],
+    "compounds": {
+      "top": "BACKSTORY",
+      "bottom": "LOGBOOK",
+      "left": "BACKLOG",
+      "right": "STORYBOOK"
+    },
+    "clues": {
+      "top": "Character's hidden history",
+      "bottom": "Captain's daily record",
+      "left": "Pile of unfinished work",
+      "right": "Like a fairy-tale ending"
+    }
+  },
+  {
+    "id": 177,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Hung Jury",
+    "matrix": [
+      "DEAD",
+      "LOCK",
+      "BEAT",
+      "BOX"
+    ],
+    "compounds": {
+      "top": "DEADLOCK",
+      "bottom": "BEATBOX",
+      "left": "DEADBEAT",
+      "right": "LOCKBOX"
+    },
+    "clues": {
+      "top": "Tied jury's predicament",
+      "bottom": "Make drum sounds by mouth",
+      "left": "Freeloader who never pays",
+      "right": "Small safe for valuables"
+    }
+  },
+  {
+    "id": 178,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Special Delivery",
+    "matrix": [
+      "GUIDE",
+      "LINE",
+      "POST",
+      "MAN"
+    ],
+    "compounds": {
+      "top": "GUIDELINE",
+      "bottom": "POSTMAN",
+      "left": "GUIDEPOST",
+      "right": "LINEMAN"
+    },
+    "clues": {
+      "top": "Rule of thumb, officially",
+      "bottom": "He always rings twice",
+      "left": "Trail marker pointing the way",
+      "right": "Utility pole climber"
+    }
+  },
+  {
+    "id": 179,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Dive Right In",
+    "matrix": [
+      "HEAD",
+      "LONG",
+      "FIRST",
+      "HAND"
+    ],
+    "compounds": {
+      "top": "HEADLONG",
+      "bottom": "FIRSTHAND",
+      "left": "HEADFIRST",
+      "right": "LONGHAND"
+    },
+    "clues": {
+      "top": "Recklessly, into the fray",
+      "bottom": "Straight from the source",
+      "left": "How divers enter",
+      "right": "Cursive, not abbreviated"
+    }
+  },
+  {
+    "id": 180,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Key Words",
+    "matrix": [
+      "FORE",
+      "WORD",
+      "LOCK",
+      "SMITH"
+    ],
+    "compounds": {
+      "top": "FOREWORD",
+      "bottom": "LOCKSMITH",
+      "left": "FORELOCK",
+      "right": "WORDSMITH"
+    },
+    "clues": {
+      "top": "Book's opening remarks",
+      "bottom": "Who to call when keys are lost",
+      "left": "Tuft a peasant tugs",
+      "right": "Crafter of phrases"
+    }
+  },
+  {
+    "id": 181,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Anchors Aweigh",
+    "matrix": [
+      "SEA",
+      "SICK",
+      "WARD",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "SEASICK",
+      "bottom": "WARDROOM",
+      "left": "SEAWARD",
+      "right": "SICKROOM"
+    },
+    "clues": {
+      "top": "Green at the gills on deck",
+      "bottom": "Naval officers' mess",
+      "left": "Toward open water",
+      "right": "Where the patient convalesces"
+    }
+  },
+  {
+    "id": 182,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Desert Island Coup",
+    "matrix": [
+      "OVER",
+      "THROW",
+      "CAST",
+      "AWAY"
+    ],
+    "compounds": {
+      "top": "OVERTHROW",
+      "bottom": "CASTAWAY",
+      "left": "OVERCAST",
+      "right": "THROWAWAY"
+    },
+    "clues": {
+      "top": "Topple, as a regime",
+      "bottom": "Robinson Crusoe, e.g.",
+      "left": "Gray from horizon to horizon",
+      "right": "Offhand, as a remark"
+    }
+  },
+  {
+    "id": 183,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Order in the Court",
+    "matrix": [
+      "FORE",
+      "LEG",
+      "COURT",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "FORELEG",
+      "bottom": "COURTROOM",
+      "left": "FORECOURT",
+      "right": "LEGROOM"
+    },
+    "clues": {
+      "top": "Horse's front limb",
+      "bottom": "Where objections are sustained",
+      "left": "Gas station's pump area",
+      "right": "What economy seats lack"
+    }
+  },
+  {
+    "id": 184,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Scenic Route",
+    "matrix": [
+      "BACK",
+      "ROAD",
+      "SLIDE",
+      "SHOW"
+    ],
+    "compounds": {
+      "top": "BACKROAD",
+      "bottom": "SLIDESHOW",
+      "left": "BACKSLIDE",
+      "right": "ROADSHOW"
+    },
+    "clues": {
+      "top": "Quiet route the GPS skips",
+      "bottom": "Vacation photos, one by one",
+      "left": "Relapse into old habits",
+      "right": "Antiques appraisal on tour"
+    }
+  },
+  {
+    "id": 185,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Case of the Mondays",
+    "matrix": [
+      "WORK",
+      "BOOK",
+      "WEEK",
+      "END"
+    ],
+    "compounds": {
+      "top": "WORKBOOK",
+      "bottom": "WEEKEND",
+      "left": "WORKWEEK",
+      "right": "BOOKEND"
+    },
+    "clues": {
+      "top": "Practice pages for pupils",
+      "bottom": "Saturday and Sunday",
+      "left": "Monday through Friday grind",
+      "right": "Shelf prop, sold in pairs"
+    }
+  },
+  {
+    "id": 186,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Big Bang",
+    "matrix": [
+      "BLOW",
+      "OUT",
+      "UP",
+      "WARD"
+    ],
+    "compounds": {
+      "top": "BLOWOUT",
+      "bottom": "UPWARD",
+      "left": "BLOWUP",
+      "right": "OUTWARD"
+    },
+    "clues": {
+      "top": "Lopsided win, or a burst tire",
+      "bottom": "Toward the ceiling",
+      "left": "Tantrum, or a poster-size print",
+      "right": "Facing away from the center"
+    }
+  },
+  {
+    "id": 187,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Crack the Whip",
+    "matrix": [
+      "HORSE",
+      "WHIP",
+      "BACK",
+      "LASH"
+    ],
+    "compounds": {
+      "top": "HORSEWHIP",
+      "bottom": "BACKLASH",
+      "left": "HORSEBACK",
+      "right": "WHIPLASH"
+    },
+    "clues": {
+      "top": "Coachman's crop, or to use it",
+      "bottom": "Angry public reaction",
+      "left": "How the cavalry rides",
+      "right": "Rear-ender's neck injury"
+    }
+  },
+  {
+    "id": 188,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Rolling Stock",
+    "matrix": [
+      "OUT",
+      "BOX",
+      "SIDE",
+      "CAR"
+    ],
+    "compounds": {
+      "top": "OUTBOX",
+      "bottom": "SIDECAR",
+      "left": "OUTSIDE",
+      "right": "BOXCAR"
+    },
+    "clues": {
+      "top": "Sent-mail folder",
+      "bottom": "Motorcycle's plus-one",
+      "left": "Where the weather is",
+      "right": "Hobo's ride on a freight train"
+    }
+  },
+  {
+    "id": 189,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Come What May",
+    "matrix": [
+      "SOME",
+      "HOW",
+      "WHAT",
+      "EVER"
+    ],
+    "compounds": {
+      "top": "SOMEHOW",
+      "bottom": "WHATEVER",
+      "left": "SOMEWHAT",
+      "right": "HOWEVER"
+    },
+    "clues": {
+      "top": "By hook or by crook",
+      "bottom": "Teen's shrug, in a word",
+      "left": "A bit, more or less",
+      "right": "On the other hand"
+    }
+  },
+  {
+    "id": 190,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Wanted Poster",
+    "matrix": [
+      "OUT",
+      "LAW",
+      "PLAY",
+      "MAKER"
+    ],
+    "compounds": {
+      "top": "OUTLAW",
+      "bottom": "PLAYMAKER",
+      "left": "OUTPLAY",
+      "right": "LAWMAKER"
+    },
+    "clues": {
+      "top": "Jesse James, for one",
+      "bottom": "Point guard who sets up shots",
+      "left": "Best a rival on the pitch",
+      "right": "Senator or representative"
+    }
+  },
+  {
+    "id": 191,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Bargain Basement",
+    "matrix": [
+      "UNDER",
+      "CUT",
+      "PAY",
+      "BACK"
+    ],
+    "compounds": {
+      "top": "UNDERCUT",
+      "bottom": "PAYBACK",
+      "left": "UNDERPAY",
+      "right": "CUTBACK"
+    },
+    "clues": {
+      "top": "Sell for less than the rival",
+      "bottom": "Revenge, or repayment",
+      "left": "Stiff on the wages",
+      "right": "Belt-tightening reduction"
+    }
+  },
+  {
+    "id": 192,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Political Theater",
+    "matrix": [
+      "UP",
+      "STAGE",
+      "STATE",
+      "CRAFT"
+    ],
+    "compounds": {
+      "top": "UPSTAGE",
+      "bottom": "STATECRAFT",
+      "left": "UPSTATE",
+      "right": "STAGECRAFT"
+    },
+    "clues": {
+      "top": "Steal the spotlight from",
+      "bottom": "Diplomacy's fine art",
+      "left": "Far from the big city, in NY",
+      "right": "Lighting, sets, and blocking"
+    }
+  },
+  {
+    "id": 193,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Porch Light",
+    "matrix": [
+      "FIRE",
+      "FLY",
+      "WALL",
+      "PAPER"
+    ],
+    "compounds": {
+      "top": "FIREFLY",
+      "bottom": "WALLPAPER",
+      "left": "FIREWALL",
+      "right": "FLYPAPER"
+    },
+    "clues": {
+      "top": "Summer night's blinking bug",
+      "bottom": "Pasted-on room decor",
+      "left": "Hacker-blocking barrier",
+      "right": "Sticky strip for buzzing pests"
+    }
+  },
+  {
+    "id": 194,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Country Living",
+    "matrix": [
+      "FARM",
+      "HAND",
+      "HOUSE",
+      "HOLD"
+    ],
+    "compounds": {
+      "top": "FARMHAND",
+      "bottom": "HOUSEHOLD",
+      "left": "FARMHOUSE",
+      "right": "HANDHOLD"
+    },
+    "clues": {
+      "top": "Hired help at harvest",
+      "bottom": "Everyone under one roof",
+      "left": "Where the rooster wakes you",
+      "right": "Climber's grip on the rock"
+    }
+  },
+  {
+    "id": 195,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Shoes Optional",
+    "matrix": [
+      "BARE",
+      "BACK",
+      "FOOT",
+      "REST"
+    ],
+    "compounds": {
+      "top": "BAREBACK",
+      "bottom": "FOOTREST",
+      "left": "BAREFOOT",
+      "right": "BACKREST"
+    },
+    "clues": {
+      "top": "Riding with no saddle",
+      "bottom": "Recliner's pop-up perch",
+      "left": "How you walk on the beach",
+      "right": "What you lean on in a chair"
+    }
+  },
+  {
+    "id": 196,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Opening Act",
+    "matrix": [
+      "KICK",
+      "BACK",
+      "OFF",
+      "STAGE"
+    ],
+    "compounds": {
+      "top": "KICKBACK",
+      "bottom": "OFFSTAGE",
+      "left": "KICKOFF",
+      "right": "BACKSTAGE"
+    },
+    "clues": {
+      "top": "Bribe slipped under the table",
+      "bottom": "In the wings, out of view",
+      "left": "Football game's first play",
+      "right": "Behind the curtain"
+    }
+  },
+  {
+    "id": 197,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Punch Clock",
+    "matrix": [
+      "BED",
+      "POST",
+      "TIME",
+      "CARD"
+    ],
+    "compounds": {
+      "top": "BEDPOST",
+      "bottom": "TIMECARD",
+      "left": "BEDTIME",
+      "right": "POSTCARD"
+    },
+    "clues": {
+      "top": "Four-poster's corner pillar",
+      "bottom": "It gets punched at the factory",
+      "left": "Lights-out hour for kids",
+      "right": "Wish you were here!"
+    }
+  },
+  {
+    "id": 198,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Final Bell",
+    "matrix": [
+      "KNOCK",
+      "DOWN",
+      "OUT",
+      "RIGHT"
+    ],
+    "compounds": {
+      "top": "KNOCKDOWN",
+      "bottom": "OUTRIGHT",
+      "left": "KNOCKOUT",
+      "right": "DOWNRIGHT"
+    },
+    "clues": {
+      "top": "Boxing tumble, or a bargain",
+      "bottom": "Completely, no strings",
+      "left": "Fight-ending punch, or a stunner",
+      "right": "Plain and simple, as a lie"
+    }
+  },
+  {
+    "id": 199,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Fancy Footwork",
+    "matrix": [
+      "BOOT",
+      "LACE",
+      "LEG",
+      "WORK"
+    ],
+    "compounds": {
+      "top": "BOOTLACE",
+      "bottom": "LEGWORK",
+      "left": "BOOTLEG",
+      "right": "LACEWORK"
+    },
+    "clues": {
+      "top": "Hiker's string to tie",
+      "bottom": "Grunt research done on foot",
+      "left": "Smuggled, as moonshine",
+      "right": "Delicate doily handiwork"
+    }
+  },
+  {
+    "id": 200,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Set in Stone",
+    "matrix": [
+      "GRAVE",
+      "SIDE",
+      "STONE",
+      "WALL"
+    ],
+    "compounds": {
+      "top": "GRAVESIDE",
+      "bottom": "STONEWALL",
+      "left": "GRAVESTONE",
+      "right": "SIDEWALL"
+    },
+    "clues": {
+      "top": "Where the eulogy is read",
+      "bottom": "Block every question",
+      "left": "Slab with two dates on it",
+      "right": "Tire's lettered flank"
+    }
+  },
+  {
+    "id": 201,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Viking Crush",
+    "matrix": [
+      "DAY",
+      "DREAM",
+      "LONG",
+      "BOAT"
+    ],
+    "compounds": {
+      "top": "DAYDREAM",
+      "bottom": "LONGBOAT",
+      "left": "DAYLONG",
+      "right": "DREAMBOAT"
+    },
+    "clues": {
+      "top": "Reverie in third period",
+      "bottom": "Viking raiders' ride",
+      "left": "Dawn to dusk",
+      "right": "Total heartthrob"
+    }
+  },
+  {
+    "id": 202,
+    "tier": 3,
+    "requires_rotation": false,
+    "title": "Strike It Rich",
+    "matrix": [
+      "GOLD",
+      "BRICK",
+      "FIELD",
+      "WORK"
+    ],
+    "compounds": {
+      "top": "GOLDBRICK",
+      "bottom": "FIELDWORK",
+      "left": "GOLDFIELD",
+      "right": "BRICKWORK"
+    },
+    "clues": {
+      "top": "Shirk while looking busy",
+      "bottom": "Research done in the wild",
+      "left": "Where the '49ers dug in",
+      "right": "Mortar-and-clay masonry"
+    }
+  },
+  {
+    "id": 203,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Board Meeting",
+    "matrix": [
+      "ARM",
+      "CHAIR",
+      "PIT",
+      "MAN"
+    ],
+    "compounds": {
+      "top": "ARMCHAIR",
+      "bottom": "PITMAN",
+      "left": "ARMPIT",
+      "right": "CHAIRMAN"
+    },
+    "clues": {
+      "top": "Couch critic's seat",
+      "bottom": "Coal miner, in old parlance",
+      "left": "Where deodorant goes",
+      "right": "He gavels the board to order"
+    }
+  },
+  {
+    "id": 204,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Beacon Patrol",
+    "matrix": [
+      "FLASH",
+      "GUN",
+      "LIGHT",
+      "SHIP"
+    ],
+    "compounds": {
+      "top": "FLASHGUN",
+      "bottom": "LIGHTSHIP",
+      "left": "FLASHLIGHT",
+      "right": "GUNSHIP"
+    },
+    "clues": {
+      "top": "Photographer's burst maker",
+      "bottom": "Floating beacon at anchor",
+      "left": "Blackout essential",
+      "right": "Heavily armed helicopter"
+    }
+  },
+  {
+    "id": 205,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Tea on Deck",
+    "matrix": [
+      "LADY",
+      "FINGER",
+      "SHIP",
+      "BOARD"
+    ],
+    "compounds": {
+      "top": "LADYFINGER",
+      "bottom": "SHIPBOARD",
+      "left": "LADYSHIP",
+      "right": "FINGERBOARD"
+    },
+    "clues": {
+      "top": "Spongy tiramisu layer",
+      "bottom": "Aboard, as a romance",
+      "left": "Honorific for a baroness",
+      "right": "Fretted neck of a guitar"
+    }
+  },
+  {
+    "id": 206,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Center Ring",
+    "matrix": [
+      "BULL",
+      "HEAD",
+      "RING",
+      "MASTER"
+    ],
+    "compounds": {
+      "top": "BULLHEAD",
+      "bottom": "RINGMASTER",
+      "left": "BULLRING",
+      "right": "HEADMASTER"
+    },
+    "clues": {
+      "top": "Whiskered freshwater catfish",
+      "bottom": "Circus emcee in a top hat",
+      "left": "Matador's arena",
+      "right": "Boarding school's top dog"
+    }
+  },
+  {
+    "id": 207,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Rinse Cycle",
+    "matrix": [
+      "EYE",
+      "LET",
+      "WASH",
+      "DOWN"
+    ],
+    "compounds": {
+      "top": "EYELET",
+      "bottom": "WASHDOWN",
+      "left": "EYEWASH",
+      "right": "LETDOWN"
+    },
+    "clues": {
+      "top": "Sneaker lace hole",
+      "bottom": "Hose-off for a dirty rig",
+      "left": "Nonsense, or a soothing rinse",
+      "right": "Anticlimax"
+    }
+  },
+  {
+    "id": 208,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Fresh Look",
+    "matrix": [
+      "MAKE",
+      "OVER",
+      "UP",
+      "LOAD"
+    ],
+    "compounds": {
+      "top": "MAKEOVER",
+      "bottom": "UPLOAD",
+      "left": "MAKEUP",
+      "right": "OVERLOAD"
+    },
+    "clues": {
+      "top": "Total style reboot",
+      "bottom": "Send it to the cloud",
+      "left": "Blush, liner, and lipstick",
+      "right": "Too much on the circuit"
+    }
+  },
+  {
+    "id": 209,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Down by the River",
+    "matrix": [
+      "RIVER",
+      "FRONT",
+      "SIDE",
+      "LINE"
+    ],
+    "compounds": {
+      "top": "RIVERFRONT",
+      "bottom": "SIDELINE",
+      "left": "RIVERSIDE",
+      "right": "FRONTLINE"
+    },
+    "clues": {
+      "top": "Prime real estate by the water",
+      "bottom": "Benchwarmer's territory",
+      "left": "Bank with no tellers",
+      "right": "Like troops in the thick of it"
+    }
+  },
+  {
+    "id": 210,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Family Tree",
+    "matrix": [
+      "STEP",
+      "CHILD",
+      "FATHER",
+      "HOOD"
+    ],
+    "compounds": {
+      "top": "STEPCHILD",
+      "bottom": "FATHERHOOD",
+      "left": "STEPFATHER",
+      "right": "CHILDHOOD"
+    },
+    "clues": {
+      "top": "Kid from a spouse's first go",
+      "bottom": "Dad life",
+      "left": "Mom's second husband, to you",
+      "right": "The wonder years"
+    }
+  },
+  {
+    "id": 211,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Barnyard Glow",
+    "matrix": [
+      "PIG",
+      "PEN",
+      "TAIL",
+      "LIGHT"
+    ],
+    "compounds": {
+      "top": "PIGPEN",
+      "bottom": "TAILLIGHT",
+      "left": "PIGTAIL",
+      "right": "PENLIGHT"
+    },
+    "clues": {
+      "top": "Muddy sty",
+      "bottom": "Red glow at the rear bumper",
+      "left": "Braid swinging behind an ear",
+      "right": "Slim torch in a doc's pocket"
+    }
+  },
+  {
+    "id": 212,
+    "tier": 1,
+    "requires_rotation": false,
+    "title": "Road Trip",
+    "matrix": [
+      "MOTOR",
+      "HOME",
+      "CAR",
+      "SICK"
+    ],
+    "compounds": {
+      "top": "MOTORHOME",
+      "bottom": "CARSICK",
+      "left": "MOTORCAR",
+      "right": "HOMESICK"
+    },
+    "clues": {
+      "top": "RV for the open road",
+      "bottom": "Queasy in the back seat",
+      "left": "Automobile, in old ads",
+      "right": "Longing for your own bed"
+    }
+  },
+  {
+    "id": 213,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Old Mill",
+    "matrix": [
+      "WATER",
+      "POWER",
+      "WHEEL",
+      "HOUSE"
+    ],
+    "compounds": {
+      "top": "WATERPOWER",
+      "bottom": "WHEELHOUSE",
+      "left": "WATERWHEEL",
+      "right": "POWERHOUSE"
+    },
+    "clues": {
+      "top": "Dam-generated juice",
+      "bottom": "Captain's bridge, or your forte",
+      "left": "Mill's spinning paddles",
+      "right": "Dynamo of a person"
+    }
+  },
+  {
+    "id": 214,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Into the Woods",
+    "matrix": [
+      "RED",
+      "HEAD",
+      "WOOD",
+      "LAND"
+    ],
+    "compounds": {
+      "top": "REDHEAD",
+      "bottom": "WOODLAND",
+      "left": "REDWOOD",
+      "right": "HEADLAND"
+    },
+    "clues": {
+      "top": "Ginger, say",
+      "bottom": "Forest acreage",
+      "left": "Towering California giant",
+      "right": "Cliff jutting into the sea"
+    }
+  },
+  {
+    "id": 215,
+    "tier": 2,
+    "requires_rotation": false,
+    "title": "Abandon Ship",
+    "matrix": [
+      "PULL",
+      "OUT",
+      "OVER",
+      "BOARD"
+    ],
+    "compounds": {
+      "top": "PULLOUT",
+      "bottom": "OVERBOARD",
+      "left": "PULLOVER",
+      "right": "OUTBOARD"
+    },
+    "clues": {
+      "top": "Troop withdrawal",
+      "bottom": "Off the deck, into the drink",
+      "left": "Sweater with no buttons",
+      "right": "Motor clamped to the stern"
+    }
+  },
+  {
+    "id": 216,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Global Reach",
+    "matrix": [
+      "UNDER",
+      "STATE",
+      "WORLD",
+      "WIDE"
+    ],
+    "compounds": {
+      "top": "UNDERSTATE",
+      "bottom": "WORLDWIDE",
+      "left": "UNDERWORLD",
+      "right": "STATEWIDE"
+    },
+    "clues": {
+      "top": "Downplay",
+      "bottom": "Across every continent",
+      "left": "Hades, or the mob's domain",
+      "right": "Governor's whole turf"
+    }
+  },
+  {
+    "id": 217,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Coastal Tally",
+    "matrix": [
+      "UNDER",
+      "SCORE",
+      "SEA",
+      "BOARD"
+    ],
+    "compounds": {
+      "top": "UNDERSCORE",
+      "bottom": "SEABOARD",
+      "left": "UNDERSEA",
+      "right": "SCOREBOARD"
+    },
+    "clues": {
+      "top": "Shift-hyphen keystroke",
+      "bottom": "The Atlantic coast, e.g.",
+      "left": "Where the sub cruises",
+      "right": "Where the tally lights up"
+    }
+  },
+  {
+    "id": 218,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Storm Warning",
+    "matrix": [
+      "THUNDER",
+      "CLAP",
+      "HEAD",
+      "BOARD"
+    ],
+    "compounds": {
+      "top": "THUNDERCLAP",
+      "bottom": "HEADBOARD",
+      "left": "THUNDERHEAD",
+      "right": "CLAPBOARD"
+    },
+    "clues": {
+      "top": "Boom after the flash",
+      "bottom": "Panel behind your pillow",
+      "left": "Towering storm cloud",
+      "right": "Overlapping siding on a house"
+    }
+  },
+  {
+    "id": 219,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Spring Thaw",
+    "matrix": [
+      "MELT",
+      "DOWN",
+      "WATER",
+      "SPOUT"
+    ],
+    "compounds": {
+      "top": "MELTDOWN",
+      "bottom": "WATERSPOUT",
+      "left": "MELTWATER",
+      "right": "DOWNSPOUT"
+    },
+    "clues": {
+      "top": "Reactor's worst day",
+      "bottom": "Tornado over the sea",
+      "left": "Runoff from a shrinking glacier",
+      "right": "Gutter's drainpipe"
+    }
+  },
+  {
+    "id": 220,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Garden Shed",
+    "matrix": [
+      "ROSE",
+      "WATER",
+      "WOOD",
+      "SHED"
+    ],
+    "compounds": {
+      "top": "ROSEWATER",
+      "bottom": "WOODSHED",
+      "left": "ROSEWOOD",
+      "right": "WATERSHED"
+    },
+    "clues": {
+      "top": "Fragrant baklava ingredient",
+      "bottom": "Where the kindling is stacked",
+      "left": "Dark timber in fine guitars",
+      "right": "Historic turning point"
+    }
+  },
+  {
+    "id": 221,
+    "tier": 3,
+    "requires_rotation": true,
+    "title": "Under Surveillance",
+    "matrix": [
+      "WIRE",
+      "TAP",
+      "WORK",
+      "ROOM"
+    ],
+    "compounds": {
+      "top": "WIRETAP",
+      "bottom": "WORKROOM",
+      "left": "WIREWORK",
+      "right": "TAPROOM"
+    },
+    "clues": {
+      "top": "Spy's phone-line bug",
+      "bottom": "Seamstress's studio",
+      "left": "Jewelry twisted from thin metal",
+      "right": "Pub's beer-pouring parlor"
+    }
   }
 ]
